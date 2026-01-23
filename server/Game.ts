@@ -417,7 +417,7 @@ export class Game {
         const player = this.players[this.turnPlayerId];
         if (!player) return;
         const oldLevel = player.state.leaderLevel;
-        const targetLevel = Math.min(10, Math.ceil(this.turnCount / 2) + 1);
+        const targetLevel = Math.min(10, oldLevel + 1);
         player.state.leaderLevel = targetLevel;
         this.addLog(`${player.username} Level Up -> ${player.state.leaderLevel}`);
         if (player.state.leaderLevel > oldLevel) {
