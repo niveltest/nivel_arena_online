@@ -666,6 +666,8 @@ export class Game {
             }
             if ((this.phase as any) !== 'SELECT_CARD') {
                 this.phase = 'ATTACK';
+            } else if (this.selection) {
+                this.selection.previousPhase = 'ATTACK';
             }
             this.pendingAttack = null;
         } else {
@@ -778,6 +780,8 @@ export class Game {
         // --- FIX: Prevent overwriting selection phase ---
         if ((this.phase as any) !== 'SELECT_CARD') {
             this.phase = 'ATTACK';
+        } else if (this.selection) {
+            this.selection.previousPhase = 'ATTACK';
         }
         this.pendingAttack = null;
         this.checkStateBasedActions();
@@ -982,7 +986,11 @@ export class Game {
             this.addLog(`${player.username} recycled ${selectedIds.length} cards.`);
         }
 
+        const prevPhase = this.selection.previousPhase;
         this.selection = null;
+        if ((this.phase as any) === 'SELECT_CARD') {
+            this.phase = prevPhase;
+        }
         this.checkStateBasedActions();
         this.broadcastState();
     }
