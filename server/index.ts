@@ -17,12 +17,40 @@ app.use(cors());
 // Serve Card Data
 import cardsData from './data/cards.json';
 import starterDecks from './data/starterDecks.json';
+import axios from 'axios';
+
 app.get('/api/cards', (req, res) => {
     res.json(cardsData);
 });
 app.get('/api/starter-decks', (req, res) => {
     res.json(starterDecks);
 });
+
+// Image Proxy to bypass SSL/Mixed Content issues
+app.get('/api/proxy-image', async (req, res) => {
+    const imageUrl = req.query.url as string;
+    if (!imageUrl) return res.status(400).send('URL is required');
+
+    try {
+        const response = await axios.get(imageUrl, {
+            responseType: 'arraybuffer',
+            timeout: 5000,
+            // Only proxy allowed domains for security
+            headers: {
+                'referer': 'http://nivelarena.jp/'
+            }
+        });
+
+        const contentType = response.headers['content-type'];
+        res.set('Content-Type', contentType);
+        res.set('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+        res.send(response.data);
+    } catch (error) {
+        console.error('Proxy Image Error:', (error as any).message);
+        res.status(500).send('Error proxying image');
+    }
+});
+
 
 // Deck Persistence API
 import fs from 'fs';

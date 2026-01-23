@@ -130,7 +130,10 @@ const Card: React.FC<CardProps> = ({ card, onClick, isHidden = false, onShowDeta
                 {card.imageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                        src={card.imageUrl.replace(/^https:\/\/nivelarena\.jp/, 'http://nivelarena.jp')}
+                        src={card.imageUrl.includes('nivelarena.jp')
+                            ? `${process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001'}/api/proxy-image?url=${encodeURIComponent(card.imageUrl)}`
+                            : card.imageUrl
+                        }
                         alt={card.name}
 
                         className={

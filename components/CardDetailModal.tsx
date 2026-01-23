@@ -80,7 +80,10 @@ const CardDetailModal: React.FC<CardDetailModalProps> = ({ card, onClose }) => {
                         <div className="w-72 aspect-[2.5/3.5] bg-black/40 rounded-lg border-2 border-white/10 overflow-hidden relative shadow-2xl">
                             {card.imageUrl ? (
                                 <Image
-                                    src={card.imageUrl.replace(/^https:\/\/nivelarena\.jp/, 'http://nivelarena.jp')}
+                                    src={card.imageUrl.includes('nivelarena.jp')
+                                        ? `${process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001'}/api/proxy-image?url=${encodeURIComponent(card.imageUrl)}`
+                                        : card.imageUrl
+                                    }
                                     alt={card.name}
                                     fill
 
