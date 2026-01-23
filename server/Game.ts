@@ -520,9 +520,7 @@ export class Game {
             const slotIndex = targetInfo?.slotIndex;
             if (slotIndex === undefined || slotIndex < 0 || slotIndex > 2) return;
 
-            const unitsPlayed = player.state.unitsPlayedThisTurn || 0;
-            if (unitsPlayed >= 2) return; // Limit 2 units per turn
-            player.state.unitsPlayedThisTurn = unitsPlayed + 1;
+
 
             const existingUnit = player.state.field[slotIndex];
             if (existingUnit) {
