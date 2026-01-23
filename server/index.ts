@@ -31,8 +31,11 @@ app.get('/api/proxy-image', async (req, res) => {
     const imageUrl = req.query.url as string;
     if (!imageUrl) return res.status(400).send('URL is required');
 
+    // Force HTTP for nivelarena.jp to avoid SSL errors (Certificate is invalid)
+    const targetUrl = imageUrl.replace(/^https:\/\/nivelarena\.jp/, 'http://nivelarena.jp');
+
     try {
-        const response = await axios.get(imageUrl, {
+        const response = await axios.get(targetUrl, {
             responseType: 'arraybuffer',
             timeout: 5000,
             // Only proxy allowed domains for security
