@@ -38,10 +38,10 @@ export class CPUPlayer extends Player {
                     this.handleMulligan();
                     break;
                 case 'LEVEL_UP':
-                    // Usually automatic or simple choice
+                    this.game.nextPhase();
                     break;
                 case 'DRAW':
-                    // Automatic
+                    this.game.nextPhase();
                     break;
                 case 'MAIN':
                     this.handleMainPhase();
