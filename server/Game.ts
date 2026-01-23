@@ -842,6 +842,11 @@ export class Game {
                         this.addLog(`${player.username} discarded ${card.name}.`);
                     }
                 });
+
+                // If this was an end-of-turn discard, restore phase to END so the turn can be finished
+                if (this.selection?.previousPhase === 'END') {
+                    this.phase = 'END';
+                }
             }
         } else if (action === 'KILL_UNIT_SELECTION') {
             const opponentId = (this.selection.context as any)?.opponentId;

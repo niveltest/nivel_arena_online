@@ -58,6 +58,9 @@ export class CPUPlayer extends Player {
                 case 'GUARDIAN_INTERCEPT':
                     this.handleGuardianIntercept();
                     break;
+                case 'END':
+                    this.game.nextPhase();
+                    break;
             }
         } catch (e) {
             console.error("[AI ERROR]", e);
