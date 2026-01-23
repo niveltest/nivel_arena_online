@@ -74,14 +74,14 @@
 - **Build Command**: `npm run build` (デフォルト)
 - **Output Directory**: `.next` (デフォルト)
 
-### 4. 環境変数の設定
+### 4. 環境変数の設定 (クライアント)
 
 "Environment Variables" セクションで以下を追加:
 
 - **Key**: `NEXT_PUBLIC_SOCKET_URL`
 - **Value**: `https://nivel-arena-server.onrender.com` (Render でデプロイしたサーバーの URL)
 
-### 5. デプロイ
+### 5. デプロイ (クライアント)
 
 "Deploy" をクリックしてデプロイを開始します。
 

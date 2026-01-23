@@ -333,8 +333,7 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
                                 <div key={cost} className="flex-1 flex flex-col items-center group relative">
                                     <div className="text-[10px] mb-1 opacity-0 group-hover:opacity-100 transition-opacity absolute -top-4">{count}</div>
                                     <div
-                                        className={`w-full bg-blue-500/50 hover:bg-blue-400 transition-colors rounded-t mana-bar ${count > 0 ? 'min-h-[4px]' : 'min-h-0'}`}
-                                        style={{ '--bar-height': `${Math.max(heightPercent, 0)}%` } as React.CSSProperties}
+                                        className={`w-full bg-blue-500/50 hover:bg-blue-400 transition-colors rounded-t h-pc-${Math.round(heightPercent)} ${count > 0 ? 'min-h-[4px]' : 'min-h-0'}`}
                                     ></div>
                                     <div className="text-[10px] mt-1 text-gray-500">{cost === 8 ? '8+' : cost}</div>
                                 </div>

@@ -6,7 +6,7 @@ import Card from './Card';
 import SelectionModal from './SelectionModal';
 import CardDetailModal from './CardDetailModal';
 import ResultModal from './ResultModal';
-import { GameState, Card as CardType } from '../shared/types';
+import { GameState, Card as CardType, AnimationEvent, AnimationType, AttackAnimationData, DamageAnimationData, DestroyAnimationData } from '../shared/types';
 
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 
@@ -390,11 +390,7 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                                         {p.skillZone.map((card, idx) => (
                                             <div
                                                 key={card.id}
-                                                className="absolute inset-0 transition-transform duration-300"
-                                                style={{
-                                                    transform: `translate(${idx * 2}px, ${idx * 2}px)`,
-                                                    zIndex: idx
-                                                }}
+                                                className={`absolute inset-0 transition-transform duration-300 stack-offset-${idx}`}
                                             >
                                                 <Card card={card} onShowDetail={handleShowDetail} className="w-full h-full shadow-lg" />
                                             </div>
@@ -463,7 +459,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
     const [showPlaymatSelector, setShowPlaymatSelector] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [customLayout, setCustomLayout] = useState<PlaymatThemeConfig>(PLAYMAT_CONFIGS[playmatId]);
-    const [activeAnimations, setActiveAnimations] = useState<{ id: string; type: 'ATTACK' | 'DAMAGE' | 'DESTROY'; data: any }[]>([]);
+    const [activeAnimations, setActiveAnimations] = useState<AnimationEvent[]>([]);
 
     // Update customLayout if playmatId changes externally (via selector)
     useEffect(() => {
@@ -507,9 +503,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
         });
 
         // Animation Listener
-        newSocket.on('animation', (evt: { type: 'ATTACK' | 'DAMAGE' | 'DESTROY'; data: any }) => {
+        newSocket.on('animation', (evt: { type: AnimationType;[key: string]: unknown }) => {
             const animId = Math.random().toString(36).substring(7);
-            setActiveAnimations(prev => [...prev, { id: animId, type: evt.type, data: evt.data }]);
+            const { type, ...data } = evt;
+            setActiveAnimations(prev => [...prev, { id: animId, type: type, data: data as unknown } as AnimationEvent]);
 
             // Auto-remove animation after duration
             setTimeout(() => {
@@ -1599,19 +1596,30 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                     </div>
                 </div>
             )}
+
+            {/* Render Active Animations */}
+            <AnimatePresence>
+                {activeAnimations.map(anim => {
+                    switch (anim.type) {
+                        case 'ATTACK':
+                            return <AttackAnimation key={anim.id} anim={anim} />;
+                        case 'DAMAGE':
+                            return <DamagePopup key={anim.id} anim={anim} />;
+                        case 'DESTROY':
+                            return <DestroyAnimation key={anim.id} anim={anim} />;
+                        default:
+                            return null;
+                    }
+                })}
+            </AnimatePresence>
         </div>
     );
 };
 
-const AttackAnimation: React.FC<{ anim: { id: string; type: 'ATTACK'; data: any } }> = ({ anim }) => {
-    // Determine positions (simplified for now, ideally calculation based on slots)
-    // If we can map slots to coordinates, we animate from attacker to target.
-    // For now, let's use a centralized exciting slash effect since dynamic coords are complex.
-    // Or better: Full screen slash effect with direction? 
-    // Let's do a simple "Impact" flash on the board for now, or a Moving Projectile if we can.
+const AttackAnimation: React.FC<{ anim: { id: string; type: 'ATTACK'; data: AttackAnimationData } }> = ({ anim }) => {
+    // Note: anim.data has attackerId, attackerIndex, defenderId, targetIndex if needed for position-based FX
+    console.log('Animation Data:', anim.data);
 
-    // Actually, we can assume Attacker implies a certain zone.
-    // Let's just do a big center screen "ATTACK!" flash or something stylish.
     return (
         <motion.div
             initial={{ scale: 0, opacity: 0, rotate: -45 }}
@@ -1629,16 +1637,8 @@ const AttackAnimation: React.FC<{ anim: { id: string; type: 'ATTACK'; data: any 
     );
 };
 
-const DamagePopup: React.FC<{ anim: { id: string; type: 'DAMAGE'; data: any } }> = ({ anim }) => {
-    const { value, targetId, location, slotIndex } = anim.data;
-    // Positioning based on location
-    // If 'LEADER', center bottom (or top if opponent).
-    // If 'UNIT', approximate slot position.
-    // Since we don't have easy access to exact DOM rects here without context refs, 
-    // we'll center it generally or assume player context.
-
-    // Simplification: Direct Damage = Center Screen Shake + Big Number
-    // Unit Damage = Smaller Number (maybe random position near center?)
+const DamagePopup: React.FC<{ anim: { id: string; type: 'DAMAGE'; data: DamageAnimationData } }> = ({ anim }) => {
+    const { value } = anim.data;
 
     return (
         <motion.div
@@ -1655,21 +1655,18 @@ const DamagePopup: React.FC<{ anim: { id: string; type: 'DAMAGE'; data: any } }>
     );
 };
 
-const DestroyAnimation: React.FC<{ anim: { id: string; type: 'DESTROY'; data: any } }> = ({ anim }) => {
+const DestroyAnimation: React.FC<{ anim: { id: string; type: 'DESTROY'; data: DestroyAnimationData } }> = ({ anim }) => {
+    console.log('Destroying Unit:', anim.data.unitId);
     return (
         <motion.div
             initial={{ scale: 1, opacity: 1 }}
-            animate={{ scale: 0.5, opacity: 0, rotate: 180 }}
+            animate={{ scale: 2, opacity: 0, rotate: 180 }}
             className="fixed inset-0 pointer-events-none flex items-center justify-center z-[200]"
         >
-            <div className="text-6xl">💥</div>
+            <div className="text-8xl">💥</div>
         </motion.div>
     );
 };
 
 export default GameBoard;
-
-// --- Inside GameBoard Component Render (Append this before closing div of GameBoard) ---
-// Since this edit only appends components, we need to actually USE them in the main component.
-// I will start by appending these definitions at the end of file, then I will modify the main return statement.
 

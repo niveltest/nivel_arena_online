@@ -56,7 +56,7 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, on
                                     className="w-14 h-20 relative ring-2 ring-cyan-500/50 rounded shadow-lg shadow-cyan-900/40 transform hover:scale-110 transition-transform duration-300 cursor-pointer group/source"
                                     onClick={() => onShowDetail?.(selection.triggerCard!)}
                                 >
-                                    <div className="absolute inset-0 scale-[0.45] origin-top-left" style={{ width: '200%', height: '200%' }}>
+                                    <div className="absolute inset-0 scale-[0.45] origin-top-left w-200p h-200p">
                                         <Card card={selection.triggerCard} onShowDetail={onShowDetail} />
                                     </div>
                                     <div className="absolute inset-0 bg-cyan-400/0 group-hover/source:bg-cyan-400/10 transition-colors pointer-events-none rounded"></div>

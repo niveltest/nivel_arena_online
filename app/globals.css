@@ -161,3 +161,133 @@ body {
 .mana-bar {
   height: var(--bar-height, 0%);
 }
+
+/* Dynamic Height Classes for Bar Charts */
+.h-pc-0 { height: 0%; }
+.h-pc-1 { height: 1%; }
+.h-pc-2 { height: 2%; }
+.h-pc-3 { height: 3%; }
+.h-pc-4 { height: 4%; }
+.h-pc-5 { height: 5%; }
+.h-pc-6 { height: 6%; }
+.h-pc-7 { height: 7%; }
+.h-pc-8 { height: 8%; }
+.h-pc-9 { height: 9%; }
+.h-pc-10 { height: 10%; }
+.h-pc-11 { height: 11%; }
+.h-pc-12 { height: 12%; }
+.h-pc-13 { height: 13%; }
+.h-pc-14 { height: 14%; }
+.h-pc-15 { height: 15%; }
+.h-pc-16 { height: 16%; }
+.h-pc-17 { height: 17%; }
+.h-pc-18 { height: 18%; }
+.h-pc-19 { height: 19%; }
+.h-pc-20 { height: 20%; }
+.h-pc-21 { height: 21%; }
+.h-pc-22 { height: 22%; }
+.h-pc-23 { height: 23%; }
+.h-pc-24 { height: 24%; }
+.h-pc-25 { height: 25%; }
+.h-pc-26 { height: 26%; }
+.h-pc-27 { height: 27%; }
+.h-pc-28 { height: 28%; }
+.h-pc-29 { height: 29%; }
+.h-pc-30 { height: 30%; }
+.h-pc-31 { height: 31%; }
+.h-pc-32 { height: 32%; }
+.h-pc-33 { height: 33%; }
+.h-pc-34 { height: 34%; }
+.h-pc-35 { height: 35%; }
+.h-pc-36 { height: 36%; }
+.h-pc-37 { height: 37%; }
+.h-pc-38 { height: 38%; }
+.h-pc-39 { height: 39%; }
+.h-pc-40 { height: 40%; }
+.h-pc-41 { height: 41%; }
+.h-pc-42 { height: 42%; }
+.h-pc-43 { height: 43%; }
+.h-pc-44 { height: 44%; }
+.h-pc-45 { height: 45%; }
+.h-pc-46 { height: 46%; }
+.h-pc-47 { height: 47%; }
+.h-pc-48 { height: 48%; }
+.h-pc-49 { height: 49%; }
+.h-pc-50 { height: 50%; }
+.h-pc-51 { height: 51%; }
+.h-pc-52 { height: 52%; }
+.h-pc-53 { height: 53%; }
+.h-pc-54 { height: 54%; }
+.h-pc-55 { height: 55%; }
+.h-pc-56 { height: 56%; }
+.h-pc-57 { height: 57%; }
+.h-pc-58 { height: 58%; }
+.h-pc-59 { height: 59%; }
+.h-pc-60 { height: 60%; }
+.h-pc-61 { height: 61%; }
+.h-pc-62 { height: 62%; }
+.h-pc-63 { height: 63%; }
+.h-pc-64 { height: 64%; }
+.h-pc-65 { height: 65%; }
+.h-pc-66 { height: 66%; }
+.h-pc-67 { height: 67%; }
+.h-pc-68 { height: 68%; }
+.h-pc-69 { height: 69%; }
+.h-pc-70 { height: 70%; }
+.h-pc-71 { height: 71%; }
+.h-pc-72 { height: 72%; }
+.h-pc-73 { height: 73%; }
+.h-pc-74 { height: 74%; }
+.h-pc-75 { height: 75%; }
+.h-pc-76 { height: 76%; }
+.h-pc-77 { height: 77%; }
+.h-pc-78 { height: 78%; }
+.h-pc-79 { height: 79%; }
+.h-pc-80 { height: 80%; }
+.h-pc-81 { height: 81%; }
+.h-pc-82 { height: 82%; }
+.h-pc-83 { height: 83%; }
+.h-pc-84 { height: 84%; }
+.h-pc-85 { height: 85%; }
+.h-pc-86 { height: 86%; }
+.h-pc-87 { height: 87%; }
+.h-pc-88 { height: 88%; }
+.h-pc-89 { height: 89%; }
+.h-pc-90 { height: 90%; }
+.h-pc-91 { height: 91%; }
+.h-pc-92 { height: 92%; }
+.h-pc-93 { height: 93%; }
+.h-pc-94 { height: 94%; }
+.h-pc-95 { height: 95%; }
+.h-pc-96 { height: 96%; }
+.h-pc-97 { height: 97%; }
+.h-pc-98 { height: 98%; }
+.h-pc-99 { height: 99%; }
+.h-pc-100 { height: 100%; }
+
+/* Stack Offset Classes */
+.stack-offset-0 { transform: translate(0px, 0px); z-index: 0; }
+.stack-offset-1 { transform: translate(2px, 2px); z-index: 1; }
+.stack-offset-2 { transform: translate(4px, 4px); z-index: 2; }
+.stack-offset-3 { transform: translate(6px, 6px); z-index: 3; }
+.stack-offset-4 { transform: translate(8px, 8px); z-index: 4; }
+.stack-offset-5 { transform: translate(10px, 10px); z-index: 5; }
+.stack-offset-6 { transform: translate(12px, 12px); z-index: 6; }
+.stack-offset-7 { transform: translate(14px, 14px); z-index: 7; }
+.stack-offset-8 { transform: translate(16px, 16px); z-index: 8; }
+.stack-offset-9 { transform: translate(18px, 18px); z-index: 9; }
+.stack-offset-10 { transform: translate(20px, 20px); z-index: 10; }
+.stack-offset-11 { transform: translate(22px, 22px); z-index: 11; }
+.stack-offset-12 { transform: translate(24px, 24px); z-index: 12; }
+.stack-offset-13 { transform: translate(26px, 26px); z-index: 13; }
+.stack-offset-14 { transform: translate(28px, 28px); z-index: 14; }
+.stack-offset-15 { transform: translate(30px, 30px); z-index: 15; }
+.stack-offset-16 { transform: translate(32px, 32px); z-index: 16; }
+.stack-offset-17 { transform: translate(34px, 34px); z-index: 17; }
+.stack-offset-18 { transform: translate(36px, 36px); z-index: 18; }
+.stack-offset-19 { transform: translate(38px, 38px); z-index: 19; }
+.stack-offset-20 { transform: translate(40px, 40px); z-index: 20; }
+
+.w-200p { width: 200%; }
+.h-200p { height: 200%; }
+

@@ -1,5 +1,5 @@
 const fs = require('fs');
-const PATH = 'data/cards.json';
+const PATH = 'server/data/cards.json';
 const cards = JSON.parse(fs.readFileSync(PATH, 'utf8'));
 
 // Korean to Japanese mapping

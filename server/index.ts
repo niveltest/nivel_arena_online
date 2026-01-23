@@ -300,17 +300,8 @@ io.on('connection', (socket) => {
         const game = games.get(currentRoomId);
         if (game) {
             // Force current player to win -> set opponent HP to 10
-            const opponentId = Object.keys(game.players).find(id => id !== socket.id);
-            if (opponentId) {
-                const opponent = game.players[opponentId];
-                opponent.state.hp = 10;
-                // Trigger win check (usually happens in loop, but here we can just damage flow or manually check condition)
-                // Since checkWinCondition is inside dealDamage loop, we call dealDamage(opponentId, 0) to trigger? 
-                // Wait, dealDamage is where check is.
-                // Or just direct check
-                game.dealDamage(opponentId, 0); // Trigger check
-                game.broadcastState();
-            }
+            // Force current player to win directly
+            game.finishGame(socket.id, "DEBUG_FORCE_WIN");
         }
     });
 

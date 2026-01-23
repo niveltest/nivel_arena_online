@@ -43,7 +43,7 @@ ngrok http 3001
 
 ngrok が起動すると、以下のような出力が表示されます:
 
-```
+```text
 Forwarding  https://xxxx-xxxx-xxxx.ngrok.io -> http://localhost:3001
 ```
 

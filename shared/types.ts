@@ -87,10 +87,38 @@ export interface SelectionState {
     candidateIds: string[]; // IDs of cards to choose from
     count: number;
     action: string; // The action to perform after selection (e.g. 'ADD_TO_HAND')
-    context?: Record<string, any>;
+    context?: Record<string, unknown>;
     triggerCard?: Card; // The card that triggered this selection
     previousPhase: GameState['phase']; // The phase to return to after selection
 }
+
+// Animation Types
+export interface AttackAnimationData {
+    attackerId: string;
+    attackerIndex: number;
+    defenderId: string;
+    targetIndex: number;
+}
+
+export interface DamageAnimationData {
+    targetId: string;
+    slotIndex: number;
+    value: number;
+    location: 'UNIT' | 'LEADER';
+}
+
+export interface DestroyAnimationData {
+    playerId: string;
+    slotIndex: number;
+    unitId: string;
+}
+
+export type AnimationType = 'ATTACK' | 'DAMAGE' | 'DESTROY';
+
+export type AnimationEvent =
+    | { id: string; type: 'ATTACK'; data: AttackAnimationData }
+    | { id: string; type: 'DAMAGE'; data: DamageAnimationData }
+    | { id: string; type: 'DESTROY'; data: DestroyAnimationData };
 
 export interface GameState {
     roomId: string;

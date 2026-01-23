@@ -1,36 +1,46 @@
-# オンラインテストプレイの実装計画
+# GameBoard.tsx および周辺の品質向上計画
 
-## 概要
+Lint 警告の解消と、TypeScript の型安全性の向上、および未実装だったアニメーション機能の有効化を行います。
 
-現在ローカル環境 (`localhost`) で動作しているゲームを、外部のネットワークからアクセス可能な状態にし、友人とオンラインでテストプレイできるようにします。
+## Proposed Changes
 
-## ユーザーレビューが必要な項目
->
-> [!IMPORTANT]
-> オンライン化にあたり、サーバーを公開するための「ホスティングサービス」の選定が必要です。
->
-> 1. **Render (無料枠あり)**: サーバー (Node.js) のデプロイに適しています。
-> 2. **Vercel (無料枠あり)**: クライアント (Next.js) のデプロイに適しています。
-> 3. **ngrok (ローカル公開)**: 自分の PC で動かしているサーバーを一時的に外部公開する最も簡単な方法です。
+### 1. グローバル CSS への補助クラス追加
 
-## 提案される変更点
+動的なスタイル指定をクラスに移行します。
 
-### [Component] Client (Frontend)
+#### [MODIFY] [globals.css](file:///C:/Users/worke/Antigravity/nivel_arena_online/app/globals.css)
 
-#### [MODIFY] [GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
+- `.stack-offset-0` 〜 `.stack-offset-20`: `transform: translate(idx*2px, idx*2px)` と `z-index: idx` をセットにしたクラス。
 
-- `SOCKET_URL` をハードコードせず、環境変数 `process.env.NEXT_PUBLIC_SOCKET_URL` から取得するように修正します。
+### 2. shared/types.ts の強化
 
-### [Component] Server (Backend)
+`any` を排除し、通信データの構造を明確にします。
 
-#### [MODIFY] [index.ts](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/index.ts)
+#### [MODIFY] [shared/types.ts](file:///C:/Users/worke/Antigravity/nivel_arena_online/shared/types.ts)
 
-- デプロイ先のポート番号を環境変数 `PORT` から取得するように修正します (Render 等のサービス対応)。
-- CORS 設定で、特定のドメイン（クライアントの公開URL）を許可できるように準備します。
+- `AnimationEvent` インターフェースの改善。
+- `AttackAnimationData`, `DamageAnimationData`, `DestroyAnimationData` 型の追加。
 
-## 検証計画
+### 3. GameBoard.tsx の修正とクリーンアップ
 
-### 手動検証
+#### [MODIFY] [GameBoard.tsx](file:///C:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
 
-- ngrok を使用して一時的な URL を生成し、外部のブラウザ（スマホ等）からアクセスして対戦ができるか確認します。
-- サーバーを Render に、クライアントを Vercel にデプロイし、本番環境での Socket.io 通信を確認します。
+- **インラインスタイルの排除**:
+  - `skillZone` で `stack-offset-` クラスを使用。
+  - `DraggableZone` の `style` 属性を整理。
+- **型エラーの解消**:
+  - `any` を排除し、`shared/types.ts` で定義した型を使用。
+- **アニメーションの有効化**:
+  - 未使用だった `AttackAnimation`, `DamagePopup`, `DestroyAnimation` を JSX 内でレンダリング。
+  - 各アニメーションコンポーネント内の未使用変数（`targetId` 等）の警告を、型安全な実装で解消。
+
+## Verification Plan
+
+### Automated Tests
+
+- `npm run build` または IDE の問題一覧で、`any` や未使用変数、インラインスタイルに関する警告・エラーが消えていることを確認。
+
+### Manual Verification
+
+- ゲームプレイ中にアタック、ダメージ、破壊が発生した際、画面上にエフェクト（"ATTACK!", "-1", "💥" 等）が表示されることを確認。
+- `Skill Zone` のカードが正しく重なっていることを確認。

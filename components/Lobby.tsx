@@ -34,7 +34,7 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
 
         // Request server to create room
         const socket = io(SOCKET_URL, {
-            timeout: 5000,
+            timeout: 15000, // 15 seconds (Allow for Render cold start)
             reconnection: false
         });
 
@@ -42,15 +42,15 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
             if (socket.connected) return;
             socket.disconnect();
             setIsConnecting(false);
-            alert("サーバーに接続できませんでした。サーバーが起動しているか確認してください。\n(npm run dev:all での起動を推奨します)");
-        }, 5000);
+            alert("サーバーへの接続がタイムアウトしました。\nRender(無料枠)のサーバーがスリープしている可能性があります。1分ほど待ってから再度「CREATE ROOM」をお試しください。\n\nもし解消しない場合は、Vercelの環境変数「NEXT_PUBLIC_SOCKET_URL」が正しく設定されているか確認してください。");
+        }, 15000);
 
         socket.on('connect_error', (err) => {
             console.error("Socket connection error:", err);
             clearTimeout(connectionTimeout);
             socket.disconnect();
             setIsConnecting(false);
-            alert("サーバー接続エラー: サーバーが起動していない可能性があります。");
+            alert(`サーバー接続エラー: ${err.message}\n\nサーバーが起動していないか、通信がブロックされています。VercelとRenderの設定を確認してください。`);
         });
 
         socket.emit('createGame', username, selectedDeck, (newRoomId: string) => {

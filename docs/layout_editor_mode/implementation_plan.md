@@ -22,7 +22,7 @@ Provide a visual way for the user to adjust the game board layout (positions and
 - Only active when `isEditMode` is true.
 - Updates a local `customLayout` state on drag end.
 
-#### [MODIFY] [GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
+#### [MODIFY] [GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx) (Integration)
 
 - Add `isEditMode` state.
 - Add `customLayout` state initialized from the selected theme.

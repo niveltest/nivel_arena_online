@@ -23,4 +23,4 @@ To ensure the interactive zones align with the graphics on the background image 
 
 ## Validation Results
 
-- **Visual Alignment**: The card slots should now sit more accurately on top of the corresponding boxes in the background illustration.
+* **Visual Alignment**: The card slots should now sit more accurately on top of the corresponding boxes in the background illustration.
