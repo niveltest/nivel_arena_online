@@ -637,11 +637,19 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
 
     const isMyTurn = gameState.turnPlayerId === playerId;
 
+    const isProcessingRef = useRef(false);
+
     const handleEndTurn = () => {
-        if (isMyTurn) {
+        if (isMyTurn && !isProcessingRef.current) {
+            isProcessingRef.current = true;
             socketRef.current?.emit('nextPhase');
+            // Prevent double clicks for 500ms
+            setTimeout(() => {
+                isProcessingRef.current = false;
+            }, 500);
         }
     };
+
 
     const handleHandCardClick = (index: number) => {
         if (!isMyTurn || gameState.phase !== 'MAIN') return;
