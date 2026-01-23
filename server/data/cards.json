@@ -27,17 +27,17 @@
     },
     {
         "id": "BT01-001",
-        "name": "レチE��フ�EチE,
+        "name": "レッドフード",
         "type": "LEADER",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n自刁E�E(炁Eのカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]\nフィールドにある [アタチE��ー] を持つ自刁E�Eユニット�Eては自刁E�Eターンの間、パワー+2000、E,
+        "text": "基本面\n[誓約]\n自分は(炎)のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]\nフィールドにある [アタッカー] を持つ自分のユニット全ては自分のターンの間、パワー+2000。",
         "affiliation": "ピルグリム",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
-            "パッシチE,
-            "アタチE��ー"
+            "パッシブ",
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/159_copy_162_5abf82a892f0549c26939bd53be4bda8_tXgEs7J4_9b9811aed3566c3cc882316b281e3c52e26cb012.png",
         "rarity": "L",
@@ -53,20 +53,20 @@
             }
         ],
         "awakeningLevel": 6,
-        "awakenedText": "[パッシブ]\nフィールドにある [アタチE��ー] を持つ自刁E�Eユニット�Eては自刁E�Eターンの間、パワー+2000、E
+        "awakenedText": "[パッシブ]\nフィールドにある [アタッカー] を持つ自分のユニット全ては自分のターンの間、パワー+2000。"
     },
     {
         "id": "BT01-002",
-        "name": "ネオン‐ブリングバレチE��",
+        "name": "ネオン‐ブリングバレット",
         "type": "UNIT",
         "cost": 1,
         "power": 2000,
         "hitCount": 1,
-        "text": "[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "炁E,
+        "text": "[アタッカー]\nこの攻撃が終わるまでパワー+2000。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/157_copy_160_5abf82a892f0549c26939bd53be4bda8_VspzquIo_fc00cdad73e833c280d6ee4dc79ba84491ac71fb.png",
         "rarity": "C",
@@ -89,8 +89,8 @@
         "power": 3000,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
-        "attribute": "炁E,
+        "affiliation": "ベース / ミシリス",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -100,16 +100,16 @@
     },
     {
         "id": "BT01-004",
-        "name": "ノイズ‐クラシチE��チE��ーチE,
+        "name": "ノイズ‐クラシックディーバ",
         "type": "UNIT",
         "cost": 1,
         "power": 1500,
         "hitCount": 1,
-        "text": "[アタチE��ー]\n[貫通][1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、相手に1ダメージを与えめE、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[アタッカー]\n[貫通][1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "PENETRATION_1",
             "PENETRATION"
         ],
@@ -125,14 +125,14 @@
     },
     {
         "id": "BT01-005",
-        "name": "ラピ‐クラシチE��バカンス",
+        "name": "ラピ‐クラシックバカンス",
         "type": "UNIT",
         "cost": 2,
         "power": 5000,
         "hitCount": 1,
-        "text": "バ�Eサーカー(こ�Eユニット�E攻撁E��能な状態であれば忁E��攻撁E��なければならなぁE、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "炁E,
+        "text": "バーサーカー(このユニットは攻撃可能な状態であれば必ず攻撃しなければならない)。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -142,16 +142,16 @@
     },
     {
         "id": "BT01-006",
-        "name": "アニス�E�スパ�Eクリングサマ�E",
+        "name": "アニス：スパークリングサマー",
         "type": "UNIT",
         "cost": 2,
         "power": 2500,
         "hitCount": 1,
-        "text": "[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+2000、En[アタチE��ー]\n略奪[1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、E枚ドローする)、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。フィールドにある相手�Eユニットを1枚選んでこ�Eターンが終わるまでパワー-5000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[アタッカー]\nこの攻撃が終わるまでパワー+2000。\n[アタッカー]\n略奪[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、1枚ドローする)。\n\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-5000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "LOOT_1"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_LaHbJtym_be5c0d7eddfff050c3e84f73eef8267a996cf9ed.png",
@@ -206,8 +206,8 @@
         "power": 4000,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
-        "attribute": "炁E,
+        "affiliation": "ベース / テトラ",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -222,14 +222,14 @@
         "cost": 3,
         "power": 4000,
         "hitCount": 1,
-        "text": "[パッシブ]\nフィールドにある [アタチE��ー] [貫通]を持つ自刁E�Eユニット�Eてのパワー+1500、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[パッシブ]\nフィールドにある [アタッカー] [貫通]を持つ自分のユニット全てのパワー+1500。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "パッシチE,
+            "パッシブ",
             "PENETRATION_1",
             "PENETRATION",
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_izwyWrDe_bc8dd9b5c1a64ae874a702b839b14a68b311a9c5.png",
         "rarity": "C",
@@ -259,11 +259,11 @@
         "cost": 3,
         "power": 4500,
         "hitCount": 1,
-        "text": "[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+1000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[アタッカー]\nこの攻撃が終わるまでパワー+1000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_Km4Mn1L2_95775e586ce0018c75f8cb978430a0aab4ad0d20.png",
         "rarity": "C",
@@ -286,8 +286,8 @@
         "power": 5000,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
-        "attribute": "炁E,
+        "affiliation": "ベース / テトラ",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -297,16 +297,16 @@
     },
     {
         "id": "BT01-011",
-        "name": "ネオン�E�ブルーオーシャン",
+        "name": "ネオン：ブルーオーシャン",
         "type": "UNIT",
         "cost": 4,
         "power": 4000,
         "hitCount": 2,
-        "text": "[アクチE��ブメイン]\nフィールドにある相手�Eユニットを1枚選んでこ�Eターンが終わるまでパワー-1500、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "炁E,
+        "text": "[アクティブメイン]\nフィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-1500。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "炎",
         "keywords": [
-            "アクチE��チE
+            "アクティブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_Nia0z9BU_0f3a4f5bd582eb758202bcba3e37a803e39aa0d9.png",
         "rarity": "R",
@@ -323,17 +323,17 @@
     },
     {
         "id": "BT01-012",
-        "name": "エマ‐ダーリンレチE��",
+        "name": "エマ‐ダーリンレッド",
         "type": "UNIT",
         "cost": 4,
         "power": 5000,
         "hitCount": 2,
-        "text": "エントリー フィールドにある自刁E�Eユニット�Eてはこ�Eターンが終わるまで、E[アタチE��ー] こ�E攻撁E��終わるまでパワー+1000」を得る、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "炁E,
+        "text": "エントリー フィールドにある自分のユニット全てはこのターンが終わるまで「 [アタッカー] この攻撃が終わるまでパワー+1000」を得る。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "炎",
         "keywords": [
             "エントリー",
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_rJ1N4MO2_4cdf703483e778648e6f883c119d73ac6e0613f0.png",
         "rarity": "P",
@@ -351,7 +351,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー",
+                "grantedKeyword": "アタッカー",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             },
@@ -368,7 +368,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー",
+                "grantedKeyword": "アタッカー",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             }
@@ -376,16 +376,16 @@
     },
     {
         "id": "BT01-013",
-        "name": "ジャチE��ル",
+        "name": "ジャッカル",
         "type": "UNIT",
         "cost": 4,
         "power": 5500,
         "hitCount": 2,
-        "text": "[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+1000、E,
-        "affiliation": "エフェクチE/ ミシリス",
-        "attribute": "炁E,
+        "text": "[アタッカー]\nこの攻撃が終わるまでパワー+1000。",
+        "affiliation": "エフェクト / ミシリス",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_MCs2LqzW_4678693a41723b005bfe599489a0f9d55302d3bf.png",
         "rarity": "C",
@@ -402,14 +402,14 @@
     },
     {
         "id": "BT01-014",
-        "name": "紁E���E�ブラチE��シャドウ",
+        "name": "紅蓮：ブラックシャドウ",
         "type": "UNIT",
         "cost": 4,
         "power": 7500,
         "hitCount": 2,
-        "text": "バ�Eサーカー(こ�Eユニット�E攻撁E��能な状態であれば忁E��攻撁E��なければならなぁE、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EトラチE��ュゾーンからコスチE以下�Eユニットカードを1枚選んで手札に加える、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "炁E,
+        "text": "バーサーカー(このユニットは攻撃可能な状態であれば必ず攻撃しなければならない)。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -434,14 +434,14 @@
     },
     {
         "id": "BT01-015",
-        "name": "ノワール‐ブラチE��ラビッチE,
+        "name": "ノワール‐ブラックラビット",
         "type": "UNIT",
         "cost": 5,
         "power": 4500,
         "hitCount": 2,
-        "text": "エントリー\nこ�Eターンが終わるまで対向ユニット�Eパワー-4000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "エントリー\nこのターンが終わるまで対向ユニットのパワー-4000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
             "エントリー"
         ],
@@ -460,16 +460,16 @@
     },
     {
         "id": "BT01-016",
-        "name": "スノ�Eホワイト：イノセントデイズ",
+        "name": "スノーホワイト：イノセントデイズ",
         "type": "UNIT",
         "cost": 6,
         "power": 7000,
         "hitCount": 2,
-        "text": "[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "炁E,
+        "text": "[アタッカー]\nこの攻撃が終わるまでパワー+2000。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_aRFYxtr0_83971874bd0a08d728f0c570f0be2d5ab17310d8.png",
         "rarity": "C",
@@ -486,14 +486,14 @@
     },
     {
         "id": "BT01-017",
-        "name": "バイパ�E‐シャイン・オブ�EラチE,
+        "name": "バイパー‐シャイン・オブ・ラブ",
         "type": "UNIT",
         "cost": 6,
         "power": 5000,
         "hitCount": 2,
-        "text": "エントリー\n対向ユニット�Eパワーはこ�Eターンが終わるまで1000になる、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "エントリー\n対向ユニットのパワーはこのターンが終わるまで1000になる。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
             "エントリー"
         ],
@@ -512,17 +512,17 @@
     },
     {
         "id": "BT01-018",
-        "name": "ブラン‐�EワイトラビッチE,
+        "name": "ブラン‐ホワイトラビット",
         "type": "UNIT",
         "cost": 7,
         "power": 7000,
         "hitCount": 3,
-        "text": "[パッシブ]\nフィールドにある [アタチE��ー] を持つ自刁E�Eユニット�Eてのパワー+2000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[パッシブ]\nフィールドにある [アタッカー] を持つ自分のユニット全てのパワー+2000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "パッシチE,
-            "アタチE��ー"
+            "パッシブ",
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_X3PUzDne_e0891e1e7a2b2b943ec223845394796e3ea7820b.png",
         "rarity": "R",
@@ -547,19 +547,19 @@
     },
     {
         "id": "BT01-019",
-        "name": "レチE��フ�EチE,
+        "name": "レッドフード",
         "type": "UNIT",
         "cost": 8,
         "power": 7000,
         "hitCount": 3,
-        "text": "エントリー\nフィールドにある自刁E�Eユニット�Eてはこ�Eターンが終わるまで [アタチE��ー] [貫通][1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、相手に1ダメージを与えめEを得る、En\n\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "炁E,
+        "text": "エントリー\nフィールドにある自分のユニット全てはこのターンが終わるまで [アタッカー] [貫通][1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)を得る。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "炎",
         "keywords": [
             "エントリー",
             "PENETRATION_1",
             "PENETRATION",
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_WgS6aENG_13dc793a6873d90e395c712271ded1f5d75ae3e6.png",
         "rarity": "UR",
@@ -569,7 +569,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,PENETRATION",
+                "grantedKeyword": "アタッカー,PENETRATION",
                 "targetType": "ALL_ENEMIES",
                 "condition": "TURN_END"
             },
@@ -578,7 +578,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,PENETRATION",
+                "grantedKeyword": "アタッカー,PENETRATION",
                 "targetType": "ALL_ENEMIES",
                 "condition": "TURN_END"
             },
@@ -605,13 +605,13 @@
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある [アタチE��ー] を持つ自刁E�Eユニットを1枚選ぶ。そのユニット�Eこ�Eターンが終わるまで [アタチE��ー] [貫通][1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、相手に1ダメージを与えめEを得る、E,
+        "text": "フィールドにある [アタッカー] を持つ自分のユニットを1枚選ぶ。そのユニットはこのターンが終わるまで [アタッカー] [貫通][1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)を得る。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "PENETRATION_1",
             "PENETRATION",
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_RPazH7Xi_a2bce25714e9c1cf2f9c5980e7434a7d4d9126ec.png",
         "rarity": "C",
@@ -621,7 +621,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,PENETRATION",
+                "grantedKeyword": "アタッカー,PENETRATION",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             }
@@ -634,9 +634,9 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある相手�Eユニット�Eてはこ�Eターンが終わるまでパワー-1000、E,
+        "text": "フィールドにある相手のユニット全てはこのターンが終わるまでパワー-1000。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -653,14 +653,14 @@
     },
     {
         "id": "BT01-022",
-        "name": "圧倁E,
+        "name": "圧倒",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある相手�Eユニットを2枚まで選んでこ�Eターンが終わるまでパワー-2000、E,
+        "text": "フィールドにある相手のユニットを2枚まで選んでこのターンが終わるまでパワー-2000。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -677,16 +677,16 @@
     },
     {
         "id": "BT01-023",
-        "name": "チアアチE�Eトゥギャザー",
+        "name": "チアアップトゥギャザー",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある [アタチE��ー] を持つ自刁E�Eユニット�Eてはこ�Eターンが終わるまでパワー+2500、E,
+        "text": "フィールドにある [アタッカー] を持つ自分のユニット全てはこのターンが終わるまでパワー+2500。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_P56marcC_c07a599a407950fc59c6fe714990e75e1cc7e50a.png",
         "rarity": "C",
@@ -703,14 +703,14 @@
     },
     {
         "id": "BT01-024",
-        "name": "フィナ�Eレ",
+        "name": "フィナーレ",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある相手�Eユニットを1枚選んでこ�Eターンが終わるまでパワー-3000。この効果でそ�EユニットをトラチE��ュしたなら、E枚ドローする、E,
+        "text": "フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-3000。この効果でそのユニットをトラッシュしたなら、1枚ドローする。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -728,16 +728,16 @@
     },
     {
         "id": "BT01-025",
-        "name": "合流E,
+        "name": "合流",
         "type": "SKILL",
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EトラチE��ュゾーンから [アタチE��ー] を持つユニットカードを1枚選んで手札に加える、E,
+        "text": "自分のトラッシュゾーンから [アタッカー] を持つユニットカードを1枚選んで手札に加える。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_VjanuBAN_10a125db941b3c4831388241a2e5c2bf65cea45c.png",
         "rarity": "C",
@@ -754,16 +754,16 @@
     },
     {
         "id": "BT01-026",
-        "name": "ガチE��シアムグローチE,
+        "name": "ガッデシアムグローブ",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\n[アタチE��ー]\n[貫通][1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、相手に1ダメージを与えめE、En\n\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
+        "text": "[装備条件なし]\n[アタッカー]\n[貫通][1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "PENETRATION_1",
             "PENETRATION"
         ],
@@ -793,11 +793,11 @@
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\n[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+2000、En[アタチE��ー]\n略奪[1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、E枚ドローする)、E,
+        "text": "[装備条件なし]\n[アタッカー]\nこの攻撃が終わるまでパワー+2000。\n[アタッカー]\n略奪[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、1枚ドローする)。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "LOOT_1"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_SxJ2htXF_a9acb1597a32ea61473feda93a7e3b81eb328bba.png",
@@ -822,16 +822,16 @@
     },
     {
         "id": "BT01-028",
-        "name": "紁E��",
+        "name": "紅蓮",
         "type": "LEADER",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n 自刁E�E(大地)のカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]\nフィールドにある《�Eース》を持つ自刁E�Eユニット�Eてのパワー+1000、E,
+        "text": "基本面\n[誓約]\n 自分は(大地)のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]\nフィールドにある《ベース》を持つ自分のユニット全てのパワー+1000。",
         "affiliation": "ピルグリム",
         "attribute": "大地",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_C75LXdDb_d96a84da1973be0e81b2a82bd84acd6ea4199998.png",
         "rarity": "L",
@@ -846,7 +846,7 @@
             }
         ],
         "awakeningLevel": 5,
-        "awakenedText": "[パッシブ]\nフィールドにある《�Eース》を持つ自刁E�Eユニット�Eてのパワー+1000、E
+        "awakenedText": "[パッシブ]\nフィールドにある《ベース》を持つ自分のユニット全てのパワー+1000。"
     },
     {
         "id": "BT01-029",
@@ -855,8 +855,8 @@
         "cost": 1,
         "power": 3000,
         "hitCount": 1,
-        "text": "エントリー\n相手�Eターンが終わるまでパワー+1000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー\n相手のターンが終わるまでパワー+1000。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
             "エントリー"
@@ -876,16 +876,16 @@
     },
     {
         "id": "BT01-030",
-        "name": "ミカ�E�スノ�Eバディ",
+        "name": "ミカ：スノーバディ",
         "type": "UNIT",
         "cost": 1,
         "power": 2000,
         "hitCount": 1,
-        "text": "戦線維持[パワー+3000](自刁E�E全てのユニットゾーンにユニットがある場合、パワー+3000)、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "戦線維持[パワー+3000](自分の全てのユニットゾーンにユニットがある場合、パワー+3000)。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
-            "戦線維持E
+            "戦線維持"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_NivTFwXH_0b34a59d256b9f36fe5d58af55d0241022b131b5.png",
         "rarity": "C",
@@ -899,7 +899,7 @@
         "power": 3500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -915,11 +915,11 @@
         "cost": 2,
         "power": 4000,
         "hitCount": 1,
-        "text": "[パッシブ]\nフィールドにある《�Eース》を持つ自刁E�EユニッチE枚につき、パワー+500、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[パッシブ]\nフィールドにある《ベース》を持つ自分のユニット1枚につき、パワー+500。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "大地",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_o0tbgRsG_f523472766ffe47137d7811004cd68115a736711.png",
         "rarity": "C",
@@ -941,8 +941,8 @@
         "cost": 2,
         "power": 2500,
         "hitCount": 1,
-        "text": "エントリー\nこ�Eターンが終わるまでヒッチE1、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー\nこのターンが終わるまでヒット+1。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
             "エントリー"
@@ -962,13 +962,13 @@
     },
     {
         "id": "BT01-034",
-        "name": "ギルチE��‐ディスビリーフウェーチE,
+        "name": "ギルティ‐ディスビリーフウェーブ",
         "type": "UNIT",
         "cost": 2,
         "power": 5500,
         "hitCount": 1,
-        "text": "[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "ベ�Eス / ミシリス",
+        "text": "[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "ベース / ミシリス",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -999,11 +999,11 @@
         "cost": 3,
         "power": 4500,
         "hitCount": 1,
-        "text": "[アタチE��ー]\n突破[コスチE以下](コスチE以下�E相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁE、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "[アタッカー]\n突破[コスト1以下](コスト1以下の相手のユニットはこのユニットの攻撃を防御できない)。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "大地",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "BREAKTHROUGH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_8B1EJxNT_e212adb47ccce1117f817eca789f5b5853fb1335.png",
@@ -1024,11 +1024,11 @@
         "cost": 3,
         "power": 3500,
         "hitCount": 1,
-        "text": "[パッシブ]\tフィールドにある《�Eース》を持つ自刁E�Eユニット�Eてのパワー+2000、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[パッシブ]\tフィールドにある《ベース》を持つ自分のユニット全てのパワー+2000。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "大地",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_6w8xFuGf_783747e97c3f72045b28ba07af535e40917e646e.png",
         "rarity": "P",
@@ -1045,16 +1045,16 @@
     },
     {
         "id": "BT01-037",
-        "name": "チE��ーゼル‐ミチE��ナイト�Eストロベリー",
+        "name": "ディーゼル‐ミッドナイト・ストロベリー",
         "type": "UNIT",
         "cost": 3,
         "power": 4500,
         "hitCount": 1,
-        "text": "戦線維持[ヒッチE1](自刁E�E全てのユニットゾーンにユニットがある場合、ヒチE��+1)、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "戦線維持[ヒット+1](自分の全てのユニットゾーンにユニットがある場合、ヒット+1)。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "大地",
         "keywords": [
-            "戦線維持E
+            "戦線維持"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_x736ijlw_97a552a128591a83449988349c462983d3b524fd.png",
         "rarity": "P",
@@ -1062,16 +1062,16 @@
     },
     {
         "id": "BT01-038",
-        "name": "ルピ�E",
+        "name": "ルピー",
         "type": "UNIT",
         "cost": 4,
         "power": 4000,
         "hitCount": 2,
-        "text": "[アクチE��ブ]�E�メイン 自刁E�E手札めE枚選んでトラチE��ュする。その後、フィールドにある自刁E�Eユニットを1枚選び、このターンが終わるまでパワー+4000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[アクティブ]：メイン 自分の手札を1枚選んでトラッシュする。その後、フィールドにある自分のユニットを1枚選び、このターンが終わるまでパワー+4000。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
-            "アクチE��チE
+            "アクティブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_pwXN0K9m_e648fe5153de7608dab9b2cf29c5dd70ff304be1.png",
         "rarity": "P",
@@ -1096,13 +1096,13 @@
     },
     {
         "id": "BT01-039",
-        "name": "スノ�Eホワイト‐�EワイトナイチE,
+        "name": "スノーホワイト‐ホワイトナイト",
         "type": "UNIT",
         "cost": 4,
         "power": 5000,
         "hitCount": 2,
-        "text": "エントリー\n相手�Eターンが終わるまでパワー+3000、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "エントリー\n相手のターンが終わるまでパワー+3000。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "大地",
         "keywords": [
             "エントリー"
@@ -1122,16 +1122,16 @@
     },
     {
         "id": "BT01-040",
-        "name": "ルピ�E�E�ウィンターショチE��ー",
+        "name": "ルピー：ウィンターショッパー",
         "type": "UNIT",
         "cost": 4,
         "power": 4000,
         "hitCount": 2,
-        "text": "[パッシブ]\n自刁E�Eリーダーレベル1につき、パワー+500、Enレベルリンク[10: ヒッチE1](自刁E�EリーダーレベルぁE0以上�E場合、ヒチE��+1)、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[パッシブ]\n自分のリーダーレベル1につき、パワー+500。\nレベルリンク[10: ヒット+1](自分のリーダーレベルが10以上の場合、ヒット+1)。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
-            "パッシチE,
+            "パッシブ",
             "レベルリンク"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_BK3adxQN_3f1269a17ef51e337b0ff0a9279923a5ae578215.png",
@@ -1158,13 +1158,13 @@
     },
     {
         "id": "BT01-041",
-        "name": "ヤン‐サンライズマ�EケチE��",
+        "name": "ヤン‐サンライズマーケット",
         "type": "UNIT",
         "cost": 5,
         "power": 6500,
         "hitCount": 2,
-        "text": "エントリー\nフィールドにある自刁E�Eユニットを1枚選んでこ�Eターンが終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー\nフィールドにある自分のユニットを1枚選んでこのターンが終わるまでパワー+2000。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
             "エントリー"
@@ -1190,7 +1190,7 @@
         "power": 7500,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -1201,13 +1201,13 @@
     },
     {
         "id": "BT01-043",
-        "name": "チE��ア",
+        "name": "ティア",
         "type": "UNIT",
         "cost": 6,
         "power": 8500,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -1218,13 +1218,13 @@
     },
     {
         "id": "BT01-044",
-        "name": "ラプンチE��ル",
+        "name": "ラプンツェル",
         "type": "UNIT",
         "cost": 6,
         "power": 8000,
         "hitCount": 2,
-        "text": "エントリー\n自刁E�EチE��キの上かめE枚を公開し、その中の《�Eース》を持つユニットカーチE枚を手札に加える。残りはチE��キに戻し、シャチE��ルする、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�Eリーダーレベル+1、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "エントリー\n自分のデッキの上から3枚を公開し、その中の《ベース》を持つユニットカード1枚を手札に加える。残りはデッキに戻し、シャッフルする。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のリーダーレベル+1。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "大地",
         "keywords": [
             "エントリー"
@@ -1259,16 +1259,16 @@
     },
     {
         "id": "BT01-045",
-        "name": "ブリチE��‐ブラチE��ムーン",
+        "name": "ブリッド‐ブラックムーン",
         "type": "UNIT",
         "cost": 7,
         "power": 7500,
         "hitCount": 3,
-        "text": "[パッシブ]\nフィールドにあるコスチEの自刁E�Eユニット�Eてのパワー+2000、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "[パッシブ]\nフィールドにあるコスト1の自分のユニット全てのパワー+2000。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "大地",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_0ZLO7bHr_824bbd6dc326c44a517ea1d7a1042fb3d69b3730.png",
         "rarity": "C",
@@ -1285,18 +1285,18 @@
     },
     {
         "id": "BT01-046",
-        "name": "紁E��",
+        "name": "紅蓮",
         "type": "UNIT",
         "cost": 8,
         "power": 8000,
         "hitCount": 3,
-        "text": "エントリー\nフィールドにある《�Eース》を持つ自刁E�Eユニットを1枚選ぶ。そのユニット�Eこ�Eターンが終わるまで [アタチE��ー]突破[コスチE以下](コスチE以下�E相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁEを得る、En\n\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "エントリー\nフィールドにある《ベース》を持つ自分のユニットを1枚選ぶ。そのユニットはこのターンが終わるまで [アタッカー]突破[コスト3以下](コスト3以下の相手のユニットはこのユニットの攻撃を防御できない)を得る。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "大地",
         "keywords": [
             "エントリー",
             "BREAKTHROUGH",
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_Mj6g9fkl_4226f5891b97e5aed2d05b05284fbd2396a7888d.png",
         "rarity": "UR",
@@ -1306,7 +1306,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,BREAKTHROUGH",
+                "grantedKeyword": "アタッカー,BREAKTHROUGH",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             },
@@ -1315,7 +1315,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,BREAKTHROUGH",
+                "grantedKeyword": "アタッカー,BREAKTHROUGH",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             },
@@ -1337,12 +1337,12 @@
     },
     {
         "id": "BT01-047",
-        "name": "純白の意忁E,
+        "name": "純白の意志",
         "type": "SKILL",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある《�Eース》を持つコスチEの自刁E�Eユニットを1枚選ぶ。そのユニット�Eヒット�Eこ�Eターンが終わるまで2になる、E,
+        "text": "フィールドにある《ベース》を持つコスト1の自分のユニットを1枚選ぶ。そのユニットのヒットはこのターンが終わるまで2になる。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -1359,7 +1359,7 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある自刁E�Eユニット�Eては相手�Eターンが終わるまでパワー+500、E,
+        "text": "フィールドにある自分のユニット全ては相手のターンが終わるまでパワー+500。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -1378,12 +1378,12 @@
     },
     {
         "id": "BT01-049",
-        "name": "チE��ートタイム",
+        "name": "デザートタイム",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある《�Eース》を持つ自刁E�Eユニット�E枚数刁E��ローする、E,
+        "text": "フィールドにある《ベース》を持つ自分のユニットの枚数分ドローする。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -1401,12 +1401,12 @@
     },
     {
         "id": "BT01-050",
-        "name": "雪見温泉祭めE,
+        "name": "雪見温泉祭り",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�E全てのユニットゾーンにユニットがある場合、フィールドにある自刁E�Eユニット�Eては相手�Eターンが終わるまでパワー+1500、E,
+        "text": "自分の全てのユニットゾーンにユニットがある場合、フィールドにある自分のユニット全ては相手のターンが終わるまでパワー+1500。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -1430,7 +1430,7 @@
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EチE��キの上かめE枚を公開し、その中のコスチE以下�Eカードを全て手札に加える。残りはチE��キに戻し、シャチE��ルする、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。フィールドにあるコスチE以下�E相手�Eユニットを1枚選んでトラチE��ュする、E,
+        "text": "自分のデッキの上から3枚を公開し、その中のコスト3以下のカードを全て手札に加える。残りはデッキに戻し、シャッフルする。\n\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -1464,7 +1464,7 @@
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある《�Eース》を持つ自刁E�Eユニット�Eてはこ�Eターンが終わるまでヒッチE1、E,
+        "text": "フィールドにある《ベース》を持つ自分のユニット全てはこのターンが終わるまでヒット+1。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -1483,16 +1483,16 @@
     },
     {
         "id": "BT01-053",
-        "name": "ガチE��シアムプロチE��ター",
+        "name": "ガッデシアムプロテクター",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: コスチE以下]\n[アタチE��ー]\n突破[コスチE以下](コスチE以下�E相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁE、E,
+        "text": "[装備条件: コスト4以下]\n[アタッカー]\n突破[コスト2以下](コスト2以下の相手のユニットはこのユニットの攻撃を防御できない)。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "BREAKTHROUGH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_pT4FGYfk_b0263b36cbf55793f00af7ced79cede6dd82c05a.png",
@@ -1505,16 +1505,16 @@
                 "value": 1000
             }
         ],
-        "equipCondition": "コスチE以丁E
+        "equipCondition": "コスト4以下"
     },
     {
         "id": "BT01-054",
-        "name": "アトラスパターンガントレチE��",
+        "name": "アトラスパターンガントレット",
         "type": "ITEM",
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\nパワー+5000、E,
+        "text": "[装備条件なし]\nパワー+5000。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -1533,16 +1533,16 @@
     },
     {
         "id": "BT01-055",
-        "name": "シンチE��ラ",
+        "name": "シンデレラ",
         "type": "LEADER",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n自刁E�E(嵁Eのカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]\n自刁E��相手�Eターンに1回ずつ、フィールドにあるコスチE以上�E自刁E�EユニットがトラチE��ュされたなら、E枚ドローする、E,
+        "text": "基本面\n[誓約]\n自分は(嵐)のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]\n自分と相手のターンに1回ずつ、フィールドにあるコスト5以上の自分のユニットがトラッシュされたなら、1枚ドローする。",
         "affiliation": "ピルグリム",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_jR3dEubO_2a466a28dd19929adffe7ffa37c013d60429af1c.png",
         "rarity": "L",
@@ -1556,20 +1556,20 @@
             }
         ],
         "awakeningLevel": 5,
-        "awakenedText": "[パッシブ]\n自刁E��相手�Eターンに1回ずつ、フィールドにあるコスチE以上�E自刁E�EユニットがトラチE��ュされたなら、E枚ドローする、E
+        "awakenedText": "[パッシブ]\n自分と相手のターンに1回ずつ、フィールドにあるコスト5以上の自分のユニットがトラッシュされたなら、1枚ドローする。"
     },
     {
         "id": "BT01-056",
-        "name": "エーチE��",
+        "name": "エーテル",
         "type": "UNIT",
         "cost": 1,
         "power": 1500,
         "hitCount": 1,
-        "text": "エグジチE��\nフィールドにある相手�Eユニットを1枚選んでこ�Eターンが終わるまでパワー-2000、E,
-        "affiliation": "エフェクチE/ ミシリス",
-        "attribute": "嵁E,
+        "text": "エグジット\nフィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-2000。",
+        "affiliation": "エフェクト / ミシリス",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_wMyCsJxf_e19b842daff4ed5788137f6269a4c9b41082857f.png",
         "rarity": "C",
@@ -1592,8 +1592,8 @@
         "power": 2500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
-        "attribute": "嵁E,
+        "affiliation": "ベース / ミシリス",
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -1603,16 +1603,16 @@
     },
     {
         "id": "BT01-058",
-        "name": "メイチE��‐シークレチE��ナ�Eス",
+        "name": "メイデン‐シークレットナース",
         "type": "UNIT",
         "cost": 1,
         "power": 3500,
         "hitCount": 1,
-        "text": "[チE��フェンダー]\n自壁Eこ�Eユニットが相手�E攻撁E��防御したなら、その攻撁E��終亁E��せ、このユニットをトラチE��ュする)、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "[ディフェンダー]\n自壊(このユニットが相手の攻撃を防御したなら、その攻撃を終了させ、このユニットをトラッシュする)。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -1629,8 +1629,8 @@
         "power": 3500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
-        "attribute": "嵁E,
+        "affiliation": "ベース / エリシオン",
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -1645,11 +1645,11 @@
         "cost": 2,
         "power": 4500,
         "hitCount": 1,
-        "text": "[パッシブ]\nこ�Eユニット�E自刁E�E手札めE枚選んでトラチE��ュしなぁE��攻撁E��きなぁE��E,
-        "affiliation": "エフェクチE/ ミシリス",
-        "attribute": "嵁E,
+        "text": "[パッシブ]\nこのユニットは自分の手札を1枚選んでトラッシュしないと攻撃できない。",
+        "affiliation": "エフェクト / ミシリス",
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_ogIrl35k_6137dc9c2678f981e3f82e35553afe63e322160e.png",
         "rarity": "C",
@@ -1664,16 +1664,16 @@
     },
     {
         "id": "BT01-061",
-        "name": "サクラ�E�ブルーム・イン・サマ�E",
+        "name": "サクラ：ブルーム・イン・サマー",
         "type": "UNIT",
         "cost": 2,
         "power": 2000,
         "hitCount": 1,
-        "text": "[アクチE��ブメイン]\nフィールドにある自刁E�Eユニットを2枚選び、その中の1枚をトラチE��ュする。他�E1枚�Eこ�Eターンが終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "[アクティブメイン]\nフィールドにある自分のユニットを2枚選び、その中の1枚をトラッシュする。他の1枚はこのターンが終わるまでパワー+2000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
-            "アクチE��チE
+            "アクティブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_9jWCTQuq_a913d846976072ecb7ec7659b210ea2bfdb898f0.png",
         "rarity": "SR",
@@ -1703,8 +1703,8 @@
         "power": 4500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
-        "attribute": "嵁E,
+        "affiliation": "ベース / ミシリス",
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -1714,16 +1714,16 @@
     },
     {
         "id": "BT01-063",
-        "name": "エクシア‐ゲーマ�Eズ",
+        "name": "エクシア‐ゲーマーズ",
         "type": "UNIT",
         "cost": 3,
         "power": 3000,
         "hitCount": 1,
-        "text": "[パッシブ]\nフィールドにある エグジチE�� 道連れを持つ自刁E�Eユニット�Eてのパワー+2000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "[パッシブ]\nフィールドにある エグジット 道連れを持つ自分のユニット全てのパワー+2000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE,
+            "パッシブ",
             "DEATH_TOUCH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_ECc9WGMZ_07047e8f87e00c929e8efba868bae27c121db80f.png",
@@ -1749,14 +1749,14 @@
     },
     {
         "id": "BT01-064",
-        "name": "プリバティ‐バンケチE��・プリンセス",
+        "name": "プリバティ‐バンケット・プリンセス",
         "type": "UNIT",
         "cost": 3,
         "power": 3500,
         "hitCount": 1,
-        "text": "エントリー\n自刁E�E手札めE枚選んでトラチE��ュできる。トラチE��ュしたなら、対向ユニットをトラチE��ュする、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "エントリー\n自分の手札を2枚選んでトラッシュできる。トラッシュしたなら、対向ユニットをトラッシュする。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
             "エントリー"
         ],
@@ -1773,16 +1773,16 @@
     },
     {
         "id": "BT01-065",
-        "name": "ユルチE,
+        "name": "ユルハ",
         "type": "UNIT",
         "cost": 4,
         "power": 6500,
         "hitCount": 2,
-        "text": "[パッシブ]\nこ�Eユニット�E自刁E�E手札めE枚選んでトラチE��ュしなぁE��攻撁E��きなぁE��E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "[パッシブ]\nこのユニットは自分の手札を1枚選んでトラッシュしないと攻撃できない。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_5obhAIGS_237321e70dc95f32617206606bb6388143c48f8c.png",
         "rarity": "C",
@@ -1797,16 +1797,16 @@
     },
     {
         "id": "BT01-066",
-        "name": "ノ�Eル‐�Eンギンホ�Eムズ",
+        "name": "ノベル‐ペンギンホームズ",
         "type": "UNIT",
         "cost": 4,
         "power": 4000,
         "hitCount": 2,
-        "text": "エグジチE��\t \n相手�E手札ぁE枚以上ある場合、相手�E手札めE枚選んでトラチE��ュする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "エグジット\t \n相手の手札が3枚以上ある場合、相手は手札を1枚選んでトラッシュする。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_SzcQ6CNn_dc615bc66e99957bcc19447f9a385827afa3bd86.png",
         "rarity": "C",
@@ -1829,11 +1829,11 @@
         "cost": 4,
         "power": 5000,
         "hitCount": 2,
-        "text": "エグジチE��\t\n道連めEこ�Eユニットを戦闘でトラチE��ュした相手�Eユニット�Eコストがこ�Eカード�Eコスト以下�E場合、そのユニットをトラチE��ュする)、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "エグジット\t\n道連れ(このユニットを戦闘でトラッシュした相手のユニットのコストがこのカードのコスト以下の場合、そのユニットをトラッシュする)。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��",
+            "エグジット",
             "DEATH_TOUCH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_LapFvKef_b4629de6e7cdad0027a702fb4ec4a54f3b2ba9c7.png",
@@ -1850,16 +1850,16 @@
     },
     {
         "id": "BT01-068",
-        "name": "D�E�キラーワイチE,
+        "name": "D：キラーワイフ",
         "type": "UNIT",
         "cost": 5,
         "power": 5000,
         "hitCount": 2,
-        "text": "エグジチE��\t2枚ドローし、その中の1枚を選んでトラチE��ュする、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "エグジット\t2枚ドローし、その中の1枚を選んでトラッシュする。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_wj2i6uGC_0ad97adc7d9e846b7ab22e3576ba5c1d33c0d1f4.png",
         "rarity": "P",
@@ -1880,9 +1880,9 @@
         "cost": 5,
         "power": 4500,
         "hitCount": 2,
-        "text": "エントリー\n対向ユニットがコスチE以下なら、そのユニットをトラチE��ュする、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "嵁E,
+        "text": "エントリー\n対向ユニットがコスト2以下なら、そのユニットをトラッシュする。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "嵐",
         "keywords": [
             "エントリー"
         ],
@@ -1904,11 +1904,11 @@
         "cost": 6,
         "power": 8500,
         "hitCount": 2,
-        "text": "[チE��フェンダー]\n自壁Eこ�Eユニットが相手�E攻撁E��防御したなら、その攻撁E��終亁E��せ、このユニットをトラチE��ュする)、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "[ディフェンダー]\n自壊(このユニットが相手の攻撃を防御したなら、その攻撃を終了させ、このユニットをトラッシュする)。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -1919,14 +1919,14 @@
     },
     {
         "id": "BT01-071",
-        "name": "ロザンナ：シチE��オーシャン",
+        "name": "ロザンナ：シックオーシャン",
         "type": "UNIT",
         "cost": 6,
         "power": 7000,
         "hitCount": 2,
-        "text": "エントリー\nフィールドにある自刁E�Eユニットを1枚選んでトラチE��ュする。その後、E枚ドローする、En\n\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "エントリー\nフィールドにある自分のユニットを1枚選んでトラッシュする。その後、1枚ドローする。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
             "エントリー"
         ],
@@ -1965,16 +1965,16 @@
     },
     {
         "id": "BT01-072",
-        "name": "モダニア‐セカンド�Eアフェクション",
+        "name": "モダニア‐セカンド・アフェクション",
         "type": "UNIT",
         "cost": 7,
         "power": 7000,
         "hitCount": 3,
-        "text": "[パッシブ]\nフィールドにある他�E自刁E�Eユニット�Eては、EエグジチE��\t 1枚ドローする」を得る、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "嵁E,
+        "text": "[パッシブ]\nフィールドにある他の自分のユニット全ては「 エグジット\t 1枚ドローする」を得る。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_BxoSvFsV_827542ee12385cac0ebeeaaf58fed4f1ffc8d045.png",
         "rarity": "R",
@@ -1997,14 +1997,14 @@
     },
     {
         "id": "BT01-073",
-        "name": "シンチE��ラ",
+        "name": "シンデレラ",
         "type": "UNIT",
         "cost": 8,
         "power": 7500,
         "hitCount": 3,
-        "text": "エントリー\n自刁E�E手札から対向ユニット�Eコストより高いコストを持つユニットカードを1枚選んでトラチE��ュできる。トラチE��ュしたなら、対向ユニットをトラチE��ュする、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。相手�E手札ぁE枚以上ある場合、相手�E手札めE枚選んでトラチE��ュする、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "嵁E,
+        "text": "エントリー\n自分の手札から対向ユニットのコストより高いコストを持つユニットカードを1枚選んでトラッシュできる。トラッシュしたなら、対向ユニットをトラッシュする。\n\n\n[トリガー] / \nこのカードをトラッシュする。相手の手札が3枚以上ある場合、相手は手札を1枚選んでトラッシュする。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "嵐",
         "keywords": [
             "エントリー"
         ],
@@ -2033,14 +2033,14 @@
     },
     {
         "id": "BT01-074",
-        "name": "シークレチE��コーチE,
+        "name": "シークレットコード",
         "type": "SKILL",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある自刁E�Eユニットを1枚選んでトラチE��ュする。そのユニット�Eヒット�Eドローする、En\n\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
+        "text": "フィールドにある自分のユニットを1枚選んでトラッシュする。そのユニットのヒット分ドローする。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -2065,14 +2065,14 @@
     },
     {
         "id": "BT01-075",
-        "name": "バ�EニングショチE��",
+        "name": "バーニングショット",
         "type": "SKILL",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�E手札めE枚選んでトラチE��ュする。そのカードと同じコストを持つ、フィールドにあるユニットを1枚選んでトラチE��ュする、E,
+        "text": "自分の手札を1枚選んでトラッシュする。そのカードと同じコストを持つ、フィールドにあるユニットを1枚選んでトラッシュする。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -2094,9 +2094,9 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある エグジチE�� 道連れを持つ自刁E�Eユニットを1枚選んでこ�Eターンが終わるまでパワー+4500、E,
+        "text": "フィールドにある エグジット 道連れを持つ自分のユニットを1枚選んでこのターンが終わるまでパワー+4500。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "DEATH_TOUCH"
         ],
@@ -2115,14 +2115,14 @@
     },
     {
         "id": "BT01-077",
-        "name": "ここは俺に任せろ�E�E,
+        "name": "ここは俺に任せろ！",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにあるユニットを1枚選び、E��んだユニット�Eヒット�E自刁E�E手札をトラチE��ュする。その後、そのユニットをトラチE��ュする、E,
+        "text": "フィールドにあるユニットを1枚選び、選んだユニットのヒット分自分の手札をトラッシュする。その後、そのユニットをトラッシュする。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -2139,14 +2139,14 @@
     },
     {
         "id": "BT01-078",
-        "name": "ビューチE��ーフルショチE��",
+        "name": "ビューティーフルショット",
         "type": "SKILL",
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "コスト�E合計が4以下になるよぁE��、フィールドにある相手�Eユニットを2枚まで選んでそ�Eユニットを全てトラチE��ュする、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EトラチE��ュゾーンから エグジチE�� を持つユニットカードを1枚選んで手札に加える、E,
+        "text": "コストの合計が4以下になるように、フィールドにある相手のユニットを2枚まで選んでそのユニットを全てトラッシュする。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンから エグジット を持つユニットカードを1枚選んで手札に加える。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -2176,9 +2176,9 @@
         "cost": 5,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EトラチE��ュゾーンから エグジチE��\n を持つコスチE以下�Eユニットカードを2枚まで選んで手札に加える、E,
+        "text": "自分のトラッシュゾーンから エグジット\n を持つコスト2以下のユニットカードを2枚まで選んで手札に加える。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -2195,16 +2195,16 @@
     },
     {
         "id": "BT01-080",
-        "name": "ガチE��シアムバイザー",
+        "name": "ガッデシアムバイザー",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\nエグジチE��\n2枚ドローする、E,
+        "text": "[装備条件なし]\nエグジット\n2枚ドローする。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_Wh5GqSEz_d19a733ee4bace06b1850018b5051c21fc5ffeb6.png",
         "rarity": "C",
@@ -2220,16 +2220,16 @@
     },
     {
         "id": "BT01-081",
-        "name": "チタンマターブ�EチE,
+        "name": "チタンマターブーツ",
         "type": "ITEM",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: エグジチE��]\nエグジチE��\n帰邁Eこ�Eターンの終亁E��、このユニットカードを自刁E�EトラチE��ュゾーンから手札に加える)、E,
+        "text": "[装備条件: エグジット]\nエグジット\n帰還(このターンの終了時、このユニットカードを自分のトラッシュゾーンから手札に加える)。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��",
+            "エグジット",
             "RECYCLE"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_F6rvumTq_ee10bcd4cd81ef55a9dfa9024bd041a670da5012.png",
@@ -2244,22 +2244,22 @@
                 "value": 1
             }
         ],
-        "equipCondition": "エグジチE��",
+        "equipCondition": "エグジット",
         "isRecycle": true
     },
     {
         "id": "BT02-001",
-        "name": "ボリューム‐ビート�Eザ・ガン",
+        "name": "ボリューム‐ビート・ザ・ガン",
         "type": "UNIT",
         "cost": 1,
         "power": 2500,
         "hitCount": 1,
-        "text": "エントリー こ�Eターンが終わるまで「[アタチE��ー] こ�E攻撁E��終わるまでパワー+1500」を得る、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "エントリー このターンが終わるまで「[アタッカー] この攻撃が終わるまでパワー+1500」を得る。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
             "エントリー",
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_WsyVlUJv_a1dc97d1fe083fad46b42511913a73324db19e22.png",
         "rarity": "C",
@@ -2277,7 +2277,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー",
+                "grantedKeyword": "アタッカー",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             },
@@ -2294,7 +2294,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー",
+                "grantedKeyword": "アタッカー",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             }
@@ -2302,17 +2302,17 @@
     },
     {
         "id": "BT02-002",
-        "name": "エマ‐オフィスセラピ�E",
+        "name": "エマ‐オフィスセラピー",
         "type": "UNIT",
         "cost": 3,
         "power": 4500,
         "hitCount": 1,
-        "text": "エントリー フィールドにある自刁E�Eユニット�Eてはこ�Eターンが終わるまで「[アタチE��ー] こ�E攻撁E��終わるまでパワー+500」を得る、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "炁E,
+        "text": "エントリー フィールドにある自分のユニット全てはこのターンが終わるまで「[アタッカー] この攻撃が終わるまでパワー+500」を得る。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "炎",
         "keywords": [
             "エントリー",
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_zlYxK6Qv_ecb84064ef0015ddff17eb0f033c2bf30a7de977.png",
         "rarity": "C",
@@ -2330,7 +2330,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー",
+                "grantedKeyword": "アタッカー",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             },
@@ -2347,7 +2347,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー",
+                "grantedKeyword": "アタッカー",
                 "targetType": "ALL_ALLIES",
                 "condition": "TURN_END"
             }
@@ -2355,16 +2355,16 @@
     },
     {
         "id": "BT02-003",
-        "name": "レチE��フ�Eド‐ナンセンスレチE��",
+        "name": "レッドフード‐ナンセンスレッド",
         "type": "UNIT",
         "cost": 3,
         "power": 2500,
         "hitCount": 1,
-        "text": "[アタチE��ー] [チE��エリスチE(対向ユニット�E防御可能な状態であれば忁E��防御しなければならなぁE、En[アタチE��ー] こ�E攻撁E��終わるまでパワー+4000、En\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "炁E,
+        "text": "[アタッカー] [デュエリスト](対向ユニットは防御可能な状態であれば必ず防御しなければならない)。\n[アタッカー] この攻撃が終わるまでパワー+4000。\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "DUELIST"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_nyxNv1Wc_75f0ebbafb1abf5f1f1ed42f9c1e67beac9bd07d.png",
@@ -2402,8 +2402,8 @@
         "power": 6000,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
-        "attribute": "炁E,
+        "affiliation": "ベース / テトラ",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -2413,16 +2413,16 @@
     },
     {
         "id": "BT02-005",
-        "name": "ラプンチE��ル�E�ピュアグレイス",
+        "name": "ラプンツェル：ピュアグレイス",
         "type": "UNIT",
         "cost": 5,
         "power": 5500,
         "hitCount": 2,
-        "text": "[アタチE��ー] こ�E攻撁E��終わるまでパワー+3000、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "炁E,
+        "text": "[アタッカー] この攻撃が終わるまでパワー+3000。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_7Dqyn8s0_a1fea2454e78606d62c00ac55f333a2b26780abe.png",
         "rarity": "R",
@@ -2439,14 +2439,14 @@
     },
     {
         "id": "BT02-006",
-        "name": "バイパ�E‐トキシチE��ラビッチE,
+        "name": "バイパー‐トキシックラビット",
         "type": "UNIT",
         "cost": 7,
         "power": 5500,
         "hitCount": 3,
-        "text": "エントリー 自刁E�EトラチE��ュゾーンからコスチE以下�Eユニットカードを1枚選んで手札に加える、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "エントリー 自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
             "エントリー"
         ],
@@ -2471,12 +2471,12 @@
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある自刁E�Eユニット�Eてはこ�Eターンが終わるまで [アタチE��ー] 略奪[1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、E枚ドローする)を得る、E,
+        "text": "フィールドにある自分のユニット全てはこのターンが終わるまで [アタッカー] 略奪[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、1枚ドローする)を得る。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "LOOT_1",
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_VMY62jwf_62191c602438b1c6872b3a55598903eb29814e7a.png",
         "rarity": "R",
@@ -2493,7 +2493,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー",
+                "grantedKeyword": "アタッカー",
                 "targetType": "ALL_ENEMIES",
                 "condition": "TURN_END"
             }
@@ -2506,9 +2506,9 @@
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EトラチE��ュゾーンからコスチE以上�Eユニットカードを1枚選んで手札に加える、E,
+        "text": "自分のトラッシュゾーンからコスト7以上のユニットカードを1枚選んで手札に加える。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -2525,14 +2525,14 @@
     },
     {
         "id": "BT02-009",
-        "name": "ガチE��シアムゲイター",
+        "name": "ガッデシアムゲイター",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: コスチE以下�EユニッチE\nパワー+4000、Enバ�Eサーカー(こ�Eユニット�E攻撁E��能な状態であれば忁E��攻撁E��なければならなぁE、En\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EトラチE��ュゾーンからコスチE以下�Eユニットカードを1枚選んで手札に加える、E,
+        "text": "[装備条件: コスト3以下のユニット]\nパワー+4000。\nバーサーカー(このユニットは攻撃可能な状態であれば必ず攻撃しなければならない)。\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -2554,17 +2554,17 @@
                 "targetType": "SELF"
             }
         ],
-        "equipCondition": "コスチE以下�EユニッチE
+        "equipCondition": "コスト3以下のユニット"
     },
     {
         "id": "BT02-010",
-        "name": "チE��ーゼル‐ブラチE��ホリチE�E",
+        "name": "ディーゼル‐ブラックホリデー",
         "type": "UNIT",
         "cost": 1,
         "power": 2500,
         "hitCount": 1,
-        "text": "エントリー 自刁E�EチE��キの上かめE枚を公開し、その中の《�Eース》を持つユニットカードを1枚手札に加える。残りはチE��キに戻し、シャチE��ルする、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "エントリー 自分のデッキの上から1枚を公開し、その中の《ベース》を持つユニットカードを1枚手札に加える。残りはデッキに戻し、シャッフルする。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "大地",
         "keywords": [
             "エントリー"
@@ -2585,13 +2585,13 @@
     },
     {
         "id": "BT02-011",
-        "name": "マルチャーナ‐スクールチE��ズ",
+        "name": "マルチャーナ‐スクールデイズ",
         "type": "UNIT",
         "cost": 3,
         "power": 6500,
         "hitCount": 1,
-        "text": "[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�Eリーダーレベル+1、E,
-        "affiliation": "ベ�Eス / エリシオン",
+        "text": "[トリガー] / \nこのカードをトラッシュする。自分のリーダーレベル+1。",
+        "affiliation": "ベース / エリシオン",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -2617,16 +2617,16 @@
     },
     {
         "id": "BT02-012",
-        "name": "ルピ�E‐ラグジュアリーラビッチE,
+        "name": "ルピー‐ラグジュアリーラビット",
         "type": "UNIT",
         "cost": 3,
         "power": 5500,
         "hitCount": 1,
-        "text": "[パッシブ] フィールドにある《�Eース》を持つ自刁E�EユニッチE枚につき、ヒチE��+1、En\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[パッシブ] フィールドにある《ベース》を持つ自分のユニット1枚につき、ヒット+1。\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_qCQbx28s_5e57b1db673909fafc22ed4580699ddd00d9c63d.png",
         "rarity": "UR",
@@ -2657,13 +2657,13 @@
     },
     {
         "id": "BT02-013",
-        "name": "チE��ア‐ラブリーチE�EチE,
+        "name": "ティア‐ラブリーデート",
         "type": "UNIT",
         "cost": 4,
         "power": 5500,
         "hitCount": 2,
-        "text": "エントリー フィールドにある自刁E�Eユニットを1枚選び、このターンが終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "エントリー フィールドにある自分のユニットを1枚選び、このターンが終わるまでパワー+2000。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "大地",
         "keywords": [
             "エントリー"
@@ -2683,13 +2683,13 @@
     },
     {
         "id": "BT02-014",
-        "name": "クエンシー�E�エスケープクイーン",
+        "name": "クエンシー：エスケープクイーン",
         "type": "UNIT",
         "cost": 7,
         "power": 9500,
         "hitCount": 3,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -2705,7 +2705,7 @@
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�E全てのユニットゾーンにユニットがある場合、�E刁E�Eリーダーレベル+1、E,
+        "text": "自分の全てのユニットゾーンにユニットがある場合、自分のリーダーレベル+1。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -2723,12 +2723,12 @@
     },
     {
         "id": "BT02-016",
-        "name": "素晴らしき大泥棁E,
+        "name": "素晴らしき大泥棒",
         "type": "SKILL",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにあるアイチE��めE枚選んでトラチE��ュする、E,
+        "text": "フィールドにあるアイテムを1枚選んでトラッシュする。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -2745,7 +2745,7 @@
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある《�Eース》を持つ自刁E�Eユニット�Eては相手�Eターンが終わるまでパワー+1500、E,
+        "text": "フィールドにある《ベース》を持つ自分のユニット全ては相手のターンが終わるまでパワー+1500。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -2764,12 +2764,12 @@
     },
     {
         "id": "BT02-018",
-        "name": "アトラスパターンヘルメチE��",
+        "name": "アトラスパターンヘルメット",
         "type": "ITEM",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: ベ�Eスを持つユニッチE\nヒッチE1、E,
+        "text": "[装備条件: ベースを持つユニット]\nヒット+1。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -2785,20 +2785,20 @@
                 "targetType": "SELF"
             }
         ],
-        "equipCondition": "ベ�Eス"
+        "equipCondition": "ベース"
     },
     {
         "id": "BT02-019",
-        "name": "メイチE���E�アイスローズ",
+        "name": "メイデン：アイスローズ",
         "type": "UNIT",
         "cost": 1,
         "power": 1000,
         "hitCount": 1,
-        "text": "エグジチE�� フィールドにある自刁E�Eユニットを1枚選び、このターンが終わるまでヒッチE1、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "エグジット フィールドにある自分のユニットを1枚選び、このターンが終わるまでヒット+1。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_RBeNFtIn_3d634e517075f66f5879372e88b24d891c7a65de.png",
         "rarity": "R",
@@ -2815,16 +2815,16 @@
     },
     {
         "id": "BT02-020",
-        "name": "ギロチン�E�ウィンタースレイヤー",
+        "name": "ギロチン：ウィンタースレイヤー",
         "type": "UNIT",
         "cost": 3,
         "power": 4000,
         "hitCount": 1,
-        "text": "[パッシブ] フィールドにある他�Eユニットが1枚以上効果でトラチE��ュされるたびに、このターンが終わるまでパワー+1000、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "[パッシブ] フィールドにある他のユニットが1枚以上効果でトラッシュされるたびに、このターンが終わるまでパワー+1000。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_xyc9MgGO_aec791c82fe8ae391e43bd1e0192aef1bcaa5965.png",
         "rarity": "C",
@@ -2841,16 +2841,16 @@
     },
     {
         "id": "BT02-021",
-        "name": "モダニア‐ファースト�Eアフェクション",
+        "name": "モダニア‐ファースト・アフェクション",
         "type": "UNIT",
         "cost": 4,
         "power": 6500,
         "hitCount": 2,
-        "text": "[チE��フェンダー] 自壁Eこ�Eユニットが相手�E攻撁E��防御したなら、その攻撁E��終亁E��せ、このユニットをトラチE��ュする)、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "嵁E,
+        "text": "[ディフェンダー] 自壊(このユニットが相手の攻撃を防御したなら、その攻撃を終了させ、このユニットをトラッシュする)。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "嵐",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -2861,16 +2861,16 @@
     },
     {
         "id": "BT02-022",
-        "name": "グレイチE,
+        "name": "グレイブ",
         "type": "UNIT",
         "cost": 5,
         "power": 5000,
         "hitCount": 2,
-        "text": "[アクチE��ブ]�E�メイン こ�Eターンの間、フィールドにて効果でトラチE��ュされた�E刁E�Eユニットが2枚以上なら、相手に1ダメージを与える、En\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "嵁E,
+        "text": "[アクティブ]：メイン このターンの間、フィールドにて効果でトラッシュされた自分のユニットが2枚以上なら、相手に1ダメージを与える。\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "嵐",
         "keywords": [
-            "アクチE��チE
+            "アクティブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_yKj8VGTd_6efcc647a7cd6adbe791a61e299b8829d4b3d3e1.png",
         "rarity": "UR",
@@ -2899,8 +2899,8 @@
         "power": 7500,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
-        "attribute": "嵁E,
+        "affiliation": "ベース / エリシオン",
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -2915,11 +2915,11 @@
         "cost": 7,
         "power": 7000,
         "hitCount": 3,
-        "text": "エグジチE�� 道連めEこ�Eユニットを戦闘でトラチE��ュした相手�Eユニット�Eコストがこ�Eカード�Eコスト以下�E場合、そのユニットをトラチE��ュする)、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "エグジット 道連れ(このユニットを戦闘でトラッシュした相手のユニットのコストがこのカードのコスト以下の場合、そのユニットをトラッシュする)。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��",
+            "エグジット",
             "DEATH_TOUCH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_9yUHAhQi_c56e6ddc86e071d93b3c0e07794af0e74d926dc8.png",
@@ -2941,9 +2941,9 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EトラチE��ュゾーンから エグジチE�� を持つコスチE以下�Eユニットカードを1枚選んで手札に加える、En\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EトラチE��ュゾーンから エグジチE�� を持つユニットカードを1枚選び、手札に加える、E,
+        "text": "自分のトラッシュゾーンから エグジット を持つコスト2以下のユニットカードを1枚選んで手札に加える。\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンから エグジット を持つユニットカードを1枚選び、手札に加える。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -2973,9 +2973,9 @@
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�E手札からユニットカードを1枚選んでトラチE��ュする。そのカード�Eヒット�Eドローする、E,
+        "text": "自分の手札からユニットカードを1枚選んでトラッシュする。そのカードのヒット分ドローする。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -2991,16 +2991,16 @@
     },
     {
         "id": "BT02-027",
-        "name": "マタータイプ：αアームガーチE,
+        "name": "マタータイプ：αアームガード",
         "type": "ITEM",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: なし]\nパワー+4000、En[パッシブ] 相手�Eターンの終亁E��、このユニットをトラチE��ュする、E,
+        "text": "[装備条件: なし]\nパワー+4000。\n[パッシブ] 相手のターンの終了時、このユニットをトラッシュする。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_rCx9iPZw_2016cfbde00aa0b7f5cbc1e2df7b67221fb8c77c.png",
         "rarity": "C",
@@ -3017,16 +3017,16 @@
     },
     {
         "id": "BT02-028",
-        "name": "ヘルム�E�アクアマリン",
+        "name": "ヘルム：アクアマリン",
         "type": "LEADER",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n自刁E�E (波濤) のカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ] フィールドにある ガーチE��アン を持つ自刁E�Eユニット�Eてのパワー+1000、E,
+        "text": "基本面\n[誓約]\n自分は (波濤) のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ] フィールドにある ガーディアン を持つ自分のユニット全てのパワー+1000。",
         "affiliation": "エリシオン",
         "attribute": "波濤",
         "keywords": [
-            "パッシチE,
+            "パッシブ",
             "GUARDIAN_1",
             "GUARDIAN"
         ],
@@ -3043,7 +3043,7 @@
             }
         ],
         "awakeningLevel": 5,
-        "awakenedText": "[パッシブ] フィールドにある ガーチE��アン を持つ自刁E�Eユニット�Eてのパワー+1000、E
+        "awakenedText": "[パッシブ] フィールドにある ガーディアン を持つ自分のユニット全てのパワー+1000。"
     },
     {
         "id": "BT02-029",
@@ -3052,11 +3052,11 @@
         "cost": 1,
         "power": 1500,
         "hitCount": 1,
-        "text": "[チE��フェンダー] こ�E防御が終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[ディフェンダー] この防御が終わるまでパワー+2000。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "波濤",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -3072,11 +3072,11 @@
         "cost": 2,
         "power": 3000,
         "hitCount": 1,
-        "text": "ガーチE��アン 防壁[1](隣のレーンの相手�Eユニットが攻撁E��る場合、�E刁E�E手札めE枚選んでトラチE��ュしたなら、このユニットでそ�E攻撁E��防御する)、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "ガーディアン 防壁[1](隣のレーンの相手のユニットが攻撃する場合、自分の手札を1枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "波濤",
         "keywords": [
-            "ガーチE��アン",
+            "ガーディアン",
             "GUARDIAN_1",
             "GUARDIAN"
         ],
@@ -3091,11 +3091,11 @@
         "cost": 2,
         "power": 2500,
         "hitCount": 1,
-        "text": "[チE��フェンダー] こ�E防御が終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[ディフェンダー] この防御が終わるまでパワー+2000。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "波濤",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -3111,11 +3111,11 @@
         "cost": 2,
         "power": 2500,
         "hitCount": 1,
-        "text": "[アタチE��ー] 突破[コスチE以上](コスチE以上�E相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁE、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "[アタッカー] 突破[コスト6以上](コスト6以上の相手のユニットはこのユニットの攻撃を防御できない)。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "波濤",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "BREAKTHROUGH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_hje0oSGv_28d73e8821c2c6f646a36f441af1138b6d5ccdfa.png",
@@ -3137,7 +3137,7 @@
         "power": 4500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
+        "affiliation": "ベース / テトラ",
         "attribute": "波濤",
         "keywords": [
             "-"
@@ -3153,11 +3153,11 @@
         "cost": 3,
         "power": 4000,
         "hitCount": 1,
-        "text": "ガーチE��アン 防壁[1](隣のレーンの相手�Eユニットが攻撁E��る場合、�E刁E�E手札めE枚選んでトラチE��ュしたなら、このユニットでそ�E攻撁E��防御する)、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "ガーディアン 防壁[1](隣のレーンの相手のユニットが攻撃する場合、自分の手札を1枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "波濤",
         "keywords": [
-            "ガーチE��アン",
+            "ガーディアン",
             "GUARDIAN_1",
             "GUARDIAN"
         ],
@@ -3167,16 +3167,16 @@
     },
     {
         "id": "BT02-035",
-        "name": "マスト‐パイレーチE��ーチE,
+        "name": "マスト‐パイレーツハート",
         "type": "UNIT",
         "cost": 3,
         "power": 1500,
         "hitCount": 1,
-        "text": "[アタチE��ー] 潜�E[1](こ�Eユニット�E攻撁E��相手�Eユニットに防御されなかった場合、E枚ドローする)、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "[アタッカー] 潜入[1](このユニットの攻撃を相手のユニットに防御されなかった場合、1枚ドローする)。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "波濤",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "INFILTRATE",
             "INFILTRATE_1"
         ],
@@ -3194,13 +3194,13 @@
     },
     {
         "id": "BT02-036",
-        "name": "アリス�E�ワンダーランドバニ�E",
+        "name": "アリス：ワンダーランドバニー",
         "type": "UNIT",
         "cost": 3,
         "power": 4500,
         "hitCount": 1,
-        "text": "エントリー フィールドにある ガーチE��アン を持つ自刁E�Eユニットを1枚選び、このターンが終わるまでヒッチE1、En\n[トリガー] / \nこ�EカードをトラチE��ュする。フィールドにある一番低いコストを持つ相手�Eユニットを1枚選んで、そのユニットと裁E��してぁE��アイチE��全てを持ち主の手札に戻す、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー フィールドにある ガーディアン を持つ自分のユニットを1枚選び、このターンが終わるまでヒット+1。\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにある一番低いコストを持つ相手のユニットを1枚選んで、そのユニットと装備しているアイテム全てを持ち主の手札に戻す。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "波濤",
         "keywords": [
             "エントリー",
@@ -3236,13 +3236,13 @@
     },
     {
         "id": "BT02-037",
-        "name": "チE��イ",
+        "name": "ツバイ",
         "type": "UNIT",
         "cost": 4,
         "power": 5500,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
+        "affiliation": "ベース / エリシオン",
         "attribute": "波濤",
         "keywords": [
             "-"
@@ -3258,11 +3258,11 @@
         "cost": 4,
         "power": 4000,
         "hitCount": 2,
-        "text": "[パッシブ] フィールドにある [チE��フェンダー] を持つ自刁E�Eユニット�Eてのパワー+2000、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "[パッシブ] フィールドにある [ディフェンダー] を持つ自分のユニット全てのパワー+2000。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "波濤",
         "keywords": [
-            "パッシチE,
+            "パッシブ",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -3282,17 +3282,17 @@
     },
     {
         "id": "BT02-039",
-        "name": "イサベル‐ハネムーンパ�EチE��ー",
+        "name": "イサベル‐ハネムーンパーティー",
         "type": "UNIT",
         "cost": 4,
         "power": 4000,
         "hitCount": 2,
-        "text": "ガーチE��アン 防壁[2](隣のレーンの相手�Eユニットが攻撁E��る場合、�E刁E�E手札めE枚選んでトラチE��ュしたなら、このユニットでそ�E攻撁E��防御する)、Enエントリー 相手�Eターンが終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "ガーディアン 防壁[2](隣のレーンの相手のユニットが攻撃する場合、自分の手札を2枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\nエントリー 相手のターンが終わるまでパワー+2000。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "波濤",
         "keywords": [
             "エントリー",
-            "ガーチE��アン",
+            "ガーディアン",
             "GUARDIAN_2",
             "GUARDIAN"
         ],
@@ -3311,13 +3311,13 @@
     },
     {
         "id": "BT02-040",
-        "name": "ペッパ�E",
+        "name": "ペッパー",
         "type": "UNIT",
         "cost": 5,
         "power": 5500,
         "hitCount": 2,
-        "text": "エントリー 1枚ドローする、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "エントリー 1枚ドローする。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "波濤",
         "keywords": [
             "エントリー"
@@ -3341,11 +3341,11 @@
         "cost": 5,
         "power": 3500,
         "hitCount": 2,
-        "text": "[アタチE��ー] 自刁E�E手札ぁE枚以上ある場合、この攻撁E��終わるまで突破[コスチE以上](コスチE以上�E相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁEを得る、En[トリガー] / \nこ�EカードをトラチE��ュする、E枚ドローする、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "[アタッカー] 自分の手札が5枚以上ある場合、この攻撃が終わるまで突破[コスト6以上](コスト6以上の相手のユニットはこのユニットの攻撃を防御できない)を得る。\n[トリガー] / \nこのカードをトラッシュする。1枚ドローする。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "波濤",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "BREAKTHROUGH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_gJqXV1PA_38ab8a5b4105a723a78ef7d76b7b34b4c62a88fc.png",
@@ -3356,7 +3356,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,BREAKTHROUGH",
+                "grantedKeyword": "アタッカー,BREAKTHROUGH",
                 "targetType": "ALL_ALLIES"
             },
             {
@@ -3384,13 +3384,13 @@
     },
     {
         "id": "BT02-042",
-        "name": "ルドミラ�E�ウィンターオーナ�E",
+        "name": "ルドミラ：ウィンターオーナー",
         "type": "UNIT",
         "cost": 5,
         "power": 1500,
         "hitCount": 2,
-        "text": "エントリー 自刁E�EトラチE��ュゾーンから [トリガー] を持たなぁE��キルカードを1枚選び、デチE��の上に裏向きで置く、En[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー 自分のトラッシュゾーンから [トリガー] を持たないスキルカードを1枚選び、デッキの上に裏向きで置く。\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "波濤",
         "keywords": [
             "エントリー"
@@ -3421,11 +3421,11 @@
         "cost": 6,
         "power": 7000,
         "hitCount": 2,
-        "text": "[チE��フェンダー] こ�E防御が終わるまでパワー+4000、En[トリガー] / \nこ�EカードをトラチE��ュする。フィールドにある一番低いコストを持つ相手�Eユニットを1枚選んで、そのユニットと裁E��してぁE��アイチE��全てを持ち主の手札に戻す、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[ディフェンダー] この防御が終わるまでパワー+4000。\n[トリガー] / \nこのカードをトラッシュする。フィールドにある一番低いコストを持つ相手のユニットを1枚選んで、そのユニットと装備しているアイテム全てを持ち主の手札に戻す。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "波濤",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_4000",
             "DEFENDER"
         ],
@@ -3457,7 +3457,7 @@
         "power": 7500,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "波濤",
         "keywords": [
             "-"
@@ -3468,16 +3468,16 @@
     },
     {
         "id": "BT02-045",
-        "name": "メアリー�E��EイゴチE��ス",
+        "name": "メアリー：ベイゴッデス",
         "type": "UNIT",
         "cost": 7,
         "power": 7500,
         "hitCount": 3,
-        "text": "[パッシブ] 自刁E��相手�Eターンに1回ずつ、効果で自刁E�E手札めE枚以上トラチE��ュした場合、E枚ドローする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[パッシブ] 自分と相手のターンに1回ずつ、効果で自分の手札を1枚以上トラッシュした場合、1枚ドローする。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "波濤",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_WoPmO3Zg_2f821c787d28d2f98c1e60c89cdc71d58e4c984d.png",
         "rarity": "R",
@@ -3493,17 +3493,17 @@
     },
     {
         "id": "BT02-046",
-        "name": "ヘルム�E�アクアマリン",
+        "name": "ヘルム：アクアマリン",
         "type": "UNIT",
         "cost": 8,
         "power": 9000,
         "hitCount": 3,
-        "text": "ガーチE��アン 防壁[3](隣のレーンの相手�Eユニットが攻撁E��る場合、�E刁E�E手札めE枚選んでトラチE��ュしたなら、このユニットでそ�E攻撁E��防御する)、En[パッシブ]\nフィールドにあるコスチE以上�E相手�Eユニット�Eてはバ�Eサーカー(こ�Eユニット�E攻撁E��能な状態であれば忁E��攻撁E��なければならなぁEを得る、En[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "ガーディアン 防壁[3](隣のレーンの相手のユニットが攻撃する場合、自分の手札を3枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\n[パッシブ]\nフィールドにあるコスト3以上の相手のユニット全てはバーサーカー(このユニットは攻撃可能な状態であれば必ず攻撃しなければならない)を得る。\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "波濤",
         "keywords": [
-            "パッシチE,
-            "ガーチE��アン",
+            "パッシブ",
+            "ガーディアン",
             "GUARDIAN_3",
             "GUARDIAN"
         ],
@@ -3533,7 +3533,7 @@
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある [チE��フェンダー] を持つ自刁E�Eユニットを1枚選び、このターンが終わるまでパワー+3500、E,
+        "text": "フィールドにある [ディフェンダー] を持つ自分のユニットを1枚選び、このターンが終わるまでパワー+3500。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -3554,12 +3554,12 @@
     },
     {
         "id": "BT02-048",
-        "name": "私たちは友達�E�E,
+        "name": "私たちは友達！",
         "type": "SKILL",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある ガーチE��アン を持つ自刁E�EユニッチE枚と ガーチE��アン を持たなぁE�E刁E�EユニッチE枚を選ぶ。このターンが終わるまで、その中の ガーチE��アン を持たなぁE��ニット�EパワーぁEガーチE��アン を持つユニット�E今�Eパワー刁E��がる、E,
+        "text": "フィールドにある ガーディアン を持つ自分のユニット1枚と ガーディアン を持たない自分のユニット1枚を選ぶ。このターンが終わるまで、その中の ガーディアン を持たないユニットのパワーが ガーディアン を持つユニットの今のパワー分上がる。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -3578,12 +3578,12 @@
     },
     {
         "id": "BT02-049",
-        "name": "イージスキャノン牽制封E��",
+        "name": "イージスキャノン牽制射撃",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある [チE��フェンダー] を持つ自刁E�Eユニットを2枚選ぶ。その後、相手に1ダメージを与える。選んだ2枚�Eこ�Eターンが終わるまで攻撁E��きなぁE��E,
+        "text": "フィールドにある [ディフェンダー] を持つ自分のユニットを2枚選ぶ。その後、相手に1ダメージを与える。選んだ2枚はこのターンが終わるまで攻撃できない。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -3609,12 +3609,12 @@
     },
     {
         "id": "BT02-050",
-        "name": "ニンジンとウサギパ�EチE��ー",
+        "name": "ニンジンとウサギパーティー",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある ガーチE��アン を持つ自刁E�Eユニットを1枚選び、このターンが終わるまでパワー+2000。�E刁E�E手札ぁE枚以上ある場合、更にこ�Eターンが終わるまでヒッチE1、E,
+        "text": "フィールドにある ガーディアン を持つ自分のユニットを1枚選び、このターンが終わるまでパワー+2000。自分の手札が5枚以上ある場合、更にこのターンが終わるまでヒット+1。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -3640,12 +3640,12 @@
     },
     {
         "id": "BT02-051",
-        "name": "海賊�E眼差ぁE,
+        "name": "海賊の眼差し",
         "type": "SKILL",
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�E手札めE枚選んでトラチE��ュする。その後、相手に1ダメージを与える、E,
+        "text": "自分の手札を2枚選んでトラッシュする。その後、相手に1ダメージを与える。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -3674,12 +3674,12 @@
     },
     {
         "id": "BT02-052",
-        "name": "セラミックベスチE,
+        "name": "セラミックベスト",
         "type": "ITEM",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: コスチE以下�EユニッチEパワー+1000、E,
+        "text": "[装備条件: コスト3以下のユニット]パワー+1000。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -3695,16 +3695,16 @@
                 "targetType": "SELF"
             }
         ],
-        "equipCondition": "コスチE以下�EユニッチE
+        "equipCondition": "コスト3以下のユニット"
     },
     {
         "id": "BT02-053",
-        "name": "ガチE��シアムジャケチE��",
+        "name": "ガッデシアムジャケット",
         "type": "ITEM",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: ガーチE��アンを持つユニッチEパワー+2000、E,
+        "text": "[装備条件: ガーディアンを持つユニット]パワー+2000。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -3721,20 +3721,20 @@
                 "targetType": "SELF"
             }
         ],
-        "equipCondition": "ガーチE��アン"
+        "equipCondition": "ガーディアン"
     },
     {
         "id": "BT02-054",
-        "name": "ノルンコードグローチE,
+        "name": "ノルンコードグローブ",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: コスチE以上�EユニッチE[アタチE��ー] 潜�E[1](こ�Eユニット�E攻撁E��相手�Eユニットに防御されなかった場合、E枚ドローする)、E,
+        "text": "[装備条件: コスト4以上のユニット][アタッカー] 潜入[1](このユニットの攻撃を相手のユニットに防御されなかった場合、1枚ドローする)。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "INFILTRATE",
             "INFILTRATE_1"
         ],
@@ -3749,20 +3749,20 @@
                 "value": 1
             }
         ],
-        "equipCondition": "コスチE以上�EユニッチE
+        "equipCondition": "コスト4以上のユニット"
     },
     {
         "id": "BT02-055",
-        "name": "クラウン‐ネイキチE��キング",
+        "name": "クラウン‐ネイキッドキング",
         "type": "LEADER",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n自刁E�E [稲妻] のカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]  フィールドにあるアイチE��を裁E��してぁE��自刁E�Eユニット�Eてのパワー+1500、E,
+        "text": "基本面\n[誓約]\n自分は [稲妻] のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]  フィールドにあるアイテムを装備している自分のユニット全てのパワー+1500。",
         "affiliation": "ピルグリム",
         "attribute": "稲妻",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_pgdL4Rz8_f285d505418ae439d861b4fccb93efb8f8aa3952.png",
         "rarity": "L",
@@ -3777,20 +3777,20 @@
             }
         ],
         "awakeningLevel": 6,
-        "awakenedText": "[パッシブ]  フィールドにあるアイチE��を裁E��してぁE��自刁E�Eユニット�Eてのパワー+1500、E
+        "awakenedText": "[パッシブ]  フィールドにあるアイテムを装備している自分のユニット全てのパワー+1500。"
     },
     {
         "id": "BT02-056",
-        "name": "トロニ�E",
+        "name": "トロニー",
         "type": "UNIT",
         "cost": 1,
         "power": 1000,
         "hitCount": 1,
-        "text": "エグジチE�� 自刁E�EトラチE��ュゾーンからコスチEのアイチE��カードを1枚選んで手札に加える、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "エグジット 自分のトラッシュゾーンからコスト1のアイテムカードを1枚選んで手札に加える。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_QiIoYjnZ_087788be753e2ec4535dffafdde278715ad9f763.png",
         "rarity": "C",
@@ -3807,17 +3807,17 @@
     },
     {
         "id": "BT02-057",
-        "name": "シュガー‐コールミ�E・ハ�Eド�EイルチE,
+        "name": "シュガー‐コールミー・ハードボイルド",
         "type": "UNIT",
         "cost": 1,
         "power": 1500,
         "hitCount": 1,
-        "text": "[アームド] 裁E��してぁE��アイチE��1枚につき、パワー+2000、E枚以上なら更に「[アタチE��ー] 1枚ドローする」を得る、En[トリガー] / \nこ�EカードをトラチE��ュする、E枚ドローする。その後、�E刁E�E手札めE枚選んでトラチE��ュする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[アームド] 装備しているアイテム1枚につき、パワー+2000。3枚以上なら更に「[アタッカー] 1枚ドローする」を得る。\n[トリガー] / \nこのカードをトラッシュする。2枚ドローする。その後、自分の手札を2枚選んでトラッシュする。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
-            "アタチE��ー",
+            "アームド",
+            "アタッカー",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_uiBth207_360caaad590684f1746f9509305a963c378bcd6e.png",
@@ -3843,7 +3843,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー",
+                "grantedKeyword": "アタッカー",
                 "targetType": "ALL_ALLIES"
             },
             {
@@ -3900,11 +3900,11 @@
         "cost": 2,
         "power": 3000,
         "hitCount": 1,
-        "text": "エグジチE�� 自刁E�EダメージゾーンからアイチE��カードを1枚選んで手札に加える。その後、�E刁E�E手札めE枚選んでダメージゾーンに置く、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エグジット 自分のダメージゾーンからアイテムカードを1枚選んで手札に加える。その後、自分の手札を1枚選んでダメージゾーンに置く。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_zf4uvo6I_7748d757e9ef83db5ebb48b2b2f21ceee5935e1b.png",
         "rarity": "C",
@@ -3921,13 +3921,13 @@
     },
     {
         "id": "BT02-059",
-        "name": "エーチE,
+        "name": "エード",
         "type": "UNIT",
         "cost": 2,
         "power": 3500,
         "hitCount": 1,
-        "text": "エントリー フィールドにある自刁E�Eユニットが裁E��してぁE��アイチE��めE枚選び、持ち主の手札に戻すことができる、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー フィールドにある自分のユニットが装備しているアイテムを1枚選び、持ち主の手札に戻すことができる。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
             "エントリー"
@@ -3951,11 +3951,11 @@
         "cost": 2,
         "power": 3000,
         "hitCount": 1,
-        "text": "[パッシブ] フィールドにあるアイチE��を裁E��してぁE��自刁E�EユニッチE枚につき、パワー+2000、E枚以上なら更にヒッチE1、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[パッシブ] フィールドにあるアイテムを装備している自分のユニット1枚につき、パワー+2000。3枚以上なら更にヒット+1。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_9Mj4sgR8_c4cf9b89b9e709dfa4db6de8befb87a250800ac3.png",
         "rarity": "SR",
@@ -3986,7 +3986,7 @@
         "power": 5000,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
+        "affiliation": "ベース / テトラ",
         "attribute": "稲妻",
         "keywords": [
             "-"
@@ -3997,17 +3997,17 @@
     },
     {
         "id": "BT02-062",
-        "name": "プリム‐レイジーサマ�E",
+        "name": "プリム‐レイジーサマー",
         "type": "UNIT",
         "cost": 3,
         "power": 4000,
         "hitCount": 1,
-        "text": "[アームド][アタチE��ー] アイチE��を裁E��してぁE��場合、この攻撁E��終わるまで[貫通][1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、相手に1ダメージを与えめEを得る、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[アームド][アタッカー] アイテムを装備している場合、この攻撃が終わるまで[貫通][1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)を得る。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
-            "アタチE��ー",
-            "アームチE,
+            "アタッカー",
+            "アームド",
             "PENETRATION_1",
             "PENETRATION",
             "ARMED"
@@ -4020,20 +4020,20 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,PENETRATION",
+                "grantedKeyword": "アタッカー,PENETRATION",
                 "targetType": "ALL_ALLIES"
             }
         ]
     },
     {
         "id": "BT02-063",
-        "name": "レオチE,
+        "name": "レオナ",
         "type": "UNIT",
         "cost": 3,
         "power": 4000,
         "hitCount": 1,
-        "text": "エントリー 対向ユニット�Eヒット�E自刁E�E手札からアイチE��カードを選んでトラチE��ュできる。その後、対向ユニットをトラチE��ュする、En[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EチE��キからコスチE以下�EアイチE��カードを1枚選んで手札に加える。デチE��をシャチE��ルする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー 対向ユニットのヒット分自分の手札からアイテムカードを選んでトラッシュできる。その後、対向ユニットをトラッシュする。\n[トリガー] / \nこのカードをトラッシュする。自分のデッキからコスト1以下のアイテムカードを1枚選んで手札に加える。デッキをシャッフルする。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
             "エントリー"
@@ -4059,13 +4059,13 @@
     },
     {
         "id": "BT02-064",
-        "name": "ビスケチE��",
+        "name": "ビスケット",
         "type": "UNIT",
         "cost": 4,
         "power": 6000,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
+        "affiliation": "ベース / テトラ",
         "attribute": "稲妻",
         "keywords": [
             "-"
@@ -4081,11 +4081,11 @@
         "cost": 4,
         "power": 5000,
         "hitCount": 2,
-        "text": "[アームチE 《ユニ�Eク》]《ユニ�Eク》を持つアイチE��を裁E��してぁE��場合、パワー+2500、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[アームド: 《ユニーク》]《ユニーク》を持つアイテムを装備している場合、パワー+2500。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
+            "アームド",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_4MSq9ikC_76a0705b31482e3c49cb7add132702cf31a60e46.png",
@@ -4107,11 +4107,11 @@
         "cost": 4,
         "power": 5000,
         "hitCount": 2,
-        "text": "[アームド] アイチE��を裁E��してぁE��なら戦闁E効果でトラチE��ュされる時、このユニットが裁E��してぁE��アイチE��めE枚選んで持ち主の手札に戻すことができる、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[アームド] アイテムを装備しているなら戦闘/効果でトラッシュされる時、このユニットが装備しているアイテムを1枚選んで持ち主の手札に戻すことができる。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
+            "アームド",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_oYdTUWs9_74aabb12da6fa70f419a7542808fe1faf18a412a.png",
@@ -4127,18 +4127,18 @@
     },
     {
         "id": "BT02-067",
-        "name": "クラウン‐ネイキチE��キング",
+        "name": "クラウン‐ネイキッドキング",
         "type": "UNIT",
         "cost": 4,
         "power": 6000,
         "hitCount": 2,
-        "text": "[アームチE 《ユニ�Eク》]《ユニ�Eク》を持つアイチE��を裁E��してぁE��場合、このユニットが裁E��してぁE��アイチE��の枚数が対向ユニット�Eヒット�E以上なら、[アタチE��ー] 突破(相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁEを得る、En[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "[アームド: 《ユニーク》]《ユニーク》を持つアイテムを装備している場合、このユニットが装備しているアイテムの枚数が対向ユニットのヒット分以上なら、[アタッカー] 突破(相手のユニットはこのユニットの攻撃を防御できない)を得る。\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
+            "アームド",
             "BREAKTHROUGH",
-            "アタチE��ー",
+            "アタッカー",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_B28d1lEL_9312d0357a53cd76668ef92d5f9d2db2fe1bcb73.png",
@@ -4149,7 +4149,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,BREAKTHROUGH",
+                "grantedKeyword": "アタッカー,BREAKTHROUGH",
                 "targetType": "OPPOSING"
             },
             {
@@ -4170,13 +4170,13 @@
     },
     {
         "id": "BT02-068",
-        "name": "リター‐フィチE��ュガーチE,
+        "name": "リター‐フィッシュガード",
         "type": "UNIT",
         "cost": 5,
         "power": 6500,
         "hitCount": 2,
-        "text": "エントリー 自刁E�EチE��キの上かめE枚を公開し、その中のアイチE��カードを1枚手札に加える。残りは好きな頁E��でチE��キの下に置く、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "エントリー 自分のデッキの上から2枚を公開し、その中のアイテムカードを1枚手札に加える。残りは好きな順番でデッキの下に置く。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
             "エントリー"
@@ -4201,11 +4201,11 @@
         "cost": 5,
         "power": 5000,
         "hitCount": 2,
-        "text": "[アームド] アイチE��を裁E��してぁE��なら戦闁E効果でトラチE��ュされる時、このユニットが裁E��してぁE��アイチE��めE枚選んでトラチE��ュできる。その後、トラチE��ュされなぁE��E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[アームド] アイテムを装備しているなら戦闘/効果でトラッシュされる時、このユニットが装備しているアイテムを1枚選んでトラッシュできる。その後、トラッシュされない。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
+            "アームド",
             "ITEM_SHIELD",
             "ARMED"
         ],
@@ -4215,13 +4215,13 @@
     },
     {
         "id": "BT02-070",
-        "name": "センチ‐�EイチE��ホリチE�E",
+        "name": "センチ‐マイティホリデー",
         "type": "UNIT",
         "cost": 6,
         "power": 8000,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "稲妻",
         "keywords": [
             "-"
@@ -4232,13 +4232,13 @@
     },
     {
         "id": "BT02-071",
-        "name": "ソーダ�E�トゥインクルバニー",
+        "name": "ソーダ：トゥインクルバニー",
         "type": "UNIT",
         "cost": 6,
         "power": 6000,
         "hitCount": 2,
-        "text": "エントリー 自刁E�EトラチE��ュゾーンからアイチE��カードを3枚選んで好きな頁E��でチE��キの下に置くことができる。その後、対向ユニットをトラチE��ュする、En\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー 自分のトラッシュゾーンからアイテムカードを3枚選んで好きな順番でデッキの下に置くことができる。その後、対向ユニットをトラッシュする。\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
             "エントリー"
@@ -4264,16 +4264,16 @@
     },
     {
         "id": "BT02-072",
-        "name": "マクスウェル‐メカニックホワイチE,
+        "name": "マクスウェル‐メカニックホワイト",
         "type": "UNIT",
         "cost": 7,
         "power": 8000,
         "hitCount": 3,
-        "text": "[アームド] アイチE��を裁E��してぁE��場合、ヒチE��+1、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[アームド] アイテムを装備している場合、ヒット+1。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
+            "アームド",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_85aQLJMN_bcfdb4eb2d78c4a1725383d8b2c987c0ea1d26cd.png",
@@ -4289,12 +4289,12 @@
     },
     {
         "id": "BT02-073",
-        "name": "勁E���E眼差ぁE,
+        "name": "勇気の眼差し",
         "type": "SKILL",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EダメージゾーンからアイチE��カードを1枚選んで手札に加える。その後、�E刁E�E手札めE枚選んでダメージゾーンに置く、E,
+        "text": "自分のダメージゾーンからアイテムカードを1枚選んで手札に加える。その後、自分の手札を1枚選んでダメージゾーンに置く。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -4313,12 +4313,12 @@
     },
     {
         "id": "BT02-074",
-        "name": "お食事�Eお時間です、ご主人槁E,
+        "name": "お食事のお時間です、ご主人様",
         "type": "SKILL",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EチE��キから《ユニ�Eク》を持つアイチE��カードを1枚手札に加える。デチE��をシャチE��ルする、En\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EチE��キからコスチE以下�EアイチE��カードを1枚選んで手札に加える。デチE��をシャチE��ルする、E,
+        "text": "自分のデッキから《ユニーク》を持つアイテムカードを1枚手札に加える。デッキをシャッフルする。\n\n[トリガー] / \nこのカードをトラッシュする。自分のデッキからコスト1以下のアイテムカードを1枚選んで手札に加える。デッキをシャッフルする。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -4345,12 +4345,12 @@
     },
     {
         "id": "BT02-075",
-        "name": "ビギナ�EズベネフィチE��",
+        "name": "ビギナーズベネフィット",
         "type": "SKILL",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにあるアイチE��めE枚選んで持ち主のチE��キの下に置く、E,
+        "text": "フィールドにあるアイテムを1枚選んで持ち主のデッキの下に置く。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -4374,7 +4374,7 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EトラチE��ュゾーンからコスチE以下�EアイチE��カードを1枚選んで手札に加える、E,
+        "text": "自分のトラッシュゾーンからコスト1以下のアイテムカードを1枚選んで手札に加える。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -4398,7 +4398,7 @@
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EチE��キの上かめE枚を公開し、その中のアイチE��カードを2枚まで選んで手札に加える。残りは好きな頁E��でチE��キの下に置く、E,
+        "text": "自分のデッキの上から5枚を公開し、その中のアイテムカードを2枚まで選んで手札に加える。残りは好きな順番でデッキの下に置く。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -4428,8 +4428,8 @@
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: なし]",
-        "affiliation": "ユニ�Eク",
+        "text": "[装備条件: なし]",
+        "affiliation": "ユニーク",
         "attribute": "稲妻",
         "keywords": [
             "-"
@@ -4440,16 +4440,16 @@
     },
     {
         "id": "BT02-079",
-        "name": "ガチE��シアムブ�EチE,
+        "name": "ガッデシアムブーツ",
         "type": "ITEM",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: なし][アタチE��ー] こ�E攻撁E��終わるまでパワー+2000、E,
+        "text": "[装備条件: なし][アタッカー] この攻撃が終わるまでパワー+2000。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_Pcyw8Gj7_6c72def302997896d10e80569cde47314400feab.png",
         "rarity": "C",
@@ -4466,12 +4466,12 @@
     },
     {
         "id": "BT02-080",
-        "name": "アトラスパターンプロチE��ター",
+        "name": "アトラスパターンプロテクター",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: [アームド]を持つユニッチEパワー+3000、E,
+        "text": "[装備条件: [アームド]を持つユニット]パワー+3000。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -4487,20 +4487,20 @@
                 "targetType": "SELF"
             }
         ],
-        "equipCondition": "アームチE
+        "equipCondition": "アームド"
     },
     {
         "id": "BT02-081",
-        "name": "パターンシリーズ�E�E1ゲイター",
+        "name": "パターンシリーズ：31ゲイター",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: なし][パッシブ] 自刁E��相手�Eターンに1回ずつ、このユニットが戦闁E効果でトラチE��ュされる時、�E刁E�E手札をこのユニット�Eヒット�E選んでトラチE��ュできる。その後、トラチE��ュされなぁE��E,
-        "affiliation": "ユニ�Eク",
+        "text": "[装備条件: なし][パッシブ] 自分と相手のターンに1回ずつ、このユニットが戦闘/効果でトラッシュされる時、自分の手札をこのユニットのヒット分選んでトラッシュできる。その後、トラッシュされない。",
+        "affiliation": "ユニーク",
         "attribute": "稲妻",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_UohLrp2b_a6b449d4a5610bd576f48b75aaf1b74890e4c4d6.png",
         "rarity": "C",
@@ -4514,16 +4514,16 @@
     },
     {
         "id": "ST01-001",
-        "name": "ラチE,
+        "name": "ラピ",
         "type": "LEADER",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]自刁E�E(炁Eのカード�EみをデチE��に入れることができる、En\n[覚�E]自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]\nフィールドにある自刁E�Eユニット�Eては自刁E�Eターンの間、パワー+1000、E,
+        "text": "基本面\n[誓約]自分は(炎)のカードのみをデッキに入れることができる。\n\n[覚醒]自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]\nフィールドにある自分のユニット全ては自分のターンの間、パワー+1000。",
         "affiliation": "エリシオン",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_T7DQiq8P_b5a7f3c1b8d178e5cd8cd97bb9a9f02e38f66c8e.png",
         "rarity": "L",
@@ -4539,7 +4539,7 @@
             }
         ],
         "awakeningLevel": 5,
-        "awakenedText": "[パッシブ]\nフィールドにある自刁E�Eユニット�Eては自刁E�Eターンの間、パワー+1000、E
+        "awakenedText": "[パッシブ]\nフィールドにある自分のユニット全ては自分のターンの間、パワー+1000。"
     },
     {
         "id": "ST01-002",
@@ -4549,8 +4549,8 @@
         "power": 3000,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
-        "attribute": "炁E,
+        "affiliation": "ベース / エリシオン",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -4560,16 +4560,16 @@
     },
     {
         "id": "ST01-003",
-        "name": "ベスチE��ー",
+        "name": "ベスティー",
         "type": "UNIT",
         "cost": 1,
         "power": 2500,
         "hitCount": 1,
-        "text": "[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+1000、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "炁E,
+        "text": "[アタッカー]\nこの攻撃が終わるまでパワー+1000。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_QDPcWKIg_2aff81237b5ab7b542bb02093fa9646edb80bb0b.png",
         "rarity": "C",
@@ -4592,8 +4592,8 @@
         "power": 4000,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
-        "attribute": "炁E,
+        "affiliation": "ベース / エリシオン",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -4608,11 +4608,11 @@
         "cost": 2,
         "power": 3000,
         "hitCount": 1,
-        "text": "[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[アタッカー]\nこの攻撃が終わるまでパワー+2000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_lSm4L5Yj_3e71e076ead55356e15e823fec01207c10dfc039.png",
         "rarity": "C",
@@ -4634,9 +4634,9 @@
         "cost": 2,
         "power": 2000,
         "hitCount": 1,
-        "text": "エントリー\nこ�Eターンが終わるまで対向ユニット�Eパワー-3000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "エントリー\nこのターンが終わるまで対向ユニットのパワー-3000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
             "エントリー"
         ],
@@ -4655,16 +4655,16 @@
     },
     {
         "id": "ST01-007",
-        "name": "バイパ�E",
+        "name": "バイパー",
         "type": "UNIT",
         "cost": 3,
         "power": 4500,
         "hitCount": 1,
-        "text": "[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+1000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[アタッカー]\nこの攻撃が終わるまでパワー+1000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_3LXNoBVA_fb62c192ede22428bfcdc1237013edf6c46e7bee.png",
         "rarity": "C",
@@ -4686,12 +4686,12 @@
         "cost": 4,
         "power": 5500,
         "hitCount": 2,
-        "text": "[パッシブ]\nフィールドにある \n[アタチE��ー]\n を持つ自刁E�Eユニット�Eては自刁E�Eターンの間、パワー+1000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[パッシブ]\nフィールドにある \n[アタッカー]\n を持つ自分のユニット全ては自分のターンの間、パワー+1000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "パッシチE,
-            "アタチE��ー"
+            "パッシブ",
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_GDPEXtSh_adef0defa2d1b1f30eb585d04c097ea329c42ca3.png",
         "rarity": "R",
@@ -4718,14 +4718,14 @@
     },
     {
         "id": "ST01-009",
-        "name": "エチE,
+        "name": "エマ",
         "type": "UNIT",
         "cost": 5,
         "power": 7000,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
-        "attribute": "炁E,
+        "affiliation": "ベース / エリシオン",
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -4740,11 +4740,11 @@
         "cost": 6,
         "power": 6500,
         "hitCount": 2,
-        "text": "[アクチE��ブメイン]\n自刁E�E手札めE枚選んでチE��キに戻し、シャチE��ルする。その後、このターンが終わるまで対向ユニット�Eパワー-3000、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。フィールドにある相手�Eユニットを1枚選んでこ�Eターンが終わるまでパワー-5000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "炁E,
+        "text": "[アクティブメイン]\n自分の手札を1枚選んでデッキに戻し、シャッフルする。その後、このターンが終わるまで対向ユニットのパワー-3000。\n\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-5000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "炎",
         "keywords": [
-            "アクチE��チE
+            "アクティブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_RMLkXTcj_49a2512e186e63c24921cbfef3905bb60140dc13.png",
         "rarity": "SR",
@@ -4785,16 +4785,16 @@
     },
     {
         "id": "ST01-011",
-        "name": "ラチE,
+        "name": "ラピ",
         "type": "UNIT",
         "cost": 7,
         "power": 7500,
         "hitCount": 3,
-        "text": "[アタチE��ー]\n[貫通][1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、相手に1ダメージを与えめE、En\n\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "炁E,
+        "text": "[アタッカー]\n[貫通][1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "PENETRATION_1",
             "PENETRATION"
         ],
@@ -4819,14 +4819,14 @@
     },
     {
         "id": "ST01-012",
-        "name": "弱点の見極めE,
+        "name": "弱点の見極め",
         "type": "SKILL",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある相手�Eユニットを1枚選んでこ�Eターンが終わるまでパワー-2000、E,
+        "text": "フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-2000。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -4848,9 +4848,9 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EトラチE��ュゾーンからコスチE以下�Eユニットカードを1枚選んで手札に加える、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EトラチE��ュゾーンからコスチE以下�Eユニットカードを1枚選んで手札に加える、E,
+        "text": "自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -4875,14 +4875,14 @@
     },
     {
         "id": "ST01-014",
-        "name": "火力が全て�E�E,
+        "name": "火力が全て！",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある自刁E�Eユニット�Eてはこ�Eターンが終わるまでパワー+2000、E,
+        "text": "フィールドにある自分のユニット全てはこのターンが終わるまでパワー+2000。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -4904,9 +4904,9 @@
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある相手�Eユニットを1枚選んでこ�Eターンが終わるまでパワー-5000、En\n\n[トリガー] / こ�EカードをトラチE��ュする。フィールドにある相手�Eユニットを1枚選んでこ�Eターンが終わるまでパワー-5000、E,
+        "text": "フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-5000。\n\n\n[トリガー] / このカードをトラッシュする。フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-5000。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
             "-"
         ],
@@ -4933,16 +4933,16 @@
     },
     {
         "id": "ST01-016",
-        "name": "レアメタルブ�EチE,
+        "name": "レアメタルブーツ",
         "type": "ITEM",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\n\n[アタチE��ー]\nこ�E攻撁E��終わるまでパワー+2000、E,
+        "text": "[装備条件なし]\n\n[アタッカー]\nこの攻撃が終わるまでパワー+2000。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー"
+            "アタッカー"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_GrJEW0tC_837c9deb18ebcbe027fe1d94d7c37dbb66a6b252.png",
         "rarity": "C",
@@ -4959,16 +4959,16 @@
     },
     {
         "id": "ST01-017",
-        "name": "ケブラーグローチE,
+        "name": "ケブラーグローブ",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\n\n[アタチE��ー]\n略奪[1](こ�Eユニットが攻撁E��た戦闘で相手�EユニットをトラチE��ュしたなら、E枚ドローする)、E,
+        "text": "[装備条件なし]\n\n[アタッカー]\n略奪[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、1枚ドローする)。",
         "affiliation": "-",
-        "attribute": "炁E,
+        "attribute": "炎",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "LOOT_1"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_6KN2SGZF_791785081bc4a73ddc22cc9cd25b205f1b933334.png",
@@ -4985,16 +4985,16 @@
     },
     {
         "id": "ST02-001",
-        "name": "ギルチE��",
+        "name": "ギルティ",
         "type": "LEADER",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n 自刁E�E(大地)のカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]\n自刁E�Eサイズ+1、E,
+        "text": "基本面\n[誓約]\n 自分は(大地)のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]\n自分のサイズ+1。",
         "affiliation": "ミシリス",
         "attribute": "大地",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_0at946UK_b80d4f69d9e4ce2d60cba320ae10dcd75cfd2741.png",
         "rarity": "L",
@@ -5006,7 +5006,7 @@
             }
         ],
         "awakeningLevel": 6,
-        "awakenedText": "[パッシブ]\n自刁E�Eサイズ+1、E
+        "awakenedText": "[パッシブ]\n自分のサイズ+1。"
     },
     {
         "id": "ST02-002",
@@ -5016,7 +5016,7 @@
         "power": 3500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -5032,11 +5032,11 @@
         "cost": 1,
         "power": 1500,
         "hitCount": 1,
-        "text": "エグジチE��\n自刁E�Eリーダーレベル+1、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エグジット\n自分のリーダーレベル+1。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_9a5CW4ZA_7584ed49e40193093966412a08525f1efb8c56d7.png",
         "rarity": "C",
@@ -5058,7 +5058,7 @@
         "power": 4500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -5074,8 +5074,8 @@
         "cost": 3,
         "power": 2500,
         "hitCount": 1,
-        "text": "エントリー\n自刁E�Eリーダーレベル+1、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー\n自分のリーダーレベル+1。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "大地",
         "keywords": [
             "エントリー"
@@ -5100,7 +5100,7 @@
         "power": 5500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
+        "affiliation": "ベース / テトラ",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -5111,16 +5111,16 @@
     },
     {
         "id": "ST02-007",
-        "name": "ブリチE��",
+        "name": "ブリッド",
         "type": "UNIT",
         "cost": 3,
         "power": 3500,
         "hitCount": 1,
-        "text": "[アクチE��ブメイン]\n自刁E�E手札めE枚選んでトラチE��ュする。その後、フィールドにある《�Eース》を持つ自刁E�Eユニット�Eてはこ�Eターンが終わるまでヒッチE1、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�Eリーダーレベル+1、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "[アクティブメイン]\n自分の手札を1枚選んでトラッシュする。その後、フィールドにある《ベース》を持つ自分のユニット全てはこのターンが終わるまでヒット+1。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のリーダーレベル+1。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "大地",
         "keywords": [
-            "アクチE��チE
+            "アクティブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_eGy8vq7S_3fe08dc16beeed98a10879c36f301bec84097bef.png",
         "rarity": "R",
@@ -5166,13 +5166,13 @@
     },
     {
         "id": "ST02-008",
-        "name": "マルチャーチE,
+        "name": "マルチャーナ",
         "type": "UNIT",
         "cost": 4,
         "power": 6500,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
+        "affiliation": "ベース / エリシオン",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -5183,13 +5183,13 @@
     },
     {
         "id": "ST02-009",
-        "name": "ギルチE��",
+        "name": "ギルティ",
         "type": "UNIT",
         "cost": 5,
         "power": 8500,
         "hitCount": 2,
-        "text": "[トリガー] / \nこ�EカードをトラチE��ュする。フィールドにあるコスチE以下�E相手�Eユニットを1枚選んでトラチE��ュする、E,
-        "affiliation": "ベ�Eス / ミシリス",
+        "text": "[トリガー] / \nこのカードをトラッシュする。フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
+        "affiliation": "ベース / ミシリス",
         "attribute": "大地",
         "keywords": [
             "-"
@@ -5217,16 +5217,16 @@
     },
     {
         "id": "ST02-010",
-        "name": "スノ�EホワイチE,
+        "name": "スノーホワイト",
         "type": "UNIT",
         "cost": 6,
         "power": 6500,
         "hitCount": 2,
-        "text": "[アタチE��ー]\n突破[コスチE以下](コスチE以下�E相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁE、En\n\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "[アタッカー]\n突破[コスト2以下](コスト2以下の相手のユニットはこのユニットの攻撃を防御できない)。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "大地",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "BREAKTHROUGH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_OKGyRgjP_699d618f8493ed7d14c9ba5f24225317cd2caac6.png",
@@ -5250,16 +5250,16 @@
     },
     {
         "id": "ST02-011",
-        "name": "チE��ーゼル",
+        "name": "ディーゼル",
         "type": "UNIT",
         "cost": 7,
         "power": 3000,
         "hitCount": 3,
-        "text": "[パッシブ]\n自刁E�Eリーダーレベル1につき、パワー+1000、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "[パッシブ]\n自分のリーダーレベル1につき、パワー+1000。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "大地",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_43ez1c7w_67b2742b73297eed5da9497a778ba0a88a5cc58b.png",
         "rarity": "C",
@@ -5276,12 +5276,12 @@
     },
     {
         "id": "ST02-012",
-        "name": "クレチE��ェンチE,
+        "name": "クレッシェンド",
         "type": "SKILL",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある自刁E�Eユニットを1枚選んでこ�Eターンが終わるまでパワー+3000、E,
+        "text": "フィールドにある自分のユニットを1枚選んでこのターンが終わるまでパワー+3000。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -5305,7 +5305,7 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�Eリーダーレベル+1、E,
+        "text": "自分のリーダーレベル+1。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -5328,7 +5328,7 @@
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EチE��キの上からカードを3枚�E開し、その中の1枚を選んで手札に加える。残りの2枚�EチE��キに戻し、シャチE��ルする、E,
+        "text": "自分のデッキの上からカードを3枚公開し、その中の1枚を選んで手札に加える。残りの2枚はデッキに戻し、シャッフルする。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -5352,7 +5352,7 @@
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�Eユニットと相手�Eユニットが両方あるレーンを一つ選び、そのレーンでパワーが一番低いユニットをトラチE��ュする。パワーが同じなら、�EてトラチE��ュする、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。フィールドにあるコスチE以下�E相手�Eユニットを1枚選んでトラチE��ュする、E,
+        "text": "自分のユニットと相手のユニットが両方あるレーンを一つ選び、そのレーンでパワーが一番低いユニットをトラッシュする。パワーが同じなら、全てトラッシュする。\n\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -5381,12 +5381,12 @@
     },
     {
         "id": "ST02-016",
-        "name": "ケブラープロチE��ター",
+        "name": "ケブラープロテクター",
         "type": "ITEM",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\n\nパワー+2000、E,
+        "text": "[装備条件なし]\n\nパワー+2000。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -5405,12 +5405,12 @@
     },
     {
         "id": "ST02-017",
-        "name": "レアメタルヘルメチE��",
+        "name": "レアメタルヘルメット",
         "type": "ITEM",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: コスチE以上]\n\nヒッチE1、E,
+        "text": "[装備条件: コスト4以上]\n\nヒット+1。",
         "affiliation": "-",
         "attribute": "大地",
         "keywords": [
@@ -5426,7 +5426,7 @@
                 "targetType": "SELF"
             }
         ],
-        "equipCondition": "コスチE以丁E
+        "equipCondition": "コスト4以上"
     },
     {
         "id": "ST03-001",
@@ -5435,11 +5435,11 @@
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n自刁E�E(嵁Eのカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]\nフィールドにある エグジチE��\n を持つ自刁E�Eユニット�Eてのパワー+1000、E,
+        "text": "基本面\n[誓約]\n自分は(嵐)のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが4以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]\nフィールドにある エグジット\n を持つ自分のユニット全てのパワー+1000。",
         "affiliation": "ピルグリム",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_DfAOyRPV_3f23e6ac08d1a34b4828151bd971755a0072c0ce.png",
         "rarity": "L",
@@ -5462,18 +5462,18 @@
             }
         ],
         "awakeningLevel": 4,
-        "awakenedText": "[パッシブ]\nフィールドにある エグジチE��\n を持つ自刁E�Eユニット�Eてのパワー+1000、E
+        "awakenedText": "[パッシブ]\nフィールドにある エグジット\n を持つ自分のユニット全てのパワー+1000。"
     },
     {
         "id": "ST03-002",
-        "name": "チE��タ",
+        "name": "デルタ",
         "type": "UNIT",
         "cost": 1,
         "power": 2500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
-        "attribute": "嵁E,
+        "affiliation": "ベース / エリシオン",
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -5488,11 +5488,11 @@
         "cost": 1,
         "power": 500,
         "hitCount": 1,
-        "text": "エグジチE��\n相手�E手札めE枚選んでトラチE��ュする、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。相手�E手札ぁE枚以上ある場合、相手�E手札めE枚選んでトラチE��ュする、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "エグジット\n相手は手札を1枚選んでトラッシュする。\n\n\n[トリガー] / \nこのカードをトラッシュする。相手の手札が3枚以上ある場合、相手は手札を1枚選んでトラッシュする。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_lgakU4Ie_0f616e0e611c70683f5a7d03dc5cc1937fa3d2fa.png",
         "rarity": "SR",
@@ -5527,14 +5527,14 @@
     },
     {
         "id": "ST03-004",
-        "name": "ユチE,
+        "name": "ユニ",
         "type": "UNIT",
         "cost": 2,
         "power": 3500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
-        "attribute": "嵁E,
+        "affiliation": "ベース / ミシリス",
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -5544,14 +5544,14 @@
     },
     {
         "id": "ST03-005",
-        "name": "ノ�Eル",
+        "name": "ノベル",
         "type": "UNIT",
         "cost": 2,
         "power": 2500,
         "hitCount": 1,
-        "text": "エントリー\n対向ユニットがコスチE以下なら、そのユニットをトラチE��ュする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "エントリー\n対向ユニットがコスト1以下なら、そのユニットをトラッシュする。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
             "エントリー"
         ],
@@ -5573,11 +5573,11 @@
         "cost": 2,
         "power": 2500,
         "hitCount": 1,
-        "text": "エグジチE��\n1枚ドローする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "エグジット\n1枚ドローする。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_a9GX6uSp_a744e9f8185d707509171e0a59b537ddaa0e5872.png",
         "rarity": "R",
@@ -5598,11 +5598,11 @@
         "cost": 3,
         "power": 4000,
         "hitCount": 1,
-        "text": "エグジチE��\n道連めEこ�Eユニットを戦闘でトラチE��ュした相手�Eユニット�Eコストがこ�Eカード�Eコスト以下�E場合、そのユニットをトラチE��ュする)、E,
-        "affiliation": "エフェクチE/ エリシオン",
-        "attribute": "嵁E,
+        "text": "エグジット\n道連れ(このユニットを戦闘でトラッシュした相手のユニットのコストがこのカードのコスト以下の場合、そのユニットをトラッシュする)。",
+        "affiliation": "エフェクト / エリシオン",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��",
+            "エグジット",
             "DEATH_TOUCH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_QpPZoq9T_ef02808128a5638cea697bd5cc4d7177550afa2f.png",
@@ -5624,11 +5624,11 @@
         "cost": 4,
         "power": 5000,
         "hitCount": 2,
-        "text": "[パッシブ]\nフィールドにあるエグジチE��を持つ自刁E�Eユニット�Eてのパワー+1000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "[パッシブ]\nフィールドにあるエグジットを持つ自分のユニット全てのパワー+1000。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_3LWUxStE_e98b22d552bf13eb1a1183eff3a3231fe23d716c.png",
         "rarity": "C",
@@ -5653,14 +5653,14 @@
     },
     {
         "id": "ST03-009",
-        "name": "メイチE��",
+        "name": "メイデン",
         "type": "UNIT",
         "cost": 5,
         "power": 6500,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
-        "attribute": "嵁E,
+        "affiliation": "ベース / エリシオン",
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -5670,16 +5670,16 @@
     },
     {
         "id": "ST03-010",
-        "name": "ロザンチE,
+        "name": "ロザンナ",
         "type": "UNIT",
         "cost": 6,
         "power": 6500,
         "hitCount": 2,
-        "text": "エグジチE��\n自刁E�EトラチE��ュゾーンから エグジチE��\n を持つコスチE以下�Eユニットカードを1枚選んで手札に加える、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。相手�E手札ぁE枚以上ある場合、相手�E手札めE枚選んでトラチE��ュする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
-        "attribute": "嵁E,
+        "text": "エグジット\n自分のトラッシュゾーンから エグジット\n を持つコスト2以下のユニットカードを1枚選んで手札に加える。\n\n\n[トリガー] / \nこのカードをトラッシュする。相手の手札が3枚以上ある場合、相手は手札を1枚選んでトラッシュする。",
+        "affiliation": "エフェクト / テトラ",
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��"
+            "エグジット"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_ovyVSaJ9_f6068d5eb3382d23ddfc5b0f77e6fd3a5c7f8017.png",
         "rarity": "R",
@@ -5711,9 +5711,9 @@
         "cost": 7,
         "power": 6500,
         "hitCount": 3,
-        "text": "エントリー\n自刁E�E手札を�EてトラチE��ュできる、E枚以上トラチE��ュしたなら、対向ユニットをトラチE��ュする、En\n\n[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ ピルグリム",
-        "attribute": "嵁E,
+        "text": "エントリー\n自分の手札を全てトラッシュできる。2枚以上トラッシュしたなら、対向ユニットをトラッシュする。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / ピルグリム",
+        "attribute": "嵐",
         "keywords": [
             "エントリー"
         ],
@@ -5738,14 +5738,14 @@
     },
     {
         "id": "ST03-012",
-        "name": "奁E��",
+        "name": "奇襲",
         "type": "SKILL",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�E手札めE枚選んでトラチE��ュする。その後、相手�E手札めE枚選んでトラチE��ュする、E,
+        "text": "自分の手札を1枚選んでトラッシュする。その後、相手は手札を1枚選んでトラッシュする。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -5777,9 +5777,9 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�E手札からユニットカードを1枚選んでトラチE��ュする。そのユニットカード�Eコストより低いコストを持つ、フィールドにあるユニットを1枚選んでトラチE��ュする、E,
+        "text": "自分の手札からユニットカードを1枚選んでトラッシュする。そのユニットカードのコストより低いコストを持つ、フィールドにあるユニットを1枚選んでトラッシュする。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -5801,9 +5801,9 @@
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある自刁E�Eユニットを1枚選んでトラチE��ュする。その後、E枚ドローする、E,
+        "text": "フィールドにある自分のユニットを1枚選んでトラッシュする。その後、2枚ドローする。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -5819,14 +5819,14 @@
     },
     {
         "id": "ST03-015",
-        "name": "かかって来ぁE��E,
+        "name": "かかって来い！",
         "type": "SKILL",
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある自刁E�Eユニットを1枚選んでそ�Eユニットと対向ユニットを全てトラチE��ュする、En\n\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EトラチE��ュゾーンから エグジチE��\n を持つユニットカードを1枚選んで手札に加える、E,
+        "text": "フィールドにある自分のユニットを1枚選んでそのユニットと対向ユニットを全てトラッシュする。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンから エグジット\n を持つユニットカードを1枚選んで手札に加える。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
             "-"
         ],
@@ -5843,16 +5843,16 @@
     },
     {
         "id": "ST03-016",
-        "name": "ケブラーベスチE,
+        "name": "ケブラーベスト",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\n\nパワー+3000、En\n[チE��フェンダー]\n自壁Eこ�Eユニットが相手�E攻撁E��防御したなら、その攻撁E��終亁E��せ、このユニットをトラチE��ュする)、E,
+        "text": "[装備条件なし]\n\nパワー+3000。\n\n[ディフェンダー]\n自壊(このユニットが相手の攻撃を防御したなら、その攻撃を終了させ、このユニットをトラッシュする)。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -5875,16 +5875,16 @@
     },
     {
         "id": "ST03-017",
-        "name": "レアメタルアームガーチE,
+        "name": "レアメタルアームガード",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件なし]\n\nエグジチE��\n道連めEこ�Eユニットを戦闘でトラチE��ュした相手�Eユニット�Eコストがこ�Eカード�Eコスト以下�E場合、そのユニットをトラチE��ュする)、E,
+        "text": "[装備条件なし]\n\nエグジット\n道連れ(このユニットを戦闘でトラッシュした相手のユニットのコストがこのカードのコスト以下の場合、そのユニットをトラッシュする)。",
         "affiliation": "-",
-        "attribute": "嵁E,
+        "attribute": "嵐",
         "keywords": [
-            "エグジチE��",
+            "エグジット",
             "DEATH_TOUCH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/5abf82a892f0549c26939bd53be4bda8_Cnfr17zZ_35ae517b258861808026c6b52ecc5cb3783398d4.png",
@@ -5906,11 +5906,11 @@
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n自刁E�E (波濤)のカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]\nフィールドにある自刁E�Eユニット�Eては相手�Eターンの間、パワー+1000、E,
+        "text": "基本面\n[誓約]\n自分は (波濤)のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが4以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]\nフィールドにある自分のユニット全ては相手のターンの間、パワー+1000。",
         "affiliation": "ピルグリム",
         "attribute": "波濤",
         "keywords": [
-            "パッシチE
+            "パッシブ"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_8xvbQJuS_b2be88a3e7e288cabce7361fd4b427fe12bd42e4.png",
         "rarity": "L",
@@ -5925,7 +5925,7 @@
             }
         ],
         "awakeningLevel": 4,
-        "awakenedText": "[パッシブ]\nフィールドにある自刁E�Eユニット�Eては相手�Eターンの間、パワー+1000、E
+        "awakenedText": "[パッシブ]\nフィールドにある自分のユニット全ては相手のターンの間、パワー+1000。"
     },
     {
         "id": "ST04-002",
@@ -5935,7 +5935,7 @@
         "power": 2500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
+        "affiliation": "ベース / テトラ",
         "attribute": "波濤",
         "keywords": [
             "-"
@@ -5951,11 +5951,11 @@
         "cost": 1,
         "power": 2000,
         "hitCount": 1,
-        "text": "ガーチE��アン 防壁[1](隣のレーンの相手�Eユニットが攻撁E��る場合、�E刁E�E手札めE枚選んでトラチE��ュしたなら、このユニットでそ�E攻撁E��防御する)、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "ガーディアン 防壁[1](隣のレーンの相手のユニットが攻撃する場合、自分の手札を1枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "波濤",
         "keywords": [
-            "ガーチE��アン",
+            "ガーディアン",
             "GUARDIAN_1",
             "GUARDIAN"
         ],
@@ -5971,7 +5971,7 @@
         "power": 3500,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
+        "affiliation": "ベース / テトラ",
         "attribute": "波濤",
         "keywords": [
             "-"
@@ -5987,8 +5987,8 @@
         "cost": 2,
         "power": 2500,
         "hitCount": 1,
-        "text": "エントリー 1枚ドローする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー 1枚ドローする。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "波濤",
         "keywords": [
             "エントリー"
@@ -6012,11 +6012,11 @@
         "cost": 2,
         "power": 2000,
         "hitCount": 1,
-        "text": "[チE��フェンダー] こ�E防御が終わるまでパワー+3000、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "[ディフェンダー] この防御が終わるまでパワー+3000。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "波濤",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_3000",
             "DEFENDER"
         ],
@@ -6032,11 +6032,11 @@
         "cost": 3,
         "power": 3000,
         "hitCount": 1,
-        "text": "[アタチE��ー] 突破[コスチE以上](コスチE以上�E相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁE、En[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[アタッカー] 突破[コスト4以上](コスト4以上の相手のユニットはこのユニットの攻撃を防御できない)。\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "波濤",
         "keywords": [
-            "アタチE��ー",
+            "アタッカー",
             "BREAKTHROUGH"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_ZLyhafkg_55acf413e40a8ba229cf2b939a1bf267c4f9c8f2.png",
@@ -6065,11 +6065,11 @@
         "cost": 4,
         "power": 5000,
         "hitCount": 2,
-        "text": "ガーチE��アン 防壁[2](隣のレーンの相手�Eユニットが攻撁E��る場合、�E刁E�E手札めE枚選んでトラチE��ュしたなら、このユニットでそ�E攻撁E��防御する)、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "ガーディアン 防壁[2](隣のレーンの相手のユニットが攻撃する場合、自分の手札を2枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "波濤",
         "keywords": [
-            "ガーチE��アン",
+            "ガーディアン",
             "GUARDIAN_2",
             "GUARDIAN"
         ],
@@ -6079,13 +6079,13 @@
     },
     {
         "id": "ST04-009",
-        "name": "マスチE,
+        "name": "マスト",
         "type": "UNIT",
         "cost": 5,
         "power": 6500,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / エリシオン",
+        "affiliation": "ベース / エリシオン",
         "attribute": "波濤",
         "keywords": [
             "-"
@@ -6101,11 +6101,11 @@
         "cost": 6,
         "power": 5000,
         "hitCount": 2,
-        "text": "[パッシブ] フィールドにあるガーチE��アンを持つ自刁E�Eユニット�Eてのパワー+2000、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "[パッシブ] フィールドにあるガーディアンを持つ自分のユニット全てのパワー+2000。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "波濤",
         "keywords": [
-            "パッシチE,
+            "パッシブ",
             "GUARDIAN_1",
             "GUARDIAN"
         ],
@@ -6129,12 +6129,12 @@
         "cost": 7,
         "power": 7000,
         "hitCount": 3,
-        "text": "ガーチE��アン 防壁[3](隣のレーンの相手�Eユニットが攻撁E��る場合、�E刁E�E手札めE枚選んでトラチE��ュしたなら、このユニットでそ�E攻撁E��防御する)、En[チE��フェンダー] こ�E防御が終わるまでパワー+2000、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "ガーディアン 防壁[3](隣のレーンの相手のユニットが攻撃する場合、自分の手札を3枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\n[ディフェンダー] この防御が終わるまでパワー+2000。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "波濤",
         "keywords": [
-            "チE��フェンダー",
-            "ガーチE��アン",
+            "ディフェンダー",
+            "ガーディアン",
             "DEFENDER_2000",
             "GUARDIAN_3",
             "GUARDIAN",
@@ -6152,7 +6152,7 @@
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにあるガーチE��アンを持つ自刁E�Eユニットを1枚選び、相手�Eターンが終わるまでパワー+2000、E,
+        "text": "フィールドにあるガーディアンを持つ自分のユニットを1枚選び、相手のターンが終わるまでパワー+2000。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -6172,12 +6172,12 @@
     },
     {
         "id": "ST04-013",
-        "name": "ムカつくでしょぁE��E,
+        "name": "ムカつくでしょう？",
         "type": "SKILL",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにあるガーチE��アンを持つ自刁E�Eユニットを1枚選び、このターンが終わるまでヒッチE1、En\n[トリガー] / \nこ�EカードをトラチE��ュする、E枚ドローする、E,
+        "text": "フィールドにあるガーディアンを持つ自分のユニットを1枚選び、このターンが終わるまでヒット+1。\n\n[トリガー] / \nこのカードをトラッシュする。1枚ドローする。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -6205,12 +6205,12 @@
     },
     {
         "id": "ST04-014",
-        "name": "ナ�Eシング",
+        "name": "ナーシング",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "2枚ドローする、E,
+        "text": "2枚ドローする。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
@@ -6228,18 +6228,18 @@
     },
     {
         "id": "ST04-015",
-        "name": "失楽圁E,
+        "name": "失楽園",
         "type": "SKILL",
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにあるガーチE��アンを持つ自刁E�Eユニットを1枚選ぶ。選んだユニット�Eこ�Eターンが終わるまで[アタチE��ー] 突破(相手�Eユニット�Eこ�Eユニット�E攻撁E��防御できなぁEを得る、En\n[トリガー] / \nこ�EカードをトラチE��ュする。フィールドにある一番低いコストを持つ相手�Eユニットを1枚選んで、そのユニットと裁E��してぁE��アイチE��全てを持ち主の手札に戻す、E,
+        "text": "フィールドにあるガーディアンを持つ自分のユニットを1枚選ぶ。選んだユニットはこのターンが終わるまで[アタッカー] 突破(相手のユニットはこのユニットの攻撃を防御できない)を得る。\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにある一番低いコストを持つ相手のユニットを1枚選んで、そのユニットと装備しているアイテム全てを持ち主の手札に戻す。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
             "GUARDIAN_1",
             "BREAKTHROUGH",
-            "アタチE��ー",
+            "アタッカー",
             "GUARDIAN"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_Kvzn6t2B_9ddd3af3a0ba508cfebf7895277003dfa8a91619.png",
@@ -6250,7 +6250,7 @@
                 "isAwakening": false,
                 "isSelfTrash": false,
                 "action": "GRANT_ABILITY",
-                "grantedKeyword": "アタチE��ー,BREAKTHROUGH",
+                "grantedKeyword": "アタッカー,BREAKTHROUGH",
                 "targetType": "SINGLE",
                 "condition": "TURN_END"
             },
@@ -6279,16 +6279,16 @@
     },
     {
         "id": "ST04-016",
-        "name": "ケブラージャケチE��",
+        "name": "ケブラージャケット",
         "type": "ITEM",
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: なし]\n[チE��フェンダー] こ�E防御が終わるまでパワー+2000、E,
+        "text": "[装備条件: なし]\n[ディフェンダー] この防御が終わるまでパワー+2000。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
-            "チE��フェンダー",
+            "ディフェンダー",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -6306,16 +6306,16 @@
     },
     {
         "id": "ST04-017",
-        "name": "レアメタルグローチE,
+        "name": "レアメタルグローブ",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: [チE��フェンダー]を持つユニッチE\n[アクチE��ブ]�E�メイン 1枚ドローする、En\n[トリガー] / \nこ�EカードをトラチE��ュする、E枚ドローする、E,
+        "text": "[装備条件: [ディフェンダー]を持つユニット]\n[アクティブ]：メイン 1枚ドローする。\n\n[トリガー] / \nこのカードをトラッシュする。1枚ドローする。",
         "affiliation": "-",
         "attribute": "波濤",
         "keywords": [
-            "アクチE��チE,
+            "アクティブ",
             "DEFENDER_2000",
             "DEFENDER"
         ],
@@ -6351,20 +6351,20 @@
                 "value": 1
             }
         ],
-        "equipCondition": "チE��フェンダー"
+        "equipCondition": "ディフェンダー"
     },
     {
         "id": "ST05-001",
-        "name": "プリバティ�E�アンカインド�EメイチE,
+        "name": "プリバティ：アンカインド・メイド",
         "type": "LEADER",
         "cost": 0,
         "power": 0,
         "hitCount": 0,
-        "text": "基本面\n[誓約]\n自刁E�E [稲妻] のカード�EみをデチE��に入れることができる、En\n[覚�E]\n自刁E�EリーダーレベルぁE以上�E場合、このカードを裏返す、En\n\n[覚�E]面\n[パッシブ]\nフィールドにある [アームド] を持つ自刁E�Eユニット�Eてのパワー+1000、E,
+        "text": "基本面\n[誓約]\n自分は [稲妻] のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[パッシブ]\nフィールドにある [アームド] を持つ自分のユニット全てのパワー+1000。",
         "affiliation": "エリシオン",
         "attribute": "稲妻",
         "keywords": [
-            "パッシチE,
+            "パッシブ",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_7Y1Oi4ns_b0d7da22b4bc333f7caf517a95c7c35ba9330c65.png",
@@ -6380,17 +6380,17 @@
             }
         ],
         "awakeningLevel": 5,
-        "awakenedText": "[パッシブ]\nフィールドにある [アームド] を持つ自刁E�Eユニット�Eてのパワー+1000、E
+        "awakenedText": "[パッシブ]\nフィールドにある [アームド] を持つ自分のユニット全てのパワー+1000。"
     },
     {
         "id": "ST05-002",
-        "name": "プロダクチE8",
+        "name": "プロダクト08",
         "type": "UNIT",
         "cost": 1,
         "power": 3000,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "稲妻",
         "keywords": [
             "-"
@@ -6406,8 +6406,8 @@
         "cost": 1,
         "power": 2500,
         "hitCount": 1,
-        "text": "エントリー 1枚ドローする。その後、�E刁E�E手札めE枚選んでトラチE��ュする、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "エントリー 1枚ドローする。その後、自分の手札を1枚選んでトラッシュする。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
             "エントリー"
@@ -6440,7 +6440,7 @@
         "power": 4000,
         "hitCount": 1,
         "text": "-",
-        "affiliation": "ベ�Eス / チE��ラ",
+        "affiliation": "ベース / テトラ",
         "attribute": "稲妻",
         "keywords": [
             "-"
@@ -6456,11 +6456,11 @@
         "cost": 2,
         "power": 3500,
         "hitCount": 1,
-        "text": "[アームド] アイチE��を裁E��してぁE��場合、パワー+1000、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[アームド] アイテムを装備している場合、パワー+1000。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
+            "アームド",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_b1zihjlM_d92dffa2264d6b3f9aa3b19edb1c4a7ebcd4dc6b.png",
@@ -6482,8 +6482,8 @@
         "cost": 3,
         "power": 3000,
         "hitCount": 1,
-        "text": "エントリー 自刁E�EチE��キからコスチEのアイチE��カードを1枚選んで手札に加える。デチE��をシャチE��ルする、En[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EチE��キからコスチE以下�EアイチE��カードを1枚選んで手札に加える。デチE��をシャチE��ルする、E,
-        "affiliation": "エフェクチE/ ピルグリム",
+        "text": "エントリー 自分のデッキからコスト2のアイテムカードを1枚選んで手札に加える。デッキをシャッフルする。\n[トリガー] / \nこのカードをトラッシュする。自分のデッキからコスト1以下のアイテムカードを1枚選んで手札に加える。デッキをシャッフルする。",
+        "affiliation": "エフェクト / ピルグリム",
         "attribute": "稲妻",
         "keywords": [
             "エントリー"
@@ -6522,11 +6522,11 @@
         "cost": 3,
         "power": 4000,
         "hitCount": 1,
-        "text": "[アームド] 裁E��してぁE��アイチE��1枚につき、パワー+1000、E,
-        "affiliation": "エフェクチE/ チE��ラ",
+        "text": "[アームド] 装備しているアイテム1枚につき、パワー+1000。",
+        "affiliation": "エフェクト / テトラ",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
+            "アームド",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_F9ImnM3N_d78308abbce7d9658582dddae27dd6d74c409829.png",
@@ -6548,11 +6548,11 @@
         "cost": 4,
         "power": 5500,
         "hitCount": 2,
-        "text": "[パッシブ] フィールドにある [アームド] を持つ自刁E�Eユニット�Eてのパワー+1000、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[パッシブ] フィールドにある [アームド] を持つ自分のユニット全てのパワー+1000。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
-            "パッシチE,
+            "パッシブ",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_GScJop4E_8a85e3880a17b1e76864e5b7d5018c3e45fc8e7d.png",
@@ -6576,7 +6576,7 @@
         "power": 7000,
         "hitCount": 2,
         "text": "-",
-        "affiliation": "ベ�Eス / ミシリス",
+        "affiliation": "ベース / ミシリス",
         "attribute": "稲妻",
         "keywords": [
             "-"
@@ -6587,16 +6587,16 @@
     },
     {
         "id": "ST05-010",
-        "name": "センチE,
+        "name": "センチ",
         "type": "UNIT",
         "cost": 6,
         "power": 7000,
         "hitCount": 2,
-        "text": "[アームド] アイチE��を裁E��してぁE��場合、パワー+2000、E,
-        "affiliation": "エフェクチE/ ミシリス",
+        "text": "[アームド] アイテムを装備している場合、パワー+2000。",
+        "affiliation": "エフェクト / ミシリス",
         "attribute": "稲妻",
         "keywords": [
-            "アームチE,
+            "アームド",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_02Tk8zA4_5df3604cecefe29b798cde14132d4470daaf812d.png",
@@ -6613,17 +6613,17 @@
     },
     {
         "id": "ST05-011",
-        "name": "プリバティ�E�アンカインド�EメイチE,
+        "name": "プリバティ：アンカインド・メイド",
         "type": "UNIT",
         "cost": 7,
         "power": 9000,
         "hitCount": 3,
-        "text": "[アームド][アタチE��ー] アイチE��を裁E��してぁE��場合、相手�E手札めE枚選んでトラチE��ュする、En[トリガー] / \nこ�Eカードを自刁E�E手札に加える、E,
-        "affiliation": "エフェクチE/ エリシオン",
+        "text": "[アームド][アタッカー] アイテムを装備している場合、相手は手札を1枚選んでトラッシュする。\n[トリガー] / \nこのカードを自分の手札に加える。",
+        "affiliation": "エフェクト / エリシオン",
         "attribute": "稲妻",
         "keywords": [
-            "アタチE��ー",
-            "アームチE,
+            "アタッカー",
+            "アームド",
             "ARMED"
         ],
         "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_TvKh1P3U_1917860f65ca42b337e2ac300698d28731d6992f.png",
@@ -6655,12 +6655,12 @@
     },
     {
         "id": "ST05-012",
-        "name": "現場検訁E,
+        "name": "現場検討",
         "type": "SKILL",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "自刁E�EトラチE��ュゾーンからアイチE��カードを1枚選んで手札に加える、En\n[トリガー] / \nこ�EカードをトラチE��ュする。�E刁E�EチE��キからコスチE以下�EアイチE��カードを1枚選んで手札に加える。デチE��をシャチE��ルする、E,
+        "text": "自分のトラッシュゾーンからアイテムカードを1枚選んで手札に加える。\n\n[トリガー] / \nこのカードをトラッシュする。自分のデッキからコスト1以下のアイテムカードを1枚選んで手札に加える。デッキをシャッフルする。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -6687,12 +6687,12 @@
     },
     {
         "id": "ST05-013",
-        "name": "リターブ�EスチE,
+        "name": "リターブースト",
         "type": "SKILL",
         "cost": 3,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにある自刁E�Eユニットを1枚選び、そのユニットが裁E��してぁE��コスチE以上�EアイチE��の枚数刁E��ローする、E,
+        "text": "フィールドにある自分のユニットを1枚選び、そのユニットが装備しているコスト1以上のアイテムの枚数分ドローする。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -6715,7 +6715,7 @@
         "cost": 4,
         "power": 0,
         "hitCount": 0,
-        "text": "フィールドにあるアイチE��めE枚以上裁E��してぁE��自刁E�Eユニットを1枚選んでトラチE��ュする。その後、フィールドにある相手�Eユニットを1枚選んでトラチE��ュする、En\n[トリガー] / \nこ�EカードをトラチE��ュする、E枚ドローする。その後、�E刁E�E手札めE枚選んでトラチE��ュする、E,
+        "text": "フィールドにあるアイテムを2枚以上装備している自分のユニットを1枚選んでトラッシュする。その後、フィールドにある相手のユニットを1枚選んでトラッシュする。\n\n[トリガー] / \nこのカードをトラッシュする。2枚ドローする。その後、自分の手札を2枚選んでトラッシュする。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -6763,7 +6763,7 @@
         "cost": 1,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: なし]パワー+1500、E,
+        "text": "[装備条件: なし]パワー+1500。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [
@@ -6782,13 +6782,13 @@
     },
     {
         "id": "ST05-016",
-        "name": "レアメタルガントレチE��",
+        "name": "レアメタルガントレット",
         "type": "ITEM",
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: [アームド]を持つユニッチEヒッチE1、E,
-        "affiliation": "ユニ�Eク",
+        "text": "[装備条件: [アームド]を持つユニット]ヒット+1。",
+        "affiliation": "ユニーク",
         "attribute": "稲妻",
         "keywords": [
             "ARMED"
@@ -6803,7 +6803,7 @@
                 "targetType": "SELF"
             }
         ],
-        "equipCondition": "アームチE
+        "equipCondition": "アームド"
     },
     {
         "id": "ST05-017",
@@ -6812,7 +6812,7 @@
         "cost": 2,
         "power": 0,
         "hitCount": 0,
-        "text": "[裁E��条件: なし]パワー+2500、E,
+        "text": "[装備条件: なし]パワー+2500。",
         "affiliation": "-",
         "attribute": "稲妻",
         "keywords": [

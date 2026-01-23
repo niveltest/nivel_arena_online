@@ -13,4 +13,7 @@
 - [x] 本番環境へのデプロイ (Deployment)
   - [x] Render でのサーバー公開 (成功)
   - [x] Vercel でのフロントエンド公開 (接続エラー修正済み)
+- [x] 不具合修正 (Bug Fixes)
+  - [x] CPU戦の進行停止（LEVEL_UP/DRAW）の解消
+  - [x] カード画像の HTTPS 化 (Vercel での Mixed Content 対策)
 - [x] 最終動作確認 (本番環境)
