@@ -814,7 +814,7 @@ this.broadcastState();
             if (idx !== -1) player.drawCard(player.state.discard.splice(idx, 1)[0]);
         });
     } else if (action === 'DISCARD_HAND' || action === 'MULLIGAN') {
-        if (this.phase === 'MULLIGAN' && action === 'MULLIGAN') {
+        if (action === 'MULLIGAN') {
             if (selectedIds.length > 0) {
                 // Mulligan All
                 const returnedCards = [...player.state.hand];

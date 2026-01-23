@@ -95,7 +95,8 @@ export class CPUPlayer extends Player {
         // Usually Mulligan allows selecting any number, but usually restricted or "select and redraw". 
         // Game.resolveMulligan takes selectedIds.
 
-        this.game.resolveMulligan(this.id, discardIds);
+        // Update: Use resolveSelection to ensure selection state is cleared
+        this.game.resolveSelection(this.id, discardIds as string[]);
     }
 
     private handleMainPhase() {
@@ -283,6 +284,12 @@ export class CPUPlayer extends Player {
 
     private handleSelection() {
         if (!this.game.selection) return;
+
+        // Mulligan (Delegated)
+        if (this.game.selection.action === 'MULLIGAN') {
+            this.handleMulligan();
+            return;
+        }
 
         // ITEM_SHIELD: AI always chooses to sacrifice an item to protect the unit
         if (this.game.selection.action === 'RESOLVE_ITEM_SHIELD') {
