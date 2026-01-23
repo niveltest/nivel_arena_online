@@ -829,12 +829,10 @@ export class Game {
                 } else {
                     this.addLog(`${player.username} kept original hand.`);
                 }
-
                 player.state.mulliganDone = true;
-
-
-                this.selection = null; // Clear selection explicitly
+                this.selection = null;
                 this.proceedMulligan();
+                return; // Prevent clearing the new selection or broadcast from end of method
             } else {
                 selectedIds.forEach(id => {
                     const idx = player.state.hand.findIndex(c => c.id === id);
@@ -884,6 +882,7 @@ export class Game {
                     this.addLog(`${card.name} moved from damage zone to hand.`);
                     if (player.state.hand.length > 0) {
                         this.requestSelection(playerId, 'HAND', player.state.hand.map(c => c.id), 1, 'SWAP_DAMAGE_STEP_2');
+                        return;
                     }
                 }
             }
@@ -959,6 +958,7 @@ export class Game {
 
                     if (validIds.length > 0) {
                         this.requestSelection(playerId, 'FIELD', validIds, 1, 'COST_BASED_KILL_STEP_2', { opponentId });
+                        return;
                     }
                 }
             }
