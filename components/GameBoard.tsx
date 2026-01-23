@@ -443,6 +443,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
     const [attackingUnitIndex, setAttackingUnitIndex] = useState<number | null>(null);
     const [showDamageZoneFor, setShowDamageZoneFor] = useState<string | null>(null);
     const socketRef = useRef<Socket | null>(null);
+    const isProcessingRef = useRef(false);
     const [detailCard, setDetailCard] = useState<CardType | null>(null);
     const [damageCardReveal, setDamageCardReveal] = useState<{ card: CardType; isTrigger: boolean; playerName: string } | null>(null);
     const [gameResult, setGameResult] = useState<{ result: 'WIN' | 'LOSE'; reason: string } | null>(null);
@@ -637,7 +638,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
 
     const isMyTurn = gameState.turnPlayerId === playerId;
 
-    const isProcessingRef = useRef(false);
+
 
     const handleEndTurn = () => {
         if (isMyTurn && !isProcessingRef.current) {

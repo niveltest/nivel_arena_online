@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "server/**",
+    "analyze_cards.js",
+    "analyze_priority_cards.js",
   ]),
 ]);
 
