@@ -448,6 +448,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
     const [gameResult, setGameResult] = useState<{ result: 'WIN' | 'LOSE'; reason: string } | null>(null);
     const [isDamaging, setIsDamaging] = useState(false);
     const [opponentDisconnected, setOpponentDisconnected] = useState<{ timeoutSec: number; remaining: number } | null>(null);
+    const [showDebugLogs, setShowDebugLogs] = useState(false);
     const [playmatId, setPlaymatId] = useState<PlaymatId>(() => {
         const saved = typeof window !== 'undefined' ? localStorage.getItem('selectedPlaymat') : null;
         return (saved === 'mermaid' || saved === 'cyber' || saved === 'official') ? saved : 'official';
@@ -1298,6 +1299,106 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             flex flex-col h-screen w-screen bg-black text-white overflow-hidden relative font-sans
             ${isDamaging ? 'shake' : ''}
         `}>
+            {/* Top Status Bar (Phase Tracker) - Moved to top to avoid hand overlap */}
+            <div className="h-16 flex items-center justify-between px-12 bg-black/80 border-b border-white/5 relative z-40 backdrop-blur-2xl">
+                <div className="flex items-center gap-6">
+                    <div className="flex flex-col">
+                        <span className="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Room // Turn</span>
+                        <div className="flex items-center gap-2">
+                            <div className="px-2 py-0.5 bg-slate-800 rounded text-[10px] font-black text-cyan-400">T-{gameState.turnCount}</div>
+                            <div className="text-[10px] text-slate-600 font-mono">{roomId}</div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Official Phase Track */}
+                <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-3">
+                    {[
+                        { id: 'LEVEL_UP', label: 'レベルアップ' },
+                        { id: 'DRAW', label: 'ドロー' },
+                        { id: 'MAIN', label: 'メイン' },
+                        { id: 'ATTACK', label: 'アタック' },
+                        { id: 'GUARDIAN_INTERCEPT', label: '防壁' },
+                        { id: 'DEFENSE', label: '防御' },
+                        { id: 'END', label: 'エンド' }
+                    ].map((p, idx, arr) => {
+                        const isActive = gameState.phase === p.id;
+                        const isPast = arr.findIndex(item => item.id === gameState.phase) > idx;
+
+                        return (
+                            <React.Fragment key={p.id}>
+                                <div className={`
+                                    flex flex-col items-center transition-all duration-300
+                                    ${isActive ? 'scale-110' : 'opacity-40'}
+                                `}>
+                                    <span className={`text-[9px] font-bold uppercase tracking-tighter mb-0.5 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`}>Phase</span>
+                                    <div className={`
+                                        px-3 py-1 rounded-sm border skew-x-[-15deg] transition-all
+                                        ${isActive ? 'bg-cyan-500 text-black font-black border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]' : 'bg-transparent text-slate-300 border-white/10'}
+                                    `}>
+                                        <span className="skew-x-[15deg] block text-[11px] font-bold whitespace-nowrap">{p.label}フェイズ</span>
+                                    </div>
+                                </div>
+                                {idx < arr.length - 1 && (
+                                    <div className={`text-slate-700 font-black text-xs transition-colors ${isPast ? 'text-cyan-900 animate-pulse' : ''} tracking-tighter`}>
+                                        ≫≫≫
+                                    </div>
+                                )}
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+
+                {/* Central NIKKE Logo Decoration */}
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-20 pointer-events-none scale-75">
+                    <div className="text-4xl font-black text-white italic tracking-tighter border-y-2 border-white/10 px-8 py-1">NIKKE</div>
+                    <div className="text-[8px] text-center font-bold tracking-[0.5em] mt-1">GODDESS OF VICTORY</div>
+                </div>
+
+                <div className="flex gap-4">
+                    <div className="flex flex-col items-end mr-4">
+                        <span className="text-[10px] text-slate-500 font-bold tracking-widest uppercase">System</span>
+                        {isMyTurn ? (
+                            <div className="px-3 py-0.5 bg-green-500/20 border border-green-500/50 rounded text-[9px] text-green-400 font-black animate-pulse">YOUR ACTION</div>
+                        ) : (
+                            <div className="px-3 py-0.5 bg-red-500/10 border border-red-500/20 rounded text-[9px] text-red-500 font-black">OPPONENT ACTING</div>
+                        )}
+                    </div>
+                    <button
+                        onClick={() => setShowPlaymatSelector(true)}
+                        className="p-2 hover:bg-white/10 rounded transition-colors group relative border border-white/5"
+                        title="プレイマット変更"
+                    >
+                        <span className="text-lg">🖼️</span>
+                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">プレイマット変更</div>
+                    </button>
+                    <button
+                        onClick={() => setIsEditMode(!isEditMode)}
+                        className={`p-2 rounded transition-colors group relative border ${isEditMode ? 'bg-yellow-500/20 border-yellow-500' : 'hover:bg-white/10 border-white/5'}`}
+                        title="レイアウト調整"
+                    >
+                        <span className="text-lg">{isEditMode ? '💾' : '📐'}</span>
+                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">
+                            {isEditMode ? '編集終了' : 'レイアウト調整'}
+                        </div>
+                    </button>
+                    <button
+                        onClick={handleEndTurn}
+                        disabled={!isMyTurn || gameState.phase === 'DEFENSE'}
+                        className={`
+                            px-8 py-2 text-[11px] font-black rounded skew-x-[-15deg] transition-all transform active:scale-95 shadow-xl
+                            ${isMyTurn && gameState.phase !== 'DEFENSE'
+                                ? 'bg-cyan-600 hover:bg-cyan-500 text-black border border-cyan-400 cursor-pointer'
+                                : 'bg-slate-800 text-slate-600 border border-white/5 cursor-not-allowed opacity-50'}
+                        `}
+                    >
+                        <span className="skew-x-[15deg] block">
+                            {isMyTurn && gameState.phase === 'END' ? 'END TURN' : 'NEXT PHASE →'}
+                        </span>
+                    </button>
+                </div>
+            </div>
+
             {/* Split Playmat Areas */}
             <div className="flex-1 flex flex-col relative overflow-hidden">
                 <PlaymatArea
@@ -1402,105 +1503,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             {gameResult && <ResultModal result={gameResult.result} reason={gameResult.reason} onReturnToLobby={() => window.location.reload()} />}
             {detailCard && <CardDetailModal card={detailCard} onClose={() => setDetailCard(null)} />}
 
-            {/* Middle Divider: Status Bar (Phase Tracker) */}
-            <div className="h-16 flex items-center justify-between px-12 bg-black/80 border-y border-white/5 relative z-40 backdrop-blur-2xl">
-                <div className="flex items-center gap-6">
-                    <div className="flex flex-col">
-                        <span className="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Room // Turn</span>
-                        <div className="flex items-center gap-2">
-                            <div className="px-2 py-0.5 bg-slate-800 rounded text-[10px] font-black text-cyan-400">T-{gameState.turnCount}</div>
-                            <div className="text-[10px] text-slate-600 font-mono">{roomId}</div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Official Phase Track */}
-                <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-3">
-                    {[
-                        { id: 'LEVEL_UP', label: 'レベルアップ' },
-                        { id: 'DRAW', label: 'ドロー' },
-                        { id: 'MAIN', label: 'メイン' },
-                        { id: 'ATTACK', label: 'アタック' },
-                        { id: 'GUARDIAN_INTERCEPT', label: '防壁' },
-                        { id: 'DEFENSE', label: '防御' },
-                        { id: 'END', label: 'エンド' }
-                    ].map((p, idx, arr) => {
-                        const isActive = gameState.phase === p.id;
-                        const isPast = arr.findIndex(item => item.id === gameState.phase) > idx;
-
-                        return (
-                            <React.Fragment key={p.id}>
-                                <div className={`
-                                    flex flex-col items-center transition-all duration-300
-                                    ${isActive ? 'scale-110' : 'opacity-40'}
-                                `}>
-                                    <span className={`text-[9px] font-bold uppercase tracking-tighter mb-0.5 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`}>Phase</span>
-                                    <div className={`
-                                        px-3 py-1 rounded-sm border skew-x-[-15deg] transition-all
-                                        ${isActive ? 'bg-cyan-500 text-black font-black border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]' : 'bg-transparent text-slate-300 border-white/10'}
-                                    `}>
-                                        <span className="skew-x-[15deg] block text-[11px] font-bold whitespace-nowrap">{p.label}フェイズ</span>
-                                    </div>
-                                </div>
-                                {idx < arr.length - 1 && (
-                                    <div className={`text-slate-700 font-black text-xs transition-colors ${isPast ? 'text-cyan-900 animate-pulse' : ''} tracking-tighter`}>
-                                        ≫≫≫
-                                    </div>
-                                )}
-                            </React.Fragment>
-                        );
-                    })}
-                </div>
-
-                {/* Central NIKKE Logo Decoration */}
-                <div className="absolute -top-10 left-1/2 -translate-x-1/2 opacity-20 pointer-events-none scale-75">
-                    <div className="text-4xl font-black text-white italic tracking-tighter border-y-2 border-white/10 px-8 py-1">NIKKE</div>
-                    <div className="text-[8px] text-center font-bold tracking-[0.5em] mt-1">GODDESS OF VICTORY</div>
-                </div>
-
-                <div className="flex gap-4">
-                    <div className="flex flex-col items-end mr-4">
-                        <span className="text-[10px] text-slate-500 font-bold tracking-widest uppercase">System</span>
-                        {isMyTurn ? (
-                            <div className="px-3 py-0.5 bg-green-500/20 border border-green-500/50 rounded text-[9px] text-green-400 font-black animate-pulse">YOUR ACTION</div>
-                        ) : (
-                            <div className="px-3 py-0.5 bg-red-500/10 border border-red-500/20 rounded text-[9px] text-red-500 font-black">OPPONENT ACTING</div>
-                        )}
-                    </div>
-                    <button
-                        onClick={() => setShowPlaymatSelector(true)}
-                        className="p-2 hover:bg-white/10 rounded transition-colors group relative border border-white/5"
-                        title="プレイマット変更"
-                    >
-                        <span className="text-lg">🖼️</span>
-                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">プレイマット変更</div>
-                    </button>
-                    <button
-                        onClick={() => setIsEditMode(!isEditMode)}
-                        className={`p-2 rounded transition-colors group relative border ${isEditMode ? 'bg-yellow-500/20 border-yellow-500' : 'hover:bg-white/10 border-white/5'}`}
-                        title="レイアウト調整"
-                    >
-                        <span className="text-lg">{isEditMode ? '💾' : '📐'}</span>
-                        <div className="absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">
-                            {isEditMode ? '編集終了' : 'レイアウト調整'}
-                        </div>
-                    </button>
-                    <button
-                        onClick={handleEndTurn}
-                        disabled={!isMyTurn || gameState.phase === 'DEFENSE'}
-                        className={`
-                            px-8 py-2 text-[11px] font-black rounded skew-x-[-15deg] transition-all transform active:scale-95 shadow-xl
-                            ${isMyTurn && gameState.phase !== 'DEFENSE'
-                                ? 'bg-cyan-600 hover:bg-cyan-500 text-black border border-cyan-400 cursor-pointer'
-                                : 'bg-slate-800 text-slate-600 border border-white/5 cursor-not-allowed opacity-50'}
-                        `}
-                    >
-                        <span className="skew-x-[15deg] block">
-                            {isMyTurn && gameState.phase === 'END' ? 'END TURN' : 'NEXT PHASE →'}
-                        </span>
-                    </button>
-                </div>
-            </div>
 
             {/* Fixed Overlay for Hand Cards - Bottom Left Horizontal */}
             <div className="fixed left-4 bottom-4 z-[45] flex flex-col items-start pointer-events-none">
@@ -1541,31 +1543,54 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                 </div>
             </div>
 
-            {/* Server Debug Logs Overlay */}
-            <div className="absolute top-4 left-4 z-50 pointer-events-auto">
-                <div className="bg-black/90 backdrop-blur-xl border-2 border-cyan-500/50 rounded-lg p-4 font-mono text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.3)] space-y-2 max-w-sm">
-                    <div className="flex justify-between items-center border-b border-white/20 mb-2 pb-2">
-                        <span className="text-white font-bold tracking-wider">SERVER LOGS</span>
-                        <div className="flex gap-2">
-                            <button
-                                onClick={() => socketRef.current?.emit('debugForceLevelUp')}
-                                className="bg-red-900/50 hover:bg-red-800 text-red-200 text-[8px] px-2 py-1 rounded border border-red-500/30"
-                            >
-                                FORCE LVL UP
-                            </button>
-                            <button
-                                onClick={() => socketRef.current?.emit('debugForceWin')}
-                                className="bg-yellow-900/50 hover:bg-yellow-800 text-yellow-200 text-[8px] px-2 py-1 rounded border border-yellow-500/30"
-                            >
-                                FORCE WIN
-                            </button>
+            {/* Server Debug Logs Overlay - Enhanced with Toggle and Drag */}
+            <motion.div
+                drag
+                dragMomentum={false}
+                className="absolute top-20 left-4 z-50 pointer-events-auto"
+            >
+                <div className="bg-black/90 backdrop-blur-xl border-2 border-cyan-500/50 rounded-lg p-3 font-mono text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.3)] min-w-[200px] max-w-sm">
+                    <div className="flex justify-between items-center border-b border-white/20 mb-2 pb-2 cursor-move">
+                        <div className="flex items-center gap-2 cursor-pointer select-none" onClick={() => setShowDebugLogs(!showDebugLogs)}>
+                            <span className="text-[10px] hover:text-white transition-colors">
+                                {showDebugLogs ? '▼' : '▶'}
+                            </span>
+                            <span className="text-white font-bold tracking-wider text-[10px]">SERVER LOGS</span>
                         </div>
+                        {showDebugLogs && (
+                            <div className="flex gap-2 ml-4">
+                                <button
+                                    onClick={() => socketRef.current?.emit('debugForceLevelUp')}
+                                    className="bg-red-900/50 hover:bg-red-800 text-red-100 text-[7px] px-1.5 py-0.5 rounded border border-red-500/30 transition-colors"
+                                >
+                                    LVL UP
+                                </button>
+                                <button
+                                    onClick={() => socketRef.current?.emit('debugForceWin')}
+                                    className="bg-yellow-900/50 hover:bg-yellow-800 text-yellow-100 text-[7px] px-1.5 py-0.5 rounded border border-yellow-500/30 transition-colors"
+                                >
+                                    WIN
+                                </button>
+                            </div>
+                        )}
                     </div>
-                    {gameState.debugLogs?.map((log, i) => (
-                        <div key={i} className="text-[10px] bg-white/5 p-1 rounded border border-white/5">{log}</div>
-                    ))}
+                    {showDebugLogs && (
+                        <div className="space-y-1 max-h-[35vh] overflow-y-auto pr-1 custom-scrollbar">
+                            {gameState.debugLogs && gameState.debugLogs.length > 0 ? (
+                                gameState.debugLogs.map((log, i) => (
+                                    <div key={i} className="text-[9px] bg-white/5 p-1 rounded border border-white/5 leading-tight break-words">{log}</div>
+                                ))
+                            ) : (
+                                <div className="text-[9px] text-slate-500 italic py-2">No logs recorded...</div>
+                            )}
+                        </div>
+                    )}
+                    {!showDebugLogs && (
+                        <div className="text-[7px] text-slate-500 italic">Click to expand logs</div>
+                    )}
                 </div>
-            </div>
+            </motion.div>
+
             {/* Layout Editor Overlay */}
             {isEditMode && customLayout && (
                 <div className="fixed top-24 right-4 z-[100] w-72 bg-slate-900/95 border-2 border-yellow-500 rounded-lg shadow-[0_0_40px_rgba(234,179,8,0.3)] p-4 flex flex-col gap-3 backdrop-blur-xl">
