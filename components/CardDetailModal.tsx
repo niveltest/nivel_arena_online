@@ -80,9 +80,10 @@ const CardDetailModal: React.FC<CardDetailModalProps> = ({ card, onClose }) => {
                         <div className="w-72 aspect-[2.5/3.5] bg-black/40 rounded-lg border-2 border-white/10 overflow-hidden relative shadow-2xl">
                             {card.imageUrl ? (
                                 <Image
-                                    src={card.imageUrl}
+                                    src={card.imageUrl.replace(/^https:\/\/nivelarena\.jp/, 'http://nivelarena.jp')}
                                     alt={card.name}
                                     fill
+
                                     className="object-contain"
                                     unoptimized
                                     priority

@@ -130,8 +130,9 @@ const Card: React.FC<CardProps> = ({ card, onClick, isHidden = false, onShowDeta
                 {card.imageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                        src={card.imageUrl}
+                        src={card.imageUrl.replace(/^https:\/\/nivelarena\.jp/, 'http://nivelarena.jp')}
                         alt={card.name}
+
                         className={
                             card.type === 'LEADER'
                                 ? `absolute w-full h-[200%] object-cover ${isAwakened ? 'bottom-0' : 'top-0'}`
