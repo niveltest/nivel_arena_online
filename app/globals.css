@@ -158,3 +158,6 @@ body {
 .shake {
   animation: shake 0.5s;
 }
+.mana-bar {
+  height: var(--bar-height, 0%);
+}
