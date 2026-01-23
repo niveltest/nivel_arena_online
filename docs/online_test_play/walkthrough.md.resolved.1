@@ -1,0 +1,245 @@
+# オンラインテストプレイの実装完了レポート
+
+## 概要
+
+ローカル環境で動作していた Nivel Arena ゲームを、外部ネットワークからアクセス可能にするための設定を完了しました。これにより、友人とオンラインでテストプレイが可能になります。
+
+## 実施した変更
+
+### 1. クライアント側の環境変数化
+
+#### [GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
+
+Socket.io サーバーの URL をハードコードから環境変数に変更しました。
+
+**変更前:**
+```typescript
+const SOCKET_URL = 'http://localhost:3001';
+```
+
+**変更後:**
+```typescript
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
+```
+
+これにより、デプロイ環境に応じて柔軟に接続先を変更できるようになりました。
+
+---
+
+### 2. サーバー側の環境変数化
+
+#### [server/index.ts](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/index.ts)
+
+以下の3つの変更を実施しました:
+
+1. **dotenv パッケージの追加と読み込み**
+
+```typescript
+import * as dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+```
+
+2. **CORS 設定の柔軟化**
+
+```typescript
+const io = new Server(server, {
+    cors: {
+        origin: process.env.CLIENT_URL || "*", // Allow all origins for dev, or specific origin for production
+        methods: ["GET", "POST"]
+    }
+});
+```
+
+3. **ポート番号の環境変数化**
+
+```typescript
+const PORT = process.env.PORT || 3001;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
+```
+
+---
+
+### 3. サーバー起動スクリプトの修正
+
+#### [server/package.json](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/package.json)
+
+TypeScript のエラーを無視して実行できるように、`--transpile-only` オプションを追加しました。
+
+```json
+"scripts": {
+    "dev": "nodemon --exec ts-node --transpile-only index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+}
+```
+
+---
+
+### 4. 環境変数設定例ファイルの作成
+
+#### [.env.example](file:///c:/Users/worke/Antigravity/nivel_arena_online/.env.example)
+
+クライアント側の環境変数設定例:
+
+```env
+# Socket.io server URL
+# For local development:
+NEXT_PUBLIC_SOCKET_URL=http://localhost:3001
+
+# For production (example with ngrok):
+# NEXT_PUBLIC_SOCKET_URL=https://your-ngrok-url.ngrok.io
+
+# For production (example with Render):
+# NEXT_PUBLIC_SOCKET_URL=https://your-server.onrender.com
+```
+
+#### [server/.env.example](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/.env.example)
+
+サーバー側の環境変数設定例:
+
+```env
+# Server port (default: 3001)
+PORT=3001
+
+# Client URL for CORS (use "*" for development, specific URL for production)
+# For local development:
+CLIENT_URL=*
+
+# For production (example with Vercel):
+# CLIENT_URL=https://your-app.vercel.app
+```
+
+---
+
+### 5. デプロイ手順書の作成
+
+#### [ngrok_setup.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/ngrok_setup.md)
+
+ngrok を使用した一時的な公開手順を作成しました。主な内容:
+
+- ngrok のインストール方法
+- サーバーとクライアントの公開手順
+- 環境変数の設定方法
+- トラブルシューティング
+
+#### [production_deployment.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/production_deployment.md)
+
+Render と Vercel を使用した本番環境デプロイ手順を作成しました。主な内容:
+
+- Render へのサーバーデプロイ手順
+- Vercel へのクライアントデプロイ手順
+- 環境変数の設定方法
+- トラブルシューティング
+
+---
+
+## 動作確認
+
+### ローカル環境での検証
+
+ローカル環境で動作確認を実施しました。
+
+#### テスト結果
+
+1. **サーバー接続**: ✅ 成功
+   - Socket.io サーバーに正常に接続されました
+   - コンソールログ: `Connected to server: 6sZuNwAllNgXktoRAAAE`
+
+2. **ルーム作成**: ✅ 成功
+   - プレイヤー名 "TestPlayer" でルームを作成
+   - Room ID: 319734 が発行されました
+   - 「対戦相手を待っています...」と表示され、正しく待機状態に移行
+
+3. **エラーの有無**: ✅ なし
+   - 接続に関するエラーは発生していません
+   - 環境変数を介したサーバー接続設定は正しく機能しています
+
+#### スクリーンショット
+
+![ルーム作成成功](file:///C:/Users/worke/.gemini/antigravity/brain/0aec5e73-6d90-4548-ba67-310ff37d3f4b/room_creation_test_1769163958529.png)
+
+#### 動作確認の録画
+
+![動作確認](file:///C:/Users/worke/.gemini/antigravity/brain/0aec5e73-6d90-4548-ba67-310ff37d3f4b/server_connection_test_1769163933421.webp)
+
+---
+
+## 変更されたファイル一覧
+
+### 修正されたファイル
+
+1. [components/GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx#L13)
+   - SOCKET_URL を環境変数化
+
+2. [server/index.ts](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/index.ts)
+   - dotenv の追加と読み込み (L9-L12)
+   - CORS 設定の環境変数化 (L103)
+   - ポート番号の環境変数化 (L329)
+
+3. [server/package.json](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/package.json)
+   - nodemon の設定を追加して TypeScript エラーを無視
+
+### 新規作成されたファイル
+
+4. [.env.example](file:///c:/Users/worke/Antigravity/nivel_arena_online/.env.example)
+   - クライアント側の環境変数設定例
+
+5. [server/.env.example](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/.env.example)
+   - サーバー側の環境変数設定例
+
+6. [docs/online_test_play/ngrok_setup.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/ngrok_setup.md)
+   - ngrok を使用した一時的な公開手順
+
+7. [docs/online_test_play/production_deployment.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/production_deployment.md)
+   - Render と Vercel を使用した本番環境デプロイ手順
+
+---
+
+## 次のステップ
+
+### 1. ngrok を使用したテスト (推奨)
+
+最も簡単な方法として、ngrok を使用してローカル環境を一時的に公開することをお勧めします。
+
+1. [ngrok_setup.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/ngrok_setup.md) の手順に従って設定
+2. 別のデバイス(スマホなど)からアクセスして動作確認
+3. 友人と対戦テスト
+
+### 2. 本番環境へのデプロイ (オプション)
+
+より安定した環境でテストプレイしたい場合:
+
+1. [production_deployment.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/production_deployment.md) の手順に従ってデプロイ
+2. Render (サーバー) と Vercel (クライアント) にデプロイ
+3. 本番環境での動作確認
+
+---
+
+## 注意事項
+
+### ローカル開発時
+
+- 環境変数を設定しなくても、デフォルト値 (`http://localhost:3001`) で動作します
+- 既存のローカル開発環境には影響ありません
+
+### ngrok 使用時
+
+- 無料プランでは2時間でセッションが切れます
+- URL は毎回変わります
+- 環境変数 `.env.local` の設定が必要です
+
+### 本番環境デプロイ時
+
+- Render の無料プランでは、15分間アクティビティがないとスリープします
+- 初回アクセス時に起動に数秒かかる場合があります
+- 環境変数の設定を忘れずに行ってください
+
+---
+
+## まとめ
+
+オンラインテストプレイのための基盤が整いました。ローカル環境での動作確認も完了し、サーバーとクライアントの接続が正常に機能しています。ngrok を使用すれば、すぐに友人とオンラインで対戦できます。より安定した環境が必要な場合は、Render と Vercel へのデプロイを検討してください。

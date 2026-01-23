@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { Card as CardType } from '../shared/types';
+const BASE_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
+
 import Card from './Card'; // Reuse existing Card component
 import CardDetailModal from './CardDetailModal';
 
@@ -25,7 +27,7 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
 
     useEffect(() => {
         // Fetch cards from API
-        fetch('http://localhost:3001/api/cards')
+        fetch(`${BASE_URL}/api/cards`)
             .then(res => res.json())
             .then((data: CardType[]) => {
                 setAllCards(data);
@@ -157,7 +159,7 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
         };
 
         try {
-            const res = await fetch('http://localhost:3001/api/decks', {
+            const res = await fetch(`${BASE_URL}/api/decks`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, deck: deckData })

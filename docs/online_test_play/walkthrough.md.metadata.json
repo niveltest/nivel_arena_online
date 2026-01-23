@@ -1,0 +1,6 @@
+{
+  "artifactType": "ARTIFACT_TYPE_WALKTHROUGH",
+  "summary": "本番環境（Render/Vercel）へのデプロイ完了報告。GitHubアップロード、各種ビルドエラーの修正、環境変数の設定など、オンライン化に必要なすべての工程を完了しました。",
+  "updatedAt": "2026-01-23T12:28:13.636478200Z",
+  "version": "2"
+}

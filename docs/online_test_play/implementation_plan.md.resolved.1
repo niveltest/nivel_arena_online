@@ -1,0 +1,71 @@
+# オンラインテストプレイの実装計画
+
+## 概要
+
+現在ローカル環境 (`localhost`) で動作しているゲームを、外部のネットワークからアクセス可能な状態にし、友人とオンラインでテストプレイできるようにします。
+
+## ユーザーレビューが必要な項目
+
+> [!IMPORTANT]
+> オンライン化にあたり、サーバーを公開するための「ホスティングサービス」の選定が必要です。
+>
+> 1. **Render (無料枠あり)**: サーバー (Node.js) のデプロイに適しています。
+> 2. **Vercel (無料枠あり)**: クライアント (Next.js) のデプロイに適しています。
+> 3. **ngrok (ローカル公開)**: 自分の PC で動かしているサーバーを一時的に外部公開する最も簡単な方法です。
+
+## 提案される変更点
+
+### [Component] Client (Frontend)
+
+#### [MODIFY] [GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
+
+- ✅ `SOCKET_URL` をハードコードせず、環境変数 `process.env.NEXT_PUBLIC_SOCKET_URL` から取得するように修正しました。
+
+#### [NEW] [.env.example](file:///c:/Users/worke/Antigravity/nivel_arena_online/.env.example)
+
+- ✅ クライアント側の環境変数設定例ファイルを作成しました。
+
+---
+
+### [Component] Server (Backend)
+
+#### [MODIFY] [index.ts](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/index.ts)
+
+- ✅ デプロイ先のポート番号を環境変数 `PORT` から取得するように修正しました (Render 等のサービス対応)。
+- ✅ CORS 設定で、特定のドメイン(クライアントの公開URL)を許可できるように環境変数 `CLIENT_URL` を追加しました。
+- ✅ `dotenv` パッケージを追加し、環境変数を読み込むように修正しました。
+
+#### [NEW] [server/.env.example](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/.env.example)
+
+- ✅ サーバー側の環境変数設定例ファイルを作成しました。
+
+---
+
+### [Component] Documentation
+
+#### [NEW] [ngrok_setup.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/ngrok_setup.md)
+
+- ✅ ngrok を使用した一時的な公開手順を作成しました。
+
+#### [NEW] [production_deployment.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/production_deployment.md)
+- ✅ Render と Vercel を使用した本番環境デプロイ手順を作成しました。
+
+#### [NEW] [GitHub Repository](https://github.com/niveltest/nivel_arena_online)
+- ✅ プログラムを GitHub にアップロードしました。
+
+## 検証計画
+
+### 手動検証
+
+- ngrok を使用して一時的な URL を生成し、外部のブラウザ(スマホ等)からアクセスして対戦ができるか確認します。
+- サーバーを Render に、クライアントを Vercel にデプロイし、本番環境での Socket.io 通信を確認します。
+
+## 次のステップ
+
+1. **ngrok を使用したテスト**:
+   - [ngrok_setup.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/ngrok_setup.md) の手順に従って、ローカル環境を一時的に公開
+   - 別のデバイスからアクセスして動作確認
+
+2. **本番環境へのデプロイ** (オプション):
+   - [production_deployment.md](file:///c:/Users/worke/Antigravity/nivel_arena_online/docs/online_test_play/production_deployment.md) の手順に従って、Render と Vercel にデプロイ
+   - より安定した環境でテストプレイ

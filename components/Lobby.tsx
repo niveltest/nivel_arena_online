@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import { io } from 'socket.io-client';
+const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
+
 
 interface LobbyProps {
     onJoin: (username: string, roomId: string) => void;
@@ -31,7 +33,7 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
         setIsConnecting(true);
 
         // Request server to create room
-        const socket = io('http://localhost:3001', {
+        const socket = io(SOCKET_URL, {
             timeout: 5000,
             reconnection: false
         });

@@ -1,0 +1,5 @@
+{
+  "artifactType": "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary": "オンラインテストプレイの実装計画。環境変数化、ngrokを使用した一時公開、Render/Vercelを使用した本番環境デプロイの手順を含みます。",
+  "updatedAt": "2026-01-23T10:19:33.530757200Z"
+}
