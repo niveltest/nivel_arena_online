@@ -223,7 +223,7 @@ export class CPUPlayer extends Player {
                 // Or maybe there is a LEADER_INDEX = -1?
 
                 // Let's scan for a killable unit
-                const killableUnitIndex = opponent.state.field.findIndex(u => u && (u.power || 0) < (spec.unit?.power || 0));
+                const killableUnitIndex = opponent.state.field.findIndex((u: Card | null) => u && (u.power || 0) < (spec.unit?.power || 0));
 
                 if (killableUnitIndex !== -1) {
                     targetIndex = killableUnitIndex;

@@ -26,7 +26,7 @@ export class Game {
         this.endGame(winnerId, reason);
     }
 
-    private hasKeyword(card: Card, keyword: string): boolean {
+    public hasKeyword(card: Card, keyword: string): boolean {
         if (!card) return false;
         const mapping: Record<string, string> = {
             'アタッカー': 'アタッカー',
@@ -91,7 +91,7 @@ export class Game {
         return false;
     }
 
-    private getKeywordValue(card: Card, keyword: string): number {
+    public getKeywordValue(card: Card, keyword: string): number {
         if (!card) return 0;
         const mapping: Record<string, string> = {
             'PENETRATION': 'PENETRATION_',
@@ -1615,7 +1615,7 @@ export class Game {
         this.checkStateBasedActions();
     }
 
-    private getUnitPower(playerId: string, slotIndex: number): number {
+    public getUnitPower(playerId: string, slotIndex: number): number {
         const player = this.players[playerId];
         const unit = player.state.field[slotIndex];
         if (!unit) return 0;
@@ -1684,7 +1684,7 @@ export class Game {
 
 
 
-    private getUnitHitCount(playerId: string, slotIndex: number): number {
+    public getUnitHitCount(playerId: string, slotIndex: number): number {
         const player = this.players[playerId];
         const unit = player.state.field[slotIndex];
         if (!unit) return 0;
@@ -1728,7 +1728,7 @@ export class Game {
         return hitCount;
     }
 
-    private destroyUnit(playerId: string, slotIndex: number, killerId?: string, killerSlot?: number, reason: 'BATTLE' | 'EFFECT' | 'RULE' | 'FORCE' = 'RULE') {
+    public destroyUnit(playerId: string, slotIndex: number, killerId?: string, killerSlot?: number, reason: 'BATTLE' | 'EFFECT' | 'RULE' | 'FORCE' = 'RULE') {
         const player = this.players[playerId];
         const unit = player.state.field[slotIndex];
         if (!unit) return;

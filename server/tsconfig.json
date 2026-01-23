@@ -15,6 +15,9 @@
     "../shared/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "test",
+    "testData",
+    "test_game_logic.ts"
   ]
 }
