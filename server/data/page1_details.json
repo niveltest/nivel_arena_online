@@ -1,0 +1,322 @@
+[
+  {
+    "id": "BT02-001",
+    "name": "ボリューム‐ビート・ザ・ガン",
+    "type": "UNIT",
+    "cost": 1,
+    "power": 2500,
+    "hitCount": 1,
+    "text": "エントリー このターンが終わるまで「アタッカー この攻撃が終わるまでパワー+1500」を得る。",
+    "affiliation": "エフェクト / テトラ",
+    "attribute": "炎",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_iu7SVGRT_1f64a64b1cf47e491d0ac14c5334a28eb8fa4d35.png",
+    "rarity": "P"
+  },
+  {
+    "id": "BT02-013",
+    "name": "ティア‐ラブリーデート",
+    "type": "UNIT",
+    "cost": 4,
+    "power": 5500,
+    "hitCount": 2,
+    "text": "エントリー フィールドにある自分のユニットを1枚選び、このターンが終わるまでパワー+2000。",
+    "affiliation": "エフェクト / ミシリス",
+    "attribute": "大地",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_H3IaYUfQ_da7d427a109fe78f62a78c45d0bd7a9f75f4de61.png",
+    "rarity": "P"
+  },
+  {
+    "id": "BT02-024",
+    "name": "プリバティ‐ガバメントノーマル",
+    "type": "UNIT",
+    "cost": 7,
+    "power": 7000,
+    "hitCount": 3,
+    "text": "[엑시트] 道連れ(このユニットを戦闘でトラッシュした相手のユニットのコストがこのカードのコスト以下の場合、そのユニットをトラッシュする)。",
+    "affiliation": "エフェクト / エリシオン",
+    "attribute": "嵐",
+    "keywords": [
+      "エグジット"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_9yUHAhQi_c56e6ddc86e071d93b3c0e07794af0e74d926dc8.png",
+    "rarity": "P"
+  },
+  {
+    "id": "BT02-035",
+    "name": "マスト‐パイレーツハート",
+    "type": "UNIT",
+    "cost": 3,
+    "power": 1500,
+    "hitCount": 1,
+    "text": "アタッカー 潜入[1](このユニットの攻撃を相手のユニットに防御されなかった場合、1枚ドローする)。",
+    "affiliation": "エフェクト / エリシオン",
+    "attribute": "波濤",
+    "keywords": [
+      "アタッカー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_X12Z7UkG_55e28dd292cd5bc285cd3c24dceb4bb82c949a9e.png",
+    "rarity": "P"
+  },
+  {
+    "id": "BT02-044",
+    "name": "アイン",
+    "type": "UNIT",
+    "cost": 6,
+    "power": 7500,
+    "hitCount": 2,
+    "text": "-",
+    "affiliation": "ベース / ミシリス",
+    "attribute": "波濤",
+    "keywords": [
+      "-"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_KTVDJxNP_701c5811e7e153a44249a536c5c3820f3845ea99.png",
+    "rarity": "P"
+  },
+  {
+    "id": "BT02-069",
+    "name": "ドレイク‐ヴィランレーサー",
+    "type": "UNIT",
+    "cost": 5,
+    "power": 5000,
+    "hitCount": 2,
+    "text": "[암드] アイテムを装備しているなら戦闘/効果でトラッシュされる時、このユニットが装備しているアイテムを1枚選んでトラッシュできる。その後、トラッシュされない。",
+    "affiliation": "エフェクト / ミシリス",
+    "attribute": "稲妻",
+    "keywords": [
+      "アームド"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_nFqDCcj4_1012b134759443498a0517e70b5f6e13212f9f1b.png",
+    "rarity": "P"
+  },
+  {
+    "id": "BT02-001",
+    "name": "ボリューム‐ビート・ザ・ガン",
+    "type": "UNIT",
+    "cost": 1,
+    "power": 2500,
+    "hitCount": 1,
+    "text": "エントリー このターンが終わるまで「アタッカー この攻撃が終わるまでパワー+1500」を得る。",
+    "affiliation": "エフェクト / テトラ",
+    "attribute": "炎",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_WsyVlUJv_a1dc97d1fe083fad46b42511913a73324db19e22.png",
+    "rarity": "C"
+  },
+  {
+    "id": "BT02-002",
+    "name": "エマ‐オフィスセラピー",
+    "type": "UNIT",
+    "cost": 3,
+    "power": 4500,
+    "hitCount": 1,
+    "text": "エントリー フィールドにある自分のユニット全てはこのターンが終わるまで「アタッカー この攻撃が終わるまでパワー+500」を得る。",
+    "affiliation": "エフェクト / エリシオン",
+    "attribute": "炎",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_zlYxK6Qv_ecb84064ef0015ddff17eb0f033c2bf30a7de977.png",
+    "rarity": "C"
+  },
+  {
+    "id": "BT02-003",
+    "name": "レッドフード‐ナンセンスレッド",
+    "type": "UNIT",
+    "cost": 3,
+    "power": 2500,
+    "hitCount": 1,
+    "text": "アタッカー デュエリスト(対向ユニットは防御可能な状態であれば必ず防御しなければならない)。\nアタッカー この攻撃が終わるまでパワー+4000。\n\nトリガー / \nこのカードを自分の手札に加える。",
+    "affiliation": "エフェクト / ピルグリム",
+    "attribute": "炎",
+    "keywords": [
+      "アタッカー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_QXSDovg9_eafb1fe51def7ef9b54759a57d30cef102e271c9.png",
+    "rarity": "UR"
+  },
+  {
+    "id": "BT02-003",
+    "name": "レッドフード‐ナンセンスレッド",
+    "type": "UNIT",
+    "cost": 3,
+    "power": 2500,
+    "hitCount": 1,
+    "text": "アタッカー デュエリスト(対向ユニットは防御可能な状態であれば必ず防御しなければならない)。\nアタッカー この攻撃が終わるまでパワー+4000。\n\nトリガー / \nこのカードを自分の手札に加える。",
+    "affiliation": "エフェクト / ピルグリム",
+    "attribute": "炎",
+    "keywords": [
+      "アタッカー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_nyxNv1Wc_75f0ebbafb1abf5f1f1ed42f9c1e67beac9bd07d.png",
+    "rarity": "SPR"
+  },
+  {
+    "id": "BT02-004",
+    "name": "ルージュ",
+    "type": "UNIT",
+    "cost": 4,
+    "power": 6000,
+    "hitCount": 2,
+    "text": "-",
+    "affiliation": "ベース / テトラ",
+    "attribute": "炎",
+    "keywords": [
+      "-"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_3gaWP6Qy_920de3e61c943e235d891d5051c0f4fd3e629846.png",
+    "rarity": "C"
+  },
+  {
+    "id": "BT02-005",
+    "name": "ラプンツェル：ピュアグレイス",
+    "type": "UNIT",
+    "cost": 5,
+    "power": 5500,
+    "hitCount": 2,
+    "text": "アタッカー この攻撃が終わるまでパワー+3000。",
+    "affiliation": "エフェクト / ピルグリム",
+    "attribute": "炎",
+    "keywords": [
+      "アタッカー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_7Dqyn8s0_a1fea2454e78606d62c00ac55f333a2b26780abe.png",
+    "rarity": "R"
+  },
+  {
+    "id": "BT02-006",
+    "name": "バイパー‐トキシックラビット",
+    "type": "UNIT",
+    "cost": 7,
+    "power": 5500,
+    "hitCount": 3,
+    "text": "エントリー 自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
+    "affiliation": "エフェクト / テトラ",
+    "attribute": "炎",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_o3GXVEUF_333e7788024a5f95ea3d52b453ff8994913675ee.png",
+    "rarity": "SR"
+  },
+  {
+    "id": "BT02-006",
+    "name": "バイパー‐トキシックラビット",
+    "type": "UNIT",
+    "cost": 7,
+    "power": 5500,
+    "hitCount": 3,
+    "text": "エントリー 自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
+    "affiliation": "エフェクト / テトラ",
+    "attribute": "炎",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_tczU7ndw_d953790d78c7799d3fefae6d427da2cee2d56d10.png",
+    "rarity": "SPR"
+  },
+  {
+    "id": "BT02-007",
+    "name": "グレアリングアイズ",
+    "type": "SKILL",
+    "cost": 3,
+    "power": 0,
+    "hitCount": 0,
+    "text": "フィールドにある自分のユニット全てはこのターンが終わるまで アタッカー 略奪[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、1枚ドローする)を得る。",
+    "affiliation": "-",
+    "attribute": "炎",
+    "keywords": [
+      "-"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_VMY62jwf_62191c602438b1c6872b3a55598903eb29814e7a.png",
+    "rarity": "R"
+  },
+  {
+    "id": "BT02-008",
+    "name": "ザ・ゲームマスター",
+    "type": "SKILL",
+    "cost": 4,
+    "power": 0,
+    "hitCount": 0,
+    "text": "自分のトラッシュゾーンからコスト7以上のユニットカードを1枚選んで手札に加える。",
+    "affiliation": "-",
+    "attribute": "炎",
+    "keywords": [
+      "-"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_5bs2DUrV_e55780ab81cc98672a960f043b647e88a0e71044.png",
+    "rarity": "C"
+  },
+  {
+    "id": "BT02-009",
+    "name": "ガッデシアムゲイター",
+    "type": "ITEM",
+    "cost": 2,
+    "power": 0,
+    "hitCount": 0,
+    "text": "[장착 조건: 3코스트 이하인 유닛]\nパワー+4000。\nバーサーカー(このユニットは攻撃可能な状態であれば必ず攻撃しなければならない)。\n\nトリガー / \nこのカードをトラッシュする。自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
+    "affiliation": "-",
+    "attribute": "炎",
+    "keywords": [
+      "-"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_FbPpJh2l_844e0ff05ee06104ae91b7da53279ecaa43d16e0.png",
+    "rarity": "C"
+  },
+  {
+    "id": "BT02-010",
+    "name": "ディーゼル‐ブラックホリデー",
+    "type": "UNIT",
+    "cost": 1,
+    "power": 2500,
+    "hitCount": 1,
+    "text": "エントリー 自分のデッキの上から1枚を公開し、その中の《ベース》を持つユニットカードを1枚手札に加える。残りはデッキに戻し、シャッフルする。",
+    "affiliation": "エフェクト / エリシオン",
+    "attribute": "大地",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_r3OX4lBI_00920801e7aa10eccd8e697dc03427e98f7c02aa.png",
+    "rarity": "C"
+  },
+  {
+    "id": "BT02-011",
+    "name": "マルチャーナ‐スクールデイズ",
+    "type": "UNIT",
+    "cost": 3,
+    "power": 6500,
+    "hitCount": 1,
+    "text": "トリガー / \nこのカードをトラッシュする。自分のリーダーレベル+1。",
+    "affiliation": "ベース / エリシオン",
+    "attribute": "大地",
+    "keywords": [
+      "-"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_bW1YVTKI_c76775106485274b616957abeb603b6dd1025a02.png",
+    "rarity": "R"
+  },
+  {
+    "id": "BT02-012",
+    "name": "ルピー‐ラグジュアリーラビット",
+    "type": "UNIT",
+    "cost": 3,
+    "power": 5500,
+    "hitCount": 1,
+    "text": "パッシブ フィールドにある《ベース》を持つ自分のユニット1枚につき、ヒット+1。\n\nトリガー / \nこのカードを自分の手札に加える。",
+    "affiliation": "エフェクト / テトラ",
+    "attribute": "大地",
+    "keywords": [
+      "パッシブ"
+    ],
+    "imageUrl": "http://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_qCQbx28s_5e57b1db673909fafc22ed4580699ddd00d9c63d.png",
+    "rarity": "UR"
+  }
+]
