@@ -56,7 +56,7 @@ const Card: React.FC<CardProps> = ({
         <motion.div
             layoutId={layoutId}
             className={`
-                relative flex flex-col bg-slate-900 rounded border-2 overflow-hidden select-none shadow-md
+                relative flex flex-col bg-slate-900 rounded border-2 select-none shadow-md
                 ${getBorderColor()} 
                 ${className || (card.type === 'LEADER' ? 'w-32 h-24' : 'w-24 h-32')}
                 ${isAwakened ? 'ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]' : ''}
@@ -72,7 +72,7 @@ const Card: React.FC<CardProps> = ({
             whileTap={{ scale: 0.95 }}
         >
             {/* Image */}
-            <div className="flex-1 bg-black/40 border-b border-white/10 overflow-hidden relative">
+            <div className="flex-1 bg-black/40 border-b border-white/10 overflow-hidden relative rounded-t-sm">
                 {card.imageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -101,7 +101,7 @@ const Card: React.FC<CardProps> = ({
             {/* Text */}
             {
                 !minimal && (
-                    <div className="h-12 text-[8px] leading-[10px] text-gray-300 overflow-hidden bg-black/40 p-1 flex flex-col gap-0.5">
+                    <div className="h-12 text-[8px] leading-[10px] text-gray-300 overflow-hidden bg-black/40 p-1 flex flex-col gap-0.5 rounded-b-sm">
                         <div className="font-bold text-white truncate flex justify-center items-center gap-1">
                             <span>{card.name}</span>
                         </div>
@@ -162,19 +162,19 @@ const Card: React.FC<CardProps> = ({
             {/* Stats Check */}
             {
                 !minimal && (card.type === 'UNIT' || card.type === 'LEADER') && (
-                    <>
-                        {/* Power (Top Right) */}
-                        <div className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-full bg-red-600 flex items-center justify-center border border-white shadow-lg z-20" title="Power">
+                    <div className="absolute -top-1.5 -right-1.5 flex flex-col items-center gap-1 z-20">
+                        {/* Power */}
+                        <div className="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center border border-white shadow-lg" title="Power">
                             <span className="font-bold text-white text-[10px]">{card.power ?? 0}</span>
                         </div>
 
-                        {/* Hit Count (Bottom Left) */}
+                        {/* Hit Count */}
                         {(card.hitCount !== undefined) && (
-                            <div className="absolute -bottom-1 -left-1 w-5 h-5 rounded-md bg-yellow-500 flex items-center justify-center border border-white shadow-lg z-10" title="Hit Count">
+                            <div className="w-5 h-5 rounded-md bg-yellow-500 flex items-center justify-center border border-white shadow-lg" title="Hit Count">
                                 <span className="font-bold text-black text-[10px]">{card.hitCount}</span>
                             </div>
                         )}
-                    </>
+                    </div>
                 )
             }
 
