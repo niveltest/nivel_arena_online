@@ -1382,16 +1382,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                         <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">プレイマット変更</div>
                     </button>
                     <button
-                        onClick={() => setIsEditMode(!isEditMode)}
-                        className={`p-2 rounded transition-colors group relative border ${isEditMode ? 'bg-yellow-500/20 border-yellow-500' : 'hover:bg-white/10 border-white/5'}`}
-                        title="レイアウト調整"
-                    >
-                        <span className="text-lg">{isEditMode ? '💾' : '📐'}</span>
-                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">
-                            {isEditMode ? '編集終了' : 'レイアウト調整'}
-                        </div>
-                    </button>
-                    <button
                         onClick={handleEndTurn}
                         disabled={!isMyTurn || gameState.phase === 'DEFENSE'}
                         className={`
