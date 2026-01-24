@@ -32,6 +32,9 @@ export class CPUPlayer extends Player {
         // Add a small delay to simulate human "thinking"
         await new Promise(resolve => setTimeout(resolve, 1000));
 
+        // Re-check ownership AFTER delay to prevent "carrying over" actions into human turns
+        if (this.game.turnPlayerId !== this.id && this.game.phase !== 'MULLIGAN' && !this.isSelecting()) return;
+
         try {
             switch (this.game.phase) {
                 case 'MULLIGAN':
