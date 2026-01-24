@@ -139,6 +139,15 @@ const Card: React.FC<CardProps> = ({
                 )
             }
 
+            {/* Cost Display - Top Left */}
+            {
+                !minimal && (
+                    <div className="absolute -top-1.5 -left-1.5 w-6 h-6 bg-cyan-600 rotate-45 flex items-center justify-center border border-white z-20 shadow-md">
+                        <span className="-rotate-45 font-bold text-white text-xs">{card.cost}</span>
+                    </div>
+                )
+            }
+
             {/* Stats Check */}
             {
                 !minimal && (card.type === 'UNIT' || card.type === 'LEADER') && (
