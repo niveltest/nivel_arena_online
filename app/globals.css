@@ -318,8 +318,10 @@ body {
   }
 
   .playmat-canvas {
-    transform: scale(0.9);
-    transform-origin: center top;
+    transform: scale(0.95);
+    max-width: 98vw;
+    max-height: 40vh;
+    transform-origin: center center;
   }
 
   /* Compact buttons for mobile */
@@ -334,3 +336,11 @@ body {
     margin-left: var(--hand-overlap-mobile) !important;
   }
 }
+
+/* Dynamic Layering Utilities */
+.z-index-0 { z-index: 0; } .z-index-1 { z-index: 1; } .z-index-2 { z-index: 2; } .z-index-3 { z-index: 3; }
+.z-index-4 { z-index: 4; } .z-index-5 { z-index: 5; } .z-index-6 { z-index: 6; } .z-index-7 { z-index: 7; }
+.z-index-8 { z-index: 8; } .z-index-9 { z-index: 9; } .z-index-10 { z-index: 10; } .z-index-11 { z-index: 11; }
+.z-index-12 { z-index: 12; } .z-index-13 { z-index: 13; } .z-index-14 { z-index: 14; } .z-index-15 { z-index: 15; }
+.z-index-16 { z-index: 16; } .z-index-17 { z-index: 17; } .z-index-18 { z-index: 18; } .z-index-19 { z-index: 19; }
+.z-index-20 { z-index: 20; }

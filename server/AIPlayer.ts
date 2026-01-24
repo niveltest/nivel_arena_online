@@ -41,10 +41,10 @@ export class CPUPlayer extends Player {
                     this.handleMulligan();
                     break;
                 case 'LEVEL_UP':
-                    this.game.nextPhase();
+                    if (this.game.turnPlayerId === this.id) this.game.nextPhase();
                     break;
                 case 'DRAW':
-                    this.game.nextPhase();
+                    if (this.game.turnPlayerId === this.id) this.game.nextPhase();
                     break;
                 case 'MAIN':
                     this.handleMainPhase();
@@ -62,12 +62,44 @@ export class CPUPlayer extends Player {
                     this.handleGuardianIntercept();
                     break;
                 case 'END':
-                    this.game.nextPhase();
+                    if (this.game.turnPlayerId === this.id) this.game.nextPhase();
                     break;
             }
         } catch (e) {
             console.error("[AI ERROR]", e);
         }
+    }
+
+    private getSizeLimit(): number {
+        const damage = this.state.damageZone.length;
+        let limit = this.state.leaderLevel + damage;
+
+        // Apply Leader Passive Size Buffs
+        const leader = this.state.leader;
+        if (leader.effects) {
+            const isAwakened = this.state.leaderLevel >= (leader.awakeningLevel || 6);
+            leader.effects.forEach(eff => {
+                if (eff.trigger === 'PASSIVE' && eff.action === 'BUFF_SIZE') {
+                    if (!eff.isAwakening || (eff.isAwakening && isAwakened)) {
+                        limit += (eff.value as number || 0);
+                    }
+                }
+            });
+        }
+        return limit;
+    }
+
+    private getCurrentFieldSize(): number {
+        const fieldSize = this.state.field.reduce((sum, c) => {
+            if (!c) return sum;
+            let unitTotal = c.cost;
+            if (c.attachments) {
+                unitTotal += c.attachments.reduce((aSum, a) => aSum + a.cost, 0);
+            }
+            return sum + unitTotal;
+        }, 0);
+        const skillSize = this.state.skillZone.reduce((sum, s) => sum + s.cost, 0);
+        return fieldSize + skillSize;
     }
 
     private isSelecting() {
@@ -130,56 +162,64 @@ export class CPUPlayer extends Player {
         }
 
         // 3. Play units
+        const currentSize = this.getCurrentFieldSize();
+        const sizeLimit = this.getSizeLimit();
+
         const units = this.state.hand
-            .filter(c => c.type === 'UNIT' && c.cost <= (this.state.resources || 0))
+            .filter(c => c.type === 'UNIT')
             .sort((a, b) => (b.power || 0) - (a.power || 0));
 
         for (const unit of units) {
             const freeSlot = this.state.field.findIndex(s => s === null);
             if (freeSlot !== -1) {
-                const handIndex = this.state.hand.findIndex(c => c.id === unit.id);
-                this.game.playCard(this.id, handIndex, { slotIndex: freeSlot });
-                acted = true;
-                break; // One action per think tick
+                const canAfford = (currentSize + unit.cost) <= sizeLimit;
+                if (canAfford) {
+                    const handIndex = this.state.hand.findIndex(c => c.id === unit.id);
+                    console.log(`[AI] Playing UNIT: ${unit.name} (Cost: ${unit.cost}, CurrentSize: ${currentSize}, Limit: ${sizeLimit})`);
+                    this.game.playCard(this.id, handIndex, { slotIndex: freeSlot });
+                    acted = true;
+                    break;
+                }
             }
         }
 
         // 4. Play items if we have units
         if (!acted) {
-            const items = this.state.hand
-                .filter(c => c.type === 'ITEM' && c.cost <= (this.state.resources || 0));
+            const items = this.state.hand.filter(c => c.type === 'ITEM');
             const unitsOnField = this.state.field.filter(u => u !== null) as Card[];
 
             if (items.length > 0 && unitsOnField.length > 0) {
                 const item = items[0];
-                const unit = unitsOnField[0];
-                const handIndex = this.state.hand.findIndex(c => c.id === item.id);
-                const unitIndex = this.state.field.findIndex(u => u?.id === unit.id);
-                this.game.playCard(this.id, handIndex, { slotIndex: unitIndex });
-                acted = true;
+                if ((currentSize + item.cost) <= sizeLimit) {
+                    const unit = unitsOnField[0];
+                    const handIndex = this.state.hand.findIndex(c => c.id === item.id);
+                    const unitIndex = this.state.field.findIndex(u => u?.id === unit.id);
+                    console.log(`[AI] Playing ITEM: ${item.name} (Cost: ${item.cost}, CurrentSize: ${currentSize}, Limit: ${sizeLimit})`);
+                    this.game.playCard(this.id, handIndex, { slotIndex: unitIndex });
+                    acted = true;
+                }
             }
         }
 
         // 5. Play SKILL Cards (New)
         if (!acted) {
-            const skills = this.state.hand
-                .filter(c => c.type === 'SKILL' && c.cost <= (this.state.resources || 0));
+            const skills = this.state.hand.filter(c => c.type === 'SKILL');
 
             if (skills.length > 0) {
-                // Simple AI: Just play the first playable skill
-                // For target selection, Game.requestSelection involves AI thinking later.
-                // We just need to trigger 'playCard'.
                 const skill = skills[0];
-                const handIndex = this.state.hand.findIndex(c => c.id === skill.id);
-                this.game.playCard(this.id, handIndex);
-                acted = true;
+                if ((currentSize + skill.cost) <= sizeLimit) {
+                    const handIndex = this.state.hand.findIndex(c => c.id === skill.id);
+                    console.log(`[AI] Playing SKILL: ${skill.name} (Cost: ${skill.cost}, CurrentSize: ${currentSize}, Limit: ${sizeLimit})`);
+                    this.game.playCard(this.id, handIndex);
+                    acted = true;
+                }
             }
         }
 
         // 6. End phase if no more actions
-        if (!acted) {
+        if (!acted && this.game.turnPlayerId === this.id) {
             this.game.nextPhase();
-        } else {
+        } else if (acted) {
             // If we acted, schedule another think
             this.think();
         }
@@ -251,7 +291,7 @@ export class CPUPlayer extends Player {
                 this.game.attack(this.id, spec.index, targetIndex);
                 this.think();
             }
-        } else {
+        } else if (this.game.turnPlayerId === this.id) {
             this.game.nextPhase();
         }
     }

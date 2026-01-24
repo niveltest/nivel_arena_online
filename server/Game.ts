@@ -1986,7 +1986,22 @@ export class Game {
         const player = this.players[playerId];
         if (!player) return 0;
         const damage = player.state.damageZone.length;
-        return player.state.leaderLevel + damage;
+        let limit = player.state.leaderLevel + damage;
+
+        // Apply Leader Passive Size Buffs
+        const leader = player.state.leader;
+        if (leader.effects) {
+            const isAwakened = player.state.leaderLevel >= (leader.awakeningLevel || 6);
+            leader.effects.forEach(eff => {
+                if (eff.trigger === 'PASSIVE' && eff.action === 'BUFF_SIZE') {
+                    if (!eff.isAwakening || (eff.isAwakening && isAwakened)) {
+                        limit += (eff.value as number || 0);
+                    }
+                }
+            });
+        }
+
+        return limit;
     }
 
     private checkDrawOnKill(playerId: string, opponentId: string, slotIndex: number, drawOnKill?: number) {

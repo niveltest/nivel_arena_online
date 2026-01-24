@@ -6,7 +6,7 @@ import Card from './Card';
 import SelectionModal from './SelectionModal';
 import CardDetailModal from './CardDetailModal';
 import ResultModal from './ResultModal';
-import { GameState, Card as CardType, AnimationEvent, AnimationType, AttackAnimationData, DamageAnimationData, DestroyAnimationData } from '../shared/types';
+import { GameState, Card as CardType, type AnimationEvent, AnimationType, AttackAnimationData, DamageAnimationData, DestroyAnimationData } from '../shared/types';
 
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 
@@ -49,7 +49,7 @@ const PLAYMAT_CONFIGS: Record<'official' | 'mermaid' | 'cyber', PlaymatThemeConf
         deck: { top: '29.4%', left: '88.5%', scale: '0.67', bottom: 'auto', right: 'auto' },
         trash: { top: '72.3%', left: '88.2%', scale: '0.67', bottom: 'auto', right: 'auto' },
         skill: { bottom: 'auto', right: 'auto', scale: '0.65', left: '69.3%', top: '84.7%' },
-        damage: { top: '83.8%', left: '30.8%', bottom: 'auto', right: 'auto', scale: '0.8' },
+        damage: { top: '83.3%', left: '32.1%', bottom: 'auto', right: 'auto', scale: '1.2' },
         level: { showSidebar: true, position: 'official-side' }
     },
     mermaid: {
@@ -208,7 +208,7 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
 
     return (
         <div id={containerId} className={`
-            flex-1 relative w-full flex items-center justify-center overflow-visible transition-all duration-700
+            flex-1 relative w-full flex items-center justify-center overflow-hidden transition-all duration-700 p-2 sm:p-4
             ${isOpponent ? 'opacity-90 border-b border-white/10 rotate-180' : ''}
         `}>
             <style>{`
@@ -235,17 +235,6 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                     opacity: var(--mat-opacity);
                 }
 
-                #${containerId} .damage-card-container[data-index="1"] { margin-left: -5.0rem; z-index: 1; }
-                #${containerId} .damage-card-container[data-index="2"] { margin-left: -5.0rem; z-index: 2; }
-                #${containerId} .damage-card-container[data-index="3"] { margin-left: -5.0rem; z-index: 3; }
-                #${containerId} .damage-card-container[data-index="4"] { margin-left: -5.0rem; z-index: 4; }
-                #${containerId} .damage-card-container[data-index="5"] { margin-left: -5.0rem; z-index: 5; }
-                #${containerId} .damage-card-container[data-index="6"] { margin-left: -5.0rem; z-index: 6; }
-                #${containerId} .damage-card-container[data-index="7"] { margin-left: -5.0rem; z-index: 7; }
-                #${containerId} .damage-card-container[data-index="8"] { margin-left: -5.0rem; z-index: 8; }
-                #${containerId} .damage-card-container[data-index="9"] { margin-left: -5.0rem; z-index: 9; }
-                #${containerId} .damage-card-container[data-index="10"] { margin-left: -5.0rem; z-index: 10; }
-
                 #${containerId} .damage-card-container {
                     transition: all 0.2s ease-out;
                 }
@@ -260,172 +249,174 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                 }
 
             `}</style>
-            <div className="relative h-full aspect-video flex items-center justify-center playmat-canvas" ref={canvasRef}>
-                <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 playmat-bg`}></div>
+            <div className="relative h-full w-full max-w-full max-h-full flex items-center justify-center p-1 sm:p-4">
+                <div className="relative w-full h-full max-w-full max-h-full aspect-video flex items-center justify-center playmat-canvas" ref={canvasRef}>
+                    <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 playmat-bg`}></div>
 
-                {/* Level Zone Sidebar - Positioned relatively to layout but mostly fixed currently */}
-                {config.level.showSidebar && (
-                    <div className={`absolute 
+                    {/* Level Zone Sidebar - Positioned relatively to layout but mostly fixed currently */}
+                    {config.level.showSidebar && (
+                        <div className={`absolute 
                         ${config.level.position === 'official-side'
-                            ? 'left-[10.5%] top-[24%] h-[55%] w-[5%] flex flex-col-reverse justify-between py-1'
-                            : config.level.position === 'left-overlap'
-                                ? 'left-[4%] bottom-[12%] h-[40%] flex-row-reverse w-[200px] flex gap-2'
-                                : 'left-[2%] top-[15%] h-[70%] w-[40px] flex flex-col-reverse justify-between'} 
+                                ? 'left-[10.5%] top-[24%] h-[55%] w-[5%] flex flex-col-reverse justify-between py-1'
+                                : config.level.position === 'left-overlap'
+                                    ? 'left-[4%] bottom-[12%] h-[40%] flex-row-reverse w-[200px] flex gap-2'
+                                    : 'left-[2%] top-[15%] h-[70%] w-[40px] flex flex-col-reverse justify-between'} 
                         pointer-events-none z-10`}>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(lv => (
-                            <div key={lv} className={`
+                            {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(lv => (
+                                <div key={lv} className={`
                                 flex items-center justify-center font-black transition-all duration-300 relative
                                 ${config.level.position === 'official-side' ? 'text-[12px] h-6 border-b border-white/5 w-full' : 'text-xl w-full'}
                                 ${p.leaderLevel === lv
-                                    ? `text-white scale-125 z-10 ${isOpponent ? 'bg-red-500/40 shadow-[0_0_15px_rgba(239,68,68,0.5)]' : 'bg-cyan-500/40 shadow-[0_0_15px_rgba(34,211,238,0.5)]'}`
-                                    : 'text-slate-600 opacity-20 bg-black/10'}
+                                        ? `text-white scale-125 z-10 ${isOpponent ? 'bg-red-500/40 shadow-[0_0_15px_rgba(239,68,68,0.5)]' : 'bg-cyan-500/40 shadow-[0_0_15px_rgba(34,211,238,0.5)]'}`
+                                        : 'text-slate-600 opacity-20 bg-black/10'}
                                 ${isOpponent ? 'rotate-180' : ''}
                             `}>
-                                {p.leaderLevel === lv && (
-                                    <div className="absolute -left-8 text-[8px] font-bold text-white/80 whitespace-nowrap hidden sm:block">
-                                        CAP
-                                    </div>
-                                )}
-                                {lv}
-                                {p.leaderLevel === lv && (
-                                    <div className={`absolute inset-0 border-2 ${isOpponent ? 'border-red-400/50' : 'border-cyan-400/50'} animate-pulse`}></div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {/* Draggable Components */}
-                <DraggableZone zoneKey="leader" config={effectiveLeaderConfig} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="leader-zone" isOpponent={isOpponent}>
-                    <div
-                        className={`relative group tactical-border p-1 ${isOpponent ? 'border-red-500/30' : 'border-cyan-500/30'} 
-                            ${isOpponent && !isEditMode ? 'cursor-pointer hover:ring-2 hover:ring-red-500 transition-all' : ''}
-                        `}
-                        onClick={() => {
-                            if (isOpponent && !isEditMode && onEnemyTargetClick) {
-                                // アタッカーが選択されている場合、正面のレーンへのアタックとして処理
-                                // サーバー側で attackerIndex === targetIndex が期待されているため
-                                // ここでは具体的なレーンを特定できないが、アタッカー自身のインデックスで送信する
-                                // (handleEnemyTargetClick は GameBoard 側で attackingUnitIndex を知っている)
-                                onEnemyTargetClick(-1); // -1 を渡して「リーダーへの意図」を伝える
-                            }
-                        }}
-                    >
-                        <div className={`absolute -bottom-4 -left-4 text-[10px] font-black ${isOpponent ? 'text-red-500/50 bg-red-500/10 border-red-500/20' : 'text-cyan-500/50 bg-cyan-500/10 border-cyan-500/20'} px-2 py-0.5 border`}>
-                            {isOpponent ? 'TARGET_LOCKED' : 'COMMANDER_ID:001'}
-                        </div>
-                        <div className="shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-xl overflow-hidden ring-1 ring-white/10">
-                            <Card
-                                card={p.leader}
-                                isEnemy={isOpponent}
-                                onShowDetail={handleShowDetail}
-                                isAwakened={p.leaderLevel >= (p.leader.awakeningLevel || 6)}
-                                minimal={true}
-                            />
-                        </div>
-                        <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
-                            <div className={`px-3 py-0.5 ${isOpponent ? 'bg-red-600' : 'bg-cyan-600'} text-white font-black rounded-full shadow-lg border border-white/20 text-xs`}>LV {p.leaderLevel}</div>
-                        </div>
-                    </div>
-                </DraggableZone>
-
-                {[0, 1, 2].map(i => {
-                    const key = `field${i}` as keyof PlaymatThemeConfig;
-                    // 対角線配置の整合性を保つため、相手側のみスロットのインデックスを反転させる (0<->2)
-                    // これにより、自分のスロット0(左)の正面に相手のスロット0が配置されるようになる
-                    const dataIdx = isOpponent ? (2 - i) : i;
-
-                    return (
-                        <DraggableZone key={i} zoneKey={key} config={config[key] as PlaymatZoneConfig} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className={`field-slot-${i} z-30`} isOpponent={isOpponent}>
-                            {renderSlot(p.field, dataIdx, isOpponent)}
-                        </DraggableZone>
-                    );
-                })}
-
-                <DraggableZone zoneKey="deck" config={config.deck || {}} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone z-20" isOpponent={isOpponent}>
-                    <div className="relative group perspective-1000">
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Deck ({p.deck.length})</div>
-                        {p.deck.length > 0 ? (
-                            <div className="w-28 h-40 bg-slate-800 border-2 border-white/20 rounded-lg shadow-xl flex items-center justify-center transform group-hover:rotate-y-12 transition-transform">
-                                <span className="text-3xl opacity-20">🎴</span>
-                            </div>
-                        ) : (
-                            <div className="w-28 h-40 border-2 border-dashed border-white/10 rounded-lg opacity-30"></div>
-                        )}
-                    </div>
-                </DraggableZone>
-
-                <DraggableZone zoneKey="trash" config={config.trash || {}} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone z-20" isOpponent={isOpponent}>
-                    <div className="relative group">
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded italic">Trash ({p.discard.length})</div>
-                        {p.discard.length > 0 ? (
-                            <div className="w-28 h-40 transition-transform group-hover:scale-105 cursor-pointer">
-                                <Card card={p.discard[p.discard.length - 1]} isHidden={false} onShowDetail={handleShowDetail} className="w-full h-full" />
-                            </div>
-                        ) : (
-                            <div className="w-28 h-40 border-2 border-white/10 rounded-lg flex items-center justify-center text-sm text-white/20 font-bold uppercase">Empty</div>
-                        )}
-                    </div>
-                </DraggableZone>
-
-                {config.skill && (
-                    <DraggableZone zoneKey="skill" config={config.skill} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone z-20" isOpponent={isOpponent}>
-                        <div
-                            className={`relative group italic transition-all duration-300
-                                ${!isOpponent && !isEditMode ? 'cursor-pointer hover:scale-105 active:scale-95' : ''}
-                            `}
-                            onClick={() => {
-                                if (!isOpponent && !isEditMode && onSkillZoneClick) {
-                                    onSkillZoneClick();
-                                }
-                            }}
-                        >
-                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-cyan-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Skill Zone</div>
-                            <div className={`w-28 h-40 border-2 rounded-lg flex items-center justify-center text-sm font-bold uppercase backdrop-blur-sm relative overflow-visible transition-colors
-                                ${!isOpponent && !isEditMode ? 'border-cyan-500/40 text-cyan-500/40 hover:border-cyan-400 hover:text-cyan-400' : 'border-cyan-500/20 text-cyan-500/20'}
-                                ${p.skillZone.length > 0 ? 'border-cyan-500/60 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : ''}
-                            `}>
-                                {p.skillZone.length > 0 ? (
-                                    <div className="relative w-full h-full">
-                                        {p.skillZone.map((card, idx) => (
-                                            <div
-                                                key={card.id}
-                                                className={`absolute inset-0 transition-transform duration-300 stack-offset-${idx}`}
-                                            >
-                                                <Card card={card} onShowDetail={handleShowDetail} className="w-full h-full shadow-lg" />
-                                            </div>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <>
-                                        <div className="absolute inset-0 bg-cyan-500/5 animate-pulse"></div>
-                                        <span className="relative z-10">Slot</span>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                    </DraggableZone>
-                )}
-
-                <DraggableZone zoneKey="damage" config={config.damage || {}} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone" isOpponent={isOpponent}>
-                    <div className="relative flex items-center h-40 cursor-pointer"
-                        onClick={() => setShowDamageZoneFor(isOpponent ? 'opponent' : 'me')}
-                    >
-                        {/* Overlapping Cards - Stable Flex Layout */}
-                        <div className="flex items-center justify-center">
-                            {p.damageZone.map((card, i) => (
-                                <div key={i}
-                                    data-index={i}
-                                    className={`relative transition-all duration-300 overflow-visible damage-card-container`}
-                                >
-                                    <div className="origin-center shadow-[0_8px_16px_rgba(0,0,0,0.8)] ring-1 ring-white/30 rounded-lg overflow-hidden bg-black/90">
-                                        <Card card={card} isHidden={false} onShowDetail={handleShowDetail} minimal={true} />
-                                    </div>
+                                    {p.leaderLevel === lv && (
+                                        <div className="absolute -left-8 text-[8px] font-bold text-white/80 whitespace-nowrap hidden sm:block">
+                                            CAP
+                                        </div>
+                                    )}
+                                    {lv}
+                                    {p.leaderLevel === lv && (
+                                        <div className={`absolute inset-0 border-2 ${isOpponent ? 'border-red-400/50' : 'border-cyan-400/50'} animate-pulse`}></div>
+                                    )}
                                 </div>
                             ))}
                         </div>
-                    </div>
-                </DraggableZone>
+                    )}
+
+                    {/* Draggable Components */}
+                    <DraggableZone zoneKey="leader" config={effectiveLeaderConfig} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="leader-zone" isOpponent={isOpponent}>
+                        <div
+                            className={`relative group tactical-border p-1 ${isOpponent ? 'border-red-500/30' : 'border-cyan-500/30'} 
+                            ${isOpponent && !isEditMode ? 'cursor-pointer hover:ring-2 hover:ring-red-500 transition-all' : ''}
+                        `}
+                            onClick={() => {
+                                if (isOpponent && !isEditMode && onEnemyTargetClick) {
+                                    // アタッカーが選択されている場合、正面のレーンへのアタックとして処理
+                                    // サーバー側で attackerIndex === targetIndex が期待されているため
+                                    // ここでは具体的なレーンを特定できないが、アタッカー自身のインデックスで送信する
+                                    // (handleEnemyTargetClick は GameBoard 側で attackingUnitIndex を知っている)
+                                    onEnemyTargetClick(-1); // -1 を渡して「リーダーへの意図」を伝える
+                                }
+                            }}
+                        >
+                            <div className={`absolute -bottom-4 -left-4 text-[10px] font-black ${isOpponent ? 'text-red-500/50 bg-red-500/10 border-red-500/20' : 'text-cyan-500/50 bg-cyan-500/10 border-cyan-500/20'} px-2 py-0.5 border`}>
+                                {isOpponent ? 'TARGET_LOCKED' : 'COMMANDER_ID:001'}
+                            </div>
+                            <div className="shadow-[0_0_30px_rgba(0,0,0,0.5)] rounded-xl overflow-hidden ring-1 ring-white/10">
+                                <Card
+                                    card={p.leader}
+                                    isEnemy={isOpponent}
+                                    onShowDetail={handleShowDetail}
+                                    isAwakened={p.leaderLevel >= (p.leader.awakeningLevel || 6)}
+                                    minimal={true}
+                                />
+                            </div>
+                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2">
+                                <div className={`px-3 py-0.5 ${isOpponent ? 'bg-red-600' : 'bg-cyan-600'} text-white font-black rounded-full shadow-lg border border-white/20 text-xs`}>LV {p.leaderLevel}</div>
+                            </div>
+                        </div>
+                    </DraggableZone>
+
+                    {[0, 1, 2].map(i => {
+                        const key = `field${i}` as keyof PlaymatThemeConfig;
+                        // 対角線配置の整合性を保つため、相手側のみスロットのインデックスを反転させる (0<->2)
+                        // これにより、自分のスロット0(左)の正面に相手のスロット0が配置されるようになる
+                        const dataIdx = isOpponent ? (2 - i) : i;
+
+                        return (
+                            <DraggableZone key={i} zoneKey={key} config={config[key] as PlaymatZoneConfig} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className={`field-slot-${i} z-30`} isOpponent={isOpponent}>
+                                {renderSlot(p.field, dataIdx, isOpponent)}
+                            </DraggableZone>
+                        );
+                    })}
+
+                    <DraggableZone zoneKey="deck" config={config.deck || {}} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone z-20" isOpponent={isOpponent}>
+                        <div className="relative group perspective-1000">
+                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Deck ({p.deck.length})</div>
+                            {p.deck.length > 0 ? (
+                                <div className="w-28 h-40 bg-slate-800 border-2 border-white/20 rounded-lg shadow-xl flex items-center justify-center transform group-hover:rotate-y-12 transition-transform">
+                                    <span className="text-3xl opacity-20">🎴</span>
+                                </div>
+                            ) : (
+                                <div className="w-28 h-40 border-2 border-dashed border-white/10 rounded-lg opacity-30"></div>
+                            )}
+                        </div>
+                    </DraggableZone>
+
+                    <DraggableZone zoneKey="trash" config={config.trash || {}} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone z-20" isOpponent={isOpponent}>
+                        <div className="relative group">
+                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded italic">Trash ({p.discard.length})</div>
+                            {p.discard.length > 0 ? (
+                                <div className="w-28 h-40 transition-transform group-hover:scale-105 cursor-pointer">
+                                    <Card card={p.discard[p.discard.length - 1]} isHidden={false} onShowDetail={handleShowDetail} className="w-full h-full" />
+                                </div>
+                            ) : (
+                                <div className="w-28 h-40 border-2 border-white/10 rounded-lg flex items-center justify-center text-sm text-white/20 font-bold uppercase">Empty</div>
+                            )}
+                        </div>
+                    </DraggableZone>
+
+                    {config.skill && (
+                        <DraggableZone zoneKey="skill" config={config.skill} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone z-20" isOpponent={isOpponent}>
+                            <div
+                                className={`relative group italic transition-all duration-300
+                                ${!isOpponent && !isEditMode ? 'cursor-pointer hover:scale-105 active:scale-95' : ''}
+                            `}
+                                onClick={() => {
+                                    if (!isOpponent && !isEditMode && onSkillZoneClick) {
+                                        onSkillZoneClick();
+                                    }
+                                }}
+                            >
+                                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-cyan-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Skill Zone</div>
+                                <div className={`w-28 h-40 border-2 rounded-lg flex items-center justify-center text-sm font-bold uppercase backdrop-blur-sm relative overflow-visible transition-colors
+                                ${!isOpponent && !isEditMode ? 'border-cyan-500/40 text-cyan-500/40 hover:border-cyan-400 hover:text-cyan-400' : 'border-cyan-500/20 text-cyan-500/20'}
+                                ${p.skillZone.length > 0 ? 'border-cyan-500/60 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : ''}
+                            `}>
+                                    {p.skillZone.length > 0 ? (
+                                        <div className="relative w-full h-full">
+                                            {p.skillZone.map((card, idx) => (
+                                                <div
+                                                    key={card.id}
+                                                    className={`absolute inset-0 transition-transform duration-300 stack-offset-${idx}`}
+                                                >
+                                                    <Card card={card} onShowDetail={handleShowDetail} className="w-full h-full shadow-lg" />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <div className="absolute inset-0 bg-cyan-500/5 animate-pulse"></div>
+                                            <span className="relative z-10">Slot</span>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </DraggableZone>
+                    )}
+
+                    <DraggableZone zoneKey="damage" config={config.damage || {}} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone" isOpponent={isOpponent}>
+                        <div className="relative flex items-center h-40 cursor-pointer"
+                            onClick={() => setShowDamageZoneFor(isOpponent ? 'opponent' : 'me')}
+                        >
+                            {/* Overlapping Cards - Stable Flex Layout anchored to start/left */}
+                            <div className={`flex items-center justify-start ${isOpponent ? 'flex-row-reverse' : 'flex-row'}`}>
+                                {p.damageZone.map((card, i) => (
+                                    <div key={i}
+                                        data-index={i}
+                                        className={`relative transition-all duration-300 overflow-visible damage-card-container z-index-${i} ${i > 0 ? (isOpponent ? 'mr-[-3.9rem]' : 'ml-[-3.9rem]') : ''}`}
+                                    >
+                                        <div className="origin-center shadow-[0_8px_16px_rgba(0,0,0,0.8)] ring-1 ring-white/30 rounded-lg overflow-hidden bg-black/90">
+                                            <Card card={card} isHidden={false} onShowDetail={handleShowDetail} minimal={true} />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </DraggableZone>
+                </div>
             </div>
         </div>
     );
@@ -459,7 +450,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
         return (saved === 'mermaid' || saved === 'cyber' || saved === 'official') ? saved : 'official';
     });
     const [showPlaymatSelector, setShowPlaymatSelector] = useState(false);
-    const [isEditMode, setIsEditMode] = useState(false);
     const [customLayout, setCustomLayout] = useState<PlaymatThemeConfig>(PLAYMAT_CONFIGS[playmatId]);
     const [activeAnimations, setActiveAnimations] = useState<AnimationEvent[]>([]);
 
@@ -916,6 +906,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                             onShowDetail={handleShowDetail}
                             onUseActive={() => handleUseActive(i)}
                             canUseActive={canUseActive}
+                            showDetailOverlay={(!isOpponent && attackingUnitIndex === i) || isValidAttackTarget || isValidPlayTarget}
                         />
 
                         {/* Attached Items Visualization (Bottom) */}
@@ -1420,7 +1411,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                     renderSlot={renderSlot}
                     handleShowDetail={handleShowDetail}
                     setShowDamageZoneFor={setShowDamageZoneFor}
-                    isEditMode={isEditMode}
+                    isEditMode={false}
                     onLayoutChange={(key, pos) => {
                         if (!customLayout) return;
                         setCustomLayout({
@@ -1536,7 +1527,11 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                             `}
                             onClick={() => handleHandCardClick(i)}
                         >
-                            <Card card={c} onShowDetail={handleShowDetail} />
+                            <Card
+                                card={c}
+                                onShowDetail={handleShowDetail}
+                                showDetailOverlay={selectedCardIndex === i}
+                            />
                         </div>
                     ))}
                 </div>
@@ -1590,36 +1585,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                 </div>
             </motion.div>
 
-            {/* Layout Editor Overlay */}
-            {isEditMode && customLayout && (
-                <div className="fixed top-24 right-4 z-[100] w-72 bg-slate-900/95 border-2 border-yellow-500 rounded-lg shadow-[0_0_40px_rgba(234,179,8,0.3)] p-4 flex flex-col gap-3 backdrop-blur-xl">
-                    <div className="flex justify-between items-center border-b border-yellow-500/30 pb-2">
-                        <span className="font-black text-yellow-500 text-[10px] tracking-widest uppercase">Layout Editor // Config</span>
-                        <button
-                            onClick={() => setCustomLayout(PLAYMAT_CONFIGS[playmatId])}
-                            className="text-[9px] px-2 py-0.5 bg-red-900/50 hover:bg-red-800 border border-red-500/40 rounded text-red-100 transition-colors"
-                        >
-                            RESET
-                        </button>
-                    </div>
-                    <div className="text-[9px] text-gray-400 leading-tight bg-black/60 p-2 rounded border border-white/10 max-h-48 overflow-y-auto font-mono scrollbar-hide">
-                        <pre className="whitespace-pre-wrap">{JSON.stringify(customLayout, null, 2)}</pre>
-                    </div>
-                    <button
-                        onClick={() => {
-                            navigator.clipboard.writeText(JSON.stringify(customLayout, null, 2));
-                            alert('レイアウト情報をコピーしました。これを私（AI）に貼り付けて送ってください。');
-                        }}
-                        className="w-full py-2 bg-yellow-500 hover:bg-yellow-400 text-black font-black text-[10px] rounded transition-all active:scale-95 shadow-lg"
-                    >
-                        COPY JSON CONFIG
-                    </button>
-                    <div className="text-[7px] text-yellow-500/50 text-center leading-relaxed">
-                        ドラッグして配置を調整し、<br />
-                        JSONをコピーしてチャットに送信してください。
-                    </div>
-                </div>
-            )}
 
             {/* Render Active Animations */}
             <AnimatePresence>

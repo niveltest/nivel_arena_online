@@ -15,6 +15,7 @@ interface CardProps {
     className?: string;
     isAwakened?: boolean;
     minimal?: boolean;
+    showDetailOverlay?: boolean;
 }
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
@@ -29,7 +30,8 @@ const Card: React.FC<CardProps> = ({
     layoutId,
     className,
     isAwakened = false,
-    minimal = false
+    minimal = false,
+    showDetailOverlay = false
 }) => {
 
     // Calculate card border color based on rarity/type
@@ -58,7 +60,7 @@ const Card: React.FC<CardProps> = ({
             className={`
                 relative flex flex-col bg-slate-900 rounded border-2 select-none shadow-md
                 ${getBorderColor()} 
-                ${className || (card.type === 'LEADER' ? 'w-20 h-16 sm:w-32 sm:h-24' : 'w-16 h-22 sm:w-24 sm:h-32')}
+                ${className || (card.type === 'LEADER' ? 'w-20 h-16 sm:w-32 sm:h-24' : 'w-16 h-[5.55rem] sm:w-24 sm:h-[8.08rem]')}
                 ${isAwakened ? 'ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]' : ''}
             `}
             onClick={() => {
@@ -193,6 +195,22 @@ const Card: React.FC<CardProps> = ({
                     </button>
                 )
             }
+
+            {/* Mobile/Selection Detail Overlay */}
+            {showDetailOverlay && onShowDetail && (
+                <div className="absolute inset-0 z-40 flex items-center justify-center p-2">
+                    <button
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            onShowDetail(card);
+                        }}
+                        className="w-full h-2/3 bg-cyan-500/80 backdrop-blur-sm rounded-lg border-2 border-white flex flex-col items-center justify-center gap-1 shadow-[0_0_20px_rgba(6,182,212,0.6)] animate-pulse"
+                    >
+                        <span className="text-xl sm:text-2xl">🔍</span>
+                        <span className="text-[8px] sm:text-[10px] font-black text-white uppercase tracking-tighter">Details</span>
+                    </button>
+                </div>
+            )}
         </motion.div>
     );
 };

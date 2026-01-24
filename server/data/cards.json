@@ -5001,8 +5001,9 @@
         "effects": [
             {
                 "trigger": "PASSIVE",
-                "action": "BUFF_ALLY",
-                "targetType": "ALL_ALLIES"
+                "action": "BUFF_SIZE",
+                "value": 1,
+                "isAwakening": true
             }
         ],
         "awakeningLevel": 6,
