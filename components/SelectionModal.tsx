@@ -47,7 +47,7 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, on
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
             <div className="bg-slate-900 border-2 border-cyan-500 rounded-xl max-w-4xl w-full max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(6,182,212,0.3)]">
                 {/* Header */}
-                <div className="p-6 border-b border-white/10 flex justify-between items-center bg-gradient-to-r from-cyan-900/20 to-transparent">
+                <div className="p-4 sm:p-6 border-b border-white/10 flex justify-between items-center bg-gradient-to-r from-cyan-900/20 to-transparent">
                     <div className="flex items-center gap-6">
                         {selection.triggerCard && (
                             <div className="flex flex-col items-center shrink-0">
@@ -64,9 +64,9 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, on
                             </div>
                         )}
                         <div>
-                            <h2 className="text-2xl font-bold text-white tracking-wider">
-                                {selection.action === 'DISCARD_HAND' ? '👋 カードを捨てる' :
-                                    selection.action === 'MULLIGAN' ? '🔄 マリガン (初期手札の引き直し)' :
+                            <h2 className="text-lg sm:text-2xl font-bold text-white tracking-wider">
+                                {selection.action === 'DISCARD_HAND' ? '👋 破棄' :
+                                    selection.action === 'MULLIGAN' ? '🔄 マリガン' :
                                         '🃏 カード選択'} <span className="text-cyan-400">[{
                                             selection.type === 'HAND' ? '手札' :
                                                 selection.type === 'DECK' ? '山札' :
@@ -75,18 +75,18 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, on
                                                             selection.type === 'DAMAGE_ZONE' ? 'ダメージゾーン' : selection.type
                                         }]</span>
                             </h2>
-                            <p className="text-gray-400 text-sm mt-1">
+                            <p className="text-gray-400 text-[10px] sm:text-sm mt-1">
                                 {selection.action === 'MULLIGAN' ?
-                                    '手札を引き直す場合はカードをクリックしてください（全て入れ替わります）' :
-                                    `選択してください: ${selectedIds.length} / ${selection.count}`}
+                                    '引き直すカードをクリックしてください' :
+                                    `選択: ${selectedIds.length} / ${selection.count}`}
                             </p>
                         </div>
                     </div>
                 </div>
 
                 {/* Content */}
-                <div className="flex-1 overflow-y-auto p-8 bg-slate-950/50">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 justify-items-center">
+                <div className="flex-1 overflow-y-auto p-4 sm:p-8 bg-slate-950/50">
+                    <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-6 justify-items-center">
                         {candidateCards.map(card => {
                             const isSelected = selectedIds.includes(card.id);
                             return (
@@ -110,11 +110,11 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, on
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 border-t border-white/10 flex justify-end gap-4 bg-slate-900/80">
+                <div className="p-4 sm:p-6 border-t border-white/10 flex justify-end gap-4 bg-slate-900/80">
                     <button
                         onClick={handleConfirm}
                         disabled={selectedIds.length === 0 && selection.action !== 'MULLIGAN'}
-                        className={`px-8 py-3 rounded-lg font-bold transition-all duration-300 ${(selectedIds.length > 0 || selection.action === 'MULLIGAN')
+                        className={`px-4 sm:px-8 py-2 sm:py-3 rounded-lg font-bold transition-all duration-300 ${(selectedIds.length > 0 || selection.action === 'MULLIGAN')
                             ? 'bg-cyan-500 hover:bg-cyan-400 text-black shadow-[0_0_20px_rgba(6,182,212,0.4)] transform hover:-translate-y-1'
                             : 'bg-gray-700 text-gray-500 cursor-not-allowed opacity-50'
                             }`}

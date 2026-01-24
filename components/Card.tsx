@@ -58,7 +58,7 @@ const Card: React.FC<CardProps> = ({
             className={`
                 relative flex flex-col bg-slate-900 rounded border-2 select-none shadow-md
                 ${getBorderColor()} 
-                ${className || (card.type === 'LEADER' ? 'w-32 h-24' : 'w-24 h-32')}
+                ${className || (card.type === 'LEADER' ? 'w-20 h-16 sm:w-32 sm:h-24' : 'w-16 h-22 sm:w-24 sm:h-32')}
                 ${isAwakened ? 'ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]' : ''}
             `}
             onClick={() => {
@@ -101,11 +101,11 @@ const Card: React.FC<CardProps> = ({
             {/* Text */}
             {
                 !minimal && (
-                    <div className="h-12 text-[8px] leading-[10px] text-gray-300 overflow-hidden bg-black/40 p-1 flex flex-col gap-0.5 rounded-b-sm">
+                    <div className="h-8 sm:h-12 text-[6px] sm:text-[8px] leading-[8px] sm:leading-[10px] text-gray-300 overflow-hidden bg-black/40 p-1 flex flex-col gap-0.5 rounded-b-sm">
                         <div className="font-bold text-white truncate flex justify-center items-center gap-1">
                             <span>{card.name}</span>
                         </div>
-                        <div className="line-clamp-3">{card.text}</div>
+                        <div className="line-clamp-2 sm:line-clamp-3">{card.text}</div>
                         {card.awakenedText && (
                             <div className="text-yellow-300 border-t border-white/10 pt-0.5 mt-0.5">
                                 <span className="font-bold text-[7px] border border-yellow-500 rounded px-0.5 mr-1">覚醒LV{card.awakeningLevel}</span>
@@ -144,8 +144,8 @@ const Card: React.FC<CardProps> = ({
             {/* Cost Display - Top Left */}
             {
                 !minimal && (
-                    <div className="absolute -top-1.5 -left-1.5 w-6 h-6 bg-cyan-600 rotate-45 flex items-center justify-center border border-white z-20 shadow-md">
-                        <span className="-rotate-45 font-bold text-white text-xs">{card.cost}</span>
+                    <div className="absolute -top-1 -left-1 sm:-top-1.5 sm:-left-1.5 w-4 h-4 sm:w-6 sm:h-6 bg-cyan-600 rotate-45 flex items-center justify-center border border-white z-20 shadow-md">
+                        <span className="-rotate-45 font-bold text-white text-[8px] sm:text-xs">{card.cost}</span>
                     </div>
                 )
             }
@@ -162,16 +162,16 @@ const Card: React.FC<CardProps> = ({
             {/* Stats Check */}
             {
                 !minimal && (card.type === 'UNIT' || card.type === 'LEADER') && (
-                    <div className="absolute -top-1.5 -right-1.5 flex flex-col items-center gap-1 z-20">
+                    <div className="absolute -top-1.5 -right-1.5 flex flex-col items-center gap-0.5 sm:gap-1 z-20">
                         {/* Power */}
-                        <div className="w-7 h-7 rounded-full bg-red-600 flex items-center justify-center border border-white shadow-lg" title="Power">
-                            <span className="font-bold text-white text-[10px]">{card.power ?? 0}</span>
+                        <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-red-600 flex items-center justify-center border border-white shadow-lg" title="Power">
+                            <span className="font-bold text-white text-[7px] sm:text-[10px]">{card.power ?? 0}</span>
                         </div>
 
                         {/* Hit Count */}
                         {(card.hitCount !== undefined) && (
-                            <div className="w-5 h-5 rounded-md bg-yellow-500 flex items-center justify-center border border-white shadow-lg" title="Hit Count">
-                                <span className="font-bold text-black text-[10px]">{card.hitCount}</span>
+                            <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-yellow-500 flex items-center justify-center border border-white shadow-lg" title="Hit Count">
+                                <span className="font-bold text-black text-[7px] sm:text-[10px]">{card.hitCount}</span>
                             </div>
                         )}
                     </div>

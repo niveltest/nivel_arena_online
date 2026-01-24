@@ -1309,8 +1309,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             ${isDamaging ? 'shake' : ''}
         `}>
             {/* Top Status Bar (Phase Tracker) - Moved to top to avoid hand overlap */}
-            <div className="h-16 flex items-center justify-between px-12 bg-black/80 border-b border-white/5 relative z-40 backdrop-blur-2xl">
-                <div className="flex items-center gap-6">
+            <div className="h-14 sm:h-16 flex items-center justify-between px-4 sm:px-12 bg-black/80 border-b border-white/5 relative z-40 backdrop-blur-2xl">
+                <div className="hidden sm:flex items-center gap-6">
                     <div className="flex flex-col">
                         <span className="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Room // Turn</span>
                         <div className="flex items-center gap-2">
@@ -1338,14 +1338,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                             <React.Fragment key={p.id}>
                                 <div className={`
                                     flex flex-col items-center transition-all duration-300
-                                    ${isActive ? 'scale-110' : 'opacity-40'}
+                                    ${isActive ? 'scale-105 sm:scale-110' : 'opacity-40'}
                                 `}>
-                                    <span className={`text-[9px] font-bold uppercase tracking-tighter mb-0.5 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`}>Phase</span>
+                                    <span className={`hidden sm:block text-[9px] font-bold uppercase tracking-tighter mb-0.5 ${isActive ? 'text-cyan-400' : 'text-slate-400'}`}>Phase</span>
                                     <div className={`
-                                        px-3 py-1 rounded-sm border skew-x-[-15deg] transition-all
+                                        px-2 sm:px-3 py-0.5 sm:py-1 rounded-sm border skew-x-[-15deg] transition-all
                                         ${isActive ? 'bg-cyan-500 text-black font-black border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.5)]' : 'bg-transparent text-slate-300 border-white/10'}
                                     `}>
-                                        <span className="skew-x-[15deg] block text-[11px] font-bold whitespace-nowrap">{p.label}フェイズ</span>
+                                        <span className="skew-x-[15deg] block text-[8px] sm:text-[11px] font-bold whitespace-nowrap">{p.label}</span>
                                     </div>
                                 </div>
                                 {idx < arr.length - 1 && (
@@ -1364,13 +1364,13 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                     <div className="text-[8px] text-center font-bold tracking-[0.5em] mt-1">GODDESS OF VICTORY</div>
                 </div>
 
-                <div className="flex gap-4">
-                    <div className="flex flex-col items-end mr-4">
-                        <span className="text-[10px] text-slate-500 font-bold tracking-widest uppercase">System</span>
+                <div className="flex gap-2 sm:gap-4">
+                    <div className="hidden xs:flex flex-col items-end mr-1 sm:mr-4">
+                        <span className="text-[8px] sm:text-[10px] text-slate-500 font-bold tracking-widest uppercase">System</span>
                         {isMyTurn ? (
-                            <div className="px-3 py-0.5 bg-green-500/20 border border-green-500/50 rounded text-[9px] text-green-400 font-black animate-pulse">YOUR ACTION</div>
+                            <div className="px-2 sm:px-3 py-0.5 bg-green-500/20 border border-green-500/50 rounded text-[7px] sm:text-[9px] text-green-400 font-black animate-pulse">YOUR ACTION</div>
                         ) : (
-                            <div className="px-3 py-0.5 bg-red-500/10 border border-red-500/20 rounded text-[9px] text-red-500 font-black">OPPONENT ACTING</div>
+                            <div className="px-2 sm:px-3 py-0.5 bg-red-500/10 border border-red-500/20 rounded text-[7px] sm:text-[9px] text-red-500 font-black">OPPONENT ACTING</div>
                         )}
                     </div>
                     <button
@@ -1395,14 +1395,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                         onClick={handleEndTurn}
                         disabled={!isMyTurn || gameState.phase === 'DEFENSE'}
                         className={`
-                            px-8 py-2 text-[11px] font-black rounded skew-x-[-15deg] transition-all transform active:scale-95 shadow-xl
+                            px-4 sm:px-8 py-2 text-[8px] sm:text-[11px] font-black rounded skew-x-[-15deg] transition-all transform active:scale-95 shadow-xl
                             ${isMyTurn && gameState.phase !== 'DEFENSE'
                                 ? 'bg-cyan-600 hover:bg-cyan-500 text-black border border-cyan-400 cursor-pointer'
                                 : 'bg-slate-800 text-slate-600 border border-white/5 cursor-not-allowed opacity-50'}
                         `}
                     >
                         <span className="skew-x-[15deg] block">
-                            {isMyTurn && gameState.phase === 'END' ? 'END TURN' : 'NEXT PHASE →'}
+                            {isMyTurn && gameState.phase === 'END' ? 'END TURN' : 'NEXT'}
                         </span>
                     </button>
                 </div>
@@ -1538,9 +1538,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                     {me.hand.map((c, i) => (
                         <div key={i}
                             className={`
-                                -ml-12 transition-all duration-300 z-1 origin-bottom cursor-pointer first:ml-0 pointer-events-auto
+                                -ml-6 sm:-ml-12 transition-all duration-300 z-1 origin-bottom cursor-pointer first:ml-0 pointer-events-auto
                                 ${selectedCardIndex === i
-                                    ? '-translate-y-12 scale-125 z-50 ring-4 ring-cyan-500 shadow-[0_0_30px_rgba(6,182,212,0.5)] rounded-lg rotate-0'
+                                    ? '-translate-y-8 sm:-translate-y-12 scale-110 sm:scale-125 z-50 ring-2 sm:ring-4 ring-cyan-500 shadow-[0_0_30px_rgba(6,182,212,0.5)] rounded-lg rotate-0'
                                     : 'hover:-translate-y-8 hover:scale-110 hover:z-40 hover:-rotate-3'}
                                 ${selectedCardIndex !== null && selectedCardIndex !== i ? 'opacity-40 grayscale-[0.5]' : ''}
                             `}
