@@ -417,7 +417,6 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                 </DraggableZone>
             </div>
         </div>
-        </div >
     );
 };
 
