@@ -1495,7 +1495,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
 
 
             {/* Fixed Overlay for Hand Cards - Bottom Left Horizontal */}
-            <div className="fixed left-4 bottom-4 z-[45] flex flex-col items-start pointer-events-none">
+            <div className="fixed left-4 bottom-4 z-[45] flex flex-col items-start pointer-events-none w-full md:h-64">
                 {/* Help Text - Positioned above the hand */}
                 <AnimatePresence>
                     {isMyTurn && (
