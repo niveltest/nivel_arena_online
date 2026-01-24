@@ -102,13 +102,8 @@ const Card: React.FC<CardProps> = ({
             {
                 !minimal && (
                     <div className="h-12 text-[8px] leading-[10px] text-gray-300 overflow-hidden bg-black/40 p-1 flex flex-col gap-0.5">
-                        <div className="font-bold text-white truncate flex justify-between items-center gap-1">
+                        <div className="font-bold text-white truncate flex justify-center items-center gap-1">
                             <span>{card.name}</span>
-                            {card.affiliation && (
-                                <span className="text-[6px] px-1 bg-slate-700 rounded border border-slate-600 shrink-0">
-                                    {card.affiliation}
-                                </span>
-                            )}
                         </div>
                         <div className="line-clamp-3">{card.text}</div>
                         {card.awakenedText && (
@@ -155,12 +150,21 @@ const Card: React.FC<CardProps> = ({
                 )
             }
 
+            {/* Affiliation - Top Center */}
+            {
+                !minimal && card.affiliation && (
+                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-slate-800/90 border border-white/20 rounded-b text-[6px] font-bold text-cyan-300 z-20 shadow-sm whitespace-nowrap">
+                        {card.affiliation.split('/')[0]}
+                    </div>
+                )
+            }
+
             {/* Stats Check */}
             {
                 !minimal && (card.type === 'UNIT' || card.type === 'LEADER') && (
                     <>
-                        {/* Power (Bottom Right) */}
-                        <div className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-red-600 flex items-center justify-center border-2 border-white shadow-lg z-10" title="Power">
+                        {/* Power (Top Right) */}
+                        <div className="absolute -top-1.5 -right-1.5 w-7 h-7 rounded-full bg-red-600 flex items-center justify-center border border-white shadow-lg z-20" title="Power">
                             <span className="font-bold text-white text-[10px]">{card.power ?? 0}</span>
                         </div>
 
