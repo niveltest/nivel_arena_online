@@ -102,7 +102,14 @@ const Card: React.FC<CardProps> = ({
             {
                 !minimal && (
                     <div className="h-12 text-[8px] leading-[10px] text-gray-300 overflow-hidden bg-black/40 p-1 flex flex-col gap-0.5">
-                        <div className="font-bold text-white truncate">{card.name}</div>
+                        <div className="font-bold text-white truncate flex justify-between items-center gap-1">
+                            <span>{card.name}</span>
+                            {card.affiliation && (
+                                <span className="text-[6px] px-1 bg-slate-700 rounded border border-slate-600 shrink-0">
+                                    {card.affiliation}
+                                </span>
+                            )}
+                        </div>
                         <div className="line-clamp-3">{card.text}</div>
                         {card.awakenedText && (
                             <div className="text-yellow-300 border-t border-white/10 pt-0.5 mt-0.5">

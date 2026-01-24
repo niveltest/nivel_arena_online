@@ -42,7 +42,7 @@ interface PlaymatThemeConfig {
 
 const PLAYMAT_CONFIGS: Record<'official' | 'mermaid' | 'cyber', PlaymatThemeConfig> = {
     official: {
-        leader: { top: '75.0%', left: '13.1%', rotation: '0deg', bottom: 'auto', right: 'auto', scale: '0.7' },
+        leader: { top: '75.0%', left: '13.1%', rotation: '0deg', bottom: 'auto', right: 'auto', scale: '1.0' },
         field0: { top: '20.0%', left: '35.0%', scale: '0.8', bottom: 'auto', right: 'auto' },
         field1: { top: '20.0%', left: '50.0%', scale: '0.8', bottom: 'auto', right: 'auto' },
         field2: { top: '20.0%', left: '65.0%', scale: '0.8', bottom: 'auto', right: 'auto' },
