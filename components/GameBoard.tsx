@@ -208,7 +208,7 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
 
     return (
         <div id={containerId} className={`
-            flex-1 relative w-full flex items-center justify-center overflow-hidden transition-all duration-700 p-2 sm:p-4
+            flex-1 relative w-full flex flex-col items-center justify-center overflow-hidden transition-all duration-700
             ${isOpponent ? 'opacity-90 border-b border-white/10 rotate-180' : ''}
         `}>
             <style>{`
@@ -249,8 +249,8 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                 }
 
             `}</style>
-            <div className="relative h-full max-w-full max-h-full flex items-center justify-center p-1 sm:p-4">
-                <div className="relative h-full w-auto max-w-full max-h-full aspect-video flex items-center justify-center playmat-canvas" ref={canvasRef}>
+            <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-full aspect-video flex items-center justify-center playmat-canvas" style={{ containerType: 'size' }} ref={canvasRef}>
                     <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 playmat-bg`}></div>
 
                     {/* Level Zone Sidebar - Positioned relatively to layout but mostly fixed currently */}
@@ -336,11 +336,11 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                         <div className="relative group perspective-1000">
                             <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Deck ({p.deck.length})</div>
                             {p.deck.length > 0 ? (
-                                <div className="w-28 h-40 bg-slate-800 border-2 border-white/20 rounded-lg shadow-xl flex items-center justify-center transform group-hover:rotate-y-12 transition-transform">
+                                <div className="w-[10cqw] aspect-[5/7] bg-slate-800 border-2 border-white/20 rounded-lg shadow-xl flex items-center justify-center transform group-hover:rotate-y-12 transition-transform">
                                     <span className="text-3xl opacity-20">🎴</span>
                                 </div>
                             ) : (
-                                <div className="w-28 h-40 border-2 border-dashed border-white/10 rounded-lg opacity-30"></div>
+                                <div className="w-[10cqw] aspect-[5/7] border-2 border-dashed border-white/10 rounded-lg opacity-30"></div>
                             )}
                         </div>
                     </DraggableZone>
@@ -349,11 +349,11 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                         <div className="relative group">
                             <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded italic">Trash ({p.discard.length})</div>
                             {p.discard.length > 0 ? (
-                                <div className="w-28 h-40 transition-transform group-hover:scale-105 cursor-pointer">
+                                <div className="w-[10cqw] aspect-[5/7] transition-transform group-hover:scale-105 cursor-pointer">
                                     <Card card={p.discard[p.discard.length - 1]} isHidden={false} onShowDetail={handleShowDetail} className="w-full h-full" />
                                 </div>
                             ) : (
-                                <div className="w-28 h-40 border-2 border-white/10 rounded-lg flex items-center justify-center text-sm text-white/20 font-bold uppercase">Empty</div>
+                                <div className="w-[10cqw] aspect-[5/7] border-2 border-white/10 rounded-lg flex items-center justify-center text-sm text-white/20 font-bold uppercase">Empty</div>
                             )}
                         </div>
                     </DraggableZone>
@@ -370,8 +370,8 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                                     }
                                 }}
                             >
-                                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-cyan-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Skill Zone</div>
-                                <div className={`w-28 h-40 border-2 rounded-lg flex items-center justify-center text-sm font-bold uppercase backdrop-blur-sm relative overflow-visible transition-colors
+                                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[1cqw] font-bold text-cyan-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Skill Zone</div>
+                                <div className={`w-[10cqw] aspect-[5/7] border-2 rounded-lg flex items-center justify-center text-sm font-bold uppercase backdrop-blur-sm relative overflow-visible transition-colors
                                 ${!isOpponent && !isEditMode ? 'border-cyan-500/40 text-cyan-500/40 hover:border-cyan-400 hover:text-cyan-400' : 'border-cyan-500/20 text-cyan-500/20'}
                                 ${p.skillZone.length > 0 ? 'border-cyan-500/60 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : ''}
                             `}>
@@ -398,7 +398,7 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                     )}
 
                     <DraggableZone zoneKey="damage" config={config.damage || {}} isEditMode={isEditMode} onLayoutChange={onLayoutChange} containerRef={canvasRef} className="canvas-zone" isOpponent={isOpponent}>
-                        <div className="relative flex items-center h-40 cursor-pointer"
+                        <div className="relative flex items-center h-[16cqw] cursor-pointer"
                             onClick={() => setShowDamageZoneFor(isOpponent ? 'opponent' : 'me')}
                         >
                             {/* Overlapping Cards - Stable Flex Layout anchored to start/left */}
@@ -406,9 +406,9 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                                 {p.damageZone.map((card, i) => (
                                     <div key={i}
                                         data-index={i}
-                                        className={`relative transition-all duration-300 overflow-visible damage-card-container z-index-${i} ${i > 0 ? (isOpponent ? 'mr-[-3.9rem]' : 'ml-[-3.9rem]') : ''}`}
+                                        className={`relative transition-all duration-300 overflow-visible damage-card-container z-index-${i} ${i > 0 ? (isOpponent ? 'mr-[-8cqw]' : 'ml-[-8cqw]') : ''}`}
                                     >
-                                        <div className="origin-center shadow-[0_8px_16px_rgba(0,0,0,0.8)] ring-1 ring-white/30 rounded-lg overflow-hidden bg-black/90">
+                                        <div className="w-[10cqw] aspect-[5/7] origin-center shadow-[0_8px_16px_rgba(0,0,0,0.8)] ring-1 ring-white/30 rounded-lg overflow-hidden bg-black/90">
                                             <Card card={card} isHidden={false} onShowDetail={handleShowDetail} minimal={true} />
                                         </div>
                                     </div>
@@ -869,7 +869,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
 
         return (
             <div
-                className={`w-28 h-40 border-2 rounded-lg flex items-center justify-center transition-all relative 
+                className={`w-[13cqw] aspect-[5/7] border-2 rounded-lg flex items-center justify-center transition-all relative 
                     ${card ? 'border-transparent' : 'border-white/5 bg-transparent'} 
                     ${isValidPlayTarget ? 'border-green-400 bg-green-400/20 cursor-pointer animate-pulse ring-2 ring-green-400' : ''}
                     ${isValidAttackTarget ? 'cursor-crosshair ring-2 ring-red-500 bg-red-500/10' : ''}
