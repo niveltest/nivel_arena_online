@@ -60,7 +60,7 @@ const Card: React.FC<CardProps> = ({
             className={`
                 relative flex flex-col bg-slate-900 rounded border-2 select-none shadow-md
                 ${getBorderColor()} 
-                ${className || (card.type === 'LEADER' ? 'w-20 h-16 sm:w-32 sm:h-24 md:w-40 md:h-30' : 'w-16 h-[5.55rem] sm:w-24 sm:h-[8.08rem] md:w-28 md:h-[9.4rem]')}
+                ${className || (card.type === 'LEADER' ? 'w-20 h-16 sm:w-32 sm:h-24' : 'w-16 h-[5.55rem] sm:w-24 sm:h-[8.08rem]')}
                 ${isAwakened ? 'ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]' : ''}
             `}
             onClick={() => {
