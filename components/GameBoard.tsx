@@ -49,7 +49,7 @@ const PLAYMAT_CONFIGS: Record<'official' | 'mermaid' | 'cyber', PlaymatThemeConf
         deck: { top: '29.4%', left: '88.5%', scale: '0.67', bottom: 'auto', right: 'auto' },
         trash: { top: '72.3%', left: '88.2%', scale: '0.67', bottom: 'auto', right: 'auto' },
         skill: { bottom: 'auto', right: 'auto', scale: '0.65', left: '69.3%', top: '84.7%' },
-        damage: { top: '83.8%', left: '30.8%', bottom: 'auto', right: 'auto', scale: '0.67' },
+        damage: { top: '83.8%', left: '30.8%', bottom: 'auto', right: 'auto', scale: '0.8' },
         level: { showSidebar: true, position: 'official-side' }
     },
     mermaid: {
@@ -163,7 +163,7 @@ const DraggableZone: React.FC<{
                 bottom: config.bottom || 'auto',
                 left: config.left || 'auto',
                 right: config.right || 'auto',
-                transform: `translate(-50%, -50%) scale(${currentScale}) ${isOpponent ? 'rotate(180deg)' : 'rotate(0deg)'}`,
+                transform: `translate(-50%, -50%) scale(${currentScale}) rotate(${config.rotation || '0deg'}) ${isOpponent ? 'rotate(180deg)' : ''}`,
                 transformOrigin: 'center center',
                 pointerEvents: isEditMode ? 'auto' : 'none',
                 zIndex: className?.includes('z-') ? undefined : (isEditMode ? 100 : 20),

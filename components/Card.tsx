@@ -58,7 +58,7 @@ const Card: React.FC<CardProps> = ({
             className={`
                 relative flex flex-col bg-slate-900 rounded border-2 overflow-hidden select-none shadow-md
                 ${getBorderColor()} 
-                ${className || 'w-24 h-32'}
+                ${className || (card.type === 'LEADER' ? 'w-32 h-24' : 'w-24 h-32')}
                 ${isAwakened ? 'ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]' : ''}
             `}
             onClick={() => {
