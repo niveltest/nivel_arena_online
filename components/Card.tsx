@@ -15,7 +15,6 @@ interface CardProps {
     className?: string;
     isAwakened?: boolean;
     minimal?: boolean;
-    showDetailOverlay?: boolean;
 }
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
@@ -30,8 +29,7 @@ const Card: React.FC<CardProps> = ({
     layoutId,
     className,
     isAwakened = false,
-    minimal = false,
-    showDetailOverlay = false
+    minimal = false
 }) => {
 
     // Calculate card border color based on rarity/type
