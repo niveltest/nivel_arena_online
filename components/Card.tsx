@@ -196,21 +196,6 @@ const Card: React.FC<CardProps> = ({
                 )
             }
 
-            {/* Mobile/Selection Detail Overlay */}
-            {showDetailOverlay && onShowDetail && (
-                <div className="absolute inset-0 z-40 flex items-center justify-center p-2">
-                    <button
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            onShowDetail(card);
-                        }}
-                        className="w-full h-2/3 bg-cyan-500/80 backdrop-blur-sm rounded-lg border-2 border-white flex flex-col items-center justify-center gap-1 shadow-[0_0_20px_rgba(6,182,212,0.6)] animate-pulse"
-                    >
-                        <span className="text-xl sm:text-2xl">🔍</span>
-                        <span className="text-[8px] sm:text-[10px] font-black text-white uppercase tracking-tighter">Details</span>
-                    </button>
-                </div>
-            )}
         </motion.div>
     );
 };
