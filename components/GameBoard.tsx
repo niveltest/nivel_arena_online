@@ -250,7 +250,7 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
 
             `}</style>
             <div className="relative w-full h-full flex items-center justify-center">
-                <div className="relative w-full aspect-video flex items-center justify-center playmat-canvas" style={{ containerType: 'size' }} ref={canvasRef}>
+                <div className="relative h-full w-auto max-w-full max-h-full aspect-video flex items-center justify-center playmat-canvas" style={{ containerType: 'size' }} ref={canvasRef}>
                     <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 playmat-bg`}></div>
 
                     {/* Level Zone Sidebar - Positioned relatively to layout but mostly fixed currently */}
