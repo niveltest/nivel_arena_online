@@ -941,7 +941,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
 
                         {/* Attached Items Visualization (Bottom) */}
                         {card.attachments && card.attachments.length > 0 && (
-                            <div className="absolute top-full left-1/2 -translate-x-1/2 w-max flex flex-row justify-center gap-1 p-1 pointer-events-auto z-50">
+                            <div className={`absolute left-1/2 -translate-x-1/2 w-max flex flex-row justify-center gap-1 p-1 pointer-events-auto z-50
+                                ${isOpponent ? 'bottom-full mb-1 rotate-180' : 'top-full mt-1'}
+                            `}>
                                 {card.attachments.map((item, idx) => (
                                     <motion.div
                                         key={idx}

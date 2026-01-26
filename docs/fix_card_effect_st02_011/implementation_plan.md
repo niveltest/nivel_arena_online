@@ -1,39 +1,84 @@
-# カード効果修正計画: ST02-011
+# 装備カード表示改善計画
 
-## 目標
+## 問題
 
-ST02-011 (ディーゼル) の効果「[パッシブ] 自分のリーダーレベル1につき、パワー+1000。」を正しく反映させる。
+相手ユニットに装備されているアイテム（アタッチメント）が見えにくい。
+画像を確認すると、相手のカードは180度回転して表示されているが、アタッチメントも同様に回転しているか、あるいは位置がカードの下（画面上では上側？）に隠れている可能性がある。
 
-## 変更内容
+## 現状のコード (GameBoard.tsx)
 
-### 1. [MODIFY] [server/data/cards.json](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/data/cards.json)
-
-- ST02-011 の効果定義を修正。
-  - `targetType`: "ALL_ALLIES" -> "SELF"
-  - `condition`: (新規追加) "PER_LEADER_LEVEL"
-
-### 2. [MODIFY] [components/GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
-
-- `getCalculatedStats` 関数内の `card.effects.forEach` ループに、`BUFF_ALLY` (パワー上昇) の処理を追加。
-- `condition === 'PER_LEADER_LEVEL'` の場合、`p.leaderLevel * eff.value` を加算するロジックを実装。
-
-## コード詳細 (GameBoard.tsx)
-
-```typescript
-        if (card.effects) {
-            card.effects.forEach(eff => {
-                // ... (既存の SET_HIT 処理)
-
-                // 追加: パワーバフ処理
-                if (eff.trigger === 'PASSIVE' && eff.action === 'BUFF_ALLY') {
-                    if (eff.targetType === 'SELF') {
-                        if (eff.condition === 'PER_LEADER_LEVEL') {
-                            totalPower += (eff.value || 0) * p.leaderLevel;
-                        } else {
-                            totalPower += (eff.value || 0);
-                        }
-                    }
-                }
-            });
-        }
+```tsx
+{card.attachments && card.attachments.length > 0 && (
+    <div className="absolute top-full left-1/2 -translate-x-1/2 w-max flex flex-row justify-center gap-1 p-1 pointer-events-auto z-50">
+        {/* ... items ... */}
+    </div>
+)}
 ```
+
+現在は `absolute top-full` でカードの「下」に表示している。
+相手側 (`isOpponent`) の場合、カード自体が親コンテナごと回転 (`rotate-180`) しているとすると、`top-full` は画面上では「上」側（プレイヤーから見て奥側）に来るはず。
+しかし、プレイマットのレイアウト上、相手のスロットの上側はスペースが狭いか、他の要素と被っている可能性がある。
+
+また、相手カードが回転している場合、アタッチメントの中身も回転して逆さまに見える可能性がある。
+
+## 修正案
+
+### [MODIFY] [components/GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
+
+1. **表示位置の調整**:
+   相手側 (`isOpponent`) の場合、装備品をカードの「上側」（画面上では手前側、つまり `bottom-full` 相当）に表示するか、あるいは `top-full` のままでも `rotate-180` をキャンセルして見やすくする。
+
+   現状のプレイマットレイアウト（スロットが向かい合っている）を考えると、カードの「足元」に装備品があるのが自然。
+   自分視点：カードの下 (`top-full`)
+   相手視点：カードの上 (`top-full` だと画面奥に行ってしまう)。相手にとっての「足元」は画面奥だが、UIとしてはプレイヤーに見やすい方がいい。
+
+   しかし、画像を見ると相手カードの下（画面上では上）に何か重なっているように見える。
+
+   **提案**:
+   - `isOpponent` の場合、位置を `bottom-full` (画面下側、プレイヤー寄り) に変更する？いや、それだとカード本体に被るか、手前のスペース（何もない空間）に出る。
+   - あるいは、`top-full` (画面奥側) のまま、`z-index` を上げて、かつ `rotate-180` を適用して「正位置」で表示する？
+
+   もっとシンプルに、相手のカードのアタッチメントは「相手のスロットの手前（画面下側）」に表示するのが見やすいかもしれない。
+
+   コード修正イメージ:
+
+   ```tsx
+   <div className={`absolute left-1/2 -translate-x-1/2 w-max flex flex-row justify-center gap-1 p-1 pointer-events-auto z-50
+       ${isOpponent ? 'bottom-full mb-1 rotate-180' : 'top-full mt-1'}
+   `}>
+   ```
+
+   ※ `isOpponent` のとき親が `rotate-180` されているなら、子要素も一緒に回っている。
+   親が回っている状態で `bottom-full` (親の下) は画面上では「上」になる。
+   親が回っている状態で `top-full` (親の上) は画面上では「下」になる。
+
+   現在 `top-full` なので、親のローカル座標系で「下」。親が180度回っているので画面上では「上（奥）」。
+   これを画面上で「下（手前）」にしたいなら、親のローカル座標系で「上」、つまり `bottom-full` にすべき？
+   いや、CSSの `top` は上辺、`bottom` は下辺。
+   回転しても `top` は `top`。
+
+   整理：
+   - `<div className="... rotate-180">` (Card Container)
+     - `<Card ... />`
+     - `<div className="absolute top-full ...">` (Attachments)
+
+   `rotate-180` の中心において、`top-full` は回転後、画面上では **上** に来る。
+   相手のスロットは画面上部にあるので、そのさらに「上」に行くと、画面外に見切れるか、UI（ログなど）と被る。
+
+   **解決策**:
+   相手側の場合、アタッチメントを `bottom-full` (回転前の下、回転後の画面下側＝スロットの手前側) に配置する。
+   そうすれば、相手ユニットの手前（プレイヤーに近い側）に装備品が表示され、見やすくなるはず。
+
+2. **向きの修正**:
+   親が回転しているので、アタッチメントも逆さまになっている可能性がある。
+   アタッチメントのコンテナにも `rotate-180` を掛けて、正位置に戻す（あるいはそのまま維持するか確認）。ユーザーは「見えづらい」と言っているので、逆さまも要因かも。
+
+### 詳細ロジック
+
+- クラス名の切り替え:
+  `isOpponent ? 'bottom-full mb-2 rotate-180' : 'top-full mt-2'`
+  ※ コンテナ自体を回して文字を読めるようにする。
+
+## 検証
+
+- 相手ユニットにアイテムがついた時、スロットの「手前（画面中央寄り）」に表示され、かつ文字が正位置で読めることを確認する。
