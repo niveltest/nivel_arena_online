@@ -336,11 +336,11 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                         <div className="relative group perspective-1000">
                             <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Deck ({p.deck.length})</div>
                             {p.deck.length > 0 ? (
-                                <div className="w-[10cqw] aspect-[5/7] bg-slate-800 border-2 border-white/20 rounded-lg shadow-xl flex items-center justify-center transform group-hover:rotate-y-12 transition-transform">
+                                <div className="w-[13cqw] aspect-[5/7] bg-slate-800 border-2 border-white/20 rounded-lg shadow-xl flex items-center justify-center transform group-hover:rotate-y-12 transition-transform">
                                     <span className="text-3xl opacity-20">🎴</span>
                                 </div>
                             ) : (
-                                <div className="w-[10cqw] aspect-[5/7] border-2 border-dashed border-white/10 rounded-lg opacity-30"></div>
+                                <div className="w-[13cqw] aspect-[5/7] border-2 border-dashed border-white/10 rounded-lg opacity-30"></div>
                             )}
                         </div>
                     </DraggableZone>
@@ -349,11 +349,11 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                         <div className="relative group">
                             <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] font-bold text-slate-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded italic">Trash ({p.discard.length})</div>
                             {p.discard.length > 0 ? (
-                                <div className="w-[10cqw] aspect-[5/7] transition-transform group-hover:scale-105 cursor-pointer">
+                                <div className="w-[13cqw] aspect-[5/7] transition-transform group-hover:scale-105 cursor-pointer">
                                     <Card card={p.discard[p.discard.length - 1]} isHidden={false} onShowDetail={handleShowDetail} className="w-full h-full" />
                                 </div>
                             ) : (
-                                <div className="w-[10cqw] aspect-[5/7] border-2 border-white/10 rounded-lg flex items-center justify-center text-sm text-white/20 font-bold uppercase">Empty</div>
+                                <div className="w-[13cqw] aspect-[5/7] border-2 border-white/10 rounded-lg flex items-center justify-center text-sm text-white/20 font-bold uppercase">Empty</div>
                             )}
                         </div>
                     </DraggableZone>
@@ -370,8 +370,8 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                                     }
                                 }}
                             >
-                                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[1cqw] font-bold text-cyan-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Skill Zone</div>
-                                <div className={`w-[10cqw] aspect-[5/7] border-2 rounded-lg flex items-center justify-center text-sm font-bold uppercase backdrop-blur-sm relative overflow-visible transition-colors
+                                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-[1.2cqw] font-bold text-cyan-500 uppercase tracking-widest bg-black/40 px-2 py-0.5 rounded">Skill Zone</div>
+                                <div className={`w-[13cqw] aspect-[5/7] border-2 rounded-lg flex items-center justify-center text-sm font-bold uppercase backdrop-blur-sm relative overflow-visible transition-colors
                                 ${!isOpponent && !isEditMode ? 'border-cyan-500/40 text-cyan-500/40 hover:border-cyan-400 hover:text-cyan-400' : 'border-cyan-500/20 text-cyan-500/20'}
                                 ${p.skillZone.length > 0 ? 'border-cyan-500/60 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : ''}
                             `}>
