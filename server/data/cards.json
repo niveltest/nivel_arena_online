@@ -5271,7 +5271,8 @@
                 "isSelfTrash": false,
                 "action": "BUFF_ALLY",
                 "value": 1000,
-                "targetType": "ALL_ALLIES"
+                "targetType": "SELF",
+                "condition": "PER_LEADER_LEVEL"
             }
         ]
     },

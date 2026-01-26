@@ -827,6 +827,35 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                         totalHit += (eff.value || 1) * baseCount;
                     }
                 }
+
+                if (eff.trigger === 'PASSIVE' && (eff.action === 'BUFF_ALLY' || eff.action === 'BUFF_Self')) {
+                    const isSelf = eff.targetType === 'SELF';
+                    if (isSelf) {
+                        if (eff.condition === 'PER_LEADER_LEVEL') {
+                            totalPower += (eff.value || 0) * p.leaderLevel;
+                        } else {
+                            totalPower += (eff.value || 0);
+                        }
+                    } else if (eff.targetType === 'ALL_ALLIES') {
+                        if (eff.condition === 'PER_LEADER_LEVEL') {
+                            totalPower += (eff.value || 0) * p.leaderLevel;
+                        } else {
+                            // Global buffs are usually handled elsewhere (e.g. Leader Passive loop), 
+                            // but if a UNIT has a passive that buffs ALL ALLIES, it should be here?
+                            // Currently global buffs from units might be complex since we are iterating a specific card here.
+                            // However, getCalculatedStats is for *this* card.
+                            // If *another* card gives a buff, this function doesn't see it unless we iterate all cards.
+                            // BUT, getCalculatedStats is called for *each* card.
+                            // Wait, getCalculatedStats iterates card.effects, so it only sees SELF buffs from itself.
+                            // It does NOT see buffs provided by *other* cards unless we change the architecture.
+                            // Fortunately, ST02-011 is a Self buff in my fix.
+                            // (Note: Currently unit-to-global buffs might not be fully implemented in this function structure, 
+                            //  as it only checks `p.leader.effects` and `card.effects`. 
+                            //  To support unit-to-global properly, we'd need to iterate all *other* units' effects here too. 
+                            //  For now, focusing on ST02-011 self-buff.)
+                        }
+                    }
+                }
             });
         }
 
