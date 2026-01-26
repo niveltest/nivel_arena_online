@@ -1283,6 +1283,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             previousPhase: 'MULLIGAN' as const
         };
 
+        const isFirst = gameState.turnPlayerId === playerId;
+        const turnOrderLabel = isFirst ? '⚔️ 先攻 (First)' : '🛡️ 後攻 (Second)';
+
         return (
             <SelectionModal
                 selection={selection}
@@ -1291,6 +1294,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                     socketRef.current?.emit('mulligan', { selectedIds });
                 }}
                 onShowDetail={handleShowDetail}
+                turnOrderLabel={turnOrderLabel}
             />
         );
     };

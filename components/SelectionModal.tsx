@@ -9,9 +9,10 @@ interface SelectionModalProps {
     allCards: CardType[]; // もしくは GameState から取得
     onConfirm: (selectedIds: string[]) => void;
     onShowDetail?: (card: CardType) => void;
+    turnOrderLabel?: string;
 }
 
-const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, onConfirm, onShowDetail }) => {
+const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, onConfirm, onShowDetail, turnOrderLabel }) => {
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
     const candidateCards = allCards.filter(c => selection.candidateIds.includes(c.id));
@@ -75,6 +76,11 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, on
                                                             selection.type === 'DAMAGE_ZONE' ? 'ダメージゾーン' : selection.type
                                         }]</span>
                             </h2>
+                            {turnOrderLabel && (
+                                <div className={`text-xl font-black mt-1 ${turnOrderLabel.includes('先攻') ? 'text-red-500' : 'text-blue-500'}`}>
+                                    {turnOrderLabel}
+                                </div>
+                            )}
                             <p className="text-gray-400 text-[10px] sm:text-sm mt-1">
                                 {selection.action === 'MULLIGAN' ?
                                     '引き直すカードをクリックしてください' :
