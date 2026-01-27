@@ -1416,13 +1416,13 @@ export class Game {
                     break;
                 }
                 case 'DISCARD': {
-                    if (effect.targetType === 'SELF') {
+                    if (effect.targetType === 'SELF' || effect.targetType === 'SELF_HAND') {
                         // Player discards from own hand
                         const count = effect.value || 1;
                         if (player.state.hand.length > 0) {
                             this.requestSelection(playerId, 'HAND', player.state.hand.map(c => c.id), count, 'DISCARD_HAND', undefined, card);
                         }
-                    } else {
+                    } else if (effect.targetType === 'OPPONENT_HAND') {
                         // Opponent discards
                         if (!opponentId || !opponent) return;
                         const count = effect.value || 1;
