@@ -1,84 +1,48 @@
-# 装備カード表示改善計画
+# 突破能力修正計画
 
 ## 問題
 
-相手ユニットに装備されているアイテム（アタッチメント）が見えにくい。
-画像を確認すると、相手のカードは180度回転して表示されているが、アタッチメントも同様に回転しているか、あるいは位置がカードの下（画面上では上側？）に隠れている可能性がある。
+「突破」能力を持つカードが、対象コスト制限を無視して機能している可能性があるため、全カードを調査・修正する。
 
-## 現状のコード (GameBoard.tsx)
+## 調査対象
 
-```tsx
-{card.attachments && card.attachments.length > 0 && (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 w-max flex flex-row justify-center gap-1 p-1 pointer-events-auto z-50">
-        {/* ... items ... */}
-    </div>
-)}
-```
-
-現在は `absolute top-full` でカードの「下」に表示している。
-相手側 (`isOpponent`) の場合、カード自体が親コンテナごと回転 (`rotate-180`) しているとすると、`top-full` は画面上では「上」側（プレイヤーから見て奥側）に来るはず。
-しかし、プレイマットのレイアウト上、相手のスロットの上側はスペースが狭いか、他の要素と被っている可能性がある。
-
-また、相手カードが回転している場合、アタッチメントの中身も回転して逆さまに見える可能性がある。
+`server/data/cards.json` を検索し、「突破」能力を持つすべてのカードをリストアップする。
 
 ## 修正案
 
-### [MODIFY] [components/GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
+### 1. [MODIFY] [server/data/cards.json](file:///c:/Users/worke/Antigravity/nivel_arena_online/server/data/cards.json)
 
-1. **表示位置の調整**:
-   相手側 (`isOpponent`) の場合、装備品をカードの「上側」（画面上では手前側、つまり `bottom-full` 相当）に表示するか、あるいは `top-full` のままでも `rotate-180` をキャンセルして見やすくする。
+対象カードの `keywords` または `grantedKeyword` を修正する。
 
-   現状のプレイマットレイアウト（スロットが向かい合っている）を考えると、カードの「足元」に装備品があるのが自然。
-   自分視点：カードの下 (`top-full`)
-   相手視点：カードの上 (`top-full` だと画面奥に行ってしまう)。相手にとっての「足元」は画面奥だが、UIとしてはプレイヤーに見やすい方がいい。
+- **スノーホワイト (ST02-010)**: `BREAKTHROUGH` -> `BREAKTHROUGH_2`
+- **その他確認されたカード**:
+  - もしコスト指定がある場合 ("コストX以下...") -> `BREAKTHROUGH_X`
+  - 無条件の場合 -> `BREAKTHROUGH` (変更なし、ロジック側で「無制限」として処理)
 
-   しかし、画像を見ると相手カードの下（画面上では上）に何か重なっているように見える。
+### 2. [MODIFY] [components/GameBoard.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/GameBoard.tsx)
 
-   **提案**:
-   - `isOpponent` の場合、位置を `bottom-full` (画面下側、プレイヤー寄り) に変更する？いや、それだとカード本体に被るか、手前のスペース（何もない空間）に出る。
-   - あるいは、`top-full` (画面奥側) のまま、`z-index` を上げて、かつ `rotate-180` を適用して「正位置」で表示する？
+防御判定ロジック (`renderDefenseModal` 内など) をアップデート。
 
-   もっとシンプルに、相手のカードのアタッチメントは「相手のスロットの手前（画面下側）」に表示するのが見やすいかもしれない。
+```typescript
+const checkBreakthrough = () => {
+    const keywords = [...(attacker.keywords || []), ...(attacker.tempKeywords || [])];
+    
+    // "BREAKTHROUGH" または "BREAKTHROUGH_X" を探す
+    const btKeyword = keywords.find(k => k === 'BREAKTHROUGH' || k.startsWith('BREAKTHROUGH_'));
+    
+    if (!btKeyword) return false;
 
-   コード修正イメージ:
+    // "BREAKTHROUGH" (無印) は無条件突破
+    if (btKeyword === 'BREAKTHROUGH') return true;
 
-   ```tsx
-   <div className={`absolute left-1/2 -translate-x-1/2 w-max flex flex-row justify-center gap-1 p-1 pointer-events-auto z-50
-       ${isOpponent ? 'bottom-full mb-1 rotate-180' : 'top-full mt-1'}
-   `}>
-   ```
-
-   ※ `isOpponent` のとき親が `rotate-180` されているなら、子要素も一緒に回っている。
-   親が回っている状態で `bottom-full` (親の下) は画面上では「上」になる。
-   親が回っている状態で `top-full` (親の上) は画面上では「下」になる。
-
-   現在 `top-full` なので、親のローカル座標系で「下」。親が180度回っているので画面上では「上（奥）」。
-   これを画面上で「下（手前）」にしたいなら、親のローカル座標系で「上」、つまり `bottom-full` にすべき？
-   いや、CSSの `top` は上辺、`bottom` は下辺。
-   回転しても `top` は `top`。
-
-   整理：
-   - `<div className="... rotate-180">` (Card Container)
-     - `<Card ... />`
-     - `<div className="absolute top-full ...">` (Attachments)
-
-   `rotate-180` の中心において、`top-full` は回転後、画面上では **上** に来る。
-   相手のスロットは画面上部にあるので、そのさらに「上」に行くと、画面外に見切れるか、UI（ログなど）と被る。
-
-   **解決策**:
-   相手側の場合、アタッチメントを `bottom-full` (回転前の下、回転後の画面下側＝スロットの手前側) に配置する。
-   そうすれば、相手ユニットの手前（プレイヤーに近い側）に装備品が表示され、見やすくなるはず。
-
-2. **向きの修正**:
-   親が回転しているので、アタッチメントも逆さまになっている可能性がある。
-   アタッチメントのコンテナにも `rotate-180` を掛けて、正位置に戻す（あるいはそのまま維持するか確認）。ユーザーは「見えづらい」と言っているので、逆さまも要因かも。
-
-### 詳細ロジック
-
-- クラス名の切り替え:
-  `isOpponent ? 'bottom-full mb-2 rotate-180' : 'top-full mt-2'`
-  ※ コンテナ自体を回して文字を読めるようにする。
+    // "BREAKTHROUGH_X" はコストX以下なら防御不可
+    const threshold = parseInt(btKeyword.split('_')[1]);
+    const defenderCost = defender.cost;
+    
+    return defenderCost <= threshold;
+};
+```
 
 ## 検証
 
-- 相手ユニットにアイテムがついた時、スロットの「手前（画面中央寄り）」に表示され、かつ文字が正位置で読めることを確認する。
+- 各パターンの突破持ちによる攻撃で、正しい防御可否判定が行われるか確認する。

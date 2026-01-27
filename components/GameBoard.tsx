@@ -1019,11 +1019,35 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
         const attackerStats = getCalculatedStats(opponentId!, attacker);
         const defenderStats = getCalculatedStats(playerId, defender);
 
-        const hasBreakthrough = attacker.keywords?.includes('突破') ||
-            attacker.tempKeywords?.includes('突破') ||
-            attacker.text?.includes('【突破】') ||
-            attacker.keywords?.includes('BREAKTHROUGH') ||
-            attacker.tempKeywords?.includes('BREAKTHROUGH');
+        // Check for Breakthrough ability with cost restriction
+        const checkBreakthrough = () => {
+            const keywords = [...(attacker.keywords || []), ...(attacker.tempKeywords || [])];
+
+            // Find BREAKTHROUGH or BREAKTHROUGH_X keyword
+            const btKeyword = keywords.find(k => k === 'BREAKTHROUGH' || k.startsWith('BREAKTHROUGH_'));
+
+            if (!btKeyword) {
+                // Also check Japanese text for legacy support
+                if (attacker.keywords?.includes('突破') ||
+                    attacker.tempKeywords?.includes('突破') ||
+                    attacker.text?.includes('【突破】')) {
+                    return true; // Fallback for Japanese text
+                }
+                return false;
+            }
+
+            // BREAKTHROUGH (no suffix) means unconditional breakthrough
+            if (btKeyword === 'BREAKTHROUGH') return true;
+
+            // BREAKTHROUGH_X means can only be blocked by units with cost > X
+            const threshold = parseInt(btKeyword.split('_')[1]);
+            if (isNaN(threshold)) return true; // Invalid format, treat as unconditional
+
+            const defenderCost = defender.cost;
+            return defenderCost <= threshold; // Cannot block if defender cost is <= threshold
+        };
+
+        const hasBreakthrough = checkBreakthrough();
 
         return (
             <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md">
