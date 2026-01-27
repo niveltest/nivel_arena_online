@@ -25,19 +25,22 @@ export class SoundManager {
     static play(key: string) {
         if (typeof window === 'undefined') return;
 
-        console.log(`[SoundManager] Playing: ${key}`);
-
         const url = this.sounds[key];
         if (!url) return;
 
-        // Clone or reuse? For rapid overlapping sounds (like machine gun card draw), cloning is better.
-        // For now simple new Audio or cloneNode.
+        // Silently fail if audio cannot be loaded - don't disrupt gameplay
         try {
             const audio = new Audio(url);
             audio.volume = 0.4;
-            audio.play().catch(e => console.warn("Audio play failed (user interaction needed?):", e));
+            audio.play().catch(() => {
+                // Silently ignore audio playback errors
+                // These are typically caused by:
+                // - User hasn't interacted with page yet (browser autoplay policy)
+                // - Audio file not found or CORS issues
+                // - Network problems
+            });
         } catch (e) {
-            console.warn("Audio error:", e);
+            // Silently ignore audio loading errors
         }
     }
 }
