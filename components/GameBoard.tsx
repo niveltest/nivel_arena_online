@@ -406,9 +406,9 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                                 {p.damageZone.map((card, i) => (
                                     <div key={i}
                                         data-index={i}
-                                        className={`relative transition-all duration-300 overflow-visible damage-card-container z-index-${i} ${i > 0 ? (isOpponent ? 'mr-[-10.4cqw]' : 'ml-[-10.4cqw]') : ''}`}
+                                        className={`relative transition-all duration-300 overflow-visible damage-card-container z-index-${i} ${i > 0 ? (isOpponent ? 'mr-[-8cqw]' : 'ml-[-8cqw]') : ''}`}
                                     >
-                                        <div className="w-[13cqw] aspect-[0.7072] origin-center shadow-[0_8px_16px_rgba(0,0,0,0.8)] ring-1 ring-white/30 rounded-lg overflow-hidden bg-black/90">
+                                        <div className="w-[10cqw] aspect-[5/7] origin-center shadow-[0_8px_16px_rgba(0,0,0,0.8)] ring-1 ring-white/30 rounded-lg overflow-hidden bg-black/90">
                                             <Card card={card} isHidden={false} onShowDetail={handleShowDetail} minimal={true} />
                                         </div>
                                     </div>
