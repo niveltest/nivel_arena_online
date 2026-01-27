@@ -402,7 +402,7 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
                             onClick={() => setShowDamageZoneFor(isOpponent ? 'opponent' : 'me')}
                         >
                             {/* Overlapping Cards - Stable Flex Layout anchored to start/left */}
-                            <div className={`flex items-center justify-start ${isOpponent ? 'flex-row-reverse' : 'flex-row'}`}>
+                            <div className={`flex items-center justify-center ${isOpponent ? 'flex-row-reverse' : 'flex-row'}`}>
                                 {p.damageZone.map((card, i) => (
                                     <div key={i}
                                         data-index={i}
