@@ -6,12 +6,13 @@ import Card from './Card';
 import SelectionModal from './SelectionModal';
 import CardDetailModal from './CardDetailModal';
 import ResultModal from './ResultModal';
-import { GameState, Card as CardType, type AnimationEvent, AnimationType, AttackAnimationData, DamageAnimationData, DestroyAnimationData } from '../shared/types';
+import { GameState, Card as CardType, type AnimationEvent, AnimationType, Player, CardEffect, AttackAnimationData, DestroyAnimationData } from '../shared/types';
 
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
 import { SoundManager } from '../utils/SoundManager';
+import { DamageAnimationData, EffectAnimationData } from '../shared/types';
 
 // Playmat Layout Types
 interface PlaymatZoneConfig {
@@ -79,6 +80,12 @@ const PLAYMAT_CONFIGS: Record<'official' | 'mermaid' | 'cyber', PlaymatThemeConf
 // SoundManager handles SFX
 
 type PlaymatId = 'official' | 'mermaid' | 'cyber';
+
+interface PlaymatOption {
+    id: string;
+    name: string;
+    img: string;
+}
 
 interface PlaymatAreaProps {
     p: GameState['players'][string];
@@ -458,23 +465,23 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
     const [customLayout, setCustomLayout] = useState<PlaymatThemeConfig>(PLAYMAT_CONFIGS[playmatId]);
     const [activeAnimations, setActiveAnimations] = useState<AnimationEvent[]>([]);
 
-    const getCurrentFieldSize = (p: any) => {
+    const getCurrentFieldSize = (p: Player) => {
         let size = 0;
-        p.field.forEach((u: any) => {
+        p.field.forEach((u: CardType | null) => {
             if (u) {
                 size += u.cost;
-                u.attachments?.forEach((a: any) => { size += a.cost; });
+                u.attachments?.forEach((a: CardType) => { size += a.cost; });
             }
         });
         return size;
     };
 
-    const getSizeLimit = (p: any) => {
+    const getSizeLimit = (p: Player) => {
         let limit = p.leaderLevel + p.damageZone.length;
         const leader = p.leader;
         if (leader && leader.effects) {
             const isAwakened = p.leaderLevel >= (leader.awakeningLevel || 6);
-            leader.effects.forEach((eff: any) => {
+            leader.effects.forEach((eff: CardEffect) => {
                 if (eff.trigger === 'PASSIVE' && eff.action === 'BUFF_SIZE') {
                     if (!eff.isAwakening || isAwakened) {
                         limit += (eff.value || 0);
@@ -558,52 +565,62 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
             // Handle Floating Text for Damage & Effects
             if (type === 'DAMAGE' || type === 'EFFECT') {
                 const isDamage = type === 'DAMAGE';
-                const dData = data as any;
-                const targetId = isDamage ? dData.targetId : dData.playerId;
-                const isMe = targetId === newSocket.id;
+                let targetId: string | undefined;
+                let text: string | undefined;
+                let colorAttr: string | undefined;
 
+                if (isDamage) {
+                    const damageData = data as unknown as DamageAnimationData;
+                    targetId = damageData.targetId;
+                    text = `-${damageData.value}`;
+                } else {
+                    const effectData = data as unknown as EffectAnimationData;
+                    targetId = effectData.playerId;
+                    text = effectData.text;
+                    colorAttr = effectData.color;
+                }
+
+                const isMe = targetId === newSocket.id;
                 let x = '50%';
                 let y = '50%';
-                let text = isDamage ? `-${dData.value}` : dData.text;
 
                 // Enhanced Colors and Labels
                 let color = 'text-white';
                 if (isDamage) {
                     color = 'text-red-500';
-                    text = `-${dData.value}`;
                 } else if (type === 'EFFECT') {
-                    const lowText = dData.text?.toLowerCase() || '';
-                    if (lowText.includes('power +') || lowText.includes('buff') || dData.color === 'blue') {
+                    const lowText = text?.toLowerCase() || '';
+                    if (lowText.includes('power +') || lowText.includes('buff') || colorAttr === 'blue') {
                         color = 'text-cyan-400';
-                        text = `▲ ${dData.text}`;
-                    } else if (lowText.includes('heal') || dData.color === 'green') {
+                        text = `▲ ${text}`;
+                    } else if (lowText.includes('heal') || colorAttr === 'green') {
                         color = 'text-green-400';
-                        text = `✚ ${dData.text}`;
-                    } else if (lowText.includes('level up') || dData.color === 'orange') {
+                        text = `✚ ${text}`;
+                    } else if (lowText.includes('level up') || colorAttr === 'orange') {
                         color = 'text-orange-400';
-                        text = `⭐ ${dData.text}`;
-                    } else if (lowText.includes('destroy') || dData.color === 'purple') {
+                        text = `⭐ ${text}`;
+                    } else if (lowText.includes('destroy') || colorAttr === 'purple') {
                         color = 'text-purple-400';
-                        text = `💥 ${dData.text}`;
-                    } else if (dData.color === 'red') {
+                        text = `💥 ${text}`;
+                    } else if (colorAttr === 'red') {
                         color = 'text-red-400';
-                        text = `▼ ${dData.text}`;
+                        text = `▼ ${text}`;
                     }
                 }
 
-                const location = isDamage ? dData.location : (dData.slotIndex === -1 ? 'LEADER' : 'UNIT');
-                const slotIndex = dData.slotIndex;
+                const slotIdx = isDamage ? (data as unknown as DamageAnimationData).slotIndex : (data as unknown as EffectAnimationData).slotIndex;
+                const location = isDamage ? (data as unknown as DamageAnimationData).location : (slotIdx === -1 ? 'LEADER' : 'UNIT');
 
-                if (location === 'UNIT' && typeof slotIndex === 'number') {
+                if (location === 'UNIT' && typeof slotIdx === 'number') {
                     const xPositions = ['35%', '50%', '65%'];
                     const isOpponentTarget = !isMe;
 
                     if (isOpponentTarget) {
                         y = '25%';
-                        x = xPositions[2 - slotIndex];
+                        x = xPositions[2 - slotIdx];
                     } else {
-                        y = '55%';
-                        x = xPositions[slotIndex];
+                        y = '75%';
+                        x = xPositions[slotIdx];
                     }
                 } else if (location === 'LEADER') {
                     y = isMe ? '75%' : '15%';
@@ -717,7 +734,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         return () => {
             newSocket.disconnect();
         };
-    }, [roomId, username]);
+    }, [roomId, username, isSpectator, password]);
 
     // Timer for disconnection countdown
     useEffect(() => {
@@ -795,8 +812,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         );
     }
 
-    let me: any;
-    let opponent: any;
+    let me: Player | null = null;
+    let opponent: Player | null = null;
 
     if (isSpectator) {
         // Spectator View: Player 1 (first key) is "Bottom", Player 2 is "Top"
@@ -1057,7 +1074,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
     };
 
     const renderSlot = (cards: (CardType | null)[], i: number, isOpponent: boolean) => {
-        const targetPlayerId = isOpponent ? opponentId! : playerId;
+        const targetPlayerId = isOpponent ? opponent?.id : playerId;
         const card = cards[i];
 
         // ... (ハイライトロジック)
@@ -1074,7 +1091,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         }
 
         // Calculate dynamic stats
-        const stats = card ? getCalculatedStats(targetPlayerId, card) : null;
+        const stats = card ? getCalculatedStats(targetPlayerId!, card) : null;
 
         // Check Active Ability availability
         const hasActive = card?.effects?.some(e => e.trigger === 'ACTIVE') ?? false;
@@ -1119,7 +1136,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                             onShowDetail={handleShowDetail}
                             onUseActive={() => handleUseActive(i)}
                             canUseActive={canUseActive}
-                            isAwakened={p.leaderLevel >= (card.type === 'LEADER' ? (card.awakeningLevel || 6) : 99)}
+                            isAwakened={(isOpponent ? opponent! : me!).leaderLevel >= (card.type === 'LEADER' ? (card.awakeningLevel || 6) : 99)}
                             minimal={true}
                             isReady={!isOpponent && isMyTurn && gameState.phase === 'ATTACK' && !card.attackedThisTurn && !card.isStunned && !card.cannotAttack}
                             showDetailOverlay={(!isOpponent && attackingUnitIndex === i) || isValidAttackTarget || isValidPlayTarget}
@@ -1190,7 +1207,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
             );
         }
 
-        const attacker = opponent.field[gameState.pendingAttack.attackerIndex];
+        const attacker = opponent?.field[gameState.pendingAttack.attackerIndex];
         const defender = me.field[gameState.pendingAttack.targetIndex];
 
         if (!attacker || !defender) {
@@ -1203,7 +1220,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
             );
         }
 
-        const attackerStats = getCalculatedStats(opponentId!, attacker);
+        const attackerStats = getCalculatedStats(opponent!.id, attacker);
         const defenderStats = getCalculatedStats(playerId, defender);
 
         // Check for Breakthrough ability with cost restriction
@@ -1303,10 +1320,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         const allCardsPool = [
             ...me.deck,
             ...me.hand,
-            ...me.field.filter((f): f is CardType => f !== null),
+            ...me.field.filter((f: CardType | null): f is CardType => f !== null),
             ...me.discard,
-            ...opponent.field.filter((f): f is CardType => f !== null),
-            ...opponent.discard
+            ...(opponent?.field?.filter((f: CardType | null): f is CardType => f !== null) || []),
+            ...(opponent?.discard || [])
         ];
 
         return (
@@ -1334,7 +1351,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         }
 
         const { attackerIndex } = gameState.pendingAttack;
-        const attacker = opponent.field[attackerIndex];
+        const attacker = opponent?.field[attackerIndex];
 
         if (!attacker) {
             return (
@@ -1346,9 +1363,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
             );
         }
         const adjSlots = [attackerIndex - 1, attackerIndex + 1].filter(s => s >= 0 && s <= 2);
-        const candidates = adjSlots.filter(s => {
+        const candidates = adjSlots.filter((s: number) => {
             const u = me.field[s];
-            return u && u.keywords?.some(k => k.startsWith('GUARDIAN_'));
+            return u && u.keywords?.some((k: string) => k.startsWith('GUARDIAN_'));
         });
 
         return (
@@ -1363,7 +1380,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                     <div className="flex flex-col gap-4">
                         {candidates.map(slotIdx => {
                             const unit = me.field[slotIdx]!;
-                            const costMatch = unit.keywords?.find(k => k.startsWith('GUARDIAN_'))?.split('_')[1];
+                            const costMatch = unit.keywords?.find((k: string) => k.startsWith('GUARDIAN_'))?.split('_')[1];
                             const cost = costMatch ? parseInt(costMatch) : 1;
                             const canAfford = me.hand.length >= cost;
 
@@ -1407,13 +1424,15 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         if (!showDamageZoneFor) return null;
         const targetPlayer = showDamageZoneFor === 'me' ? me : opponent;
 
+        if (!targetPlayer) return null;
+
         return (
             <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/90" onClick={() => setShowDamageZoneFor(null)}>
                 <div className="p-8 w-full max-w-4xl" onClick={e => e.stopPropagation()}>
                     <h2 className="text-xl font-bold mb-4 text-center">{targetPlayer.username}のダメージゾーン</h2>
                     <div className="flex flex-wrap gap-4 justify-center">
                         {targetPlayer.damageZone.length === 0 && <div className="text-gray-500">ダメージなし</div>}
-                        {targetPlayer.damageZone.map((c, i) => (
+                        {targetPlayer.damageZone.map((c: CardType, i: number) => (
                             <div key={i} className="scale-100">
                                 <Card card={c} isEnemy={false} isHidden={false} onShowDetail={handleShowDetail} />
                             </div>
@@ -1447,7 +1466,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                     <div className="mb-8">
                         <div className="text-cyan-500 text-[10px] font-bold uppercase mb-4 tracking-widest">Select Your Playmat</div>
                         <div className="grid grid-cols-3 gap-6">
-                            {options.map(opt => (
+                            {options.map((opt: PlaymatOption) => (
                                 <div
                                     key={opt.id}
                                     className={`
@@ -1475,7 +1494,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                     <div className="mb-8 border-t border-white/10 pt-8">
                         <div className="text-red-500 text-[10px] font-bold uppercase mb-4 tracking-widest">Select Opponent&apos;s Playmat Theme</div>
                         <div className="grid grid-cols-3 gap-6">
-                            {options.map(opt => (
+                            {options.map((opt: PlaymatOption) => (
                                 <div
                                     key={`opp-${opt.id}`}
                                     className={`
@@ -1519,7 +1538,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         const selection = {
             playerId: playerId,
             type: 'HAND' as const,
-            candidateIds: me.hand.map(c => c.id),
+            candidateIds: me.hand.map((c: CardType) => c.id),
             count: me.hand.length,
             action: 'MULLIGAN',
             previousPhase: 'MULLIGAN' as const
@@ -1643,37 +1662,41 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
 
             {/* Split Playmat Areas */}
             <div className="flex-1 flex flex-col relative overflow-hidden">
-                <PlaymatArea
-                    p={opponent}
-                    isOpponent={true}
-                    matId={opponentPlaymatId}
-                    config={PLAYMAT_CONFIGS[opponentPlaymatId]}
-                    renderSlot={renderSlot}
-                    handleShowDetail={handleShowDetail}
-                    setShowDamageZoneFor={setShowDamageZoneFor}
-                    isEditMode={false}
-                    onLayoutChange={() => { }}
-                    onEnemyTargetClick={handleEnemyTargetClick}
-                />
-                <PlaymatArea
-                    p={me}
-                    isOpponent={false}
-                    matId={playmatId}
-                    config={customLayout || PLAYMAT_CONFIGS[playmatId]}
-                    renderSlot={renderSlot}
-                    handleShowDetail={handleShowDetail}
-                    setShowDamageZoneFor={setShowDamageZoneFor}
-                    isEditMode={false}
-                    onLayoutChange={(key, pos) => {
-                        if (!customLayout) return;
-                        setCustomLayout({
-                            ...customLayout,
-                            [key]: { ...(customLayout[key as keyof PlaymatThemeConfig] as PlaymatZoneConfig), ...pos }
-                        });
-                    }}
-                    onEnemyTargetClick={handleEnemyTargetClick}
-                    onSkillZoneClick={handleSkillZoneClick}
-                />
+                {opponent && (
+                    <PlaymatArea
+                        p={opponent}
+                        isOpponent={true}
+                        matId={opponentPlaymatId}
+                        config={PLAYMAT_CONFIGS[opponentPlaymatId]}
+                        renderSlot={renderSlot}
+                        handleShowDetail={handleShowDetail}
+                        setShowDamageZoneFor={setShowDamageZoneFor}
+                        isEditMode={false}
+                        onLayoutChange={() => { }}
+                        onEnemyTargetClick={handleEnemyTargetClick}
+                    />
+                )}
+                {me && (
+                    <PlaymatArea
+                        p={me}
+                        isOpponent={false}
+                        matId={playmatId}
+                        config={customLayout || PLAYMAT_CONFIGS[playmatId]}
+                        renderSlot={renderSlot}
+                        handleShowDetail={handleShowDetail}
+                        setShowDamageZoneFor={setShowDamageZoneFor}
+                        isEditMode={false}
+                        onLayoutChange={(key, pos) => {
+                            if (!customLayout) return;
+                            setCustomLayout({
+                                ...customLayout,
+                                [key]: { ...(customLayout[key as keyof PlaymatThemeConfig] as PlaymatZoneConfig), ...pos }
+                            });
+                        }}
+                        onEnemyTargetClick={handleEnemyTargetClick}
+                        onSkillZoneClick={handleSkillZoneClick}
+                    />
+                )}
             </div>
 
             {/* Tactical HUD Overlays (Global) */}
@@ -1768,7 +1791,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                 </AnimatePresence>
 
                 <div className="flex flex-row items-end transition-all duration-500 pl-4 pb-2">
-                    {me.hand.map((c, i) => (
+                    {me.hand.map((c: CardType, i: number) => (
                         <div key={i}
                             className={`
                                 -ml-6 sm:-ml-12 transition-all duration-300 z-1 origin-bottom cursor-pointer first:ml-0 pointer-events-auto
@@ -1783,7 +1806,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                                 card={c}
                                 onShowDetail={handleShowDetail}
                                 showDetailOverlay={selectedCardIndex === i}
-                                isPlayable={isMyTurn && gameState.phase === 'MAIN' && (getCurrentFieldSize(me) + c.cost) <= getSizeLimit(me)}
+                                isPlayable={isMyTurn && gameState.phase === 'MAIN' && (getCurrentFieldSize(me!) + c.cost) <= getSizeLimit(me!)}
                             />
                         </div>
                     ))}
@@ -1893,23 +1916,6 @@ const AttackAnimation: React.FC<{ anim: { id: string; type: 'ATTACK'; data: Atta
     );
 };
 
-const DamagePopup: React.FC<{ anim: { id: string; type: 'DAMAGE'; data: DamageAnimationData } }> = ({ anim }) => {
-    const { value } = anim.data;
-
-    return (
-        <motion.div
-            initial={{ y: 0, opacity: 0, scale: 0.5 }}
-            animate={{ y: -100, opacity: 1, scale: 1.5 }}
-            exit={{ opacity: 0, y: -200 }}
-            transition={{ duration: 1 }}
-            className="fixed inset-0 pointer-events-none flex items-center justify-center z-[200]"
-        >
-            <span className="text-6xl font-black text-red-500 drop-shadow-[0_0_5px_black] stroke-2 stroke-white">
-                -{value}
-            </span>
-        </motion.div>
-    );
-};
 
 const DestroyAnimation: React.FC<{ anim: { id: string; type: 'DESTROY'; data: DestroyAnimationData } }> = ({ anim }) => {
     console.log('Destroying Unit:', anim.data.unitId);
