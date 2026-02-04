@@ -64,23 +64,25 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, on
                                 </div>
                             </div>
                         )}
-                        <div>
-                            <h2 className="text-lg sm:text-2xl font-bold text-white tracking-wider">
-                                {selection.action === 'DISCARD_HAND' ? '👋 破棄' :
-                                    selection.action === 'MULLIGAN' ? '🔄 マリガン' :
-                                        '🃏 カード選択'} <span className="text-cyan-400">[{
-                                            selection.type === 'HAND' ? '手札' :
-                                                selection.type === 'DECK' ? '山札' :
-                                                    selection.type === 'DISCARD' ? '捨て札' :
-                                                        selection.type === 'FIELD' ? 'フィールド' :
-                                                            selection.type === 'DAMAGE_ZONE' ? 'ダメージゾーン' : selection.type
-                                        }]</span>
-                            </h2>
-                            {turnOrderLabel && (
-                                <div className={`text-xl font-black mt-1 ${turnOrderLabel.includes('先攻') ? 'text-red-500' : 'text-blue-500'}`}>
-                                    {turnOrderLabel}
-                                </div>
-                            )}
+                        <div className="flex-1">
+                            <div className="flex items-center gap-4">
+                                <h2 className="text-lg sm:text-2xl font-bold text-white tracking-wider">
+                                    {selection.action === 'DISCARD_HAND' ? '👋 破棄' :
+                                        selection.action === 'MULLIGAN' ? '🔄 マリガン' :
+                                            '🃏 カード選択'} <span className="text-cyan-400">[{
+                                                selection.type === 'HAND' ? '手札' :
+                                                    selection.type === 'DECK' ? '山札' :
+                                                        selection.type === 'DISCARD' ? '捨て札' :
+                                                            selection.type === 'FIELD' ? 'フィールド' :
+                                                                selection.type === 'DAMAGE_ZONE' ? 'ダメージゾーン' : selection.type
+                                            }]</span>
+                                </h2>
+                                {turnOrderLabel && (
+                                    <div className={`text-2xl font-black px-4 py-1 rounded-lg border-2 ${turnOrderLabel.includes('先攻') ? 'text-red-400 border-red-500 bg-red-950/50' : 'text-blue-400 border-blue-500 bg-blue-950/50'}`}>
+                                        {turnOrderLabel}
+                                    </div>
+                                )}
+                            </div>
                             <p className="text-gray-400 text-[10px] sm:text-sm mt-1">
                                 {selection.action === 'MULLIGAN' ?
                                     '引き直すカードをクリックしてください' :
