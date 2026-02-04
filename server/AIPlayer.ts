@@ -145,8 +145,8 @@ export class CPUPlayer extends Player {
         // Usually Mulligan allows selecting any number, but usually restricted or "select and redraw". 
         // Game.resolveMulligan takes selectedIds.
 
-        // Update: Use resolveSelection to ensure selection state is cleared
-        this.game.resolveSelection(this.id, discardIds as string[]);
+        console.log(`[AI] Mulligan decision: ${discardIds.length === 0 ? 'KEEP ALL' : `MULLIGAN ${discardIds.length} cards`}`);
+        this.game.resolveMulligan(this.id, discardIds as string[]);
     }
 
     private handleMainPhase() {
