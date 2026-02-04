@@ -366,7 +366,7 @@ export class CPUPlayer extends Player {
             }).sort((a: any, b: any) => b.priority - a.priority);
 
             const bestTarget = rankedTargets[0];
-            const hasGuardian = opponentUnits.some(u => this.game.hasKeyword(u.unit, 'GUARDIAN'));
+            const hasGuardian = opponentUnits.some((u: any) => this.game.hasKeyword(u.unit, 'GUARDIAN'));
 
             // AGGRO logic: Hit leader if no Guardian, even if there are units
             const shouldHitLeader = !hasGuardian && (this.personality === 'AGGRO' || (bestTarget.priority < 0 && opponent.state.hp > 0));
@@ -474,7 +474,7 @@ export class CPUPlayer extends Player {
             }
         }
         // 3. Mutual Destruction: If both die, only do it if attacker is higher threat
-        else if (defenderPower === attackerPower) {
+        else if (defenderPower === attackerPower && attackerCard) {
             const attackerThreat = this.evaluateThreat(attackerCard, 'KILL');
             if (attackerThreat >= defenderValueSacrifice) {
                 action = 'BLOCK';
@@ -537,7 +537,7 @@ export class CPUPlayer extends Player {
                     if (e.action === 'BUFF_ALLY') score += 1000 * weights.BOARD_CONTROL;
                     if (e.action === 'BUFF_HIT') score += 1500 * weights.PLAYER_HP;
                 }
-                if (e.trigger === 'ON_ATTACK' || e.trigger === 'ON_HIT') {
+                if (e.trigger === 'ON_ATTACK') {
                     score += 500;
                 }
             });

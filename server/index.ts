@@ -152,9 +152,15 @@ io.on('connection', (socket) => {
     console.log('A user connected:', socket.id);
     let currentRoomId: string | null = null;
 
-    socket.on('createGame', (username: string, deckId: string, callback?: (roomId: string) => void) => {
+    socket.on('createGame', (username: string, deckId: string, password?: string, callback?: (roomId: string) => void) => {
+        // If password is function (no password provided by client lib fallback), handle gracefully
+        if (typeof password === 'function') {
+            callback = password;
+            password = undefined;
+        }
+
         const roomId = uuidv4().substring(0, 6).toUpperCase(); // Short ID
-        const game = new Game(roomId, io);
+        const game = new Game(roomId, io, password || null);
 
         // Store the creator's deck preference in the game instance or handle it via handleJoinGame
         // For now, we'll store it so the first joiner (creator) uses it.
@@ -162,21 +168,21 @@ io.on('connection', (socket) => {
 
         games.set(roomId, game);
 
-        console.log(`Game created: ${roomId} by ${username} with deck ${deckId}`);
+        console.log(`Game created: ${roomId} by ${username} with deck ${deckId} (Password: ${password ? 'YES' : 'NO'})`);
         if (callback) callback(roomId);
 
         // Do not auto-join here. The client will connect with a new socket and join.
     });
 
-    socket.on('joinGame', (data: { username: string, roomId?: string, deckData?: { deckIdList: string[], leaderId: string }, starterDeckId?: string }) => {
+    socket.on('joinGame', (data: { username: string, roomId?: string, deckData?: { deckIdList: string[], leaderId: string }, starterDeckId?: string, password?: string, isSpectator?: boolean }) => {
         console.log(`[DEBUG] joinGame received from ${socket.id}:`, data);
-        const { username, roomId, deckData, starterDeckId } = data;
+        const { username, roomId, deckData, starterDeckId, password, isSpectator } = data;
         if (!roomId) {
             console.error(`[DEBUG] Room ID missing for ${socket.id}`);
             socket.emit('error', 'Room ID is required');
             return;
         }
-        handleJoinGame(username, roomId, deckData, starterDeckId);
+        handleJoinGame(username, roomId, deckData, starterDeckId, password, isSpectator);
     });
 
     socket.on('addCPU', (data: { roomId: string, starterDeckId?: string }) => {
@@ -209,12 +215,31 @@ io.on('connection', (socket) => {
         }
     });
 
-    const handleJoinGame = (username: string, roomId: string, deckData?: { deckIdList: string[], leaderId: string }, starterDeckId?: string) => {
+    const handleJoinGame = (username: string, roomId: string, deckData?: { deckIdList: string[], leaderId: string }, starterDeckId?: string, password?: string, isSpectator?: boolean) => {
         const game = games.get(roomId);
         if (!game) {
             socket.emit('error', 'Game not found');
             return;
         }
+
+        // --- Password Check ---
+        if (game.password && game.password !== password) {
+            socket.emit('error', 'Incorrect Password');
+            return;
+        }
+        // ----------------------
+
+        // --- Spectator Logic ---
+        if (isSpectator) {
+            const player = new Player(socket, username);
+            // Spectator setup (no deck needed)
+            game.addSpectator(player);
+            currentRoomId = roomId;
+            socket.join(roomId);
+            socket.emit('joined', { playerId: socket.id, roomId, isSpectator: true });
+            return;
+        }
+        // -----------------------
 
         // --- Reconnect Logic ---
         // Check if this username is already in the game and disconnected/waiting

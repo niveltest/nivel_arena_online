@@ -7,7 +7,9 @@ import { validateDeck } from './deckValidation';
 
 export class Game {
     public id: string;
+    public password?: string | null = null;
     public players: Record<string, Player> = {};
+    public spectators: Record<string, Player> = {};
     public phase: GameState['phase'] = 'WAITING';
     public turnPlayerId: string = '';
     public turnCount: number = 0;
@@ -18,9 +20,10 @@ export class Game {
     public selection: SelectionState | null = null;
     private effectQueue: Array<{ playerId: string, card: Card, trigger: string, context?: Record<string, unknown>, specificEffect?: CardEffect }> = [];
 
-    public constructor(id: string, io: any) {
+    public constructor(id: string, io: any, password?: string | null) {
         this.id = id;
         this.io = io;
+        this.password = password;
     }
 
     public finishGame(winnerId: string, reason: string) {
@@ -154,6 +157,24 @@ export class Game {
         if (Object.keys(this.players).length >= 2) return false;
         this.players[player.id] = player;
         return true;
+    }
+
+    public addSpectator(player: Player) {
+        this.spectators[player.id] = player;
+        // Send current state immediately
+        const state = this.createGameState();
+        // Spectator sees ALL hands
+        const serializedState = JSON.parse(JSON.stringify(state));
+        Object.keys(serializedState.players).forEach(pId => {
+            // For spectator, we reveal all hands.
+            // But normally, hand cards are hidden (server sends empty array/masked for opponents).
+            // However, our current simple implementation sends EVERYTHING to everyone (not ideal for cheating prevention but fine for now).
+            // If we strictly hid cards before, we would need logic here.
+            // Currently, Client filters visibility. Check if `broadcastState` needs updates.
+        });
+
+        player.socket.emit('gameState', serializedState);
+        this.addLog(`${player.username} (Spectator) joined.`);
     }
 
     public handleDisconnect(socketId: string) {
@@ -1410,6 +1431,7 @@ export class Game {
                 }
                 case 'DEBUFF_ENEMY': {
                     if (!opponent) return;
+                    const slotIndex = effectContext?.slotIndex;
                     if (effect.targetType === 'ALL_ENEMIES') {
                         opponent.state.field.forEach((u, i) => {
                             if (u) {
@@ -1440,7 +1462,7 @@ export class Game {
                                         color: 'orange',
                                         text: `-${effect.value}`
                                     });
-                                    this.checkDrawOnKill(playerId, opponentId, slotIndex, effect.drawOnKill);
+                                    this.checkDrawOnKill(playerId, opponentId, slotIndex, (effect as any).drawOnKill);
                                 }
                             }
                         }
@@ -1451,7 +1473,7 @@ export class Game {
                             this.requestSelection(playerId, 'FIELD', candidates, 1, 'DEBUFF_ENEMY_SELECTION', {
                                 opponentId,
                                 value: effect.value,
-                                drawOnKill: effect.drawOnKill
+                                drawOnKill: (effect as any).drawOnKill
                             }, card);
                         }
                     }
@@ -2192,7 +2214,7 @@ export class Game {
         this.addLog(`${winnerName} Wins! Reason: ${reason}`);
     }
 
-    public broadcastState() {
+    public createGameState(): any {
         const state: any = {
             roomId: this.id,
             phase: this.phase,
@@ -2206,10 +2228,37 @@ export class Game {
         Object.values(this.players).forEach(p => {
             state.players[p.id] = p.state;
         });
+        return state;
+    }
 
+    private checkDrawOnKill(playerId: string, opponentId: string, slotIndex: number, drawOnKill?: number) {
+        if (!drawOnKill || drawOnKill <= 0) return;
+        // Check current power of target. If <= 0, it will be destroyed by StateBasedActions.
+        const power = this.getUnitPower(opponentId, slotIndex);
+        if (power <= 0) {
+            const player = this.players[playerId];
+            for (let i = 0; i < drawOnKill; i++) {
+                if (player.state.deck.length > 0) player.drawCard(player.state.deck.pop()!);
+            }
+            this.addLog(`${player.username} draws ${drawOnKill} card(s) from Kill effect.`);
+        }
+    }
+
+    public broadcastState() {
+        const state = this.createGameState();
+        const serializedState = state; // Since we are currently sending full state to everyone (hand visible check is Client-side), we just send this.
+
+        // Send to Players
         Object.values(this.players).forEach(p => {
             if (p.socket && (p.socket as any).emit) {
-                p.socket.emit('gameState', state);
+                p.socket.emit('gameState', serializedState);
+            }
+        });
+
+        // Send to Spectators
+        Object.values(this.spectators).forEach(p => {
+            if (p.socket && (p.socket as any).emit) {
+                p.socket.emit('gameState', serializedState);
             }
         });
 
@@ -2225,7 +2274,12 @@ export class Game {
     }
 
     public broadcastAction(playerId: string, actionType: string, data: unknown) {
+        // Send to Players
         Object.values(this.players).forEach(p => {
+            p.socket.emit('gameAction', { playerId, actionType, data });
+        });
+        // Send to Spectators
+        Object.values(this.spectators).forEach(p => {
             p.socket.emit('gameAction', { playerId, actionType, data });
         });
     }
@@ -2269,16 +2323,6 @@ export class Game {
         return limit;
     }
 
-    private checkDrawOnKill(playerId: string, opponentId: string, slotIndex: number, drawOnKill?: number) {
-        if (!drawOnKill) return;
-        const opponent = this.players[opponentId];
-        if (!opponent.state.field[slotIndex]) {
-            const player = this.players[playerId];
-            for (let i = 0; i < drawOnKill; i++) {
-                if (player.state.deck.length > 0) player.drawCard(player.state.deck.pop()!);
-            }
-        }
-    }
 
     public resolveMulligan(playerId: string, selectedIds: string[]) {
         const player = this.players[playerId];

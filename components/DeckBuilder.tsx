@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card as CardType } from '../shared/types';
 const BASE_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
+import { SoundManager } from '../utils/SoundManager';
 
 import Card from './Card'; // Reuse existing Card component
 import CardDetailModal from './CardDetailModal';
@@ -24,6 +25,10 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [deckName, setDeckName] = useState<string>('My Deck');
     const [sortMethod, setSortMethod] = useState<'COST' | 'POWER' | 'NAME'>('COST'); // Add Sort State
+
+    useEffect(() => {
+        SoundManager.play('bgm_deck');
+    }, []);
 
     useEffect(() => {
         // Fetch cards from API

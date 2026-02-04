@@ -16,7 +16,14 @@ export type SoundKey =
     | 'levelUp'
     | 'victory'
     | 'defeat'
-    | 'bgm_battle';
+    | 'bgm_battle'
+    | 'bgm_lobby'
+    | 'bgm_deck'
+    | 'bgm_victory'
+    | 'bgm_defeat'
+    | 'effect'
+    | 'turn_start'
+    | 'selection';
 
 export interface AudioConfig {
     volume: number; // 0.0 to 1.0
@@ -34,7 +41,14 @@ const SOUND_MAP: Record<SoundKey, string> = {
     'levelUp': '/audio/se_levelup.mp3',
     'victory': '/audio/se_victory.mp3',
     'defeat': '/audio/se_defeat.mp3',
-    'bgm_battle': '/audio/bgm_battle.mp3'
+    'bgm_battle': '/audio/bgm_battle.mp3',
+    'bgm_lobby': '/audio/bgm_lobby.mp3',
+    'bgm_deck': '/audio/bgm_deck.mp3',
+    'bgm_victory': '/audio/bgm_victory.mp3',
+    'bgm_defeat': '/audio/bgm_defeat.mp3',
+    'effect': '/audio/se_effect.mp3',
+    'turn_start': '/audio/se_turn_start.mp3',
+    'selection': '/audio/se_selection.mp3'
 };
 
 class AudioManager {
@@ -71,7 +85,7 @@ class AudioManager {
         console.log('[AudioManager] Initialized');
 
         // Preload commonly used SE
-        this.preloadSE(['play_card', 'attack', 'attack_hit', 'damage']);
+        this.preloadSE(['play_card', 'attack', 'attack_hit', 'damage', 'draw', 'destroy', 'levelUp']);
     }
 
     private preloadSE(keys: SoundKey[]) {

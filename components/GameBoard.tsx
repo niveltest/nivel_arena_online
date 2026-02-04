@@ -425,9 +425,11 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
 interface GameBoardProps {
     username: string;
     roomId: string;
+    password?: string;
+    isSpectator?: boolean;
 }
 
-const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
+const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpectator }) => {
     const [gameState, setGameState] = useState<GameState | null>(null);
     const [playerId, setPlayerId] = useState<string>('');
     const [selectedCardIndex, setSelectedCardIndex] = useState<number | null>(null);
@@ -435,6 +437,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
     const [showDamageZoneFor, setShowDamageZoneFor] = useState<string | null>(null);
     const socketRef = useRef<Socket | null>(null);
     const isProcessingRef = useRef(false);
+    const prevTurnPlayerIdRef = useRef<string | null>(null);
+    const prevPhaseRef = useRef<string | null>(null);
     const [detailCard, setDetailCard] = useState<CardType | null>(null);
     const [damageCardReveal, setDamageCardReveal] = useState<{ card: CardType; isTrigger: boolean; playerName: string } | null>(null);
     const [gameResult, setGameResult] = useState<{ result: 'WIN' | 'LOSE'; reason: string } | null>(null);
@@ -506,7 +510,8 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             const savedRoomId = localStorage.getItem('currentRoomId');
             const savedUsername = localStorage.getItem('currentUsername');
 
-            if (savedRoomId && savedUsername && !isProcessingRef.current) {
+            // Only auto-rejoin if NOT spectator and NOT password guarded join (simple check for now)
+            if (savedRoomId && savedUsername && !isProcessingRef.current && !isSpectator && !password) {
                 console.log(`[Session] Attempting auto-rejoin: ${savedUsername} in ${savedRoomId}`);
                 newSocket.emit('joinGame', {
                     username: savedUsername,
@@ -531,8 +536,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             newSocket.emit('joinGame', {
                 username: username || 'Player-' + newSocket.id?.substr(0, 4),
                 roomId,
-                deckData,
-                starterDeckId
+                deckData: isSpectator ? undefined : deckData,
+                starterDeckId: isSpectator ? undefined : starterDeckId,
+                password,
+                isSpectator
             });
         });
 
@@ -541,6 +548,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             const animId = Math.random().toString(36).substring(7);
             const { type, ...data } = evt;
             setActiveAnimations(prev => [...prev, { id: animId, type: type, data: data as unknown } as AnimationEvent]);
+
+            // Play Sounds based on animation type
+            if (type === 'DESTROY') SoundManager.play('destroy');
+            if (type === 'EFFECT') SoundManager.play('effect');
 
 
 
@@ -720,34 +731,86 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
         return () => clearInterval(timer);
     }, [opponentDisconnected]);
 
-    if (!gameState || !playerId || Object.keys(gameState.players).length < 2) {
+    // BGM handling for Game Over
+    useEffect(() => {
+        if (gameResult) {
+            if (gameResult.result === 'WIN') {
+                SoundManager.play('bgm_victory');
+            } else {
+                SoundManager.play('bgm_defeat');
+            }
+        }
+    }, [gameResult]);
+
+    // Turn Start & Selection Sounds
+    useEffect(() => {
+        if (!gameState) return;
+
+        // Turn Start Sound
+        if (gameState.turnPlayerId !== prevTurnPlayerIdRef.current) {
+            if (gameState.turnPlayerId === playerId && !isSpectator) {
+                SoundManager.play('turn_start');
+            }
+            prevTurnPlayerIdRef.current = gameState.turnPlayerId;
+        }
+
+        // Selection/Prompt Sounds
+        if (gameState.phase !== prevPhaseRef.current) {
+            if (gameState.phase === 'SELECT_CARD' || gameState.phase === 'GUARDIAN_INTERCEPT') {
+                // Only sound for the acting player
+                const isActing = (gameState.phase === 'SELECT_CARD' && gameState.selection?.playerId === playerId) ||
+                    (gameState.phase === 'GUARDIAN_INTERCEPT' && gameState.pendingAttack?.defenderId === playerId);
+                if (isActing && !isSpectator) {
+                    SoundManager.play('selection');
+                }
+            }
+            prevPhaseRef.current = gameState.phase;
+        }
+    }, [gameState, playerId, isSpectator]);
+
+    const playerIds = gameState ? Object.keys(gameState.players) : [];
+
+    if (!gameState || (!isSpectator && playerIds.length < 2) || (isSpectator && playerIds.length === 0)) {
         return (
             <div className="flex flex-col items-center justify-center h-screen bg-slate-950 text-white gap-4">
-                <div className="text-xl animate-pulse">対戦相手を待っています...</div>
+                <div className="text-xl animate-pulse">
+                    {isSpectator ? 'プレイヤーを待機中...' : '対戦相手を待っています...'}
+                </div>
                 <div className="text-3xl font-mono font-bold text-yellow-500 bg-white/10 px-8 py-4 rounded-lg border border-yellow-500/30">
                     Room ID: {roomId}
                 </div>
-                <div className="text-sm text-gray-400">このIDを対戦相手に共有してください</div>
-                <button
-                    onClick={() => {
-                        const starterDeckId = localStorage.getItem('selectedStarterDeck') || 'ST01';
-                        socketRef.current?.emit('addCPU', { roomId, starterDeckId });
-                    }}
-                    className="mt-8 px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-bold transition transform hover:scale-105"
-                >
-                    CPU対戦を開始する (Solo Play)
-                </button>
+                <div className="text-sm text-gray-400">このIDを{isSpectator ? 'プレイヤー' : '対戦相手'}に共有してください</div>
+                {!isSpectator && (
+                    <button
+                        onClick={() => {
+                            const starterDeckId = localStorage.getItem('selectedStarterDeck') || 'ST01';
+                            socketRef.current?.emit('addCPU', { roomId, starterDeckId });
+                        }}
+                        className="mt-8 px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg font-bold transition transform hover:scale-105"
+                    >
+                        CPU対戦を開始する (Solo Play)
+                    </button>
+                )}
             </div>
         );
     }
 
-    const me = gameState.players[playerId];
-    const opponentId = Object.keys(gameState.players).find(id => id !== playerId);
-    const opponent = opponentId ? gameState.players[opponentId] : null;
+    let me: any;
+    let opponent: any;
 
-    if (!me || !opponent) return <div>同期中...</div>;
+    if (isSpectator) {
+        // Spectator View: Player 1 (first key) is "Bottom", Player 2 is "Top"
+        me = gameState.players[playerIds[0]];
+        opponent = playerIds.length > 1 ? gameState.players[playerIds[1]] : null;
+    } else {
+        me = gameState.players[playerId];
+        const opponentId = playerIds.find(id => id !== playerId);
+        opponent = opponentId ? gameState.players[opponentId] : null;
+    }
 
-    const isMyTurn = gameState.turnPlayerId === playerId;
+    if (!me) return <div>同期中...</div>;
+
+    const isMyTurn = !isSpectator && gameState.turnPlayerId === playerId;
 
 
 
@@ -1493,6 +1556,11 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                             <div className="text-[10px] text-slate-600 font-mono">{roomId}</div>
                         </div>
                     </div>
+                    {isSpectator && (
+                        <div className="px-3 py-1 bg-purple-600/50 border border-purple-400/50 rounded text-[10px] font-black text-purple-100 animate-pulse flex items-center gap-2">
+                            <span>👁</span> SPECTATOR MODE
+                        </div>
+                    )}
                 </div>
 
                 {/* Official Phase Track */}

@@ -13,7 +13,14 @@ export class SoundManager {
         'destroy': 'destroy',
         'damage': 'damage', // Maps to damage received sound
         'levelUp': 'levelUp',
-        'bgm_battle': 'bgm_battle'
+        'bgm_battle': 'bgm_battle',
+        'bgm_lobby': 'bgm_lobby',
+        'bgm_deck': 'bgm_deck',
+        'bgm_victory': 'bgm_victory',
+        'bgm_defeat': 'bgm_defeat',
+        'effect': 'effect',
+        'turn_start': 'turn_start',
+        'selection': 'selection'
     };
 
     static preload() {
@@ -32,7 +39,7 @@ export class SoundManager {
 
         const mappedKey = this.KEY_MAP[key];
         if (mappedKey) {
-            if (mappedKey === 'bgm_battle') {
+            if (mappedKey.startsWith('bgm_')) {
                 audioManager.playBGM(mappedKey);
             } else {
                 audioManager.playSE(mappedKey);

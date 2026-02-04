@@ -10,15 +10,19 @@ export default function Home() {
   const [inDeckBuilder, setInDeckBuilder] = useState(false);
   const [username, setUsername] = useState("");
   const [roomId, setRoomId] = useState("");
+  const [password, setPassword] = useState<string | undefined>(undefined);
+  const [isSpectator, setIsSpectator] = useState(false);
 
-  const handleJoin = (name: string, id: string) => {
+  const handleJoin = (name: string, id: string, pwd?: string, spec?: boolean) => {
     setUsername(name);
     setRoomId(id);
+    setPassword(pwd);
+    setIsSpectator(!!spec);
     setInGame(true);
   };
 
   if (inGame) {
-    return <GameBoard username={username} roomId={roomId} />;
+    return <GameBoard username={username} roomId={roomId} password={password} isSpectator={isSpectator} />;
   }
 
   if (inDeckBuilder) {
