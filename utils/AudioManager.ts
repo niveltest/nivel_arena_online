@@ -60,6 +60,9 @@ class AudioManager {
     };
     private initialized = false;
 
+    private pendingBGM: SoundKey | null = null;
+    private pendingSE: { key: SoundKey, volume: number }[] = [];
+
     /**
      * Initialize the audio system
      * Must be called after user interaction due to browser autoplay policies
@@ -93,8 +96,22 @@ class AudioManager {
         console.log('[AudioManager] Initialized successfully');
 
         // Preload commonly used SE
-        console.log('[AudioManager] Preloading sound effects...');
-        this.preloadSE(['play_card', 'attack', 'attack_hit', 'damage', 'draw', 'destroy', 'levelUp']);
+        this.preloadSE(['play_card', 'attack', 'attack_hit', 'damage', 'draw', 'destroy', 'levelUp'], true);
+
+        // Play pending BGM if any
+        if (this.pendingBGM) {
+            const key = this.pendingBGM;
+            this.pendingBGM = null;
+            console.log(`[AudioManager] Playing pending BGM: ${key}`);
+            this.playBGM(key);
+        }
+
+        // Play pending SE if any
+        if (this.pendingSE.length > 0) {
+            console.log(`[AudioManager] Playing ${this.pendingSE.length} pending sounds`);
+            this.pendingSE.forEach(se => this.playSE(se.key, se.volume));
+            this.pendingSE = [];
+        }
     }
 
     /**
@@ -104,24 +121,26 @@ class AudioManager {
         return this.initialized;
     }
 
-    private preloadSE(keys: SoundKey[]) {
+    private preloadSE(keys: SoundKey[], silent: boolean = false) {
         if (typeof window === 'undefined') return;
 
-        console.log(`[AudioManager] Preloading ${keys.length} sound effects...`);
+        if (!silent) console.log(`[AudioManager] Preloading ${keys.length} sound effects...`);
         keys.forEach(key => {
             const src = SOUND_MAP[key];
             if (!src) {
-                console.warn(`[AudioManager] Sound key "${key}" not found in SOUND_MAP`);
+                if (!silent) console.warn(`[AudioManager] Sound key "${key}" not found in SOUND_MAP`);
                 return;
             }
 
             const audio = new Audio(src);
-            audio.addEventListener('canplaythrough', () => {
-                console.log(`[AudioManager] Preloaded: ${key} (${src})`);
-            }, { once: true });
-            audio.addEventListener('error', (e) => {
-                console.error(`[AudioManager] Failed to preload: ${key} (${src})`, e);
-            }, { once: true });
+            if (!silent) {
+                audio.addEventListener('canplaythrough', () => {
+                    console.log(`[AudioManager] Preloaded: ${key} (${src})`);
+                }, { once: true });
+                audio.addEventListener('error', (e) => {
+                    console.error(`[AudioManager] Failed to preload: ${key} (${src})`, e);
+                }, { once: true });
+            }
 
             audio.load(); // Hint browser to preload
             // Store one instance in the pool
@@ -158,7 +177,9 @@ class AudioManager {
                 this.fadeVolume(this.bgm!, 0, targetVolume, fadeInDuration);
             }).catch(err => {
                 // Autoplay policy might block this
-                console.warn('[AudioManager] BGM play failed (Autoplay?):', err);
+                console.warn('[AudioManager] BGM play failed (Autoplay?):', err.message);
+                this.pendingBGM = key;
+                this.initialized = false; // System is effectively not fully initialized for sound if this fails
             });
         }
     }
@@ -185,10 +206,14 @@ class AudioManager {
      * Play a sound effect
      */
     public playSE(key: SoundKey, volumeScale: number = 1.0): void {
-        if (!this.initialized && typeof window !== 'undefined') {
-            // Auto-init on first user interaction-triggered sound if possible
-            console.log('[AudioManager] Auto-initializing on first SE play');
-            this.initialized = true;
+        if (typeof window === 'undefined') return;
+
+        if (!this.initialized) {
+            // Store for later playback once user interacts
+            if (this.pendingSE.length < 10) { // Limit queue size
+                this.pendingSE.push({ key, volume: volumeScale });
+            }
+            return;
         }
 
         if (this.config.se.muted) {

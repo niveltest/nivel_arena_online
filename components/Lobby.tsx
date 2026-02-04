@@ -4,6 +4,7 @@ import { io } from 'socket.io-client';
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
 import { useEffect } from 'react';
 import { SoundManager } from '../utils/SoundManager';
+import { audioManager } from '../utils/AudioManager';
 
 
 interface LobbyProps {
@@ -22,7 +23,30 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
     const [selectedDeck, setSelectedDeck] = useState<string>('CUSTOM');
 
     useEffect(() => {
+        // Initialize Audio System
+        console.log('[Lobby] Initializing audio system...');
+        audioManager.initialize().catch(console.error);
+        SoundManager.preload();
+
+        // Also initialize on first user interaction (for browsers with strict autoplay policies)
+        const handleFirstInteraction = () => {
+            console.log('[Lobby] First user interaction detected, ensuring audio is initialized');
+            audioManager.initialize().catch(console.error);
+            // Remove listeners after first interaction
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('keydown', handleFirstInteraction);
+        };
+
+        document.addEventListener('click', handleFirstInteraction, { once: true });
+        document.addEventListener('keydown', handleFirstInteraction, { once: true });
+
+        // Try to play lobby BGM (will be pending if blocked)
         SoundManager.play('bgm_lobby');
+
+        return () => {
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('keydown', handleFirstInteraction);
+        };
     }, []);
 
     const starterDecks = [
@@ -86,7 +110,13 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-slate-950 text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10 pointer-events-none"></div>
+            {/* Grid background using CSS instead of SVG file to avoid 404 */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none"
+                style={{
+                    backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+                    backgroundSize: '40px 40px'
+                }}>
+            </div>
 
             <div className="p-8 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl w-full max-w-md z-10">
                 <h1 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
