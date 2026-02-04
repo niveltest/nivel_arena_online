@@ -261,6 +261,14 @@ export class CPUPlayer extends Player {
     }
 
     private handleAttackPhase() {
+        console.log(`[AI] handleAttackPhase called. Phase: ${this.game.phase}, TurnPlayer: ${this.game.turnPlayerId}, MyID: ${this.id}`);
+
+        // Only act if it's our turn
+        if (this.game.turnPlayerId !== this.id) {
+            console.log(`[AI] Not my turn in ATTACK phase, skipping.`);
+            return;
+        }
+
         const opponentId = Object.keys(this.game.players).find(id => id !== this.id);
         if (!opponentId) return;
         const opponent = (this.game as any).players[opponentId];
@@ -270,10 +278,11 @@ export class CPUPlayer extends Player {
             .map((u, i) => ({ unit: u, index: i }))
             .filter(spec => spec.unit && !spec.unit.attackedThisTurn && !spec.unit.cannotAttack && !spec.unit.isStunned);
 
+        console.log(`[AI] Ready units count: ${readyUnitsSpecs.length}`);
+
         if (readyUnitsSpecs.length === 0) {
-            if (this.game.turnPlayerId === this.id) {
-                this.game.nextPhase();
-            }
+            console.log(`[AI] No ready units, advancing to next phase.`);
+            this.game.nextPhase();
             return;
         }
 
@@ -292,8 +301,9 @@ export class CPUPlayer extends Player {
             let targetIndex = opponent.state.field.findIndex((u: any) => u === null);
             if (targetIndex === -1) targetIndex = 0; // If field full, still hit a slot (Game.ts will handle block/intercept)
 
+            console.log(`[AI] Lethal attack: Unit ${spec.index} -> Target ${targetIndex}`);
             this.game.attack(this.id, spec.index, targetIndex);
-            this.think();
+            // Don't call think() immediately - let the attack resolve
             return;
         }
 
@@ -384,9 +394,9 @@ export class CPUPlayer extends Player {
             if (targetIndex === -1) targetIndex = 0;
         }
 
-        (this.game as any).addLog(`[AI] Strategic Attack: ${bestAttackerSpec.unit?.name} (Pwr:${myPower}) -> TargetIdx:${targetIndex}`);
+        console.log(`[AI] Strategic Attack: ${bestAttackerSpec.unit?.name} (Pwr:${myPower}) -> TargetIdx:${targetIndex}`);
         this.game.attack(this.id, bestAttackerSpec.index, targetIndex);
-        this.think();
+        // Don't call think() immediately - let the attack resolve
     }
 
     private handleGuardianIntercept() {
