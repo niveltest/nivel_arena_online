@@ -92,6 +92,11 @@ body {
   background-size: 20px 20px;
 }
 
+.bg-grid-pattern {
+  background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
 .container-size {
   container-type: size;
 }

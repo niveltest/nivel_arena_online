@@ -1,115 +1,34 @@
-# Walkthrough: オンライン環境での音声再生問題修正
+# オンライン環境の音声再生問題の修正
 
-オンライン環境（Vercel）で音声が再生されない問題を修正しました。
+オンライン環境で音声が再生されない問題を解決するため、ブラウザの自動再生ポリシーへの対応、アセットパスの修正、およびデプロイ設定の改善を行いました。
 
-## 実装内容
+## 概要
 
-### 1. AudioManagerの改善
+- **AudioManager の強化**: ブラウザの自動再生ポリシーによりブロックされた音声を、ユーザー操作後に自動再生する「保留再生」機能を実装しました。
+- **Lobby コンポーネントの修正**: ユーザー操作をトリガーとしたオーディオ初期化処理を追加し、存在しない `grid.svg` への参照を CSS グリッドに置き換えました。
+- **デプロイ環境の安定化**: `vercel.json` 内の古い Secret 参照を削除し、Vercel への正常なデプロイを可能にしました。
 
-#### 詳細なログの追加
+## 変更内容
 
-- `initialize()`メソッドに初期化プロセスの各ステップでログを出力
-- `preloadSE()`メソッドに音声ファイルの読み込み成功/失敗のログを追加
-- `playSE()`メソッドに再生開始/失敗のログを追加
+### オーディオ管理
 
-#### 初期化状態確認メソッドの追加
+- [AudioManager.ts](file:///c:/Users/worke/Antigravity/nivel_arena_online/utils/AudioManager.ts):
+  - `playBGM` に `pendingBGM` ロジックを追加。
+  - `initialize` メソッドで保留中の BGM を再生するように拡張。
+- [Lobby.tsx](file:///c:/Users/worke/Antigravity/nivel_arena_online/components/Lobby.tsx):
+  - マウント時および最初のクリック/キー操作時にオーディオを初期化。
+  - 404 エラー（`grid.svg`）を解消するため、CSS による背景描画に変更。
 
-```typescript
-public isInitialized(): boolean {
-    return this.initialized;
-}
-```
+### インフラ・デプロイ
 
-#### エラーハンドリングの強化
+- [vercel.json](file:///c:/Users/worke/Antigravity/nivel_arena_online/vercel.json):
+  - 不要な `env` セクションを削除し、Vercel ダッシュボードで設定された環境変数が優先されるように修正。
 
-- 音声ファイルの読み込み時に`canplaythrough`と`error`イベントリスナーを追加
-- 再生失敗時に詳細なエラーメッセージを表示
+## 検証結果
 
-### 2. GameBoardでの初期化処理
+- **デプロイ成功**: `npx vercel --prod` を実行し、[本番環境 URL](https://nivel-arena-online.vercel.app/) への正常なデプロイを確認しました。
+- **環境変数の反映**: デプロイ済みの環境で、`NEXT_PUBLIC_SOCKET_URL` がサーバー URL を正しく指していることを確認済み。
 
-#### コンポーネントマウント時の初期化
-
-```typescript
-useEffect(() => {
-    console.log('[GameBoard] Initializing audio system...');
-    audioManager.initialize()
-        .then(() => {
-            console.log('[GameBoard] Audio system initialized');
-        })
-        .catch(err => {
-            console.error('[GameBoard] Failed to initialize audio:', err);
-        });
-    // ...
-}, []);
-```
-
-#### ユーザーインタラクション時の初期化
-
-ブラウザの自動再生ポリシーに対応するため、ユーザーの最初のクリックまたはキー入力時に音声システムを初期化：
-
-```typescript
-const handleFirstInteraction = () => {
-    console.log('[GameBoard] First user interaction detected, ensuring audio is initialized');
-    audioManager.initialize().catch(console.error);
-    // Remove listeners after first interaction
-    document.removeEventListener('click', handleFirstInteraction);
-    document.removeEventListener('keydown', handleFirstInteraction);
-};
-
-document.addEventListener('click', handleFirstInteraction, { once: true });
-document.addEventListener('keydown', handleFirstInteraction, { once: true });
-```
-
-## 検証方法
-
-### ローカル環境での確認
-
-1. サーバーを起動:
-
-   ```bash
-   npm run dev:all
-   ```
-
-2. ブラウザで`http://localhost:3000`にアクセス
-3. F12で開発者ツールを開き、Consoleタブを確認
-4. 以下のログが表示されることを確認:
-   - `[GameBoard] Initializing audio system...`
-   - `[AudioManager] Initializing...`
-   - `[AudioManager] Initialized successfully`
-   - `[AudioManager] Preloading sound effects...`
-   - `[AudioManager] Preloaded: play_card (/audio/se_play_card.mp3)`
-   - など
-5. ゲームを開始し、カードプレイ時などに音声が再生されることを確認
-
-### オンライン環境での確認
-
-1. Vercelにデプロイ後、URLにアクセス
-2. F12で開発者ツールを開き、Consoleタブを確認
-3. 上記と同じログが表示されることを確認
-4. Networkタブで音声ファイルのリクエストが成功していることを確認（Status: 200）
-5. ゲーム中に音声が再生されることを確認
-
-### トラブルシューティング
-
-#### 音声が再生されない場合
-
-1. **コンソールログを確認**:
-   - `[AudioManager] SE play failed for xxx: NotAllowedError`が表示される場合、ブラウザの自動再生ポリシーによってブロックされています。ページ上で一度クリックしてから再度試してください。
-   - `[AudioManager] Failed to preload: xxx`が表示される場合、音声ファイルが見つからないか、ネットワークエラーです。
-
-2. **Networkタブを確認**:
-   - 音声ファイルのリクエストが404エラーになっている場合、ファイルが正しくデプロイされていません。
-   - CORSエラーが表示される場合、サーバー設定を確認してください。
-
-3. **ブラウザの音量設定を確認**:
-   - ブラウザのタブがミュートになっていないか確認
-   - システムの音量が0になっていないか確認
-
-## 変更ファイル
-
-- `utils/AudioManager.ts`: ログ追加、エラーハンドリング強化、`isInitialized()`メソッド追加
-- `components/GameBoard.tsx`: AudioManagerのインポート、初期化処理追加
-
-## コミット情報
-
-コミットハッシュ: `f4da8cf`
+> [!NOTE]
+> 私の環境のブラウザツールに一時的な問題が発生しており、音が出るかどうかの最終確認は自動で行えませんでした。お手数ですが、以下の URL より実際の動作（クリック後に BGM が鳴るか、背景が正しく表示されるか）をご確認いただけますでしょうか。
+> <https://nivel-arena-online.vercel.app/>

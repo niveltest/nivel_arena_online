@@ -55,7 +55,7 @@ class AudioManager {
     private bgm: HTMLAudioElement | null = null;
     private sePool: Map<string, HTMLAudioElement[]> = new Map();
     private config: Record<AudioType, AudioConfig> = {
-        bgm: { volume: 0.4, muted: false },
+        bgm: { volume: 0.2, muted: false },
         se: { volume: 0.6, muted: false }
     };
     private initialized = false;

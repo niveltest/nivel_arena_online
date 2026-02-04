@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import { io } from 'socket.io-client';
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
+console.log('[Lobby] Expected Socket URL:', SOCKET_URL);
 import { useEffect } from 'react';
 import { SoundManager } from '../utils/SoundManager';
 import { audioManager } from '../utils/AudioManager';
+import AudioSettingsModal from './AudioSettingsModal';
 
 
 interface LobbyProps {
@@ -21,6 +23,7 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
     const [mode, setMode] = useState<'MENU' | 'JOIN' | 'CREATE_CONFIG'>('MENU');
     const [isConnecting, setIsConnecting] = useState(false);
     const [selectedDeck, setSelectedDeck] = useState<string>('CUSTOM');
+    const [isAudioSettingsOpen, setIsAudioSettingsOpen] = useState(false);
 
     useEffect(() => {
         // Initialize Audio System
@@ -67,7 +70,9 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
 
         const socket = io(SOCKET_URL, {
             timeout: 15000,
-            reconnection: false
+            reconnection: false,
+            transports: ['polling', 'websocket'], // Start with polling for better compatibility
+            withCredentials: true
         });
 
         const connectionTimeout = setTimeout(() => {
@@ -82,7 +87,7 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
             clearTimeout(connectionTimeout);
             socket.disconnect();
             setIsConnecting(false);
-            alert(`サーバー接続エラー: ${err.message}`);
+            alert(`サーバー接続エラー (${SOCKET_URL}): ${err.message}`);
         });
 
         socket.emit('createGame', username, selectedDeck, createPassword, (newRoomId: string) => {
@@ -111,12 +116,24 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-slate-950 text-white relative overflow-hidden">
             {/* Grid background using CSS instead of SVG file to avoid 404 */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none"
-                style={{
-                    backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
-                    backgroundSize: '40px 40px'
-                }}>
+            <div className="absolute inset-0 opacity-10 pointer-events-none bg-grid-pattern">
             </div>
+
+            {/* Audio Settings Button */}
+            <div className="absolute top-6 right-6 z-50">
+                <button
+                    onClick={() => setIsAudioSettingsOpen(true)}
+                    className="p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full transition-all group active:scale-90"
+                    title="Audio Settings"
+                >
+                    <span className="text-xl group-hover:rotate-90 transition-transform inline-block">⚙️</span>
+                </button>
+            </div>
+
+            <AudioSettingsModal
+                isOpen={isAudioSettingsOpen}
+                onClose={() => setIsAudioSettingsOpen(false)}
+            />
 
             <div className="p-8 bg-black/60 backdrop-blur-md rounded-xl border border-white/10 shadow-2xl w-full max-w-md z-10">
                 <h1 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">

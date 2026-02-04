@@ -12,7 +12,13 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: (origin, callback) => {
+        // Allow all origins to avoid "origin: *" conflict with credentials: true
+        callback(null, true);
+    },
+    credentials: true
+}));
 
 // Serve Card Data
 import cardsData from './data/cards.json';
@@ -140,8 +146,9 @@ app.get('/api/decks/:username', (req, res) => {
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: process.env.CLIENT_URL || "*", // Allow all origins for dev, or specific origin for production
-        methods: ["GET", "POST"]
+        origin: true, // Echoes the request origin, required for credentials: true
+        methods: ["GET", "POST"],
+        credentials: true
     }
 });
 

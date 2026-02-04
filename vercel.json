@@ -2,9 +2,7 @@
     "buildCommand": "npm run build",
     "framework": "nextjs",
     "installCommand": "npm install",
-    "env": {
-        "NEXT_PUBLIC_SOCKET_URL": "@socket_url"
-    },
+    "installCommand": "npm install",
     "headers": [
         {
             "source": "/(.*)",

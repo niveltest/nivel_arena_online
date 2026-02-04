@@ -11,9 +11,11 @@ import { GameState, Card as CardType, type AnimationEvent, AnimationType, Player
 import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
+console.log('[GameBoard] Expected Socket URL:', SOCKET_URL);
 import { SoundManager } from '../utils/SoundManager';
 import { audioManager } from '../utils/AudioManager';
 import { DamageAnimationData, EffectAnimationData } from '../shared/types';
+import AudioSettingsModal from './AudioSettingsModal';
 
 // Playmat Layout Types
 interface PlaymatZoneConfig {
@@ -461,6 +463,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         const saved = typeof window !== 'undefined' ? localStorage.getItem('selectedOpponentPlaymat') : null;
         return (saved === 'mermaid' || saved === 'cyber' || saved === 'official') ? saved : 'official';
     });
+    const [isAudioSettingsOpen, setIsAudioSettingsOpen] = useState(false);
     const [floatingTexts, setFloatingTexts] = useState<{ id: string; text: string; x: string; y: string; color: string }[]>([]);
     const [showPlaymatSelector, setShowPlaymatSelector] = useState(false);
     const [customLayout, setCustomLayout] = useState<PlaymatThemeConfig>(PLAYMAT_CONFIGS[playmatId]);
@@ -536,7 +539,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
     useEffect(() => {
         SoundManager.preload();
         SoundManager.play('bgm_battle'); // Start BGM
-        const newSocket = io(SOCKET_URL);
+        const newSocket = io(SOCKET_URL, {
+            transports: ['polling', 'websocket'],
+            withCredentials: true
+        });
         socketRef.current = newSocket;
 
         newSocket.on('connect', () => {
@@ -1674,6 +1680,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                         <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">プレイマット変更</div>
                     </button>
                     <button
+                        onClick={() => setIsAudioSettingsOpen(true)}
+                        className="p-2 hover:bg-white/10 rounded transition-colors group relative border border-white/5"
+                        title="音量設定"
+                    >
+                        <span className="text-lg">⚙️</span>
+                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">音量設定</div>
+                    </button>
+                    <button
                         onClick={handleEndTurn}
                         disabled={!isMyTurn || gameState.phase === 'DEFENSE'}
                         className={`
@@ -1921,6 +1935,11 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                     </motion.div>
                 ))}
             </AnimatePresence>
+
+            <AudioSettingsModal
+                isOpen={isAudioSettingsOpen}
+                onClose={() => setIsAudioSettingsOpen(false)}
+            />
         </div>
     );
 };
@@ -1961,4 +1980,3 @@ const DestroyAnimation: React.FC<{ anim: { id: string; type: 'DESTROY'; data: De
 };
 
 export default GameBoard;
-
