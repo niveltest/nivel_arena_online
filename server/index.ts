@@ -12,6 +12,11 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
+
+app.get('/', (req, res) => {
+    res.send('Nivel Arena Server is Running (v1.1)');
+});
+
 app.use(cors({
     origin: (origin, callback) => {
         const allowedOrigins = [
