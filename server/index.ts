@@ -14,8 +14,21 @@ dotenv.config();
 const app = express();
 app.use(cors({
     origin: (origin, callback) => {
-        // Allow all origins to avoid "origin: *" conflict with credentials: true
-        callback(null, true);
+        const allowedOrigins = [
+            "https://nivel-arena-online.vercel.app",
+            "http://localhost:3001",
+            "http://localhost:3000"
+        ];
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith("vercel.app")) { // Allow all Vercel previews too
+            callback(null, true);
+        } else {
+            // For development, allow all (optional, but let's be permissive for now to debug)
+            // callback(new Error('Not allowed by CORS'));
+            callback(null, true);
+        }
     },
     credentials: true
 }));
@@ -146,7 +159,7 @@ app.get('/api/decks/:username', (req, res) => {
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: true, // Echoes the request origin, required for credentials: true
+        origin: ["https://nivel-arena-online.vercel.app", "http://localhost:3001", "http://localhost:3000"], // Explicitly allow Vercel
         methods: ["GET", "POST"],
         credentials: true
     }
