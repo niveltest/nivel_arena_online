@@ -1,0 +1,78 @@
+--- Unique Effect Combinations ---
+[ACT:ADD_FROM_DISCARD] [TGT:DISCARD] [CND:COST_LE_2] (Count: 1)
+  Sample: バイパー‐トキシックラビット
+[ACT:ADD_FROM_DISCARD] [TGT:DISCARD] [CND:N/A] (Count: 6)
+[ACT:ADD_FROM_DISCARD] [TGT:SELF] [CND:N/A] (Count: 54)
+[ACT:BOUNCE_UNIT] [TGT:ALL_ENEMIES] [CND:N/A] (Count: 7)
+[ACT:BOUNCE_UNIT] [TGT:SINGLE] [CND:N/A] (Count: 1)
+  Sample: エード
+[ACT:BUFF_ALLY] [TGT:ALL_ALLIES] [CND:MY_TURN] (Count: 4)
+[ACT:BUFF_ALLY] [TGT:ALL_ALLIES] [CND:N/A] (Count: 38)
+[ACT:BUFF_ALLY] [TGT:ALL_ALLIES] [CND:OPPONENT_TURN] (Count: 1)
+  Sample: ドロシー
+[ACT:BUFF_ALLY] [TGT:SELF] [CND:ARMED_IF_EQUIPPED] (Count: 2)
+  Sample: マクスウェル, センチ
+[ACT:BUFF_ALLY] [TGT:SELF] [CND:ARMED_PER_ITEM] (Count: 1)
+  Sample: ソーダ
+[ACT:BUFF_ALLY] [TGT:SELF] [CND:ARMED_UNIQUE_IF_EQUIPPED] (Count: 1)
+  Sample: ラプラス
+[ACT:BUFF_ALLY] [TGT:SELF] [CND:N/A] (Count: 34)
+[ACT:BUFF_ALLY] [TGT:SELF] [CND:PER_LEADER_LEVEL] (Count: 1)
+  Sample: ディーゼル
+[ACT:BUFF_ALLY] [TGT:SINGLE] [CND:N/A] (Count: 2)
+  Sample: ルピー, ティア‐ラブリーデート
+[ACT:BUFF_HIT] [TGT:ALL_ALLIES] [CND:N/A] (Count: 1)
+  Sample: ブリッド
+[ACT:BUFF_HIT] [TGT:SELF] [CND:N/A] (Count: 3)
+[ACT:BUFF_HIT] [TGT:SINGLE] [CND:N/A] (Count: 2)
+  Sample: メイデン：アイスローズ, アリス：ワンダーランドバニー
+[ACT:BUFF_SIZE] [TGT:N/A] [CND:N/A] (Count: 1)
+  Sample: ギルティ
+[ACT:COST_BASED_KILL] [TGT:HAND_UNIT] [CND:N/A] (Count: 1)
+  Sample: 黒化
+[ACT:DEAL_DAMAGE_PLAYER] [TGT:N/A] [CND:N/A] (Count: 3)
+[ACT:DEBUFF_ENEMY] [TGT:ALL_ENEMIES] [CND:N/A] (Count: 1)
+  Sample: フォーメーションF.F
+[ACT:DEBUFF_ENEMY] [TGT:OPPOSING] [CND:N/A] (Count: 3)
+[ACT:DEBUFF_ENEMY] [TGT:SINGLE] [CND:N/A] (Count: 13)
+[ACT:DISCARD] [TGT:N/A] [CND:N/A] (Count: 1)
+  Sample: 奇襲
+[ACT:DISCARD] [TGT:OPPONENT_HAND] [CND:N/A] (Count: 2)
+  Sample: プリバティ, プリバティ：アンカインド・メイド
+[ACT:DISCARD] [TGT:OPPONENT_HAND] [CND:OPPONENT_HAND_GE_3] (Count: 7)
+[ACT:DISCARD] [TGT:SELF] [CND:N/A] (Count: 4)
+[ACT:DISCARD] [TGT:SELF_HAND] [CND:N/A] (Count: 8)
+[ACT:DRAW] [TGT:N/A] [CND:N/A] (Count: 37)
+[ACT:GRANT_ABILITY] [TGT:ALL_ALLIES] [CND:N/A] (Count: 3)
+[ACT:GRANT_ABILITY] [TGT:ALL_ALLIES] [CND:TURN_END] (Count: 9)
+[ACT:GRANT_ABILITY] [TGT:ALL_ENEMIES] [CND:TURN_END] (Count: 3)
+[ACT:GRANT_ABILITY] [TGT:SELF] [CND:OPPOSING_HIT_LE_ARMED_COUNT] (Count: 1)
+  Sample: クラウン‐ネイキッドキング
+[ACT:GRANT_ABILITY] [TGT:SINGLE] [CND:TURN_END] (Count: 1)
+  Sample: 失楽園
+[ACT:KILL_UNIT] [TGT:OPPOSING] [CND:N/A] (Count: 3)
+[ACT:KILL_UNIT] [TGT:SINGLE] [CND:COST_LE_3] (Count: 6)
+[ACT:KILL_UNIT] [TGT:SINGLE] [CND:N/A] (Count: 10)
+[ACT:LEVEL_UP] [TGT:N/A] [CND:N/A] (Count: 11)
+[ACT:POWER_COPY_FRIEND] [TGT:N/A] [CND:N/A] (Count: 1)
+  Sample: 私たちは友達！
+[ACT:RECYCLE] [TGT:DISCARD] [CND:N/A] (Count: 2)
+  Sample: ビギナーズベネフィット, ネコの恩返し
+[ACT:RESTRICT_ATTACK] [TGT:SELF] [CND:N/A] (Count: 2)
+  Sample: アドミ, ユルハ
+[ACT:RESTRICT_ATTACK] [TGT:SINGLE] [CND:SELECTED_TARGET] (Count: 1)
+  Sample: イージスキャノン牽制射撃
+[ACT:SALVAGE_EQUIPMENT] [TGT:SELF] [CND:N/A] (Count: 1)
+  Sample: ネロ
+[ACT:SEARCH_DECK] [TGT:DECK_ALL] [CND:N/A] (Count: 1)
+  Sample: クラウン
+[ACT:SEARCH_DECK] [TGT:DECK_TOP] [CND:N/A] (Count: 3)
+[ACT:SEARCH_DECK] [TGT:DECK_TOP] [CND:TYPE_UNIT] (Count: 2)
+  Sample: ラプンツェル, ディーゼル‐ブラックホリデー
+[ACT:SET_HIT] [TGT:SELF] [CND:N/A] (Count: 7)
+[ACT:SET_POWER] [TGT:OPPOSING] [CND:N/A] (Count: 1)
+  Sample: バイパー‐シャイン・オブ・ラブ
+[ACT:SPECIAL_VICTORY] [TGT:N/A] [CND:HAS_SPECIFIC_CARDS_IN_GRAVE] (Count: 1)
+  Sample: Forbidden Exodia
+[ACT:SWAP_DAMAGE_HAND] [TGT:DAMAGE_ITEM] [CND:N/A] (Count: 2)
+  Sample: ミルク, 勇気の眼差し

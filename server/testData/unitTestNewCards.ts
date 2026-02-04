@@ -28,7 +28,8 @@ const createMockCard = (id: string, name: string, keywords: string[] = [], effec
 async function runTests() {
     console.log('=== Starting Unit Tests for New Cards ===');
 
-    const game = new Game('test-room');
+    const mockIo = { to: () => ({ emit: () => { } }), in: () => ({ emit: () => { } }) };
+    const game = new Game('test-room', mockIo);
     const p1 = new Player({ ...mockSocket, id: 'p1' }, 'Player1');
     const p2 = new Player({ ...mockSocket, id: 'p2' }, 'Player2');
 

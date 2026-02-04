@@ -1,17 +1,12 @@
-# 次のステップ：機能拡張と改善
 
-- [x] 現状の分析とタスクの整理
-  - [x] 会話履歴とコードの確認
-  - [x] タスクリストと実装計画の作成
-- [x] スキルカードの使用環境の整備 (Skill Zone Logic)
-  - [x] `Game.ts` でのスキルカードの使用とスキルゾーンへの配置の実装
-  - [x] ターンの終わりでのスキルゾーンのクリア処理
-- [x] 装備アイテムからの効果の継承 (Card Effect Inheritance)
-  - [x] ユニットが装備しているアイテムのキーワード（貫通など）の継承
-  - [x] アイテムが持つトリガー効果（ON_ATTACKなど）のユニットへの適用
-- [x] 効果の発生源の表示 (Trigger Visibility)
-  - [x] `SelectionState` の `triggerCard` を活用したUI表示 (サーバー側対応済)
-- [x] 「略奪」効果のロジック修正 (Loot Effect Fix)
-  - [x] 相手ユニットが破壊されたときのみ効果が発動するように修正
-- [x] ゼロパワーのユニットの破壊処理 (Zero Power Destruction)
-  - [x] ステートベースアクションとしての実装
+# Task: Improve CPU AI Logic
+
+- [x] Create Implementation Plan <!-- id: 0 -->
+- [x] Implement `evaluateThreat` helper in `AIPlayer.ts` <!-- id: 1 -->
+- [x] Update `handleSelection` in `AIPlayer.ts` to use smart targeting <!-- id: 2 -->
+  - [x] `RESTRICT_ATTACK_SELECTION` <!-- id: 3 -->
+  - [x] `BOUNCE_UNIT_SELECTION` <!-- id: 4 -->
+  - [x] `DEBUFF_ENEMY_SELECTION` <!-- id: 5 -->
+  - [x] `KILL_UNIT_SELECTION` <!-- id: 6 -->
+- [x] Create and run `unitTestAI.ts` verification script <!-- id: 7 -->
+- [ ] Create Walkthrough <!-- id: 8 -->

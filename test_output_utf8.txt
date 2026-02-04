@@ -1,0 +1,56 @@
+﻿Starting AI Skill Usage Unit Test...
+
+--- Case 1: No Units No Buff ---
+[AI Debug] Skills in hand: 1, FieldSize: 0, Limit: 1
+[AI Debug] Cannot afford skill: Super Buff (2 > 1)
+PlayCard called (Expected false): false
+
+--- Case 2: Units Exist Play Buff ---
+[AI Debug] Skills in hand: 1, FieldSize: 2, Limit: 1
+[AI Debug] Cannot afford skill: Super Buff (4 > 1)
+[AI] Attacking with My Unit at target index 0
+node.exe : [AI ERROR] TypeError: Cannot read
+ properties of undefined (reading 'emit')
+発生場所 行:1 文字:1
++ & "C:\Program Files\nodejs/node.exe" "C:\P
+rogram Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: 
+    ([AI ERROR] Type...reading 'emit'):Str  
+  ing) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommand 
+   Error
+ 
+    at C:\Users\worke\Antigravity\nivel_aren
+a_online\server\Game.ts:2115:22
+    at Array.forEach (<anonymous>)
+    at Game.broadcastAction (C:\Users\worke\
+Antigravity\nivel_arena_online\server\Game.t
+s:2114:37)
+    at Game.endGame (C:\Users\worke\Antigrav
+ity\nivel_arena_online\server\Game.ts:2071:1
+4)
+    at Game.dealDamage (C:\Users\worke\Antig
+ravity\nivel_arena_online\server\Game.ts:106
+7:22)
+    at Game.finalizeAttackResolution (C:\Use
+rs\worke\Antigravity\nivel_arena_online\serv
+er\Game.ts:660:22)
+    at Game.attack (C:\Users\worke\Antigravi
+ty\nivel_arena_online\server\Game.ts:637:14)
+    at CPUPlayer.handleAttackPhase (C:\Users
+\worke\Antigravity\nivel_arena_online\server
+\AIPlayer.ts:347:19)
+    at CPUPlayer.think (C:\Users\worke\Antig
+ravity\nivel_arena_online\server\AIPlayer.ts
+:61:26)
+    at async runSkillTest (C:\Users\worke\An
+tigravity\nivel_arena_online\server\testData
+\unitTestAISkill.ts:82:5)
+PlayCard called (Expected true): false
+TEST FAILED: Error: AI failed to play buff s
+kill when unit exists
+    at runSkillTest (C:\Users\worke\Antigrav
+ity\nivel_arena_online\server\testData\unitT
+estAISkill.ts:84:32)

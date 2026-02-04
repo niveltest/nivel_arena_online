@@ -16,6 +16,7 @@ export class Game {
 
     public pendingAttack: { attackerId: string, attackerIndex: number, defenderId: string, targetIndex: number } | null = null;
     public selection: SelectionState | null = null;
+    private effectQueue: Array<{ playerId: string, card: Card, trigger: string, context?: Record<string, unknown>, specificEffect?: CardEffect }> = [];
 
     public constructor(id: string, io: any) {
         this.id = id;
@@ -31,8 +32,8 @@ export class Game {
         const mapping: Record<string, string> = {
             'アタッカー': 'アタッカー',
             'ATTACKER': 'アタッカー',
-            'PENETRATION': 'PENETRATION_',
-            'LOOT': 'LOOT_',
+            'PENETRATION': '貫通',
+            'LOOT': '略奪',
             'BERSERKER': 'バーサーカー',
             'DUELIST': 'デュエリスト',
             'DEATH_TOUCH': '道連れ',
@@ -41,43 +42,54 @@ export class Game {
             'BREAKTHROUGH': '突破',
             'INFILTRATE': '潜入',
             'GUARDIAN': '防壁',
-            'UNION': 'ユニオン',
-            'LEGION': 'レギオン',
             'SHIELD': 'シールド',
             'EXIT': 'エグジット',
-            'RECYCLE': '帰還'
+            'RECYCLE': '帰還',
+            'ARMED': 'アームド',
+            'DEFENDER': 'ディフェンダー',
+            'SNIPER': '狙撃',
+            'TARGET': 'ターゲット'
         };
 
         const eng = keyword.toUpperCase();
-        const prefix = mapping[eng] || keyword;
+        const jp = mapping[eng] || keyword;
 
         const checkMatch = (kw: string) => {
-            if (kw === eng || kw === prefix) return true;
-            if (prefix.endsWith('_') && kw.startsWith(prefix)) return true;
+            if (kw === eng || kw === jp) return true;
+            // Handle numbered keywords like PENETRATION_1, LOOT_1
+            if (kw.startsWith(eng + '_') || kw.startsWith(jp + '_')) return true;
             return false;
         };
 
         if (card.keywords?.some(checkMatch)) return true;
         if (card.tempKeywords?.some(checkMatch)) return true;
 
-        const jp = (eng === 'PENETRATION') ? '貫通' : (eng === 'LOOT' ? '略奪' : prefix);
+        const textMatches = (text: string | undefined) => {
+            if (!text) return false;
+            if (text.includes(jp) || text.includes(eng)) return true;
+            // Also check for bracketed versions commonly used in card text
+            if (text.includes(`[${jp}]`) || text.includes(`[${eng}]`)) return true;
+            if (text.includes(`【${jp}】`) || text.includes(`【${eng}】`)) return true;
+            return false;
+        };
 
         if (card.attachments) {
             for (const item of card.attachments) {
                 if (item.keywords?.some(checkMatch)) return true;
-                if (item.text?.includes(jp)) return true;
+                if (textMatches(item.text)) return true;
             }
         }
 
-        if (card.text?.includes(jp)) {
-            if (card.text.includes('《ユニーク》を持つアイテムを装備している場合')) {
+        if (textMatches(card.text)) {
+            // Special Condition check (Existing logic)
+            if (card.text?.includes('《ユニーク》を持つアイテムを装備している場合')) {
                 const hasUnique = card.attachments?.some(item =>
                     item.affiliation?.includes('ユニーク') || item.text?.includes('《ユニーク》') || item.name?.includes('ユニーク')
                 );
                 if (!hasUnique) return false;
             }
 
-            if (card.text.includes('枚以上なら') && card.text.includes(jp)) {
+            if (card.text?.includes('枚以上なら') && card.text?.includes(jp)) {
                 const match = card.text.match(/(\d+)枚以上なら/);
                 if (match) {
                     const threshold = parseInt(match[1], 10);
@@ -386,23 +398,6 @@ export class Game {
                     this.addLog(`バーサーカーを持つユニットが攻撃していません。必ず攻撃を行ってください。`);
                     return;
                 }
-                // Recycle logic
-                Object.keys(this.players).forEach(pId => {
-                    const p = this.players[pId];
-                    const toHand: Card[] = [];
-                    p.state.discard = p.state.discard.filter(c => {
-                        if (c.isRecycle) {
-                            toHand.push(c);
-                            return false;
-                        }
-                        return true;
-                    });
-                    toHand.forEach(c => {
-                        p.drawCard(c);
-                        this.addLog(`${c.name} [RECYCLE] returned from trash.`);
-                    });
-                });
-
                 this.phase = 'END';
                 this.handleEndPhase();
                 break;
@@ -411,6 +406,7 @@ export class Game {
                 break;
         }
         this.broadcastState();
+        this.processEffectQueue();
     }
 
     public handleLevelUpPhase() {
@@ -449,6 +445,7 @@ export class Game {
             return;
         }
         this.broadcastState();
+        this.processEffectQueue();
     }
 
     public handleEndPhase() {
@@ -467,6 +464,23 @@ export class Game {
                 });
             }
         }
+
+        // Process [RECYCLE] (帰還) for both players
+        Object.keys(this.players).forEach(pId => {
+            const p = this.players[pId];
+            const toHand: Card[] = [];
+            p.state.discard = p.state.discard.filter(c => {
+                if (c.isRecycle || this.hasKeyword(c, 'RECYCLE')) {
+                    toHand.push(c);
+                    return false;
+                }
+                return true;
+            });
+            toHand.forEach(c => {
+                p.drawCard(c);
+                this.addLog(`${p.username}'s ${c.name} [RECYCLE] returned from trash.`);
+            });
+        });
 
         // Reset turn-based effects for ALL units (both players)
         Object.keys(this.players).forEach(pId => {
@@ -562,13 +576,13 @@ export class Game {
                 } else if (condition === 'ベースを持つユニット' || condition === 'BASE') {
                     if (!targetUnit.affiliation?.includes('ベース')) return;
                 } else if (condition.includes('コスト') && condition.includes('以下')) {
-                    const costMatch = condition.match(/コスト(\d+)以下/);
+                    const costMatch = condition.match(/(\d+)コスト以下/);
                     if (costMatch) {
                         const maxCost = parseInt(costMatch[1], 10);
                         if ((targetUnit.cost || 0) > maxCost) return;
                     }
                 } else if (condition.includes('コスト') && condition.includes('以上')) {
-                    const costMatch = condition.match(/コスト(\d+)以上/);
+                    const costMatch = condition.match(/(\d+)コスト以上/);
                     if (costMatch) {
                         const minCost = parseInt(costMatch[1], 10);
                         if ((targetUnit.cost || 0) < minCost) return;
@@ -591,6 +605,7 @@ export class Game {
             this.applyEffect(playerId, card, 'ON_PLAY', targetInfo);
         }
         this.broadcastState();
+        this.processEffectQueue();
     }
 
     public attack(playerId: string, attackerIndex: number, targetIndex: number) {
@@ -679,6 +694,7 @@ export class Game {
             }
         }
         this.broadcastState();
+        this.processEffectQueue();
     }
 
     public resolveGuardianIntercept(playerId: string, interceptSlot: number | 'NONE') {
@@ -982,6 +998,20 @@ export class Game {
                 if (idx !== -1) player.drawCard(player.state.discard.splice(idx, 1)[0]);
             });
             this.addLog(`${player.username} recycled ${selectedIds.length} cards.`);
+        } else if (this.selection.action === 'RESTRICT_ATTACK_SELECTION') {
+            const opponentId = this.selection.context?.opponentId as string;
+            const opponent = this.players[opponentId];
+            if (opponent && selectedIds.length > 0) {
+                const targetUnitId = selectedIds[0];
+                const targetSlot = opponent.state.field.findIndex(u => u && u.id === targetUnitId);
+                if (targetSlot !== -1) {
+                    const u = opponent.state.field[targetSlot];
+                    if (u) {
+                        u.cannotAttack = true;
+                        this.addLog(`${u.name} cannot attack this turn.`);
+                    }
+                }
+            }
         }
 
         const prevPhase = this.selection.previousPhase;
@@ -1011,40 +1041,47 @@ export class Game {
     public dealDamage(playerId: string, amount: number = 1) {
         const player = this.players[playerId];
         if (!player) return;
+
         for (let i = 0; i < amount; i++) {
             if (player.state.deck.length > 0) {
-                const damageCard = player.state.deck.pop()!;
-                player.state.hp++;
-                const isTrigger = !!(damageCard.effects?.some(e => e.trigger === 'ON_DAMAGE_TRIGGER'));
-                this.broadcastAction(playerId, 'DAMAGE_REVEAL', {
-                    card: damageCard,
-                    isTrigger,
-                    playerName: player.username
-                });
+                const card = player.state.deck.pop();
+                if (card) {
+                    player.state.damageZone.push(card);
+                    this.broadcastAction(playerId, 'DAMAGE_REVEAL', {
+                        card,
+                        isTrigger: !!card.effects?.some(e => e.trigger === 'ON_DAMAGE_TRIGGER'),
+                        playerName: player.username
+                    });
 
-                if (isTrigger) {
-                    this.applyEffect(playerId, damageCard, 'ON_DAMAGE_TRIGGER');
+                    // Emit Damage (Leader HP)
+                    this.emitAnimation('DAMAGE', {
+                        targetId: playerId,
+                        slotIndex: -1,
+                        value: 1,
+                        location: 'LEADER'
+                    });
 
-                    // Check if any trigger effect requires trashing this card
-                    const shouldTrash = damageCard.effects?.some(e =>
-                        e.trigger === 'ON_DAMAGE_TRIGGER' && e.isSelfTrash
-                    );
+                    if (card.effects?.some(e => e.trigger === 'ON_DAMAGE_TRIGGER')) {
+                        this.applyEffect(playerId, card, 'ON_DAMAGE_TRIGGER');
 
-                    if (shouldTrash) {
-                        // Move to discard instead of damage zone
-                        player.state.discard.push(damageCard);
-                        this.addLog(`${damageCard.name} was trashed by trigger effect.`);
-                    } else if (!(damageCard as any)._skipDamageZone) {
-                        player.state.damageZone.push(damageCard);
+                        // Check if any trigger effect requires trashing this card
+                        const shouldTrash = card.effects?.some(e =>
+                            e.trigger === 'ON_DAMAGE_TRIGGER' && e.isSelfTrash
+                        );
+
+                        if (shouldTrash) {
+                            // Move to discard instead of damage zone
+                            player.state.discard.push(card);
+                            this.addLog(`${card.name} was trashed by trigger effect.`);
+                        } else {
+                            // If not trashed, it's already in damageZone from above
+                        }
+
+                        // Official Rule: Immediately end damage check on trigger
+                        this.addLog(`Trigger revealed! Ending damage check.`);
+                        break; // Stop dealing further damage if a trigger occurs
                     }
-
-                    // Official Rule: Immediately end damage check on trigger
-                    this.addLog(`Trigger revealed! Ending damage check.`);
-                    break;
-                } else if (!(damageCard as any)._skipDamageZone) {
-                    player.state.damageZone.push(damageCard);
                 }
-
                 // Check Damage Loss
                 if (player.state.damageZone.length >= 10) {
                     this.endGame(playerId, "ダメージが10に達した");
@@ -1057,9 +1094,26 @@ export class Game {
             }
         }
         this.broadcastState();
+        this.processEffectQueue();
     }
 
     public applyEffect(playerId: string, card: Card, trigger: string, context?: Record<string, unknown>, specificEffect?: CardEffect) {
+        // Queue the effect for processing
+        this.effectQueue.push({ playerId, card, trigger, context, specificEffect });
+        this.addLog(`[Queue] Queued ${trigger} effect for ${card.name}`);
+    }
+
+    private processEffectQueue() {
+        while (this.effectQueue.length > 0) {
+            const effectEntry = this.effectQueue.shift();
+            if (!effectEntry) continue;
+
+            this.addLog(`[Queue] Processing effect for ${effectEntry.card.name}`);
+            this.applyEffectImmediate(effectEntry.playerId, effectEntry.card, effectEntry.trigger, effectEntry.context, effectEntry.specificEffect);
+        }
+    }
+
+    private applyEffectImmediate(playerId: string, card: Card, trigger: string, context?: Record<string, unknown>, specificEffect?: CardEffect) {
         const player = this.players[playerId];
         if (!player) return;
 
@@ -1121,11 +1175,56 @@ export class Game {
                 if (effect.condition === 'MY_HAND_LE_2') {
                     if (player.state.hand.length > 2) return;
                 }
+                if (effect.condition === 'OPPOSING_HIT_LE_ARMED_COUNT') {
+                    // Check context for opposing unit?
+                    // Usually this triggered by ON_ATTACK?
+                    // If ON_ATTACK, we might need pendingAttack info or slot index.
+                    // But ON_ATTACK context (where applyEffect called) usually has slotIndex.
+                    // If we are attacking, opponent is defender.
+                    if (trigger === 'ON_ATTACK') {
+                        if (this.pendingAttack) {
+                            const { defenderId, targetIndex } = this.pendingAttack;
+                            const defPlayer = this.players[defenderId];
+                            const defUnit = defPlayer.state.field[targetIndex];
+                            const myUnit = player.state.field[this.pendingAttack.attackerIndex]; // should be card
+
+                            if (defUnit && myUnit) {
+                                const armedCount = myUnit.attachments ? myUnit.attachments.length : 0;
+                                const defHit = this.getUnitHitCount(defenderId, targetIndex);
+                                if (armedCount < defHit) return;
+                            } else {
+                                return;
+                            }
+                        } else {
+                            // If pendingAttack not set yet (maybe before attack registered? unlikely for ON_ATTACK)
+                            // fallback
+                            return;
+                        }
+                    }
+                }
             }
 
             console.log(`[Game] Applying Effect: ${effect.action} (Trigger: ${trigger})`);
 
             switch (effect.action) {
+                case 'HEAL_LEADER': {
+                    const amount = effect.value || 1;
+                    for (let i = 0; i < amount; i++) {
+                        if (player.state.damageZone.length > 0) {
+                            const card = player.state.damageZone.pop();
+                            if (card) player.state.deck.unshift(card);
+                        }
+                    }
+                    this.emitAnimation('EFFECT', {
+                        playerId,
+                        slotIndex: -1,
+                        value: amount,
+                        color: 'green',
+                        text: `HEAL ${amount}`
+                    });
+                    this.addLog(`${player.username} healed ${amount} damage.`);
+                    break;
+                }
                 case 'DRAW': {
                     const amount = effect.value || 1;
                     for (let i = 0; i < amount; i++) {
@@ -1234,10 +1333,17 @@ export class Game {
                             unit.tempPowerBuff += (effect.value || 0);
                         }
                     } else if (effect.targetType === 'ALL_ALLIES') {
-                        player.state.field.forEach(u => {
+                        player.state.field.forEach((u, i) => {
                             if (u) {
                                 if (!u.tempPowerBuff) u.tempPowerBuff = 0;
                                 u.tempPowerBuff += (effect.value || 0);
+                                this.emitAnimation('EFFECT', {
+                                    playerId,
+                                    slotIndex: i,
+                                    value: effect.value,
+                                    color: 'blue',
+                                    text: `+${effect.value}`
+                                });
                             }
                         });
                     }
@@ -1258,6 +1364,42 @@ export class Game {
                             if (!unit.tempHitBuff) unit.tempHitBuff = 0;
                             unit.tempHitBuff += (effect.value || 0);
                         }
+                    } else if (effect.targetType === 'ALL_ALLIES') {
+                        player.state.field.forEach((u, i) => {
+                            if (u) {
+                                if (!u.tempHitBuff) u.tempHitBuff = 0;
+                                u.tempHitBuff += (effect.value || 0);
+                                this.emitAnimation('EFFECT', {
+                                    playerId,
+                                    slotIndex: i,
+                                    value: effect.value,
+                                    color: 'orange',
+                                    text: `HIT +${effect.value}`
+                                });
+                            }
+                        });
+                    }
+                    break;
+                }
+                case 'SET_HIT': {
+                    const slotIndex = effectContext?.slotIndex;
+                    if (typeof slotIndex === 'number') {
+                        const targetUnit = player.state.field[slotIndex];
+                        if (targetUnit) {
+                            const currentHit = this.getUnitHitCount(playerId, slotIndex);
+                            const diff = (effect.value || 0) - currentHit;
+                            if (!targetUnit.tempHitBuff) targetUnit.tempHitBuff = 0;
+                            targetUnit.tempHitBuff += diff;
+                        }
+                    } else if (effect.targetType === 'SELF') {
+                        const selfIndex = player.state.field.findIndex(u => u && u.id === card.id);
+                        if (selfIndex !== -1 && player.state.field[selfIndex]) {
+                            const unit = player.state.field[selfIndex]!;
+                            const currentHit = this.getUnitHitCount(playerId, selfIndex);
+                            const diff = (effect.value || 0) - currentHit;
+                            if (!unit.tempHitBuff) unit.tempHitBuff = 0;
+                            unit.tempHitBuff += diff;
+                        }
                     }
                     break;
                 }
@@ -1269,20 +1411,37 @@ export class Game {
                 case 'DEBUFF_ENEMY': {
                     if (!opponent) return;
                     if (effect.targetType === 'ALL_ENEMIES') {
-                        opponent.state.field.forEach(u => {
+                        opponent.state.field.forEach((u, i) => {
                             if (u) {
                                 if (!u.tempPowerDebuff) u.tempPowerDebuff = 0;
                                 u.tempPowerDebuff += (effect.value || 0);
+                                if (opponentId) {
+                                    this.emitAnimation('EFFECT', {
+                                        playerId: opponentId,
+                                        slotIndex: i,
+                                        value: effect.value,
+                                        color: 'orange',
+                                        text: `-${effect.value}`
+                                    });
+                                }
                             }
                         });
                     } else if (effect.targetType === 'OPPOSING') {
-                        const slotIndex = effectContext?.slotIndex;
                         if (typeof slotIndex === 'number') {
                             const u = opponent.state.field[slotIndex];
                             if (u) {
                                 if (!u.tempPowerDebuff) u.tempPowerDebuff = 0;
                                 u.tempPowerDebuff += (effect.value || 0);
-                                if (opponentId) this.checkDrawOnKill(playerId, opponentId, slotIndex, effect.drawOnKill);
+                                if (opponentId) {
+                                    this.emitAnimation('EFFECT', {
+                                        playerId: opponentId,
+                                        slotIndex: slotIndex,
+                                        value: effect.value,
+                                        color: 'orange',
+                                        text: `-${effect.value}`
+                                    });
+                                    this.checkDrawOnKill(playerId, opponentId, slotIndex, effect.drawOnKill);
+                                }
                             }
                         }
                     } else if (effect.targetType === 'SINGLE') {
@@ -1302,12 +1461,32 @@ export class Game {
                     if (!opponent) return;
                     if (effect.targetType === 'SINGLE' && typeof effectContext?.targetSlot === 'number') {
                         const u = opponent.state.field[effectContext.targetSlot];
-                        if (u) u.isStunned = true;
+                        if (u) {
+                            u.isStunned = true;
+                            if (opponentId) {
+                                this.emitAnimation('EFFECT', {
+                                    playerId: opponentId,
+                                    slotIndex: effectContext.targetSlot,
+                                    color: 'purple',
+                                    text: 'STUNNED'
+                                });
+                            }
+                        }
                     } else if (effect.targetType === 'OPPOSING') {
                         const slotIndex = effectContext?.slotIndex;
                         if (typeof slotIndex === 'number') {
                             const u = opponent.state.field[slotIndex];
-                            if (u) u.isStunned = true;
+                            if (u) {
+                                u.isStunned = true;
+                                if (opponentId) {
+                                    this.emitAnimation('EFFECT', {
+                                        playerId: opponentId,
+                                        slotIndex: slotIndex,
+                                        color: 'purple',
+                                        text: 'STUNNED'
+                                    });
+                                }
+                            }
                         }
                     }
                     break;
@@ -1358,7 +1537,30 @@ export class Game {
                 case 'BOUNCE_UNIT': {
                     if (!opponent || !opponentId) return;
 
-                    if (effect.targetType === 'SINGLE') {
+                    if (effect.targetType === 'ALL_ENEMIES') {
+                        const candidates: number[] = [];
+                        opponent.state.field.forEach((unit, idx) => {
+                            if (unit) candidates.push(idx);
+                        });
+                        if (candidates.length > 0) {
+                            // Bounce all automatically? Or selection? Usually automatic if "ALL".
+                            // But BOUNCE_UNIT works by requestSelection usually?
+                            // Can we bounce multiple at once?
+                            // requestSelection usually handles 1 or count.
+                            // Actually, for immediate effect without selection, we can just do it.
+                            candidates.forEach(idx => {
+                                const u = opponent.state.field[idx]!;
+                                opponent.state.field[idx] = null;
+                                opponent.state.hand.push(u);
+                                if (u.attachments) {
+                                    opponent.state.hand.push(...u.attachments);
+                                    u.attachments = [];
+                                }
+                                this.addLog(`${u.name} was returned to hand.`);
+                            });
+                            // Reset opponent unitsPlaced flags? Not needed unless replayed.
+                        }
+                    } else if (effect.targetType === 'SINGLE') {
                         if (trigger === 'ON_DAMAGE_TRIGGER' || trigger === 'ON_PLAY') {
                             // Filter candidates by condition
                             let candidates: number[] = [];
@@ -1559,6 +1761,19 @@ export class Game {
                             }
                             unit.cannotAttack = true;
                         }
+                    } else if (targetType === 'SINGLE' && opponentId) {
+                        const slotIndex = effectContext?.slotIndex ?? effectContext?.targetSlot;
+                        if (opponent && typeof slotIndex === 'number') {
+                            const u = opponent.state.field[slotIndex];
+                            if (u) u.cannotAttack = true;
+                        } else if (opponent) {
+                            // Request Selection if not provided
+                            const candidates: number[] = [];
+                            opponent.state.field.forEach((u, i) => { if (u) candidates.push(i) });
+                            if (candidates.length > 0) {
+                                this.requestSelection(playerId, 'FIELD', candidates.map(idx => opponent.state.field[idx]!.id), 1, 'RESTRICT_ATTACK_SELECTION', { opponentId }, card);
+                            }
+                        }
                     }
                     break;
                 }
@@ -1579,6 +1794,10 @@ export class Game {
                         }
                     } else if (effect.targetType === 'ALL_ALLIES') {
                         player.state.field.forEach(u => { if (u) targets.push(u); });
+                    } else if (effect.targetType === 'ALL_ENEMIES') {
+                        if (opponent) {
+                            opponent.state.field.forEach(u => { if (u) targets.push(u); });
+                        }
                     }
 
                     targets.forEach(t => {
@@ -1637,9 +1856,74 @@ export class Game {
         const player = this.players[playerId];
         const unit = player.state.field[slotIndex];
         if (!unit) return 0;
+
+        // Base Power
         let power = unit.power || 0;
         power += (unit.tempPowerBuff || 0);
         power -= (unit.tempPowerDebuff || 0);
+
+        // Unit Passives (Self)
+        if (unit.effects) {
+            unit.effects.forEach(eff => {
+                if (eff.trigger === 'PASSIVE' && eff.action === 'BUFF_ALLY') {
+                    // Check conditions
+                    if (eff.condition) {
+                        if (eff.condition === 'PER_LEADER_LEVEL') {
+                            power += (eff.value || 0) * player.state.leaderLevel;
+                            return;
+                        }
+                        if (eff.condition === 'ARMED_PER_ITEM') {
+                            const itemCount = unit.attachments ? unit.attachments.length : 0;
+                            power += (eff.value || 0) * itemCount;
+                            return;
+                        }
+                        if (eff.condition === 'ARMED_IF_EQUIPPED') {
+                            if (!unit.attachments || unit.attachments.length === 0) return;
+                        }
+                        if (eff.condition === 'ARMED_UNIQUE_IF_EQUIPPED') {
+                            const hasUnique = unit.attachments?.some(item =>
+                                item.affiliation?.includes('ユニーク') || item.text?.includes('《ユニーク》') || item.name?.includes('ユニーク')
+                            );
+                            if (!hasUnique) return;
+                        }
+                        if (eff.condition === 'MY_TURN' && this.turnPlayerId !== playerId) return;
+                        if (eff.condition === 'OPPONENT_TURN' && this.turnPlayerId === playerId) return;
+                    }
+
+                    if (eff.targetType === 'SELF') {
+                        power += (eff.value || 0);
+                    }
+                }
+            });
+        }
+
+        // Unit Passives (From Others - Lord Effects)
+        player.state.field.forEach(otherUnit => {
+            if (otherUnit && otherUnit !== unit && otherUnit.effects) {
+                otherUnit.effects.forEach(eff => {
+                    if (eff.trigger === 'PASSIVE' && eff.action === 'BUFF_ALLY' && (eff.targetType === 'ALL_ALLIES')) {
+                        // Check Awake
+                        if (eff.isAwakening) {
+                            const awakenLv = otherUnit.awakeningLevel || 0; // Units usually don't have awakeningLevel property on card directly?
+                            // Actually, ST04-001 Dorothy has Awakening, but it's a leader effect usually?
+                            // Wait, Dorothy ST04-001 IS A LEADER.
+                            // But the logic below handles LEADER effects separately.
+                            // If a UNIT acts as a Lord, it goes here.
+                            // If Dorothy (ST04-001) is a LEADER, her effect is in player.state.leader.effects.
+                            // Let's verify if ST04-001 is a Unit or Leader. It's a Leader.
+                            // So this block is for UNITs like "Captain" buffing others.
+                        }
+
+                        // Check conditions
+                        if (eff.condition === 'MY_TURN' && this.turnPlayerId !== playerId) return;
+                        if (eff.condition === 'OPPONENT_TURN' && this.turnPlayerId === playerId) return;
+
+                        power += (eff.value || 0);
+                    }
+                });
+            }
+        });
+
         if (unit.attachments) {
             unit.attachments.forEach(a => {
                 if (a.power) power += a.power;
@@ -1662,7 +1946,8 @@ export class Game {
                     if (eff.isAwakening && !isAwakened) return;
 
                     // Check MY_TURN if applicable
-                    if (eff.condition?.includes('MY_TURN') && this.turnPlayerId !== playerId) return;
+                    if (eff.condition === 'MY_TURN' && this.turnPlayerId !== playerId) return;
+                    if (eff.condition === 'OPPONENT_TURN' && this.turnPlayerId === playerId) return;
 
                     if (eff.condition === 'COUNT_UNITS') {
                         const count = player.state.field.filter(u => u !== null).length;
@@ -1707,6 +1992,7 @@ export class Game {
         const unit = player.state.field[slotIndex];
         if (!unit) return 0;
 
+        // Base Hits
         let hitCount = unit.hitCount || 1;
         if (unit.tempHitBuff) hitCount += unit.tempHitBuff;
 
@@ -1820,6 +2106,9 @@ export class Game {
                 }
             });
         });
+
+        // Process all queued effects from destruction
+        this.processEffectQueue();
     }
 
     private checkBerserkerMustAttack(): boolean {
@@ -1941,30 +2230,6 @@ export class Game {
         });
     }
 
-    public union(playerId: string, baseIndex: number, materialIndex: number) {
-        if (this.phase !== 'MAIN' || playerId !== this.turnPlayerId) return;
-        const player = this.players[playerId];
-        const baseUnit = player.state.field[baseIndex];
-        const materialUnit = player.state.field[materialIndex];
-
-        if (!baseUnit || !materialUnit) return;
-        if (baseIndex === materialIndex) return;
-
-        // Initialize unionCards if needed
-        if (!baseUnit.unionCards) baseUnit.unionCards = [];
-
-        // Add material to base
-        baseUnit.unionCards.push(materialUnit);
-        materialUnit.unionSourceId = baseUnit.id;
-
-        // Remove material from field
-        player.state.field[materialIndex] = null;
-
-        this.addLog(`${player.username} combined ${materialUnit.name} into ${baseUnit.name}!`);
-
-        this.checkStateBasedActions();
-        this.broadcastState();
-    }
 
     private addLog(msg: string) {
         this.debugLogs.push(msg);
@@ -1972,7 +2237,7 @@ export class Game {
         console.log(`[Game Log] ${msg}`);
     }
 
-    private emitAnimation(type: 'ATTACK' | 'DAMAGE' | 'DESTROY', data: any) {
+    private emitAnimation(type: 'ATTACK' | 'DAMAGE' | 'DESTROY' | 'EFFECT', data: any) {
         this.io.to(this.id).emit('animation', { type, ...data });
     }
 

@@ -1,26 +1,41 @@
-# 実装内容の確認 (Walkthrough)
+# CPU AI Logic Improvements Walkthrough
 
-## 実施した変更
+## Overview
 
-### 1. スキルカードの使用環境 (Skill Zone)
+Updated the CPU AI (`AIPlayer.ts`) to make smarter decisions when interacting with card effects, specifically targeting the new mechanics (Bounce, Debuff, etc.).
 
-- **確認**: `Game.ts` の `playCard` メソッドでスキルカードが `skillZone` に追加され、`handleEndPhase` で適切にトラッシュへ送られるようになっています（既存実装の確認）。
+## Changes
 
-### 2. カード効果の継承 (Card Effect Inheritance)
+### `server/AIPlayer.ts`
 
-- **確認**: `Game.ts` の `hasKeyword`、`getKeywordValue`、および `applyEffect` メソッドが、ユニットの `attachments`（装備品）からキーワードやトリガー効果を正しく取得することを確認しました（既存実装の確認）。
+#### 1. `evaluateThreat(card, actionType)`
 
-### 3. 「略奪 (Loot)」効果のロジック修正
+New helper method that calculates a "Threat Score" for a card.
 
-- **変更内容**: `resolveDefense` において、相手ユニットを破壊したとき（`defenderInvincible` でない場合）のみ `LOOT` キーワードによるドローが発動するように条件を整理しました。
-- **検証**: 相手が無敵（INVINCIBLE）で破壊を免れた場合にはドローが発生しません。
+- **Base Score**: Power + (Cost * 1000). High cost implies high value/difficulty to replay.
+- **Contextual Bonuses**:
+  - **Guardian/Attacker**: +500 points.
+  - **Bounce Action**: Prioritizes High Cost (tempo swing) and equipped units.
+  - **Debuff Action**: Prioritizes High Power (neutering threats).
 
-### 4. ゼロパワーユニットの破壊処理
+#### 2. `handleSelection`
 
-- **変更内容**: `checkStateBasedActions` に、フィールド上のすべてのユニットのパワーをチェックし、0以下であれば破壊するロジックを実装しました。
-- **検証**: デバフ効果などでパワーが0になったユニットが自動的にトラッシュへ送られるようになります。
+Replaced the "select first N candidates" logic with sorting based on `evaluateThreat`.
 
-## 検証結果
+- **RESTRICT_ATTACK / DEBUFF / KILL**: Targets the highest threat.
+- **BOUNCE**: Targets best bounce candidates (High Cost/Equipped).
+- **DISCARD**: Discards the lowest value cards from own hand.
 
-- [x] コードの静的解析によるロジックの正当性を確認。
-- [x] 既存の `Game.ts` の機能を損なうことなく、必要な修正と機能強化を完了。
+## Verification
+
+### Unit Test: `server/testData/unitTestAI.ts`
+
+Simulated AI decision making in specific scenarios:
+
+1. **Bounce**: AI correctly chose to bounce a **Strong Unit** (Cost 5, 5000 Power) over a Weak Unit.
+2. **Kill**: AI correctly chose to kill the **Strong Unit**.
+3. **Discard**: AI correctly chose to discard a **Weak Card** from its own hand.
+
+## Conclusion
+
+The CPU will now offer more resistance and make logical choices when using the newly implemented card effects, improving the single-player experience.

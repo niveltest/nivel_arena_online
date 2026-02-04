@@ -7,7 +7,7 @@ export interface CardEffect {
     trigger: EffectTrigger;
     action: EffectAction;
     value?: number;
-    targetType?: 'SELF' | 'ALLY' | 'ENEMY' | 'ALL' | 'DISCARD' | 'ALL_ALLIES' | 'ALL_ENEMIES' | 'SINGLE' | 'OPPOSING' | 'DECK_TOP' | 'DAMAGE_ITEM' | 'HAND_UNIT' | 'DECK_ALL';
+    targetType?: 'SELF' | 'ALLY' | 'ENEMY' | 'ALL' | 'DISCARD' | 'ALL_ALLIES' | 'ALL_ENEMIES' | 'SINGLE' | 'OPPOSING' | 'DECK_TOP' | 'DAMAGE_ITEM' | 'HAND_UNIT' | 'DECK_ALL' | 'SELF_HAND' | 'OPPONENT_HAND';
     condition?: string; // e.g. "SEARCH_TOP_3_LV3", "SEARCH_BASE", "COUNT_BASE", "FIELD_FULL", "LEVEL_UP"
     drawOnKill?: number;
     grantedKeyword?: string;
@@ -113,12 +113,21 @@ export interface DestroyAnimationData {
     unitId: string;
 }
 
-export type AnimationType = 'ATTACK' | 'DAMAGE' | 'DESTROY';
+export interface EffectAnimationData {
+    playerId: string;
+    slotIndex: number; // -1 for Leader
+    value?: number;
+    color?: string; // e.g. "green", "blue", "orange"
+    text?: string;
+}
+
+export type AnimationType = 'ATTACK' | 'DAMAGE' | 'DESTROY' | 'EFFECT';
 
 export type AnimationEvent =
     | { id: string; type: 'ATTACK'; data: AttackAnimationData }
     | { id: string; type: 'DAMAGE'; data: DamageAnimationData }
-    | { id: string; type: 'DESTROY'; data: DestroyAnimationData };
+    | { id: string; type: 'DESTROY'; data: DestroyAnimationData }
+    | { id: string; type: 'EFFECT'; data: EffectAnimationData };
 
 export interface GameState {
     roomId: string;

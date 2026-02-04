@@ -1,0 +1,27 @@
+﻿Starting AI Skill Usage Unit Test...
+
+--- Case 1: No Units No Buff ---
+PlayCard called (Expected false): false
+
+--- Case 2: Units Exist Play Buff ---
+[AI] Playing SKILL: Super Buff (Utility checked)
+PlayCard called (Expected true): true
+
+--- Case 3: Smart Target Selection ---
+[AI] Playing SKILL: Grant Skill (Utility checked)
+[Game] Applying Effect: GRANT_ABILITY (Trigger: ON_PLAY)
+[AI] Handling Selection: GRANT_ABILITY_SELECTION
+[MockGame] Selection resolved: boss
+[AI] Handling Selection: GRANT_ABILITY_SELECTION
+[MockGame] Selection resolved: boss
+[AI] Handling Selection: GRANT_ABILITY_SELECTION
+[MockGame] Selection resolved: boss
+Selected Unit ID (Expected boss): boss
+
+ALL SKILL TESTS PASSED!
+[AI] Handling Selection: GRANT_ABILITY_SELECTION
+[MockGame] Selection resolved: boss
+[AI] Handling Selection: GRANT_ABILITY_SELECTION
+[MockGame] Selection resolved: boss
+[AI] Handling Selection: GRANT_ABILITY_SELECTION
+[MockGame] Selection resolved: boss

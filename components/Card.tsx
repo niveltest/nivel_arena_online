@@ -16,6 +16,8 @@ interface CardProps {
     isAwakened?: boolean;
     minimal?: boolean;
     showDetailOverlay?: boolean;
+    isPlayable?: boolean;
+    isReady?: boolean;
 }
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
@@ -31,7 +33,9 @@ const Card: React.FC<CardProps> = ({
     className,
     isAwakened = false,
     minimal = false,
-    showDetailOverlay = false
+    showDetailOverlay = false,
+    isPlayable = false,
+    isReady = false
 }) => {
 
     // Calculate card border color based on rarity/type
@@ -62,6 +66,9 @@ const Card: React.FC<CardProps> = ({
                 ${getBorderColor()} 
                 ${className || (card.type === 'LEADER' ? 'w-20 h-16 sm:w-32 sm:h-24' : 'w-16 h-[5.55rem] sm:w-24 sm:h-[8.08rem]')}
                 ${isAwakened ? 'ring-2 ring-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]' : ''}
+                ${(card.tempPowerBuff || 0) > 0 ? 'shadow-[0_0_15px_rgba(34,197,94,0.4)] ring-1 ring-green-400/30' : ''}
+                ${isPlayable ? 'shadow-[0_0_15px_rgba(6,182,212,0.6)] ring-2 ring-cyan-400 animate-pulse' : ''}
+                ${isReady ? 'shadow-[0_0_15px_rgba(251,191,36,0.6)] ring-2 ring-yellow-400 animate-bounce-subtle' : ''}
             `}
             onClick={() => {
                 if (onClick) onClick();
@@ -120,23 +127,41 @@ const Card: React.FC<CardProps> = ({
             {/* Status Icons Overlay */}
             {
                 !minimal && (
-                    <div className="absolute bottom-14 w-full flex justify-center gap-1 pointer-events-none z-10 px-1">
-                        {/* Breakthrough Icon */}
-                        {(card.keywords?.includes('BREAKTHROUGH') || card.text?.includes('防御できない') || card.tempKeywords?.includes('BREAKTHROUGH')) && (
-                            <div className="w-4 h-4 rounded-full bg-purple-600 border border-white flex items-center justify-center shadow-md animate-pulse" title="BREAKTHROUGH">
-                                <span className="text-[10px]">⚔️</span>
+                    <div className="absolute bottom-14 w-full flex justify-center gap-1 pointer-events-none z-10 px-1 flex-wrap">
+                        {/* Breakthrough / Penetration Icon */}
+                        {(card.keywords?.includes('BREAKTHROUGH') || card.keywords?.includes('PENETRATION') || card.text?.includes('防御できない') || card.text?.includes('【貫通】') || card.tempKeywords?.includes('BREAKTHROUGH') || card.tempKeywords?.includes('PENETRATION')) && (
+                            <div className="w-5 h-5 rounded-full bg-orange-600 border border-white flex items-center justify-center shadow-lg animate-pulse" title="PENETRATION">
+                                <span className="text-[10px]">🏹</span>
                             </div>
                         )}
                         {/* Guardian Icon */}
                         {(card.keywords?.some(k => k.startsWith('GUARDIAN')) || card.text?.includes('防壁') || card.tempKeywords?.some(k => k.startsWith('GUARDIAN'))) && (
-                            <div className="w-4 h-4 rounded-full bg-blue-600 border border-white flex items-center justify-center shadow-md" title="GUARDIAN">
+                            <div className="w-5 h-5 rounded-full bg-blue-600 border border-white flex items-center justify-center shadow-lg" title="GUARDIAN">
                                 <span className="text-[10px]">🛡️</span>
+                            </div>
+                        )}
+                        {/* Loot Icon */}
+                        {(card.keywords?.includes('LOOT') || card.text?.includes('【略奪】') || card.tempKeywords?.includes('LOOT')) && (
+                            <div className="w-5 h-5 rounded-full bg-yellow-400 border border-black flex items-center justify-center shadow-lg" title="LOOT">
+                                <span className="text-[10px]">💰</span>
+                            </div>
+                        )}
+                        {/* Recycle Icon */}
+                        {(card.keywords?.includes('RECYCLE') || card.text?.includes('【帰還】') || card.tempKeywords?.includes('RECYCLE')) && (
+                            <div className="w-5 h-5 rounded-full bg-green-500 border border-white flex items-center justify-center shadow-lg" title="RECYCLE">
+                                <span className="text-[10px]">♻️</span>
                             </div>
                         )}
                         {/* Cannot Attack Icon */}
                         {(card.cannotAttack || card.keywords?.includes('PERMANENT_CANNOT_ATTACK')) && (
-                            <div className="w-4 h-4 rounded-full bg-gray-800 border border-red-500 flex items-center justify-center shadow-md" title="CANNOT ATTACK">
-                                <span className="text-[8px] text-red-500 font-bold">🚫</span>
+                            <div className="w-5 h-5 rounded-full bg-gray-800 border border-red-500 flex items-center justify-center shadow-lg" title="CANNOT ATTACK">
+                                <span className="text-[10px] text-red-500 font-bold">🚫</span>
+                            </div>
+                        )}
+                        {/* Revenge / Death Touch Icon */}
+                        {(card.keywords?.includes('DEATH_TOUCH') || card.text?.includes('道連れ') || card.tempKeywords?.includes('DEATH_TOUCH')) && (
+                            <div className="w-5 h-5 rounded-full bg-black border border-red-500 flex items-center justify-center shadow-lg" title="REVENGE">
+                                <span className="text-[10px]">💀</span>
                             </div>
                         )}
                     </div>
@@ -166,8 +191,18 @@ const Card: React.FC<CardProps> = ({
                 !minimal && (card.type === 'UNIT' || card.type === 'LEADER') && (
                     <div className="absolute -top-1.5 -right-1.5 flex flex-col items-center gap-0.5 sm:gap-1 z-20">
                         {/* Power */}
-                        <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-full bg-red-600 flex items-center justify-center border border-white shadow-lg" title="Power">
-                            <span className="font-bold text-white text-[7px] sm:text-[10px]">{card.power ?? 0}</span>
+                        <div className={`
+                            w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center border border-white shadow-lg transition-colors duration-300
+                            ${(card.tempPowerBuff || 0) > 0 ? 'bg-green-600 shadow-[0_0_10px_rgba(34,197,94,0.6)]' :
+                                (card.tempPowerDebuff || 0) > 0 ? 'bg-red-800 shadow-[0_0_10px_rgba(239,68,68,0.6)]' :
+                                    'bg-red-600'}
+                        `} title="Power">
+                            <span className={`
+                                font-bold text-[7px] sm:text-[10px]
+                                ${(card.tempPowerBuff || 0) > 0 ? 'text-green-100' :
+                                    (card.tempPowerDebuff || 0) > 0 ? 'text-red-100' :
+                                        'text-white'}
+                            `}>{card.power ?? 0}</span>
                         </div>
 
                         {/* Hit Count */}

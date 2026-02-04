@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: nivel-arena-server
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: cd server && npm install && npx tsc
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: CORS_ORIGIN
+        sync: false
+    healthCheckPath: /health

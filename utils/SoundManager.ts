@@ -1,46 +1,44 @@
+import { audioManager, SoundKey } from './AudioManager';
+
+/**
+ * Legacy SoundManager Adapter
+ * Forwards calls to the new AudioManager
+ */
 export class SoundManager {
-    static sounds: Record<string, string> = {
-        'play_card': 'https://freesound.org/data/previews/324/324896_3248244-lq.mp3', // Placeholder (Card Flip)
-        'attack': 'https://freesound.org/data/previews/566/566435_11674759-lq.mp3', // Placeholder (Sword Swoosh)
-        'draw': 'https://freesound.org/data/previews/369/369515_7086082-lq.mp3', // Placeholder (Card Draw)
-        'destroy': 'https://freesound.org/data/previews/175/175944_2577457-lq.mp3', // Placeholder (Break)
-        'damage': 'https://assets.mixkit.co/sfx/preview/mixkit-explosion-hit-1704.mp3', // Placeholder
-        'levelUp': 'https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3', // Placeholder
-        'bgm_battle': '' // Placeholder
+    // Map legacy keys to new SoundKeys
+    private static KEY_MAP: Record<string, SoundKey> = {
+        'play_card': 'play_card',
+        'attack': 'attack',
+        'draw': 'draw',
+        'destroy': 'destroy',
+        'damage': 'damage', // Maps to damage received sound
+        'levelUp': 'levelUp',
+        'bgm_battle': 'bgm_battle'
     };
 
-    static audioCache: Record<string, HTMLAudioElement> = {};
-
     static preload() {
-        if (typeof window === 'undefined') return;
-        Object.keys(this.sounds).forEach(key => {
-            if (this.sounds[key]) {
-                const audio = new Audio(this.sounds[key]);
-                audio.volume = 0.5;
-                this.audioCache[key] = audio;
-            }
-        });
+        // AudioManager handles initialization and preloading lazily or explicitly
+        if (typeof window !== 'undefined') {
+            audioManager.initialize().catch(console.error);
+        }
     }
 
     static play(key: string) {
         if (typeof window === 'undefined') return;
 
-        const url = this.sounds[key];
-        if (!url) return;
+        // Special handling for legacy keys that might not match 1:1
+        // 'damage' is ambiguous in legacy (giving or taking?), assuming taking damage for now
+        // 'attack' might need 'attack_hit' too? 
 
-        // Silently fail if audio cannot be loaded - don't disrupt gameplay
-        try {
-            const audio = new Audio(url);
-            audio.volume = 0.4;
-            audio.play().catch(() => {
-                // Silently ignore audio playback errors
-                // These are typically caused by:
-                // - User hasn't interacted with page yet (browser autoplay policy)
-                // - Audio file not found or CORS issues
-                // - Network problems
-            });
-        } catch (e) {
-            // Silently ignore audio loading errors
+        const mappedKey = this.KEY_MAP[key];
+        if (mappedKey) {
+            if (mappedKey === 'bgm_battle') {
+                audioManager.playBGM(mappedKey);
+            } else {
+                audioManager.playSE(mappedKey);
+            }
+        } else {
+            console.warn(`[SoundManager] Unknown sound key: ${key}`);
         }
     }
 }

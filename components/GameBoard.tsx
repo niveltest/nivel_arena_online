@@ -250,7 +250,7 @@ const PlaymatArea: React.FC<PlaymatAreaProps> = ({ p, isOpponent, matId, config,
 
             `}</style>
             <div className="relative w-full h-full flex items-center justify-center">
-                <div className="relative h-full w-auto max-w-full max-h-full aspect-video flex items-center justify-center playmat-canvas" style={{ containerType: 'size' }} ref={canvasRef}>
+                <div className="relative h-full w-auto max-w-full max-h-full aspect-video flex items-center justify-center playmat-canvas container-size" ref={canvasRef}>
                     <div className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 playmat-bg`}></div>
 
                     {/* Level Zone Sidebar - Positioned relatively to layout but mostly fixed currently */}
@@ -449,9 +449,37 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
         const saved = typeof window !== 'undefined' ? localStorage.getItem('selectedOpponentPlaymat') : null;
         return (saved === 'mermaid' || saved === 'cyber' || saved === 'official') ? saved : 'official';
     });
+    const [floatingTexts, setFloatingTexts] = useState<{ id: string; text: string; x: string; y: string; color: string }[]>([]);
     const [showPlaymatSelector, setShowPlaymatSelector] = useState(false);
     const [customLayout, setCustomLayout] = useState<PlaymatThemeConfig>(PLAYMAT_CONFIGS[playmatId]);
     const [activeAnimations, setActiveAnimations] = useState<AnimationEvent[]>([]);
+
+    const getCurrentFieldSize = (p: any) => {
+        let size = 0;
+        p.field.forEach((u: any) => {
+            if (u) {
+                size += u.cost;
+                u.attachments?.forEach((a: any) => { size += a.cost; });
+            }
+        });
+        return size;
+    };
+
+    const getSizeLimit = (p: any) => {
+        let limit = p.leaderLevel + p.damageZone.length;
+        const leader = p.leader;
+        if (leader && leader.effects) {
+            const isAwakened = p.leaderLevel >= (leader.awakeningLevel || 6);
+            leader.effects.forEach((eff: any) => {
+                if (eff.trigger === 'PASSIVE' && eff.action === 'BUFF_SIZE') {
+                    if (!eff.isAwakening || isAwakened) {
+                        limit += (eff.value || 0);
+                    }
+                }
+            });
+        }
+        return limit;
+    };
 
     // Update customLayout if playmatId changes externally (via selector)
     useEffect(() => {
@@ -466,6 +494,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
 
     useEffect(() => {
         SoundManager.preload();
+        SoundManager.play('bgm_battle'); // Start BGM
         const newSocket = io(SOCKET_URL);
         socketRef.current = newSocket;
 
@@ -473,7 +502,20 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             console.log('Connected to server:', newSocket.id);
             setPlayerId(newSocket.id || '');
 
-            // Load deck from localStorage
+            // Session Persistence: Try to auto-rejoin if roomId/username are in localStorage
+            const savedRoomId = localStorage.getItem('currentRoomId');
+            const savedUsername = localStorage.getItem('currentUsername');
+
+            if (savedRoomId && savedUsername && !isProcessingRef.current) {
+                console.log(`[Session] Attempting auto-rejoin: ${savedUsername} in ${savedRoomId}`);
+                newSocket.emit('joinGame', {
+                    username: savedUsername,
+                    roomId: savedRoomId
+                });
+                return;
+            }
+
+            // Normal Join/Create flow
             let deckData = undefined;
             const savedDeck = localStorage.getItem('myDeck');
             const savedLeader = localStorage.getItem('myLeader');
@@ -499,6 +541,77 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
             const animId = Math.random().toString(36).substring(7);
             const { type, ...data } = evt;
             setActiveAnimations(prev => [...prev, { id: animId, type: type, data: data as unknown } as AnimationEvent]);
+
+
+
+            // Handle Floating Text for Damage & Effects
+            if (type === 'DAMAGE' || type === 'EFFECT') {
+                const isDamage = type === 'DAMAGE';
+                const dData = data as any;
+                const targetId = isDamage ? dData.targetId : dData.playerId;
+                const isMe = targetId === newSocket.id;
+
+                let x = '50%';
+                let y = '50%';
+                let text = isDamage ? `-${dData.value}` : dData.text;
+
+                // Enhanced Colors and Labels
+                let color = 'text-white';
+                if (isDamage) {
+                    color = 'text-red-500';
+                    text = `-${dData.value}`;
+                } else if (type === 'EFFECT') {
+                    const lowText = dData.text?.toLowerCase() || '';
+                    if (lowText.includes('power +') || lowText.includes('buff') || dData.color === 'blue') {
+                        color = 'text-cyan-400';
+                        text = `▲ ${dData.text}`;
+                    } else if (lowText.includes('heal') || dData.color === 'green') {
+                        color = 'text-green-400';
+                        text = `✚ ${dData.text}`;
+                    } else if (lowText.includes('level up') || dData.color === 'orange') {
+                        color = 'text-orange-400';
+                        text = `⭐ ${dData.text}`;
+                    } else if (lowText.includes('destroy') || dData.color === 'purple') {
+                        color = 'text-purple-400';
+                        text = `💥 ${dData.text}`;
+                    } else if (dData.color === 'red') {
+                        color = 'text-red-400';
+                        text = `▼ ${dData.text}`;
+                    }
+                }
+
+                const location = isDamage ? dData.location : (dData.slotIndex === -1 ? 'LEADER' : 'UNIT');
+                const slotIndex = dData.slotIndex;
+
+                if (location === 'UNIT' && typeof slotIndex === 'number') {
+                    const xPositions = ['35%', '50%', '65%'];
+                    const isOpponentTarget = !isMe;
+
+                    if (isOpponentTarget) {
+                        y = '25%';
+                        x = xPositions[2 - slotIndex];
+                    } else {
+                        y = '55%';
+                        x = xPositions[slotIndex];
+                    }
+                } else if (location === 'LEADER') {
+                    y = isMe ? '75%' : '15%';
+                    x = '15%';
+                }
+
+                const ftId = Math.random().toString(36).substring(7);
+                setFloatingTexts(prev => [...prev, {
+                    id: ftId,
+                    text: text || '',
+                    x, y,
+                    color
+                }]);
+
+                // Cleanup text
+                setTimeout(() => {
+                    setFloatingTexts(prev => prev.filter(t => t.id !== ftId));
+                }, 1500);
+            }
 
             // Auto-remove animation after duration
             setTimeout(() => {
@@ -530,7 +643,15 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
 
         newSocket.on('error', (msg: string) => {
             alert(`エラー: ${msg}`);
+            // If room not found or similar, clear session
+            localStorage.removeItem('currentRoomId');
             window.location.reload(); // Go back to lobby
+        });
+
+        newSocket.on('joined', (data: { playerId: string, roomId: string }) => {
+            console.log(`[Session] Successfully joined room: ${data.roomId}`);
+            localStorage.setItem('currentRoomId', data.roomId);
+            localStorage.setItem('currentUsername', username || 'Player-' + data.playerId.substr(0, 4));
         });
 
         newSocket.on('gameAction', (action: { playerId: string; actionType: string; data: unknown }) => {
@@ -935,6 +1056,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                             onShowDetail={handleShowDetail}
                             onUseActive={() => handleUseActive(i)}
                             canUseActive={canUseActive}
+                            isAwakened={p.leaderLevel >= (card.type === 'LEADER' ? (card.awakeningLevel || 6) : 99)}
+                            minimal={true}
+                            isReady={!isOpponent && isMyTurn && gameState.phase === 'ATTACK' && !card.attackedThisTurn && !card.isStunned && !card.cannotAttack}
                             showDetailOverlay={(!isOpponent && attackingUnitIndex === i) || isValidAttackTarget || isValidPlayTarget}
                             className="w-full h-full"
                         />
@@ -1591,6 +1715,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                                 card={c}
                                 onShowDetail={handleShowDetail}
                                 showDetailOverlay={selectedCardIndex === i}
+                                isPlayable={isMyTurn && gameState.phase === 'MAIN' && (getCurrentFieldSize(me) + c.cost) <= getSizeLimit(me)}
                             />
                         </div>
                     ))}
@@ -1652,14 +1777,28 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId }) => {
                     switch (anim.type) {
                         case 'ATTACK':
                             return <AttackAnimation key={anim.id} anim={anim} />;
-                        case 'DAMAGE':
-                            return <DamagePopup key={anim.id} anim={anim} />;
                         case 'DESTROY':
                             return <DestroyAnimation key={anim.id} anim={anim} />;
                         default:
                             return null;
                     }
                 })}
+            </AnimatePresence>
+
+            {/* Render Floating Texts */}
+            <AnimatePresence>
+                {floatingTexts.map(ft => (
+                    <motion.div
+                        key={ft.id}
+                        initial={{ opacity: 0, y: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, y: -80, scale: 1.2 }}
+                        exit={{ opacity: 0, scale: 1.5 }}
+                        className={`fixed z-[200] font-black text-2xl sm:text-4xl pointer-events-none drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] ${ft.color}`}
+                        style={{ left: ft.x, top: ft.y }}
+                    >
+                        {ft.text}
+                    </motion.div>
+                ))}
             </AnimatePresence>
         </div>
     );

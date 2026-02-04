@@ -66,6 +66,11 @@ body {
   }
 }
 
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
 .animate-scanline {
   animation: scanline 8s linear infinite;
 }
@@ -78,9 +83,17 @@ body {
   animation: warning-flash 0.5s ease-in-out infinite;
 }
 
+.animate-bounce-subtle {
+  animation: bounce-subtle 2s ease-in-out infinite;
+}
+
 .hex-grid {
   background-image: radial-gradient(circle, #ffffff11 1px, transparent 1px);
   background-size: 20px 20px;
+}
+
+.container-size {
+  container-type: size;
 }
 
 .tactical-border {

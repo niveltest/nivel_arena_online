@@ -30,7 +30,8 @@ const createMockLeader = (name: string, effects: any[]): Card => ({
 async function runTests() {
     console.log('=== Unit Test: Leader Awakening ===');
 
-    const game = new Game('test-room');
+    const mockIo = { to: () => ({ emit: () => { } }), in: () => ({ emit: () => { } }) };
+    const game = new Game('test-room', mockIo);
     const p1 = new Player({ ...mockSocket, id: 'p1' }, 'Player1'); // Crown (Heal/Add Item)
     const p2 = new Player({ ...mockSocket, id: 'p2' }, 'Player2'); // Privaty (Stun)
 

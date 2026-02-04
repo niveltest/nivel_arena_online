@@ -26,6 +26,11 @@ app.get('/api/starter-decks', (req, res) => {
     res.json(starterDecks);
 });
 
+// Health check endpoint for deployment platforms
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
 // Image Proxy to bypass SSL/Mixed Content issues
 app.get('/api/proxy-image', async (req, res) => {
     const imageUrl = req.query.url as string;

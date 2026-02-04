@@ -1,0 +1,188 @@
+--- ドロシー‐ノスタルジア (BT02-041) ---
+Text: [アタッカー] 自分の手札が5枚以上ある場合、この攻撃が終わるまで突破[コスト6以上](コスト6以上の相手のユニットはこのユニットの攻撃を防御できない)を得る。
+[トリガー] / 
+このカードをトラッシュする。1枚ドローする。
+Effects: [
+  {
+    "trigger": "ON_ATTACK",
+    "isAwakening": false,
+    "isSelfTrash": false,
+    "action": "GRANT_ABILITY",
+    "grantedKeyword": "アタッカー,BREAKTHROUGH",
+    "targetType": "ALL_ALLIES"
+  },
+  {
+    "trigger": "ON_ATTACK",
+    "isAwakening": false,
+    "isSelfTrash": false,
+    "action": "DRAW",
+    "value": 1
+  },
+  {
+    "trigger": "ON_DAMAGE_TRIGGER",
+    "isAwakening": false,
+    "isSelfTrash": true,
+    "action": "DRAW",
+    "value": 1
+  },
+  {
+    "trigger": "ON_DAMAGE_TRIGGER",
+    "isAwakening": false,
+    "isSelfTrash": true,
+    "action": "DRAW",
+    "value": 1
+  }
+]
+--- クラウン‐ネイキッドキング (BT02-055) ---
+Text: 基本面
+[誓約]
+自分は [稲妻] のカードのみをデッキに入れることができる。
+
+[覚醒]
+自分のリーダーレベルが6以上の場合、このカードを裏返す。
+
+
+[覚醒]面
+[パッシブ]  フィールドにあるアイテムを装備している自分のユニット全てのパワー+1500。
+Effects: [
+  {
+    "trigger": "PASSIVE",
+    "isAwakening": true,
+    "isSelfTrash": false,
+    "action": "BUFF_ALLY",
+    "value": 1500,
+    "targetType": "ALL_ALLIES"
+  }
+]
+--- クラウン‐ネイキッドキング (BT02-067) ---
+Text: [アームド: 《ユニーク》]《ユニーク》を持つアイテムを装備している場合、このユニットが装備しているアイテムの枚数が対向ユニットのヒット分以上なら、[アタッカー] 突破(相手のユニットはこのユニットの攻撃を防御できない)を得る。
+[トリガー] / 
+このカードを自分の手札に加える。
+Effects: [
+  {
+    "trigger": "ON_ATTACK",
+    "isAwakening": false,
+    "isSelfTrash": false,
+    "action": "GRANT_ABILITY",
+    "grantedKeyword": "アタッカー,BREAKTHROUGH",
+    "targetType": "OPPOSING"
+  },
+  {
+    "trigger": "ON_DAMAGE_TRIGGER",
+    "isAwakening": false,
+    "isSelfTrash": false,
+    "action": "ADD_FROM_DISCARD",
+    "targetType": "SELF"
+  },
+  {
+    "trigger": "ON_DAMAGE_TRIGGER",
+    "isAwakening": false,
+    "isSelfTrash": false,
+    "action": "ADD_FROM_DISCARD",
+    "targetType": "SELF"
+  }
+]
+--- ケブラーベスト (ST03-016) ---
+Text: [装備条件なし]
+
+パワー+3000。
+
+[ディフェンダー]
+自壊(このユニットが相手の攻撃を防御したなら、その攻撃を終了させ、このユニットをトラッシュする)。
+Effects: [
+  {
+    "trigger": "PASSIVE",
+    "action": "BUFF_ALLY",
+    "value": 3000,
+    "targetType": "ENEMY"
+  },
+  {
+    "trigger": "PASSIVE",
+    "action": "KILL_UNIT",
+    "targetType": "SINGLE"
+  }
+]
+--- ドロシー (ST04-001) ---
+Text: 基本面
+[誓約]
+自分は (波濤)のカードのみをデッキに入れることができる。
+
+[覚醒]
+自分のリーダーレベルが4以上の場合、このカードを裏返す。
+
+
+[覚醒]面
+[パッシブ]
+フィールドにある自分のユニット全ては相手のターンの間、パワー+1000。
+Effects: [
+  {
+    "trigger": "PASSIVE",
+    "isAwakening": true,
+    "isSelfTrash": false,
+    "action": "BUFF_ALLY",
+    "value": 1000,
+    "targetType": "ALL_ENEMIES"
+  }
+]
+--- ドロシー (ST04-011) ---
+Text: ガーディアン 防壁[3](隣のレーンの相手のユニットが攻撃する場合、自分の手札を3枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。
+[ディフェンダー] この防御が終わるまでパワー+2000。
+Effects: []
+--- センチ‐マイティホリデー (BT02-070) ---
+Effects: []
+--- ソーダ：トゥインクルバニー (BT02-071) ---
+Effects: [
+  {
+    "trigger": "ON_DAMAGE_TRIGGER",
+    "isAwakening": false,
+    "isSelfTrash": false,
+    "action": "ADD_FROM_DISCARD",
+    "targetType": "SELF"
+  },
+  {
+    "trigger": "ON_DAMAGE_TRIGGER",
+    "isAwakening": false,
+    "isSelfTrash": false,
+    "action": "ADD_FROM_DISCARD",
+    "targetType": "SELF"
+  }
+]
+--- マクスウェル‐メカニックホワイト (BT02-072) ---
+Effects: [
+  {
+    "trigger": "PASSIVE",
+    "action": "SET_HIT",
+    "value": 1,
+    "targetType": "SELF"
+  }
+]
+--- マクスウェル (ST05-005) ---
+Effects: [
+  {
+    "trigger": "PASSIVE",
+    "action": "BUFF_ALLY",
+    "value": 1000,
+    "targetType": "SELF",
+    "condition": "ARMED_IF_EQUIPPED"
+  }
+]
+--- ソーダ (ST05-007) ---
+Effects: [
+  {
+    "trigger": "PASSIVE",
+    "action": "BUFF_ALLY",
+    "value": 1000,
+    "targetType": "SELF",
+    "condition": "ARMED_PER_ITEM"
+  }
+]
+--- センチ (ST05-010) ---
+Effects: [
+  {
+    "trigger": "PASSIVE",
+    "action": "BUFF_ALLY",
+    "value": 2000,
+    "targetType": "SELF",
+    "condition": "ARMED_IF_EQUIPPED"
+  }
+]

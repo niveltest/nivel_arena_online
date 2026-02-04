@@ -1,0 +1,39 @@
+﻿Starting AI Skill Usage Unit Test...
+
+--- Case 1: No Units No Buff ---
+[AI Debug] Skills in hand: 1, FieldSize: 0, Limit: 5
+[AI Debug] Skill Super Buff (BUFF) utility check: hasUnits=false
+[AI Debug] Skill Super Buff isUseful: false
+PlayCard called (Expected false): false
+
+--- Case 2: Units Exist Play Buff ---
+[AI Debug] Skills in hand: 1, FieldSize: 2, Limit: 5
+[AI Debug] Skill Super Buff (BUFF) utility check: hasUnits=true
+[AI Debug] Skill Super Buff isUseful: true
+[AI] Playing SKILL: Super Buff (Utility checked)
+[AI Debug] Skills in hand: 0, FieldSize: 4, Limit: 5
+PlayCard called (Expected true): true
+
+--- Case 3: Smart Target Selection ---
+[AI Debug] Skills in hand: 1, FieldSize: 8, Limit: 5
+[AI Debug] Cannot afford skill: Grant Skill (10 > 5)
+[AI] Attacking with Boss at target index 0
+[AI] Attacking with Boss at target index 0
+[AI] Attacking with Boss at target index 0
+Selected Unit ID (Expected boss): 
+node.exe : TEST FAILED: Error: AI failed to 
+prioritize boss for buff
+発生場所 行:1 文字:1
++ & "C:\Program Files\nodejs/node.exe" "C:\P
+rogram Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: 
+    (TEST FAILED: Er...e boss for buff:Str  
+  ing) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommand 
+   Error
+ 
+    at runSkillTest (C:\Users\worke\Antigrav
+ity\nivel_arena_online\server\testData\unitT
+estAISkill.ts:113:42)
