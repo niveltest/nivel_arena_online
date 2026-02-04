@@ -65,7 +65,12 @@ class AudioManager {
      * Must be called after user interaction due to browser autoplay policies
      */
     public async initialize(): Promise<void> {
-        if (this.initialized) return;
+        if (this.initialized) {
+            console.log('[AudioManager] Already initialized');
+            return;
+        }
+
+        console.log('[AudioManager] Initializing...');
 
         // Load saved settings from localStorage
         if (typeof window !== 'undefined') {
@@ -75,25 +80,49 @@ class AudioManager {
                     const parsed = JSON.parse(savedConfig);
                     // Merge saved config with defaults to ensure structure
                     this.config = { ...this.config, ...parsed };
+                    console.log('[AudioManager] Loaded saved config:', this.config);
                 } catch (e) {
-                    console.warn('Failed to load audio config:', e);
+                    console.warn('[AudioManager] Failed to load audio config:', e);
                 }
+            } else {
+                console.log('[AudioManager] No saved config, using defaults');
             }
         }
 
         this.initialized = true;
-        console.log('[AudioManager] Initialized');
+        console.log('[AudioManager] Initialized successfully');
 
         // Preload commonly used SE
+        console.log('[AudioManager] Preloading sound effects...');
         this.preloadSE(['play_card', 'attack', 'attack_hit', 'damage', 'draw', 'destroy', 'levelUp']);
+    }
+
+    /**
+     * Check if the audio system is initialized
+     */
+    public isInitialized(): boolean {
+        return this.initialized;
     }
 
     private preloadSE(keys: SoundKey[]) {
         if (typeof window === 'undefined') return;
 
+        console.log(`[AudioManager] Preloading ${keys.length} sound effects...`);
         keys.forEach(key => {
             const src = SOUND_MAP[key];
+            if (!src) {
+                console.warn(`[AudioManager] Sound key "${key}" not found in SOUND_MAP`);
+                return;
+            }
+
             const audio = new Audio(src);
+            audio.addEventListener('canplaythrough', () => {
+                console.log(`[AudioManager] Preloaded: ${key} (${src})`);
+            }, { once: true });
+            audio.addEventListener('error', (e) => {
+                console.error(`[AudioManager] Failed to preload: ${key} (${src})`, e);
+            }, { once: true });
+
             audio.load(); // Hint browser to preload
             // Store one instance in the pool
             this.sePool.set(src, [audio]);
@@ -158,13 +187,20 @@ class AudioManager {
     public playSE(key: SoundKey, volumeScale: number = 1.0): void {
         if (!this.initialized && typeof window !== 'undefined') {
             // Auto-init on first user interaction-triggered sound if possible
+            console.log('[AudioManager] Auto-initializing on first SE play');
             this.initialized = true;
         }
 
-        if (this.config.se.muted) return;
+        if (this.config.se.muted) {
+            console.log(`[AudioManager] SE muted, skipping: ${key}`);
+            return;
+        }
 
         const src = SOUND_MAP[key];
-        if (!src) return;
+        if (!src) {
+            console.warn(`[AudioManager] Unknown SE key: ${key}`);
+            return;
+        }
 
         // Get or create audio pool for this SE
         if (!this.sePool.has(src)) {
@@ -176,6 +212,7 @@ class AudioManager {
         // Find available audio element or create new one
         let audio = pool.find(a => a.paused || a.ended);
         if (!audio) {
+            console.log(`[AudioManager] Creating new audio instance for: ${key}`);
             audio = new Audio(src);
             pool.push(audio);
 
@@ -191,11 +228,14 @@ class AudioManager {
         audio.volume = Math.max(0, Math.min(1, this.config.se.volume * volumeScale));
         audio.currentTime = 0;
 
-        audio.play().catch(err => {
-            // Common error: "The play() request was interrupted" or user didn't interact yet
-            // Minimal logging to avoid console spam
-            // console.debug('[AudioManager] SE play failed:', err);
-        });
+        audio.play()
+            .then(() => {
+                console.log(`[AudioManager] Playing SE: ${key} (volume: ${audio.volume.toFixed(2)})`);
+            })
+            .catch(err => {
+                // Common error: "The play() request was interrupted" or user didn't interact yet
+                console.warn(`[AudioManager] SE play failed for ${key}:`, err.message);
+            });
     }
 
     /**

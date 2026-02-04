@@ -12,6 +12,7 @@ import { motion, AnimatePresence, PanInfo } from 'framer-motion';
 
 const SOCKET_URL = process.env.NEXT_PUBLIC_SOCKET_URL || 'http://localhost:3001';
 import { SoundManager } from '../utils/SoundManager';
+import { audioManager } from '../utils/AudioManager';
 import { DamageAnimationData, EffectAnimationData } from '../shared/types';
 
 // Playmat Layout Types
@@ -491,6 +492,35 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         }
         return limit;
     };
+
+    // Initialize Audio System on component mount
+    useEffect(() => {
+        console.log('[GameBoard] Initializing audio system...');
+        audioManager.initialize()
+            .then(() => {
+                console.log('[GameBoard] Audio system initialized');
+            })
+            .catch(err => {
+                console.error('[GameBoard] Failed to initialize audio:', err);
+            });
+
+        // Also initialize on first user interaction (for browsers with strict autoplay policies)
+        const handleFirstInteraction = () => {
+            console.log('[GameBoard] First user interaction detected, ensuring audio is initialized');
+            audioManager.initialize().catch(console.error);
+            // Remove listeners after first interaction
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('keydown', handleFirstInteraction);
+        };
+
+        document.addEventListener('click', handleFirstInteraction, { once: true });
+        document.addEventListener('keydown', handleFirstInteraction, { once: true });
+
+        return () => {
+            document.removeEventListener('click', handleFirstInteraction);
+            document.removeEventListener('keydown', handleFirstInteraction);
+        };
+    }, []);
 
     // Update customLayout if playmatId changes externally (via selector)
     useEffect(() => {
