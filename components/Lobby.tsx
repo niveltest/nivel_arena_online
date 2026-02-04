@@ -260,7 +260,7 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
             </div>
 
             <div className="absolute bottom-4 text-xs text-gray-600">
-                v0.6.0 - Audio & Rooms
+                v0.6.1 - Audio Hotfix
             </div>
         </div>
     );
