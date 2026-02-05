@@ -498,30 +498,38 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
 
     // Initialize Audio System on component mount
     useEffect(() => {
-        console.log('[GameBoard] Initializing audio system...');
-        audioManager.initialize()
-            .then(() => {
-                console.log('[GameBoard] Audio system initialized');
-            })
-            .catch(err => {
-                console.error('[GameBoard] Failed to initialize audio:', err);
-            });
+        const initAudio = async () => {
+            console.log('[GameBoard] Audio system preloading...');
+            SoundManager.preload();
 
-        // Also initialize on first user interaction (for browsers with strict autoplay policies)
-        const handleFirstInteraction = () => {
-            console.log('[GameBoard] First user interaction detected, ensuring audio is initialized');
-            audioManager.initialize().catch(console.error);
-            // Remove listeners after first interaction
-            document.removeEventListener('click', handleFirstInteraction);
-            document.removeEventListener('keydown', handleFirstInteraction);
+            try {
+                await audioManager.initialize();
+                console.log('[GameBoard] Audio system initialized. Current BGM Volume:', audioManager.getVolume('bgm'));
+
+                // Start BGM with a slight delay to ensure browser state is ready
+                setTimeout(() => {
+                    console.log('[GameBoard] Requesting Combat BGM...');
+                    SoundManager.play('bgm_battle');
+                }, 300);
+            } catch (err) {
+                console.error('[GameBoard] Audio initialization failed:', err);
+            }
         };
 
-        document.addEventListener('click', handleFirstInteraction, { once: true });
-        document.addEventListener('keydown', handleFirstInteraction, { once: true });
+        const handleFirstInteraction = () => {
+            console.log('[GameBoard] First user interaction detected, ensuring audio is initialized');
+            initAudio();
+            document.removeEventListener('click', handleFirstInteraction);
+        };
+
+        if (audioManager.isInitialized()) {
+            initAudio();
+        } else {
+            document.addEventListener('click', handleFirstInteraction, { once: true });
+        }
 
         return () => {
             document.removeEventListener('click', handleFirstInteraction);
-            document.removeEventListener('keydown', handleFirstInteraction);
         };
     }, []);
 

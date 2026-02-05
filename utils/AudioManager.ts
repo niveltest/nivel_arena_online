@@ -63,6 +63,8 @@ class AudioManager {
 
     private pendingBGM: SoundKey | null = null;
     private pendingSE: { key: SoundKey, volume: number }[] = [];
+    private currentBGMFadeId: number = 0; // Track active fade to cancel it if volume changes manually
+
 
     /**
      * Initialize the audio system
@@ -194,27 +196,26 @@ class AudioManager {
             if (audio.loop) {
                 console.log(`[AudioManager] BGM loop restart: ${key}`);
                 audio.currentTime = 0;
+                // Re-apply current volume from config just in case
+                audio.volume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
                 audio.play().catch(err => console.error('[AudioManager] BGM loop failed:', err));
             }
         });
 
-        // Start silent, then fade in to target
-        audio.volume = 0;
-
-        // Play even if muted/0 so we can adjust it later
+        // Start silent or at current volume if fade is short
         const targetVolume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
+        audio.volume = 0;
 
         audio.play().then(() => {
             // Ensure we only fade the current BGM after play starts
             if (this.bgm === audio) {
-                if (targetVolume > 0) {
+                if (targetVolume > 0 && fadeInDuration > 0) {
                     this.fadeVolume(audio, 0, targetVolume, fadeInDuration);
                 } else {
-                    audio.volume = 0; // Keep at 0 if muted/0 volume
+                    audio.volume = targetVolume;
                 }
             }
         }).catch(err => {
-            // Autoplay policy might block this
             console.warn('[AudioManager] BGM play failed (Autoplay?):', err.message);
             this.pendingBGM = key;
         });
@@ -286,7 +287,8 @@ class AudioManager {
         }
 
         // Apply volume (Master SE Volume * Event Specific Scale)
-        audio.volume = Math.max(0, Math.min(1, this.config.se.volume * volumeScale));
+        const finalVolume = Math.max(0, Math.min(1, this.config.se.volume * volumeScale));
+        audio.volume = finalVolume;
         audio.currentTime = 0;
 
         audio.play()
@@ -303,15 +305,21 @@ class AudioManager {
      * Set volume for a specific audio type
      */
     public setVolume(type: AudioType, volume: number): void {
-        this.config[type].volume = Math.max(0, Math.min(1, volume));
+        const validatedVolume = Math.max(0, Math.min(1, volume));
+        this.config[type].volume = validatedVolume;
 
-        if (type === 'bgm' && this.bgm) {
-            const targetVolume = this.config[type].muted ? 0 : this.config[type].volume;
-            this.bgm.volume = targetVolume;
+        if (type === 'bgm') {
+            // If there's an active fade, "cancel" it by incrementing the ID
+            this.currentBGMFadeId++;
 
-            // If volume becomes > 0, ensure it's playing
-            if (!this.config[type].muted && targetVolume > 0 && this.bgm.paused) {
-                this.bgm.play().catch(() => { });
+            if (this.bgm) {
+                const targetVolume = this.config.bgm.muted ? 0 : validatedVolume;
+                this.bgm.volume = targetVolume;
+
+                // If volume becomes > 0, ensure it's playing
+                if (!this.config.bgm.muted && targetVolume > 0 && this.bgm.paused) {
+                    this.bgm.play().catch(() => { });
+                }
             }
         }
 
@@ -331,13 +339,16 @@ class AudioManager {
     public toggleMute(type: AudioType): boolean {
         this.config[type].muted = !this.config[type].muted;
 
-        if (type === 'bgm' && this.bgm) {
-            const targetVolume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
-            this.bgm.volume = targetVolume;
+        if (type === 'bgm') {
+            this.currentBGMFadeId++; // Cancel any active fade
+            if (this.bgm) {
+                const targetVolume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
+                this.bgm.volume = targetVolume;
 
-            // If unmuting and volume > 0, ensure it's playing
-            if (!this.config.bgm.muted && targetVolume > 0 && this.bgm.paused) {
-                this.bgm.play().catch(() => { });
+                // If unmuting and volume > 0, ensure it's playing
+                if (!this.config.bgm.muted && targetVolume > 0 && this.bgm.paused) {
+                    this.bgm.play().catch(() => { });
+                }
             }
         }
 
@@ -364,16 +375,21 @@ class AudioManager {
     ): void {
         const startTime = Date.now();
         const volumeDiff = to - from;
+        const fadeId = this.currentBGMFadeId;
 
         const fade = () => {
+            // Cancel if a different fade has started or manual volume set
+            if (this.currentBGMFadeId !== fadeId) {
+                console.log('[AudioManager] Fade cancelled by new volume command');
+                return;
+            }
+
             const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
 
-            // Check if audio is still valid (not paused externally)
             try {
                 audio.volume = Math.max(0, Math.min(1, from + volumeDiff * progress));
             } catch (e) {
-                // Element might be in invalid state
                 return;
             }
 
