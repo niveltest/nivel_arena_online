@@ -198,9 +198,10 @@ export class Game {
         }
     }
 
-    public handleReconnect(username: string, newSocketId: string): { success: boolean, oldSocketId?: string } {
+    public handleReconnect(username: string, newSocket: any): { success: boolean, oldSocketId?: string } {
         if (this.phase === 'FINISHED') return { success: false };
 
+        const newSocketId = newSocket.id;
         const existingPlayerId = Object.keys(this.players).find(id => this.players[id].username === username);
         if (!existingPlayerId) return { success: false };
 
@@ -213,23 +214,17 @@ export class Game {
         }
 
         player.connected = true;
+        player.socket = newSocket; // Update the socket reference!!
 
-        // Typically we need to update playerId in 'players' map if playerId IS socketId.
-        // But changing key in map is tricky references.
-        // Instead, we might need to handle ID migration or just keep old ID internally but map socket events.
-        // Simplest for now: Migrate the player entry to new Key.
-
-        // Remove old key
+        // Migrate the player entry to new Key in the players map
         delete this.players[existingPlayerId];
-        // Add new key
         this.players[newSocketId] = player;
         player.id = newSocketId;
-        player.state.id = newSocketId; // State also has ID
-
-        // If it was this player's turn, update turnPlayerId reference? 
-        // We handle this in migratePlayerReferences now for robustness
+        player.state.id = newSocketId;
 
         this.migratePlayerReferences(existingPlayerId, newSocketId);
+
+        console.log(`[RECONNECT] Migrated ${username} from ${existingPlayerId} to ${newSocketId}. TurnPlayerId is now: ${this.turnPlayerId}`);
 
         this.broadcastAction(newSocketId, 'PLAYER_RECONNECTED', {
             playerId: newSocketId,
@@ -237,7 +232,6 @@ export class Game {
         });
         this.addLog(`${username} Reconnected!`);
 
-        // Send full state to reconnected player
         return { success: true, oldSocketId: existingPlayerId };
     }
 

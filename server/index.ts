@@ -278,7 +278,7 @@ io.on('connection', (socket) => {
         // Note: We need to access players to check username. `game.players` is public.
         const existingPlayerId = Object.keys(game.players).find(id => game.players[id].username === username);
         if (existingPlayerId) {
-            const result = game.handleReconnect(username, socket.id);
+            const result = game.handleReconnect(username, socket);
             if (result.success) {
                 currentRoomId = roomId;
                 socket.join(roomId);
