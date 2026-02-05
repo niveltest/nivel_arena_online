@@ -95,6 +95,11 @@ class AudioManager {
         this.initialized = true;
         console.log('[AudioManager] Initialized successfully');
 
+        // Apply loaded volume settings to any already active/pending objects
+        if (this.bgm) {
+            this.bgm.volume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
+        }
+
         // Preload commonly used SE
         this.preloadSE(['play_card', 'attack', 'attack_hit', 'damage', 'draw', 'destroy', 'levelUp'], true);
 
@@ -153,6 +158,14 @@ class AudioManager {
      */
     public playBGM(key: SoundKey, fadeInDuration: number = 1000): void {
         if (typeof window === 'undefined') return;
+
+        // If not initialized, queue but don't play yet to ensure volume settings are loaded
+        if (!this.initialized) {
+            console.log(`[AudioManager] System not initialized, queuing BGM: ${key}`);
+            this.pendingBGM = key;
+            return;
+        }
+
         const src = SOUND_MAP[key];
         if (!src) return;
 
@@ -165,21 +178,25 @@ class AudioManager {
         }
 
         // Create new BGM instance
-        this.bgm = new Audio(src);
-        this.bgm.loop = true;
+        const audio = new Audio(src);
+        this.bgm = audio;
+        audio.loop = true;
         // Start silent if not muted, or stay silent if muted
-        this.bgm.volume = 0;
+        audio.volume = 0;
 
         // Play logic
         if (!this.config.bgm.muted) {
             const targetVolume = this.config.bgm.volume;
-            this.bgm.play().then(() => {
-                this.fadeVolume(this.bgm!, 0, targetVolume, fadeInDuration);
+            audio.play().then(() => {
+                // Ensure we only fade the current BGM after play starts
+                if (this.bgm === audio) {
+                    this.fadeVolume(audio, 0, targetVolume, fadeInDuration);
+                }
             }).catch(err => {
                 // Autoplay policy might block this
                 console.warn('[AudioManager] BGM play failed (Autoplay?):', err.message);
                 this.pendingBGM = key;
-                this.initialized = false; // System is effectively not fully initialized for sound if this fails
+                // Wait for interaction - we don't set initialized=false here anymore to avoid loops
             });
         }
     }

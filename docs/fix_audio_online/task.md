@@ -1,13 +1,36 @@
-# オンライン環境の音声再生修正タスク
-
-- [x] AudioManagerの修正（保留BGM再生ロジック追加）
-- [x] Lobby.tsxの修正（初期化ロジック追加、grid.svgの修正）
-- [x] GitHubへのプッシュ
-- [x] Vercelへのデプロイ確認
-  - [x] 手動再デプロイの実行
-  - [x] Vercelの同期が停止中：リポジトリの再接続が必要
-  - [x] 環境変数エラーの解決
-    - [x] Vercel CLIでの環境変数再設定
-    - [x] `vercel.json` の `env` セクション削除
-- [x] デプロイ完了
-- [x] 最終的な動作確認（ユーザーによる）
+- [x] Analyze `package.json` for scripts <!-- id: 0 -->
+- [x] Find socket initialization code <!-- id: 1 -->
+- [x] Check environment variable configuration <!-- id: 2 -->
+- [x] Configure connection to Online Server (CORS fix) <!-- id: 3 -->
+- [x] Push changes to GitHub and verify deployment <!-- id: 4 -->
+- [ ] Debug persistent CORS issues on Render <!-- id: 5 -->
+  - [x] Verify old version running
+  - [x] Fix build script (asset copying)
+  - [x] Push and verify fix
+  - [x] Push and verify fix
+  - [x] Push and verify fix
+  - [x] Confirm successful deployment (v1.1)
+    - [x] Verify URL (`nivel-arena-server-96ie.onrender.com`) (Verified manually and via curl)
+    - [x] Trigger manual deploy on Render (Confirmed via screenshot)
+  - [x] Push and verify fix
+  - [x] Confirm successful deployment (v1.1)
+    - [x] Verify URL (`nivel-arena-server-96ie.onrender.com`) (Verified manually)
+    - [x] Trigger manual deploy on Render (Confirmed)
+  - [ ] Verify Frontend connection
+    - [x] Diagnosis: Frontend connecting to WRONG URL (`nivel-arena-server.onrender.com`)
+    - [x] Action: Update Vercel Env Var `NEXT_PUBLIC_SOCKET_URL` to `https://nivel-arena-server-96ie.onrender.com`
+    - [x] Variable Updated & Redeployed (Confirmed via screenshot)
+    - [x] Diagnosis: "Timeout" error on correct URL
+      - [x] Check Server CORS settings (Found strict origin)
+      - [x] Fix: Loosen Socket.io CORS & Bump to v1.2
+    - [x] Manual Check: Trigger Render Deploy -> Verify v1.2 -> Open App -> F12 -> Console
+  - [x] Bug: Cannot Rejoin/Reload during Game
+    - [x] Analyze `server/Game.ts` (handleReconnect logic)
+    - [x] Fix: Update `player.socket` and `player.id` on reconnect
+    - [x] Verification: Passed local automated test `reconnectTest.ts`
+  - [ ] Final Manual Check: Trigger Render Deploy -> Open App -> Reload during CPU game
+- [x] Bug: Audio volume issue during match
+  - [x] Fix: Sync volume correctly in `AudioManager.initialize`
+  - [x] Fix: Avoid race condition in `AudioManager.playBGM`
+  - [x] Fix: Wait for initialization in `GameBoard.tsx`
+  - [ ] Verification: Manual test with 0% volume setting

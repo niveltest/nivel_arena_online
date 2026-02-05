@@ -538,7 +538,19 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
 
     useEffect(() => {
         SoundManager.preload();
-        SoundManager.play('bgm_battle'); // Start BGM
+
+        // Wait for audio initialization before starting BGM to ensure volume settings are loaded
+        audioManager.initialize()
+            .then(() => {
+                console.log('[GameBoard] Audio system initialized, starting BGM');
+                SoundManager.play('bgm_battle');
+            })
+            .catch(err => {
+                console.error('[GameBoard] Failed to initialize audio:', err);
+                // Fallback: try playing anyway
+                SoundManager.play('bgm_battle');
+            });
+
         const newSocket = io(SOCKET_URL, {
             transports: ['polling', 'websocket'],
             withCredentials: true
