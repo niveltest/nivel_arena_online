@@ -1,0 +1,3 @@
+- [x] Diagnosis: CPU stuck in Main Phase loop due to recursive `think()` calls
+- [x] Fix: Decouple recursion in `AIPlayer.ts` to allow state synchronization
+- [ ] Verification: Confirm CPU progresses past Defense phase in manual test
