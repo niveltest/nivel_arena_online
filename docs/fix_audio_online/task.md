@@ -30,7 +30,8 @@
     - [x] Verification: Passed local automated test `reconnectTest.ts`
   - [ ] Final Manual Check: Trigger Render Deploy -> Open App -> Reload during CPU game
 - [x] Bug: Audio volume issue during match
-  - [x] Fix: Sync volume correctly in `AudioManager.initialize`
-  - [x] Fix: Avoid race condition in `AudioManager.playBGM`
+  - [x] Fix: BGM lifecycle management (cleanup on unmount)
+  - [x] Fix: Ensure BGM loops correctly using event listeners
+  - [x] Fix: Ensure volume is adjustable even if started at 0
   - [x] Fix: Wait for initialization in `GameBoard.tsx`
   - [ ] Verification: Manual test with 0% volume setting
