@@ -1375,12 +1375,16 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
             ...(opponent?.discard || [])
         ];
 
+        const isFirstPlayer = (gameState.turnPlayerId === playerId) === (gameState.turnCount % 2 === 1);
+        const turnOrderLabel = isFirstPlayer ? '先攻' : '後攻';
+
         return (
             <SelectionModal
                 selection={gameState.selection}
                 allCards={allCardsPool}
                 onConfirm={handleSelectCard}
                 onShowDetail={handleShowDetail}
+                turnOrderLabel={gameState.selection.action === 'MULLIGAN' ? turnOrderLabel : undefined}
             />
         );
     };
@@ -1621,6 +1625,14 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                         <span className="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Room // Turn</span>
                         <div className="flex items-center gap-2">
                             <div className="px-2 py-0.5 bg-slate-800 rounded text-[10px] font-black text-cyan-400">T-{gameState.turnCount}</div>
+                            {(() => {
+                                const isFirstPlayer = (gameState.turnPlayerId === playerId) === (gameState.turnCount % 2 === 1);
+                                return (
+                                    <div className={`px-2 py-0.5 rounded text-[10px] font-black shadow-sm ${isFirstPlayer ? 'bg-red-500/20 text-red-400 border border-red-500/30' : 'bg-blue-500/20 text-blue-400 border border-blue-500/30'}`}>
+                                        {isFirstPlayer ? '先攻' : '後攻'}
+                                    </div>
+                                );
+                            })()}
                             <div className="text-[10px] text-slate-600 font-mono">{roomId}</div>
                         </div>
                     </div>

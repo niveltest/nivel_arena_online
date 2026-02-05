@@ -1,0 +1,6 @@
+- [x] Investigation: Identify first/second player logic in `Game.ts`
+- [x] Planning: Design UI labels for Mulligan and GameBoard
+- [ ] Execution: Update `SelectionModal.tsx` to display turn order label
+- [ ] Execution: Update `GameBoard.tsx` to calculate and pass turn order to Modal
+- [ ] Execution: Add permanent turn order badge to GameBoard status bar
+- [ ] Verification: Manual test in CPU battle
