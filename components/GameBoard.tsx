@@ -468,6 +468,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
     const [showPlaymatSelector, setShowPlaymatSelector] = useState(false);
     const [customLayout, setCustomLayout] = useState<PlaymatThemeConfig>(PLAYMAT_CONFIGS[playmatId]);
     const [activeAnimations, setActiveAnimations] = useState<AnimationEvent[]>([]);
+    const audioInitializedRef = useRef(false);
 
     const getCurrentFieldSize = (p: Player) => {
         let size = 0;
@@ -498,6 +499,9 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
 
     // Initialize Audio System on component mount
     useEffect(() => {
+        if (audioInitializedRef.current) return;
+        audioInitializedRef.current = true;
+
         const initAudio = async () => {
             console.log('[GameBoard] Audio system preloading...');
             SoundManager.preload();

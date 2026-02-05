@@ -60,7 +60,7 @@ class AudioManager {
     };
     private initialized = false;
     private initializing = false;
-
+    private currentBGMKey: SoundKey | null = null;
     private pendingBGM: SoundKey | null = null;
     private pendingSE: { key: SoundKey, volume: number }[] = [];
     private currentBGMFadeId: number = 0; // Track active fade to cancel it if volume changes manually
@@ -172,14 +172,22 @@ class AudioManager {
         if (!this.initialized) {
             console.log(`[AudioManager] System not initialized, queuing BGM: ${key}`);
             this.pendingBGM = key;
+            this.currentBGMKey = key;
             return;
         }
 
         const src = SOUND_MAP[key];
         if (!src) return;
 
-        // If already playing the same track, do nothing
-        if (this.bgm && this.bgm.src.endsWith(src) && !this.bgm.paused) return;
+        // If already playing OR pending the same track, do nothing
+        if (this.currentBGMKey === key) {
+            console.log(`[AudioManager] BGM "${key}" is already playing or pending, skipping`);
+            return;
+        }
+
+        console.log(`[AudioManager] Switching BGM from "${this.currentBGMKey}" to "${key}"`);
+        this.currentBGMKey = key;
+        this.pendingBGM = null; // Clear any previously pending track as we have a new one now
 
         // Stop current BGM if playing
         if (this.bgm) {
@@ -225,6 +233,8 @@ class AudioManager {
      * Stop background music with optional fade-out
      */
     public stopBGM(fadeOutDuration: number = 500): void {
+        this.currentBGMKey = null;
+        this.pendingBGM = null;
         if (!this.bgm) return;
 
         const audio = this.bgm;
