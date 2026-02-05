@@ -1,0 +1,5 @@
+- [x] Diagnosis: Socket connection timeout on Render (Free Tier)
+- [x] Fix: Increase socket timeout from 15s to 45s in `Lobby.tsx`
+- [x] Fix: Increase socket timeout to 45s in `GameBoard.tsx`
+- [x] Fix: Bump server to v1.3 and add connection count logging in `index.ts`
+- [ ] Verification: Confirm connection success after server cold start
