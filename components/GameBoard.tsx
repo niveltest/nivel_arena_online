@@ -782,6 +782,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
 
         return () => {
             newSocket.disconnect();
+            audioManager.stopBGM(1000); // Fade out BGM when leaving
         };
     }, [roomId, username, isSpectator, password]);
 

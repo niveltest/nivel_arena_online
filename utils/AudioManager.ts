@@ -59,6 +59,7 @@ class AudioManager {
         se: { volume: 0.6, muted: false }
     };
     private initialized = false;
+    private initializing = false;
 
     private pendingBGM: SoundKey | null = null;
     private pendingSE: { key: SoundKey, volume: number }[] = [];
@@ -68,11 +69,12 @@ class AudioManager {
      * Must be called after user interaction due to browser autoplay policies
      */
     public async initialize(): Promise<void> {
-        if (this.initialized) {
-            console.log('[AudioManager] Already initialized');
+        if (this.initialized || this.initializing) {
+            console.log('[AudioManager] Already initialized or initializing');
             return;
         }
 
+        this.initializing = true;
         console.log('[AudioManager] Initializing...');
 
         // Load saved settings from localStorage
@@ -93,11 +95,16 @@ class AudioManager {
         }
 
         this.initialized = true;
+        this.initializing = false;
         console.log('[AudioManager] Initialized successfully');
 
         // Apply loaded volume settings to any already active/pending objects
         if (this.bgm) {
             this.bgm.volume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
+            // Ensure it's playing if volume > 0 and not paused
+            if (!this.config.bgm.muted && this.config.bgm.volume > 0 && this.bgm.paused) {
+                this.bgm.play().catch(() => { });
+            }
         }
 
         // Preload commonly used SE
@@ -181,24 +188,36 @@ class AudioManager {
         const audio = new Audio(src);
         this.bgm = audio;
         audio.loop = true;
-        // Start silent if not muted, or stay silent if muted
+
+        // Explicit loop handling for browsers that struggle with the loop property
+        audio.addEventListener('ended', () => {
+            if (audio.loop) {
+                console.log(`[AudioManager] BGM loop restart: ${key}`);
+                audio.currentTime = 0;
+                audio.play().catch(err => console.error('[AudioManager] BGM loop failed:', err));
+            }
+        });
+
+        // Start silent, then fade in to target
         audio.volume = 0;
 
-        // Play logic
-        if (!this.config.bgm.muted) {
-            const targetVolume = this.config.bgm.volume;
-            audio.play().then(() => {
-                // Ensure we only fade the current BGM after play starts
-                if (this.bgm === audio) {
+        // Play even if muted/0 so we can adjust it later
+        const targetVolume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
+
+        audio.play().then(() => {
+            // Ensure we only fade the current BGM after play starts
+            if (this.bgm === audio) {
+                if (targetVolume > 0) {
                     this.fadeVolume(audio, 0, targetVolume, fadeInDuration);
+                } else {
+                    audio.volume = 0; // Keep at 0 if muted/0 volume
                 }
-            }).catch(err => {
-                // Autoplay policy might block this
-                console.warn('[AudioManager] BGM play failed (Autoplay?):', err.message);
-                this.pendingBGM = key;
-                // Wait for interaction - we don't set initialized=false here anymore to avoid loops
-            });
-        }
+            }
+        }).catch(err => {
+            // Autoplay policy might block this
+            console.warn('[AudioManager] BGM play failed (Autoplay?):', err.message);
+            this.pendingBGM = key;
+        });
     }
 
     /**
@@ -287,7 +306,13 @@ class AudioManager {
         this.config[type].volume = Math.max(0, Math.min(1, volume));
 
         if (type === 'bgm' && this.bgm) {
-            this.bgm.volume = this.config[type].muted ? 0 : this.config[type].volume;
+            const targetVolume = this.config[type].muted ? 0 : this.config[type].volume;
+            this.bgm.volume = targetVolume;
+
+            // If volume becomes > 0, ensure it's playing
+            if (!this.config[type].muted && targetVolume > 0 && this.bgm.paused) {
+                this.bgm.play().catch(() => { });
+            }
         }
 
         this.saveConfig();
@@ -307,10 +332,12 @@ class AudioManager {
         this.config[type].muted = !this.config[type].muted;
 
         if (type === 'bgm' && this.bgm) {
-            if (this.config.bgm.muted) {
-                this.bgm.volume = 0;
-            } else {
-                this.bgm.volume = this.config.bgm.volume;
+            const targetVolume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
+            this.bgm.volume = targetVolume;
+
+            // If unmuting and volume > 0, ensure it's playing
+            if (!this.config.bgm.muted && targetVolume > 0 && this.bgm.paused) {
+                this.bgm.play().catch(() => { });
             }
         }
 
