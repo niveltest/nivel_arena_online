@@ -69,7 +69,7 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
         setIsConnecting(true);
 
         const socket = io(SOCKET_URL, {
-            timeout: 15000,
+            timeout: 45000,
             reconnection: false,
             transports: ['polling', 'websocket'], // Start with polling for better compatibility
             withCredentials: true
@@ -79,8 +79,8 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
             if (socket.connected) return;
             socket.disconnect();
             setIsConnecting(false);
-            alert("サーバーへの接続がタイムアウトしました。");
-        }, 15000);
+            alert("サーバーへの接続がタイムアウトしました。(45s)");
+        }, 45000);
 
         socket.on('connect_error', (err) => {
             console.error("Socket connection error:", err);

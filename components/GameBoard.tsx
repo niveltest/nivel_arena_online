@@ -552,6 +552,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
             });
 
         const newSocket = io(SOCKET_URL, {
+            timeout: 45000,
             transports: ['polling', 'websocket'],
             withCredentials: true
         });

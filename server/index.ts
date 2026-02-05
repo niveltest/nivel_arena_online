@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Nivel Arena Server is Running (v1.2)');
+    res.send('Nivel Arena Server is Running (v1.3)');
 });
 
 app.use(cors({
@@ -181,7 +181,7 @@ const io = new Server(server, {
 const games = new Map<string, Game>();
 
 io.on('connection', (socket) => {
-    console.log('A user connected:', socket.id);
+    console.log(`[Socket] A user connected: ${socket.id} (Total: ${io.engine.clientsCount})`);
     let currentRoomId: string | null = null;
 
     socket.on('createGame', (username: string, deckId: string, password?: string, callback?: (roomId: string) => void) => {
