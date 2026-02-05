@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Nivel Arena Server is Running (v1.1)');
+    res.send('Nivel Arena Server is Running (v1.2)');
 });
 
 app.use(cors({
@@ -164,7 +164,14 @@ app.get('/api/decks/:username', (req, res) => {
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: ["https://nivel-arena-online.vercel.app", "http://localhost:3001", "http://localhost:3000"], // Explicitly allow Vercel
+        origin: (origin, callback) => {
+            const allowedOrigins = ["https://nivel-arena-online.vercel.app", "http://localhost:3001", "http://localhost:3000"];
+            if (!origin || allowedOrigins.includes(origin) || origin.endsWith("vercel.app")) {
+                callback(null, true);
+            } else {
+                callback(null, true); // Allow others for debugging
+            }
+        },
         methods: ["GET", "POST"],
         credentials: true
     }
