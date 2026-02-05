@@ -254,10 +254,11 @@ export class CPUPlayer extends Player {
 
         // 5. Final check: End Phase
         if (!acted && this.game.turnPlayerId === this.id) {
+            console.log(`[AI] No more actions possible, ending turn.`);
             this.game.nextPhase();
-        } else if (acted) {
-            this.think();
         }
+        // No recursive think() here to avoid potential race/loop issues.
+        // The broadcastState from game actions will trigger the next think() if needed.
     }
 
     private handleAttackPhase() {
