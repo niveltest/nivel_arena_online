@@ -58,7 +58,7 @@ const AudioSettingsModal: React.FC<AudioSettingsModalProps> = ({ isOpen, onClose
 
                         <div className="relative z-10">
                             <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
-                                <span className="text-blue-400">⚙️</span> AUDIO SETTINGS
+                                <span className="text-blue-400">🔊</span> AUDIO SETTINGS
                             </h2>
 
                             <div className="space-y-8">

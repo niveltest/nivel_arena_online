@@ -1722,7 +1722,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                         className="p-2 hover:bg-white/10 rounded transition-colors group relative border border-white/5"
                         title="音量設定"
                     >
-                        <span className="text-lg">⚙️</span>
+                        <span className="text-lg">🔊</span>
                         <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-[10px] whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity rounded border border-white/10">音量設定</div>
                     </button>
                     <button
