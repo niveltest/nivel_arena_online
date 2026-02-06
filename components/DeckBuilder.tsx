@@ -8,6 +8,8 @@ import { SoundManager } from '../utils/SoundManager';
 import Card from './Card'; // Reuse existing Card component
 import CardDetailModal from './CardDetailModal';
 
+import { audioManager } from '../utils/AudioManager';
+
 interface DeckBuilderProps {
     onBack: () => void;
 }
@@ -28,6 +30,9 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
 
     useEffect(() => {
         SoundManager.play('bgm_deck');
+        return () => {
+            audioManager.stopBGM(1000);
+        };
     }, []);
 
     useEffect(() => {

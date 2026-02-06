@@ -49,6 +49,7 @@ const Lobby: React.FC<LobbyProps> = ({ onJoin, onDeckBuilder }) => {
         return () => {
             document.removeEventListener('click', handleFirstInteraction);
             document.removeEventListener('keydown', handleFirstInteraction);
+            audioManager.stopBGM(1000);
         };
     }, []);
 

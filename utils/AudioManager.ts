@@ -191,7 +191,7 @@ class AudioManager {
 
         // Stop current BGM if playing
         if (this.bgm) {
-            this.stopBGM(500); // Quick fade out for old track
+            this.stopBGM(500, true); // Keep the key so we don't allow duplicate requests during the transition
         }
 
         // Create new BGM instance
@@ -232,9 +232,11 @@ class AudioManager {
     /**
      * Stop background music with optional fade-out
      */
-    public stopBGM(fadeOutDuration: number = 500): void {
-        this.currentBGMKey = null;
-        this.pendingBGM = null;
+    public stopBGM(fadeOutDuration: number = 500, keepKey: boolean = false): void {
+        if (!keepKey) {
+            this.currentBGMKey = null;
+            this.pendingBGM = null;
+        }
         if (!this.bgm) return;
 
         const audio = this.bgm;

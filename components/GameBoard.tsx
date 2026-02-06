@@ -534,6 +534,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
 
         return () => {
             document.removeEventListener('click', handleFirstInteraction);
+            audioManager.stopBGM(1000);
         };
     }, []);
 
