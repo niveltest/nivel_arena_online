@@ -550,20 +550,6 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
     // Playmat state initialized from localStorage in useState initializers to avoid cascaded renders
 
     useEffect(() => {
-        SoundManager.preload();
-
-        // Wait for audio initialization before starting BGM to ensure volume settings are loaded
-        audioManager.initialize()
-            .then(() => {
-                console.log('[GameBoard] Audio system initialized, starting BGM');
-                SoundManager.play('bgm_battle');
-            })
-            .catch(err => {
-                console.error('[GameBoard] Failed to initialize audio:', err);
-                // Fallback: try playing anyway
-                SoundManager.play('bgm_battle');
-            });
-
         const newSocket = io(SOCKET_URL, {
             timeout: 45000,
             transports: ['polling', 'websocket'],
