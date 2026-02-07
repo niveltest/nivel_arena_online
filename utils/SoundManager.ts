@@ -39,6 +39,7 @@ export class SoundManager {
 
         const mappedKey = this.KEY_MAP[key];
         if (mappedKey) {
+            console.log(`[SoundManager] play(${key}) -> mapped to ${mappedKey}`);
             if (mappedKey.startsWith('bgm_')) {
                 audioManager.playBGM(mappedKey);
             } else {

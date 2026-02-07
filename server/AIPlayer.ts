@@ -287,29 +287,7 @@ export class CPUPlayer extends Player {
             return;
         }
 
-        // 2. Lethal Detection (Total Hit Count vs Opponent HP)
-        const totalPotentialHits = readyUnitsSpecs.reduce((sum, spec) => sum + this.game.getUnitHitCount(this.id, spec.index), 0);
-        const lethalPossible = totalPotentialHits >= opponent.state.hp;
-
-        if (lethalPossible) {
-            console.log(`[AI] Lethal detected! Going all-in on Leader.`);
-            // Priority: attack leader with anyone.
-            // Pick the first unit and aim for an empty slot or a non-unit index (handled by Game.attack)
-            const spec = readyUnitsSpecs[0];
-            // To attack leader, we aim for a slot with no unit or -1 if the game handles it.
-            // In current Game.ts, attack(p, attackerIdx, targetIdx) hits unit if opponent.field[targetIdx] exists.
-            // So we find an empty slot.
-            let targetIndex = opponent.state.field.findIndex((u: any) => u === null);
-            if (targetIndex === -1) targetIndex = 0; // If field full, still hit a slot (Game.ts will handle block/intercept)
-
-            console.log(`[AI] Lethal attack: Unit ${spec.index} -> Target ${targetIndex}`);
-            this.game.attack(this.id, spec.index, targetIndex);
-            // Don't call think() immediately - let the attack resolve
-            return;
-        }
-
-        // 3. Normal Attack Logic (Strategic Board Control)
-        // Sort attackers by strategic value
+        // 2. Sort attackers by strategic value
         const sortedAttackerSpecs = readyUnitsSpecs.sort((a, b) => {
             const aPower = this.game.getUnitPower(this.id, a.index);
             const bPower = this.game.getUnitPower(this.id, b.index);
@@ -332,70 +310,14 @@ export class CPUPlayer extends Player {
         const bestAttackerSpec = sortedAttackerSpecs[0];
         const myPower = this.game.getUnitPower(this.id, bestAttackerSpec.index);
 
-        // Pick the best target
-        const opponentUnits = opponent.state.field
-            .map((u: any, i: number) => ({ unit: u, index: i }))
-            .filter((spec: any) => spec.unit !== null);
+        // Target Logic: Strict Lane Battle
+        // We MUST attack the unit in the same slot (bestAttackerSpec.index)
+        // If that slot is empty, it's a direct attack (Game.ts handles this).
 
-        let targetIndex = -1;
+        const targetIndex = bestAttackerSpec.index;
+        const targetUnit = opponent.state.field[targetIndex];
 
-        if (opponentUnits.length > 0) {
-            const rankedTargets = opponentUnits.map((spec: any) => {
-                let priority = this.evaluateThreat(spec.unit, 'KILL');
-                const enemyPower = this.game.getUnitPower(opponentId, spec.index);
-
-                // --- Personality Specific Target Selection ---
-                if (this.personality === 'AGGRO') {
-                    // Aggro AI de-prioritizes units unless they have Guardian
-                    if (!this.game.hasKeyword(spec.unit, 'GUARDIAN')) {
-                        priority -= 1000;
-                    }
-                } else if (this.personality === 'CONTROL') {
-                    // Control AI prioritizes board control highly
-                    priority += (spec.unit.power || 0) * 0.5;
-                }
-
-                // Mandatory target: Guardian
-                if (this.game.hasKeyword(spec.unit, 'GUARDIAN')) {
-                    priority += 5000;
-                }
-
-                // Can we win the trade?
-                if (myPower > enemyPower) {
-                    priority += 1000;
-                    // Extra bonus for triggering LOOT or PENETRATION
-                    if (this.game.hasKeyword(bestAttackerSpec.unit!, 'LOOT') || this.game.hasKeyword(bestAttackerSpec.unit!, 'PENETRATION')) {
-                        priority += 2000;
-                    }
-                } else if (myPower === enemyPower) {
-                    priority += 200; // Mutual destruction might be okay if enemy is high threat
-                } else {
-                    priority -= 1000; // Avoid suicide unless necessary
-                }
-
-                return { index: spec.index, priority };
-            }).sort((a: any, b: any) => b.priority - a.priority);
-
-            const bestTarget = rankedTargets[0];
-            const hasGuardian = opponentUnits.some((u: any) => this.game.hasKeyword(u.unit, 'GUARDIAN'));
-
-            // AGGRO logic: Hit leader if no Guardian, even if there are units
-            const shouldHitLeader = !hasGuardian && (this.personality === 'AGGRO' || (bestTarget.priority < 0 && opponent.state.hp > 0));
-
-            if (shouldHitLeader) {
-                // Hit leader instead of units
-                targetIndex = opponent.state.field.findIndex((u: any) => u === null);
-                if (targetIndex === -1) targetIndex = 0;
-            } else {
-                targetIndex = bestTarget.index;
-            }
-        } else {
-            // No units, hit face
-            targetIndex = opponent.state.field.findIndex((u: any) => u === null);
-            if (targetIndex === -1) targetIndex = 0;
-        }
-
-        console.log(`[AI] Strategic Attack: ${bestAttackerSpec.unit?.name} (Pwr:${myPower}) -> TargetIdx:${targetIndex}`);
+        console.log(`[AI] Strategic Attack: ${bestAttackerSpec.unit?.name} (Pwr:${myPower}) -> Lane:${targetIndex} (${targetUnit ? targetUnit.name : 'Direct Attack'})`);
         this.game.attack(this.id, bestAttackerSpec.index, targetIndex);
         // Don't call think() immediately - let the attack resolve
     }

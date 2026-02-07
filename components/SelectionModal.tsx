@@ -70,23 +70,23 @@ const SelectionModal: React.FC<SelectionModalProps> = ({ selection, allCards, on
                                     {selection.action === 'DISCARD_HAND' ? '👋 破棄' :
                                         selection.action === 'MULLIGAN' ? '🔄 マリガン' :
                                             '🃏 カード選択'} <span className="text-cyan-400">[{
-                                                selection.type === 'HAND' ? '手札' :
-                                                    selection.type === 'DECK' ? '山札' :
-                                                        selection.type === 'DISCARD' ? '捨て札' :
-                                                            selection.type === 'FIELD' ? 'フィールド' :
-                                                                selection.type === 'DAMAGE_ZONE' ? 'ダメージゾーン' : selection.type
+                                                selection.type === 'HAND' ? <span>手札</span> :
+                                                    selection.type === 'DECK' ? <span>山札</span> :
+                                                        selection.type === 'DISCARD' ? <span>捨て札</span> :
+                                                            selection.type === 'FIELD' ? <span>フィールド</span> :
+                                                                selection.type === 'DAMAGE_ZONE' ? <span>ダメージゾーン</span> : <span>{selection.type}</span>
                                             }]</span>
                                 </h2>
                                 {turnOrderLabel && (
                                     <div className={`text-2xl font-black px-4 py-1 rounded-lg border-2 ${turnOrderLabel.includes('先攻') ? 'text-red-400 border-red-500 bg-red-950/50' : 'text-blue-400 border-blue-500 bg-blue-950/50'}`}>
-                                        {turnOrderLabel}
+                                        <span>{turnOrderLabel}</span>
                                     </div>
                                 )}
                             </div>
                             <p className="text-gray-400 text-[10px] sm:text-sm mt-1">
                                 {selection.action === 'MULLIGAN' ?
-                                    '引き直すカードをクリックしてください' :
-                                    `選択: ${selectedIds.length} / ${selection.count}`}
+                                    <span>引き直すカードをクリックしてください</span> :
+                                    <span>選択: {selectedIds.length} / {selection.count}</span>}
                             </p>
                         </div>
                     </div>

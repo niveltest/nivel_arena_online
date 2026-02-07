@@ -66,6 +66,11 @@ class AudioManager {
     private currentBGMFadeId: number = 0; // Track active fade to cancel it if volume changes manually
 
 
+    private fadingBGMs: HTMLAudioElement[] = [];
+
+    // Track sounds that failed to load (404 etc.) to prevent repeated attempts
+    private missingSounds: Set<string> = new Set();
+
     /**
      * Initialize the audio system
      * Must be called after user interaction due to browser autoplay policies
@@ -77,7 +82,7 @@ class AudioManager {
         }
 
         this.initializing = true;
-        console.log('[AudioManager] Initializing...');
+        console.log('[AudioManager] Initializing audio system...');
 
         // Load saved settings from localStorage
         if (typeof window !== 'undefined') {
@@ -91,8 +96,6 @@ class AudioManager {
                 } catch (e) {
                     console.warn('[AudioManager] Failed to load audio config:', e);
                 }
-            } else {
-                console.log('[AudioManager] No saved config, using defaults');
             }
         }
 
@@ -100,29 +103,16 @@ class AudioManager {
         this.initializing = false;
         console.log('[AudioManager] Initialized successfully');
 
-        // Apply loaded volume settings to any already active/pending objects
-        if (this.bgm) {
-            this.bgm.volume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
-            // Ensure it's playing if volume > 0 and not paused
-            if (!this.config.bgm.muted && this.config.bgm.volume > 0 && this.bgm.paused) {
-                this.bgm.play().catch(() => { });
-            }
-        }
-
         // Preload commonly used SE
         this.preloadSE(['play_card', 'attack', 'attack_hit', 'damage', 'draw', 'destroy', 'levelUp'], true);
 
-        // Play pending BGM if any
+        // Play pending sounds
         if (this.pendingBGM) {
-            const key = this.pendingBGM;
+            this.playBGM(this.pendingBGM);
             this.pendingBGM = null;
-            console.log(`[AudioManager] Playing pending BGM: ${key}`);
-            this.playBGM(key);
         }
 
-        // Play pending SE if any
         if (this.pendingSE.length > 0) {
-            console.log(`[AudioManager] Playing ${this.pendingSE.length} pending sounds`);
             this.pendingSE.forEach(se => this.playSE(se.key, se.volume));
             this.pendingSE = [];
         }
@@ -138,27 +128,20 @@ class AudioManager {
     private preloadSE(keys: SoundKey[], silent: boolean = false) {
         if (typeof window === 'undefined') return;
 
-        if (!silent) console.log(`[AudioManager] Preloading ${keys.length} sound effects...`);
         keys.forEach(key => {
             const src = SOUND_MAP[key];
-            if (!src) {
-                if (!silent) console.warn(`[AudioManager] Sound key "${key}" not found in SOUND_MAP`);
-                return;
-            }
+            if (!src || this.missingSounds.has(src)) return;
 
             const audio = new Audio(src);
-            if (!silent) {
-                audio.addEventListener('canplaythrough', () => {
-                    console.log(`[AudioManager] Preloaded: ${key} (${src})`);
-                }, { once: true });
-                audio.addEventListener('error', (e) => {
-                    console.error(`[AudioManager] Failed to preload: ${key} (${src})`, e);
-                }, { once: true });
+            audio.load();
+            if (!this.sePool.has(src)) {
+                this.sePool.set(src, [audio]);
             }
 
-            audio.load(); // Hint browser to preload
-            // Store one instance in the pool
-            this.sePool.set(src, [audio]);
+            audio.onerror = () => {
+                if (!silent) console.warn(`[AudioManager] Missing expected file: ${src} (Key: ${key})`);
+                this.missingSounds.add(src);
+            };
         });
     }
 
@@ -168,65 +151,61 @@ class AudioManager {
     public playBGM(key: SoundKey, fadeInDuration: number = 1000): void {
         if (typeof window === 'undefined') return;
 
-        // If not initialized, queue but don't play yet to ensure volume settings are loaded
+        const src = SOUND_MAP[key];
+        if (!src || this.missingSounds.has(src)) {
+            console.warn(`[AudioManager] Skipping BGM "${key}" - file missing or invalid.`);
+            return;
+        }
+
         if (!this.initialized) {
-            console.log(`[AudioManager] System not initialized, queuing BGM: ${key}`);
             this.pendingBGM = key;
             this.currentBGMKey = key;
             return;
         }
 
-        const src = SOUND_MAP[key];
-        if (!src) return;
+        if (this.currentBGMKey === key && this.bgm && !this.bgm.paused) return;
 
-        // If already playing OR pending the same track, do nothing
-        if (this.currentBGMKey === key) {
-            console.log(`[AudioManager] BGM "${key}" is already playing or pending, skipping`);
-            return;
-        }
-
-        console.log(`[AudioManager] Switching BGM from "${this.currentBGMKey}" to "${key}"`);
+        console.log(`[AudioManager] playBGM: ${key} -> ${src}`);
         this.currentBGMKey = key;
-        this.pendingBGM = null; // Clear any previously pending track as we have a new one now
 
-        // Stop current BGM if playing
         if (this.bgm) {
-            this.stopBGM(500, true); // Keep the key so we don't allow duplicate requests during the transition
+            this.bgm.pause();
+            this.bgm.src = "";
+            this.bgm = null;
         }
 
-        // Create new BGM instance
+        this.fadingBGMs.forEach(audio => { audio.pause(); audio.src = ""; });
+        this.fadingBGMs = [];
+
         const audio = new Audio(src);
         this.bgm = audio;
         audio.loop = true;
 
-        // Explicit loop handling for browsers that struggle with the loop property
-        audio.addEventListener('ended', () => {
-            if (audio.loop) {
-                console.log(`[AudioManager] BGM loop restart: ${key}`);
-                audio.currentTime = 0;
-                // Re-apply current volume from config just in case
-                audio.volume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
-                audio.play().catch(err => console.error('[AudioManager] BGM loop failed:', err));
-            }
-        });
-
-        // Start silent or at current volume if fade is short
         const targetVolume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
         audio.volume = 0;
 
         audio.play().then(() => {
-            // Ensure we only fade the current BGM after play starts
             if (this.bgm === audio) {
                 if (targetVolume > 0 && fadeInDuration > 0) {
+                    this.currentBGMFadeId++;
                     this.fadeVolume(audio, 0, targetVolume, fadeInDuration);
                 } else {
                     audio.volume = targetVolume;
                 }
+            } else {
+                audio.pause();
+                audio.src = "";
             }
         }).catch(err => {
-            console.warn('[AudioManager] BGM play failed (Autoplay?):', err.message);
-            this.pendingBGM = key;
+            console.error(`[AudioManager] BGM play failed: ${key} (${src}) -`, err.message);
+            audio.pause();
+            audio.src = "";
         });
+
+        audio.onerror = () => {
+            console.error(`[AudioManager] 404: BGM file not found: ${src}`);
+            this.missingSounds.add(src);
+        };
     }
 
     /**
@@ -240,11 +219,14 @@ class AudioManager {
         if (!this.bgm) return;
 
         const audio = this.bgm;
-        this.bgm = null; // Detach immediately
+        this.bgm = null;
+        this.currentBGMFadeId++;
 
         if (fadeOutDuration > 0 && !audio.paused) {
+            this.fadingBGMs.push(audio);
             this.fadeVolume(audio, audio.volume, 0, fadeOutDuration, () => {
                 audio.pause();
+                this.fadingBGMs = this.fadingBGMs.filter(a => a !== audio);
             });
         } else {
             audio.pause();
@@ -257,60 +239,44 @@ class AudioManager {
     public playSE(key: SoundKey, volumeScale: number = 1.0): void {
         if (typeof window === 'undefined') return;
 
-        if (!this.initialized) {
-            // Store for later playback once user interacts
-            if (this.pendingSE.length < 10) { // Limit queue size
-                this.pendingSE.push({ key, volume: volumeScale });
-            }
-            return;
-        }
-
-        if (this.config.se.muted) {
-            console.log(`[AudioManager] SE muted, skipping: ${key}`);
-            return;
-        }
-
         const src = SOUND_MAP[key];
-        if (!src) {
-            console.warn(`[AudioManager] Unknown SE key: ${key}`);
+        if (!src || this.missingSounds.has(src)) {
+            // Silence if missing
             return;
         }
 
-        // Get or create audio pool for this SE
-        if (!this.sePool.has(src)) {
-            this.sePool.set(src, []);
+        if (!this.initialized) {
+            if (this.pendingSE.length < 10) this.pendingSE.push({ key, volume: volumeScale });
+            return;
         }
 
+        if (this.config.se.muted) return;
+
+        if (!this.sePool.has(src)) this.sePool.set(src, []);
         const pool = this.sePool.get(src)!;
 
-        // Find available audio element or create new one
         let audio = pool.find(a => a.paused || a.ended);
         if (!audio) {
-            console.log(`[AudioManager] Creating new audio instance for: ${key}`);
             audio = new Audio(src);
             pool.push(audio);
-
-            // Limit pool size to prevent memory leaks
-            if (pool.length > 5) {
-                // If pool is full, reuse the oldest one (index 0) even if playing
-                // but better to just shift and let GC handle it, creating a new one
-                pool.shift();
-            }
+            if (pool.length > 5) pool.shift();
         }
 
-        // Apply volume (Master SE Volume * Event Specific Scale)
-        const finalVolume = Math.max(0, Math.min(1, this.config.se.volume * volumeScale));
-        audio.volume = finalVolume;
+        audio.volume = Math.max(0, Math.min(1, this.config.se.volume * volumeScale));
         audio.currentTime = 0;
 
-        audio.play()
-            .then(() => {
-                console.log(`[AudioManager] Playing SE: ${key} (volume: ${audio.volume.toFixed(2)})`);
-            })
-            .catch(err => {
-                // Common error: "The play() request was interrupted" or user didn't interact yet
-                console.warn(`[AudioManager] SE play failed for ${key}:`, err.message);
-            });
+        audio.play().then(() => {
+            console.log(`[AudioManager] playSE: ${key} -> ${src} (vol: ${audio.volume.toFixed(2)})`);
+        }).catch(err => {
+            if (err.name !== 'NotAllowedError') {
+                console.error(`[AudioManager] SE play error: ${key} -`, err.message);
+            }
+        });
+
+        audio.onerror = () => {
+            console.error(`[AudioManager] 404: SE file not found: ${src}`);
+            this.missingSounds.add(src);
+        };
     }
 
     /**
@@ -321,20 +287,15 @@ class AudioManager {
         this.config[type].volume = validatedVolume;
 
         if (type === 'bgm') {
-            // If there's an active fade, "cancel" it by incrementing the ID
             this.currentBGMFadeId++;
-
             if (this.bgm) {
                 const targetVolume = this.config.bgm.muted ? 0 : validatedVolume;
                 this.bgm.volume = targetVolume;
-
-                // If volume becomes > 0, ensure it's playing
                 if (!this.config.bgm.muted && targetVolume > 0 && this.bgm.paused) {
                     this.bgm.play().catch(() => { });
                 }
             }
         }
-
         this.saveConfig();
     }
 
@@ -350,20 +311,16 @@ class AudioManager {
      */
     public toggleMute(type: AudioType): boolean {
         this.config[type].muted = !this.config[type].muted;
-
         if (type === 'bgm') {
-            this.currentBGMFadeId++; // Cancel any active fade
+            this.currentBGMFadeId++;
             if (this.bgm) {
                 const targetVolume = this.config.bgm.muted ? 0 : this.config.bgm.volume;
                 this.bgm.volume = targetVolume;
-
-                // If unmuting and volume > 0, ensure it's playing
                 if (!this.config.bgm.muted && targetVolume > 0 && this.bgm.paused) {
                     this.bgm.play().catch(() => { });
                 }
             }
         }
-
         this.saveConfig();
         return this.config[type].muted;
     }
@@ -390,28 +347,20 @@ class AudioManager {
         const fadeId = this.currentBGMFadeId;
 
         const fade = () => {
-            // Cancel if a different fade has started or manual volume set
-            if (this.currentBGMFadeId !== fadeId) {
-                console.log('[AudioManager] Fade cancelled by new volume command');
-                return;
-            }
-
+            if (this.currentBGMFadeId !== fadeId) return;
             const elapsed = Date.now() - startTime;
             const progress = Math.min(elapsed / duration, 1);
-
             try {
                 audio.volume = Math.max(0, Math.min(1, from + volumeDiff * progress));
             } catch (e) {
                 return;
             }
-
             if (progress < 1) {
                 requestAnimationFrame(fade);
             } else if (onComplete) {
                 onComplete();
             }
         };
-
         fade();
     }
 

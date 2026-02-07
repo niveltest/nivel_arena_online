@@ -498,7 +498,10 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
     };
 
     // Initialize Audio System on component mount
+    const bgmTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
     useEffect(() => {
+        let isMounted = true;
         if (audioInitializedRef.current) return;
         audioInitializedRef.current = true;
 
@@ -508,10 +511,12 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
 
             try {
                 await audioManager.initialize();
+                if (!isMounted) return;
                 console.log('[GameBoard] Audio system initialized. Current BGM Volume:', audioManager.getVolume('bgm'));
 
                 // Start BGM with a slight delay to ensure browser state is ready
-                setTimeout(() => {
+                bgmTimeoutRef.current = setTimeout(() => {
+                    if (!isMounted) return;
                     console.log('[GameBoard] Requesting Combat BGM...');
                     SoundManager.play('bgm_battle');
                 }, 300);
@@ -533,7 +538,11 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
         }
 
         return () => {
+            isMounted = false;
             document.removeEventListener('click', handleFirstInteraction);
+            if (bgmTimeoutRef.current) {
+                clearTimeout(bgmTimeoutRef.current);
+            }
             audioManager.stopBGM(1000);
         };
     }, []);
@@ -705,7 +714,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                     const myOldState = prevState.players[newSocket.id];
                     if (myState && myOldState) {
                         if (myState.hand.length > myOldState.hand.length) SoundManager.play('draw');
-                        if (myState.resources > myOldState.resources) SoundManager.play('levelUp');
+                        if (myState.leaderLevel > myOldState.leaderLevel) SoundManager.play('levelUp');
                     }
                 }
                 return newState;
@@ -781,7 +790,7 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
 
         return () => {
             newSocket.disconnect();
-            audioManager.stopBGM(1000); // Fade out BGM when leaving
+            audioManager.stopBGM(200); // Fade out BGM when leaving
         };
     }, [roomId, username, isSpectator, password]);
 
@@ -1331,17 +1340,17 @@ const GameBoard: React.FC<GameBoardProps> = ({ username, roomId, password, isSpe
                                     : 'bg-blue-600 hover:bg-blue-500 text-white border-blue-400'}
                             `}
                         >
-                            <div className="text-2xl mb-1">🛡️ 防御</div>
+                            <div className="text-2xl mb-1">🛡️ <span>防御</span></div>
                             <div className="text-xs font-normal">
-                                {hasBreakthrough ? '突破持ちのため防御不可' : 'バトルが発生します。'}
+                                {hasBreakthrough ? <span>突破持ちのため防御不可</span> : <span>バトルが発生します。</span>}
                             </div>
                         </button>
                         <button
                             onClick={() => handleDefense('TAKE')}
                             className="bg-red-600 hover:bg-red-500 text-white py-4 rounded-lg font-bold text-lg shadow-lg border border-red-400 group"
                         >
-                            <div className="text-2xl mb-1">💔 受ける</div>
-                            <div className="text-xs text-red-200 font-normal">リーダーがダメージを受けます。</div>
+                            <div className="text-2xl mb-1">💔 <span>受ける</span></div>
+                            <div className="text-xs text-red-200 font-normal"><span>リーダーがダメージを受けます。</span></div>
                         </button>
                     </div>
                 </div>

@@ -433,15 +433,24 @@ export class Game {
         this.addLog(`${player.username} Level Up -> ${player.state.leaderLevel}`);
         if (player.state.leaderLevel > oldLevel) {
             this.broadcastAction(this.turnPlayerId, 'LEVEL_UP', { newLevel: player.state.leaderLevel });
+            this.checkAwakening(this.turnPlayerId, oldLevel);
         }
+    }
+
+    private checkAwakening(playerId: string, oldLevel: number) {
+        const player = this.players[playerId];
+        if (!player) return;
+
+        // ST01-001 hardcoded check or general awakeningLevel check
         const awakenLv = player.state.leader.id === 'ST01-001' ? 5 : (player.state.leader.awakeningLevel || 3);
+
         if (oldLevel < awakenLv && player.state.leaderLevel >= awakenLv) {
             this.addLog(`${player.username} Leader Awakened!`);
-            this.broadcastAction(this.turnPlayerId, 'AWAKEN', { leader: player.state.leader.name });
+            this.broadcastAction(playerId, 'AWAKEN', { leader: player.state.leader.name });
             if (player.state.leader.effects) {
                 player.state.leader.effects.forEach(effect => {
                     if (effect.trigger === 'ON_AWAKEN') {
-                        this.applyEffect(this.turnPlayerId, player.state.leader, 'ON_AWAKEN', undefined, effect);
+                        this.applyEffect(playerId, player.state.leader, 'ON_AWAKEN', undefined, effect);
                     }
                 });
             }
@@ -638,7 +647,10 @@ export class Game {
         // targetIndex はアタッカーのレーン(attackerIndex)と同じである必要がある（対向ユニットへの攻撃）
         // クライアント側でリーダーをクリックした際に -1 が送られてくる場合は、attackerIndex に読み替える
         const effectiveTargetIndex = targetIndex === -1 ? attackerIndex : targetIndex;
-        if (effectiveTargetIndex !== attackerIndex) return;
+        if (effectiveTargetIndex !== attackerIndex) {
+            console.log(`[Game] Invalid Attack Target: Attacker ${attackerIndex} vs Target ${targetIndex} (Effective ${effectiveTargetIndex}). Must match.`);
+            return;
+        }
 
 
         // Duelist prevents adjacent Guardians.
@@ -801,8 +813,10 @@ export class Game {
                 }
             }
         }
-        if (action === 'BLOCK' && defender.isSelfDestruct) {
-            this.addLog(`${defender.name} の [自壊] 効果が発動しました。`);
+        const hasSelfDestruct = defender.isSelfDestruct || defender.attachments?.some(a => a.isSelfDestruct);
+        if (action === 'BLOCK' && hasSelfDestruct) {
+            const sourceName = defender.isSelfDestruct ? defender.name : (defender.attachments?.find(a => a.isSelfDestruct)?.name || defender.name);
+            this.addLog(`${sourceName} の [自壊] 効果が発動しました。`);
             this.destroyUnit(defenderId, targetIndex, undefined, undefined, 'EFFECT');
         }
 
@@ -815,6 +829,7 @@ export class Game {
         this.pendingAttack = null;
         this.checkStateBasedActions();
         this.broadcastState();
+        this.processEffectQueue();
     }
 
     public resolveSelection(playerId: string, selectedIds: string[]) {
@@ -1036,6 +1051,7 @@ export class Game {
         }
         this.checkStateBasedActions();
         this.broadcastState();
+        this.processEffectQueue();
     }
 
     public useActiveAbility(playerId: string, slotIndex: number) {
@@ -1051,6 +1067,7 @@ export class Game {
         unit.activeUsedThisTurn = true;
         this.checkStateBasedActions();
         this.broadcastState();
+        this.processEffectQueue();
     }
 
     public dealDamage(playerId: string, amount: number = 1) {
@@ -1119,6 +1136,11 @@ export class Game {
     }
 
     private processEffectQueue() {
+        if (this.effectQueue.length === 0) {
+            this.broadcastState();
+            return;
+        }
+
         while (this.effectQueue.length > 0) {
             const effectEntry = this.effectQueue.shift();
             if (!effectEntry) continue;
@@ -1126,6 +1148,8 @@ export class Game {
             this.addLog(`[Queue] Processing effect for ${effectEntry.card.name}`);
             this.applyEffectImmediate(effectEntry.playerId, effectEntry.card, effectEntry.trigger, effectEntry.context, effectEntry.specificEffect);
         }
+        // Ensure state is updated after effects resolve (Fixes visual delay for Entry effects like Level Up)
+        this.broadcastState();
     }
 
     private applyEffectImmediate(playerId: string, card: Card, trigger: string, context?: Record<string, unknown>, specificEffect?: CardEffect) {
@@ -1693,8 +1717,10 @@ export class Game {
                     if (player.state.leaderLevel < 10) {
                         const oldLevel = player.state.leaderLevel;
                         player.state.leaderLevel = Math.min(10, player.state.leaderLevel + amount);
+                        this.addLog(`[Effect] ${player.username} Level Up: ${oldLevel} -> ${player.state.leaderLevel}`);
                         if (player.state.leaderLevel > oldLevel) {
-                            this.broadcastAction(playerId, 'LEVEL_UP', { level: player.state.leaderLevel });
+                            this.broadcastAction(playerId, 'LEVEL_UP', { level: player.state.leaderLevel, newLevel: player.state.leaderLevel });
+                            this.checkAwakening(playerId, oldLevel);
                         }
                     }
                     break;
@@ -2259,9 +2285,18 @@ export class Game {
         // Check for AI Actions
         Object.values(this.players).forEach(p => {
             if (p.isCPU && (p as any).think) {
-                // If it's the CPU's turn or CPU needs to select something
-                if (this.turnPlayerId === p.id || this.selection?.playerId === p.id || this.phase === 'MULLIGAN') {
-                    (p as any).think();
+                // Determine if this CPU needs to act
+                const isMyTurn = this.turnPlayerId === p.id;
+                const isMySelection = this.selection?.playerId === p.id;
+                const isMyDefense = this.phase === 'DEFENSE' && this.pendingAttack?.defenderId === p.id;
+                const isMyIntercept = this.phase === 'GUARDIAN_INTERCEPT' && this.pendingAttack?.defenderId === p.id;
+                const isMulligan = this.phase === 'MULLIGAN' && !p.state.mulliganDone;
+
+                if (isMyTurn || isMySelection || isMyDefense || isMyIntercept || isMulligan) {
+                    // console.log(`[Game] Triggering think for CPU ${p.username} (Phase: ${this.phase})`);
+                    setTimeout(() => {
+                        (p as any).think();
+                    }, 100);
                 }
             }
         });
