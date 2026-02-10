@@ -17,6 +17,13 @@ app.get('/', (req, res) => {
     res.send('Nivel Arena Server is Running (v1.3)');
 });
 
+// Serve static files (Audio) from public directory
+import path from 'path';
+// Adjust path assuming running from dist/server/index.js -> ../../public
+const PUBLIC_DIR = path.join(__dirname, '../../public');
+app.use('/audio', express.static(path.join(PUBLIC_DIR, 'audio')));
+console.log(`Serving static files from: ${path.join(PUBLIC_DIR, 'audio')}`);
+
 app.use(cors({
     origin: (origin, callback) => {
         const allowedOrigins = [
