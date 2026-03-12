@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('Nivel Arena Server is Running (v1.3)');
+    res.send('Nivel Arena Server is Running (v1.4)');
 });
 
 // Serve static files (Audio) from public directory
@@ -51,7 +51,15 @@ import starterDecks from './data/starterDecks.json';
 import axios from 'axios';
 
 app.get('/api/cards', (req, res) => {
-    res.json(cardsData);
+    try {
+        if (!cardsData) {
+            return res.status(500).send('ERROR: cardsData is null or undefined');
+        }
+        res.json(cardsData);
+    } catch (err) {
+        console.error('API Cards Error:', err);
+        res.status(500).send('ERROR: Failed to serve cards data');
+    }
 });
 app.get('/api/starter-decks', (req, res) => {
     res.json(starterDecks);
