@@ -6023,32 +6023,6 @@
     ]
   },
   {
-    "id": "SPECIAL-001",
-    "name": "Forbidden Exodia",
-    "type": "UNIT",
-    "cost": 10,
-    "power": 1000,
-    "hitCount": 1,
-    "text": "[SPECIAL_VICTORY]\nWin the game if you have 'BT01-001', 'BT01-002', 'BT01-003' in your trash.",
-    "affiliation": "Special",
-    "attribute": "Light",
-    "keywords": [],
-    "imageUrl": "https://via.placeholder.com/300x400?text=Exodia",
-    "rarity": "S",
-    "effects": [
-      {
-        "trigger": "PASSIVE",
-        "action": "SPECIAL_VICTORY",
-        "condition": "HAS_SPECIFIC_CARDS_IN_GRAVE",
-        "value": [
-          "BT01-001",
-          "BT01-002",
-          "BT01-003"
-        ]
-      }
-    ]
-  },
-  {
     "id": "ST01-001",
     "name": "ラピ",
     "type": "LEADER",

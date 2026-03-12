@@ -239,9 +239,6 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
                             <option value="ST04">ST04</option>
                             <option value="ST05">ST05</option>
                         </optgroup>
-                        <optgroup label="その他">
-                            <option value="SPECIAL">SPECIAL</option>
-                        </optgroup>
                     </select>
 
                     {/* Sort Control */}
