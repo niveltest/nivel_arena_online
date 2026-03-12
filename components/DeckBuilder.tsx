@@ -24,6 +24,7 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
     const [filterType, setFilterType] = useState<string>('ALL');
     const [filterAttr, setFilterAttr] = useState<string>('ALL');
     const [filterCost, setFilterCost] = useState<number | 'ALL'>('ALL');
+    const [filterSet, setFilterSet] = useState<string>('ALL');
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [deckName, setDeckName] = useState<string>('My Deck');
     const [sortMethod, setSortMethod] = useState<'COST' | 'POWER' | 'NAME'>('COST'); // Add Sort State
@@ -78,6 +79,10 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
             if (!attrMatch) return false;
         }
         if (filterCost !== 'ALL' && c.cost !== filterCost) return false;
+        if (filterSet !== 'ALL') {
+            const setPrefix = c.id.split('-')[0];
+            if (setPrefix !== filterSet) return false;
+        }
         if (searchTerm) {
             const lowerSearch = searchTerm.toLowerCase();
             if (!c.name.toLowerCase().includes(lowerSearch) && !c.text?.toLowerCase().includes(lowerSearch)) return false;
@@ -217,6 +222,26 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
                         {[0, 1, 2, 3, 4, 5, 6, 7, 8].map(cost => (
                             <option key={cost} value={cost}>コスト {cost}</option>
                         ))}
+                    </select>
+
+                    {/* Set Filter */}
+                    <select aria-label="セットで絞り込み" className="bg-slate-800 border border-white/20 rounded px-2 py-1" value={filterSet} onChange={e => setFilterSet(e.target.value)}>
+                        <option value="ALL">全セット</option>
+                        <optgroup label="ブースターパック">
+                            <option value="BT01">BT01</option>
+                            <option value="BT02">BT02</option>
+                            <option value="BT03">BT03</option>
+                        </optgroup>
+                        <optgroup label="スターターデッキ">
+                            <option value="ST01">ST01</option>
+                            <option value="ST02">ST02</option>
+                            <option value="ST03">ST03</option>
+                            <option value="ST04">ST04</option>
+                            <option value="ST05">ST05</option>
+                        </optgroup>
+                        <optgroup label="その他">
+                            <option value="SPECIAL">SPECIAL</option>
+                        </optgroup>
                     </select>
 
                     {/* Sort Control */}
