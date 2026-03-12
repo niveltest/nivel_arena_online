@@ -93,7 +93,6 @@ app.get('/api/proxy-image', async (req, res) => {
 
 // Deck Persistence API
 import fs from 'fs';
-import path from 'path';
 const DECKS_DIR = path.join(__dirname, 'data/decks');
 if (!fs.existsSync(DECKS_DIR)) fs.mkdirSync(DECKS_DIR);
 

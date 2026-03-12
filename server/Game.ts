@@ -449,8 +449,8 @@ export class Game {
         // ST01-001 hardcoded check or general awakeningLevel check
         const awakenLv = player.state.leader.id === 'ST01-001' ? 5 : (player.state.leader.awakeningLevel || 3);
 
-        if (!player.state.leader.isAwakened && player.state.leaderLevel >= awakenLv) {
-            player.state.leader.isAwakened = true;
+        if (!(player.state.leader as any).isAwakened && player.state.leaderLevel >= awakenLv) {
+            (player.state.leader as any).isAwakened = true;
             this.addLog(`${player.username} Leader Awakened!`);
             this.broadcastAction(playerId, 'AWAKEN', { leader: player.state.leader.name });
             if (player.state.leader.effects) {
@@ -777,6 +777,16 @@ export class Game {
 
                 this.finalizeAttackResolution();
             }
+        }
+    }
+
+    private applyInterception(playerId: string, interceptSlot: number) {
+        if (!this.pendingAttack) return;
+        const defender = this.players[playerId];
+        const unit = defender.state.field[interceptSlot];
+        if (unit) {
+            this.pendingAttack.targetIndex = interceptSlot;
+            this.finalizeAttackResolution();
         }
     }
 
@@ -2570,7 +2580,7 @@ export class Game {
         this.io.to(this.id).emit('animation', { type, ...data });
     }
 
-    private requestSelection(playerId: string, type: 'DECK' | 'DISCARD' | 'HAND' | 'FIELD' | 'DAMAGE_ZONE', candidateIds: string[], count: number, action: string, context?: Record<string, unknown>, triggerCard?: Card) {
+    private requestSelection(playerId: string, type: SelectionState['type'], candidateIds: string[], count: number, action: string, context?: Record<string, unknown>, triggerCard?: Card) {
         this.selection = { playerId, type, candidateIds, count, action, context, triggerCard, previousPhase: this.phase };
         this.phase = 'SELECT_CARD';
         this.broadcastState();
