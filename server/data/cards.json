@@ -580,7 +580,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある [アタッカー] を持つ自分のユニットを1枚選ぶ。そのユニットはこのターンが終わるまで [アタッカー] [貫通][1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)を得る。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "PENETRATION_1",
@@ -609,7 +609,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある相手のユニット全てはこのターンが終わるまでパワー-1000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -633,7 +633,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある相手のユニットを2枚まで選んでこのターンが終わるまでパワー-2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -657,7 +657,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある [アタッカー] を持つ自分のユニット全てはこのターンが終わるまでパワー+2500。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "アタッカー"
@@ -683,7 +683,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-3000。この効果でそのユニットをトラッシュしたなら、1枚ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -708,7 +708,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のトラッシュゾーンから [アタッカー] を持つユニットカードを1枚選んで手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "アタッカー"
@@ -734,7 +734,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\n[アタッカー]\n[貫通][1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "アタッカー",
@@ -768,7 +768,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\n[アタッカー]\nこの攻撃が終わるまでパワー+2000。\n[アタッカー]\n略奪[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、1枚ドローする)。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "アタッカー",
@@ -1317,7 +1317,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある《ベース》を持つコスト1の自分のユニットを1枚選ぶ。そのユニットのヒットはこのターンが終わるまで2になる。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -1334,7 +1334,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニット全ては相手のターンが終わるまでパワー+500。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -1358,7 +1358,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある《ベース》を持つ自分のユニットの枚数分ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -1381,7 +1381,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分の全てのユニットゾーンにユニットがある場合、フィールドにある自分のユニット全ては相手のターンが終わるまでパワー+1500。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -1405,7 +1405,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のデッキの上から3枚を公開し、その中のコスト3以下のカードを全て手札に加える。残りはデッキに戻し、シャッフルする。\n\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -1439,7 +1439,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある《ベース》を持つ自分のユニット全てはこのターンが終わるまでヒット+1。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -1463,7 +1463,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: コスト4以下]\n[アタッカー]\n突破[コスト2以下](コスト2以下の相手のユニットはこのユニットの攻撃を防御できない)。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "アタッカー",
@@ -1489,7 +1489,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\nパワー+5000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -2013,7 +2013,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニットを1枚選んでトラッシュする。そのユニットのヒット分ドローする。\n\n\n[トリガー] / \nこのカードを自分の手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -2045,7 +2045,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札を1枚選んでトラッシュする。そのカードと同じコストを持つ、フィールドにあるユニットを1枚選んでトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -2069,7 +2069,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある エグジット 道連れを持つ自分のユニットを1枚選んでこのターンが終わるまでパワー+4500。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "DEATH_TOUCH"
@@ -2095,7 +2095,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるユニットを1枚選び、選んだユニットのヒット分自分の手札をトラッシュする。その後、そのユニットをトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -2119,7 +2119,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "コストの合計が4以下になるように、フィールドにある相手のユニットを2枚まで選んでそのユニットを全てトラッシュする。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンから エグジット を持つユニットカードを1枚選んで手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -2151,7 +2151,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のトラッシュゾーンから エグジット\n を持つコスト2以下のユニットカードを2枚まで選んで手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -2175,7 +2175,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\nエグジット\n2枚ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "エグジット"
@@ -2200,7 +2200,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: エグジット]\nエグジット\n帰還(このターンの終了時、このユニットカードを自分のトラッシュゾーンから手札に加える)。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "エグジット",
@@ -2446,7 +2446,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニット全てはこのターンが終わるまで [アタッカー] 略奪[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、1枚ドローする)を得る。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "LOOT_1",
@@ -2481,7 +2481,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のトラッシュゾーンからコスト7以上のユニットカードを1枚選んで手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -2505,7 +2505,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: コスト3以下のユニット]\nパワー+4000。\nバーサーカー(このユニットは攻撃可能な状態であれば必ず攻撃しなければならない)。\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -2680,7 +2680,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分の全てのユニットゾーンにユニットがある場合、自分のリーダーレベル+1。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -2703,7 +2703,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるアイテムを1枚選んでトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -2720,7 +2720,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある《ベース》を持つ自分のユニット全ては相手のターンが終わるまでパワー+1500。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -2744,7 +2744,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: ベースを持つユニット]\nヒット+1。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -2916,7 +2916,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のトラッシュゾーンから エグジット を持つコスト2以下のユニットカードを1枚選んで手札に加える。\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンから エグジット を持つユニットカードを1枚選び、手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -2948,7 +2948,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札からユニットカードを1枚選んでトラッシュする。そのカードのヒット分ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -2971,7 +2971,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: なし]\nパワー+4000。\n[パッシブ] 相手のターンの終了時、このユニットをトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "パッシブ"
@@ -3508,7 +3508,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある [ディフェンダー] を持つ自分のユニットを1枚選び、このターンが終わるまでパワー+3500。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "DEFENDER_2000",
@@ -3534,7 +3534,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある ガーディアン を持つ自分のユニット1枚と ガーディアン を持たない自分のユニット1枚を選ぶ。このターンが終わるまで、その中の ガーディアン を持たないユニットのパワーが ガーディアン を持つユニットの今のパワー分上がる。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "GUARDIAN_1",
@@ -3558,7 +3558,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある [ディフェンダー] を持つ自分のユニットを2枚選ぶ。その後、相手に1ダメージを与える。選んだ2枚はこのターンが終わるまで攻撃できない。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "DEFENDER_2000",
@@ -3589,7 +3589,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある ガーディアン を持つ自分のユニットを1枚選び、このターンが終わるまでパワー+2000。自分の手札が5枚以上ある場合、更にこのターンが終わるまでヒット+1。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "GUARDIAN_1",
@@ -3620,7 +3620,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札を2枚選んでトラッシュする。その後、相手に1ダメージを与える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "-"
@@ -3654,7 +3654,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: コスト3以下のユニット]パワー+1000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "-"
@@ -3679,7 +3679,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: ガーディアンを持つユニット]パワー+2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "GUARDIAN_1",
@@ -3705,7 +3705,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: コスト4以上のユニット][アタッカー] 潜入[1](このユニットの攻撃を相手のユニットに防御されなかった場合、1枚ドローする)。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "アタッカー",
@@ -4270,7 +4270,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のダメージゾーンからアイテムカードを1枚選んで手札に加える。その後、自分の手札を1枚選んでダメージゾーンに置く。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -4294,7 +4294,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のデッキから《ユニーク》を持つアイテムカードを1枚手札に加える。デッキをシャッフルする。\n\n[トリガー] / \nこのカードをトラッシュする。自分のデッキからコスト1以下のアイテムカードを1枚選んで手札に加える。デッキをシャッフルする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -4326,7 +4326,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるアイテムを1枚選んで持ち主のデッキの下に置く。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -4350,7 +4350,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のトラッシュゾーンからコスト1以下のアイテムカードを1枚選んで手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -4374,7 +4374,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のデッキの上から5枚を公開し、その中のアイテムカードを2枚まで選んで手札に加える。残りは好きな順番でデッキの下に置く。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -4421,7 +4421,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: なし][アタッカー] この攻撃が終わるまでパワー+2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "アタッカー"
@@ -4447,7 +4447,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: [アームド]を持つユニット]パワー+3000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "ARMED"
@@ -4490,13 +4490,13 @@
   {
     "id": "BT03-012",
     "name": "一緒に花見でもどうか？",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札を2枚まで選んで残りはトラッシュする。手札が3枚になるまでドローする。\n\n\n\nトリガー / \nこのカードをトラッシュする。自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選び、手札に加える。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_JEhYiLIw_fcc3cbd5fa0ba4c71d3b005177a150acb8675992.png",
     "rarity": "C",
@@ -4505,13 +4505,13 @@
   {
     "id": "BT03-013",
     "name": "ニューフレーバー",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 2,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある相手のユニットを1枚選ぶ。自分と相手の手札の枚数が違う場合、このターンが終わるまでその差1枚につき、そのユニットのパワー-1000。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_9TvcYmQ7_847ad0b2534e9316feb3b93fbadebb7094c77730.png",
     "rarity": "C",
@@ -4520,13 +4520,13 @@
   {
     "id": "BT03-014",
     "name": "爆発は芸術です。",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある  を持つコスト4以下の自分のユニットを1枚選ぶ。そのユニットはこのターンが終わるまで  デュエリスト(対向ユニットは防御可能な状態であれば必ず防御しなければならない)を得る。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_BuMp8Gb7_e0aef681aafaa3c1f68ed72b4871b01303f57f65.png",
     "rarity": "C",
@@ -4535,13 +4535,13 @@
   {
     "id": "BT03-015",
     "name": "継承される力",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 4,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある相手のユニットを1枚選ぶ。自分の手札からユニットカードを1枚選んでトラッシュした場合、このターンが終わるまでそのユニットのパワーはトラッシュしたユニットカードのパワー分下がる。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_OmP8hnD2_9cb15ef0d40ded4027886e4d38fd0ef9b28e35f8.png",
     "rarity": "R",
@@ -4550,13 +4550,13 @@
   {
     "id": "BT03-016",
     "name": "チタンマターバイザー",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 1,
     "power": 0,
     "hitCount": 0,
     "text": "この攻撃が終わるまで対向ユニットのパワー-1000。この効果でそのユニットをトラッシュしたなら、このユニットが装備している〈チタンマターバイザー〉を1枚選んでトラッシュできる。その後、2枚ドローする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [
       "アタッカー"
     ],
@@ -4576,13 +4576,13 @@
   {
     "id": "BT03-017",
     "name": "チタンマターベスト",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 2,
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札を1枚選んでトラッシュできる。その後、フィールドにある相手のユニットを1枚選ぶ。そのユニットのパワーはこのターンが終わるまで3000になる。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -4593,13 +4593,13 @@
   {
     "id": "BT03-018",
     "name": "ナガ‐ラストガールフッド",
-    "type": "リーダー",
+    "type": "LEADER",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "基本面\n\n\n自分は  のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 自分の全てのユニットゾーンにユニットがある場合、自分のユニット全てのパワー+1000。",
     "affiliation": "ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "戦線維持"
     ],
@@ -4610,13 +4610,13 @@
   {
     "id": "BT03-018",
     "name": "ナガ‐ラストガールフッド",
-    "type": "リーダー",
+    "type": "LEADER",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "基本面\n\n\n自分は  のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 自分の全てのユニットゾーンにユニットがある場合、自分のユニット全てのパワー+1000。",
     "affiliation": "ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "戦線維持"
     ],
@@ -4627,13 +4627,13 @@
   {
     "id": "BT03-019",
     "name": "ルピー：ウィンターショッパー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 1,
     "power": 0,
     "hitCount": 1,
     "text": "自分のリーダーレベルが6以上の場合、パワー+2000。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "レベルリンク"
     ],
@@ -4644,13 +4644,13 @@
   {
     "id": "BT03-020",
     "name": "トリナ",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "自分のリーダーレベルが6以上で自分の全てのユニットゾーンにユニットがある場合、パワー+3000、ヒット+1。\n\n\n\nトリガー / \nこのカードをトラッシュする。フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "レベルリンク、 戦線維持"
     ],
@@ -4661,13 +4661,13 @@
   {
     "id": "BT03-020",
     "name": "トリナ",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "自分のリーダーレベルが6以上で自分の全てのユニットゾーンにユニットがある場合、パワー+3000、ヒット+1。\n\n\n\nトリガー / \nこのカードをトラッシュする。フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "レベルリンク、 戦線維持"
     ],
@@ -4678,13 +4678,13 @@
   {
     "id": "BT03-021",
     "name": "ティア",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 3,
     "power": 4000,
     "hitCount": 1,
     "text": "自分の全てのユニットゾーンにユニットがある場合、リーダーレベル+1。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー、 戦線維持"
     ],
@@ -4695,13 +4695,13 @@
   {
     "id": "BT03-022",
     "name": "フローラ",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 0,
     "hitCount": 1,
     "text": "自分のリーダーレベルが6以上で自分の全てのユニットゾーンにユニットがある場合、フィールドにあるコスト3以下の他の自分のユニット全てのパワー+2000。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "レベルリンク、 戦線維持"
     ],
@@ -4712,13 +4712,13 @@
   {
     "id": "BT03-023",
     "name": "ブリッド‐クラシックワーカー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 4500,
     "hitCount": 2,
     "text": "自分のデッキの上からカードを2枚公開し、その中のコスト4以下のユニットカードを1枚選んで手札に加える。残りはトラッシュする。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -4729,13 +4729,13 @@
   {
     "id": "BT03-024",
     "name": "紅蓮",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 4,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある他の自分のユニット全てのヒット1につき、パワー+1000。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "パッシブ"
     ],
@@ -4746,13 +4746,13 @@
   {
     "id": "BT03-025",
     "name": "ディーゼル‐ストロベリーフラワー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 5,
     "power": 5500,
     "hitCount": 2,
     "text": "自分のリーダーレベルが10以上の場合、1枚ドローする。違う場合、リーダーレベル+1。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -4763,13 +4763,13 @@
   {
     "id": "BT03-026",
     "name": "ジュリア‐マイルドノクターン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 6,
     "power": 8500,
     "hitCount": 2,
     "text": "-",
     "affiliation": "ベース / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_qNzV75dS_4c4e380b46f4ea827c4852efef800250bc8d02fa.png",
     "rarity": "C",
@@ -4778,13 +4778,13 @@
   {
     "id": "BT03-027",
     "name": "シン‐バックストリートドリーム",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 6,
     "power": 0,
     "hitCount": 2,
     "text": "このユニットのパワーが対向ユニットより3500以上高い場合、このターンが終わるまで  貫通[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)を得る。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -4803,13 +4803,13 @@
   {
     "id": "BT03-027",
     "name": "シン‐バックストリートドリーム",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 6,
     "power": 0,
     "hitCount": 2,
     "text": "このユニットのパワーが対向ユニットより3500以上高い場合、このターンが終わるまで  貫通[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)を得る。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -4820,13 +4820,13 @@
   {
     "id": "BT03-028",
     "name": "ナガ‐ラストガールフッド",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 10000,
     "hitCount": 3,
     "text": "自分のリーダーレベルが10以上の場合、突破[コスト4以下](コスト4以下の相手のユニットはこのユニットの攻撃を防御できない)を得る。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アタッカー、 レベルリンク"
     ],
@@ -4837,13 +4837,13 @@
   {
     "id": "BT03-028",
     "name": "ナガ‐ラストガールフッド",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 10000,
     "hitCount": 3,
     "text": "自分のリーダーレベルが10以上の場合、突破[コスト4以下](コスト4以下の相手のユニットはこのユニットの攻撃を防御できない)を得る。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アタッカー、 レベルリンク"
     ],
@@ -4854,13 +4854,13 @@
   {
     "id": "BT03-029",
     "name": "BRAND NEW YEAR",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるコスト5以上の自分のユニットを1枚選んでこのターンが終わるまでヒット+1。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_LYhIDQb5_ad298659fe6a872651115da64483aa963c330eb8.png",
     "rarity": "C",
@@ -4869,13 +4869,13 @@
   {
     "id": "BT03-030",
     "name": "最適のルート",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるコスト3以下の自分のユニット全てはこのターンが終わるまでヒット+1。コスト3以下の自分のユニットが3枚以上あるなら更に1枚ドローする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_hFzjewax_d919d230e353bd6365057d346cec7bdff48bc103.png",
     "rarity": "C",
@@ -4884,13 +4884,13 @@
   {
     "id": "BT03-031",
     "name": "祭りの終り",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるコスト3以下の自分のユニットを1枚選ぶ。そのユニットのパワーが対向ユニットより高い場合、対向ユニットをトラッシュする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_U6B8TQAH_e6eda1b5522a52369526490581bd5e9f7686c5d9.png",
     "rarity": "R",
@@ -4899,13 +4899,13 @@
   {
     "id": "BT03-032",
     "name": "秘密の花園",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるコスト3以下の自分のユニット全てはこのターンが終わるまでパワー+5000。コスト3以下の自分のユニットが3枚以上あるなら更にヒット+1。\n\n\n\nトリガー / \nこのカードをトラッシュする。自分のリーダーレベル+1。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_l85MxrJU_b61e3f98bdcf1b6ffecd0f8e32ba5d1d9fed3024.png",
     "rarity": "C",
@@ -4914,13 +4914,13 @@
   {
     "id": "BT03-033",
     "name": "レアメタルジャケット",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "自分のサイズ+1。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [
       "パッシブ"
     ],
@@ -4931,13 +4931,13 @@
   {
     "id": "BT03-034",
     "name": "レアメタルゴーグル",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 3,
     "power": 0,
     "hitCount": 0,
     "text": "パワー+2500、ヒット+1。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_KDHn63Uh_fa4ee972418e8777b0f551e74cce7b5df949864e.png",
     "rarity": "C",
@@ -4946,13 +4946,13 @@
   {
     "id": "BT03-035",
     "name": "リトルマーメイド‐アビスフラワー",
-    "type": "リーダー",
+    "type": "LEADER",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "基本面\n\n\n自分は  のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 相手の手札が3枚以上ある場合、自分の手札を1枚選んでトラッシュできる。その後、相手は手札を1枚選んでトラッシュする。",
     "affiliation": "ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -4963,13 +4963,13 @@
   {
     "id": "BT03-035",
     "name": "リトルマーメイド‐アビスフラワー",
-    "type": "リーダー",
+    "type": "LEADER",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "基本面\n\n\n自分は  のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 相手の手札が3枚以上ある場合、自分の手札を1枚選んでトラッシュできる。その後、相手は手札を1枚選んでトラッシュする。",
     "affiliation": "ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -4980,13 +4980,13 @@
   {
     "id": "BT03-036",
     "name": "ロザンナ：シックオーシャン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 1,
     "power": 1000,
     "hitCount": 1,
     "text": "フィールドにある  を持つ自分のユニット1枚につき、1枚ドローする。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -4997,13 +4997,13 @@
   {
     "id": "BT03-037",
     "name": "ニヒリスター",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 2,
     "power": 0,
     "hitCount": 1,
     "text": "フィールドにある相手のユニットを1枚選ぶ。このターンが終わるまでフィールドにある  を持つ自分のユニット1枚につき、そのユニットのパワー-2500。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5014,13 +5014,13 @@
   {
     "id": "BT03-038",
     "name": "モダニア‐ファースト・アフェクション",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 2,
     "power": 2500,
     "hitCount": 1,
     "text": "相手の手札が3枚以上ある場合、自分の手札を1枚選んでトラッシュできる。その後、相手は手札を1枚選んでトラッシュする。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5031,13 +5031,13 @@
   {
     "id": "BT03-039",
     "name": "シンデレラ‐ガラスのプリンセス",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 3000,
     "hitCount": 1,
     "text": "自分のトラッシュゾーンからコスト4のユニットカードを1枚選んで手札に加える。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5056,13 +5056,13 @@
   {
     "id": "BT03-039",
     "name": "シンデレラ‐ガラスのプリンセス",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 3000,
     "hitCount": 1,
     "text": "自分のトラッシュゾーンからコスト4のユニットカードを1枚選んで手札に加える。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5073,13 +5073,13 @@
   {
     "id": "BT03-040",
     "name": "サクラ‐黒夜密行",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 4,
     "power": 5000,
     "hitCount": 2,
     "text": "相手が  以外の効果でドローした場合、相手は手札を4枚になるようにトラッシュする。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "パッシブ"
     ],
@@ -5090,13 +5090,13 @@
   {
     "id": "BT03-041",
     "name": "ミハラ：ボンディングチェーン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 4,
     "power": 0,
     "hitCount": 2,
     "text": "犠牲[1](隣のレーンの相手のユニットが攻撃する場合、フィールドにある他の自分のユニットを1枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\n\n 相手のターンなら自分の手札から  を持つユニットカードか  を持つアイテムカードを1枚選んでトラッシュできる。その後、空いている自分のユニットゾーンにこのユニットカードを配置して自分のターンが終わるまでパワー+2500。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット、 ガーディアン"
     ],
@@ -5107,13 +5107,13 @@
   {
     "id": "BT03-041",
     "name": "ミハラ：ボンディングチェーン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 4,
     "power": 0,
     "hitCount": 2,
     "text": "犠牲[1](隣のレーンの相手のユニットが攻撃する場合、フィールドにある他の自分のユニットを1枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\n\n 相手のターンなら自分の手札から  を持つユニットカードか  を持つアイテムカードを1枚選んでトラッシュできる。その後、空いている自分のユニットゾーンにこのユニットカードを配置して自分のターンが終わるまでパワー+2500。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット、 ガーディアン"
     ],
@@ -5124,13 +5124,13 @@
   {
     "id": "BT03-042",
     "name": "マナ",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 5,
     "power": 0,
     "hitCount": 2,
     "text": "このターンの間、相手の手札が1枚以上トラッシュされている場合、パワー+2500。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "パッシブ"
     ],
@@ -5141,13 +5141,13 @@
   {
     "id": "BT03-043",
     "name": "メイデン‐アンダー・ザ・サン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 4500,
     "hitCount": 2,
     "text": "対向ユニットがコスト4以下の場合、そのユニットはこのターンが終わるまで  自壊(このユニットが相手の攻撃を防御したなら、その攻撃を終了させ、このユニットをトラッシュする)を得る。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5158,13 +5158,13 @@
   {
     "id": "BT03-044",
     "name": "リトルマーメイド‐アビスフラワー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 6,
     "power": 0,
     "hitCount": 2,
     "text": "相手の手札が1枚以下の場合、対向ユニットをトラッシュする。\n\n 相手の手札が2枚以下の場合、このターンが終わるまでパワー+3000。\n\n\n\nトリガー / \nこのカードをトラッシュする。自分のトラッシュゾーンから  を持つユニットカードを1枚選んで手札に加える。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー、 アクティブ"
     ],
@@ -5175,13 +5175,13 @@
   {
     "id": "BT03-044",
     "name": "リトルマーメイド‐アビスフラワー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 6,
     "power": 0,
     "hitCount": 2,
     "text": "相手の手札が1枚以下の場合、対向ユニットをトラッシュする。\n\n 相手の手札が2枚以下の場合、このターンが終わるまでパワー+3000。\n\n\n\nトリガー / \nこのカードをトラッシュする。自分のトラッシュゾーンから  を持つユニットカードを1枚選んで手札に加える。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー、 アクティブ"
     ],
@@ -5192,13 +5192,13 @@
   {
     "id": "BT03-045",
     "name": "D：キラーワイフ‐シークレットパーティークリーナー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 7,
     "power": 7000,
     "hitCount": 3,
     "text": "フィールドにある自分のユニットを1枚選んでトラッシュする。その後、フィールドにある自分のユニット全てはこのターンが終わるまで&nbsp; 帰還(このターンの終了時、このユニットカードを自分のトラッシュゾーンから手札に加える)を得る。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5209,13 +5209,13 @@
   {
     "id": "BT03-046",
     "name": "KILL THE LORD",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるコスト2以下の自分のユニットを1枚選んでトラッシュする。その後、1枚ドローする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_cIRgfoZ3_1d5ed7766a52e5edc52f7179642f75f7bc5ec1dc.png",
     "rarity": "C",
@@ -5224,13 +5224,13 @@
   {
     "id": "BT03-047",
     "name": "M.M.R.研究所",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 2,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある&nbsp; を持つ自分のユニット全てはこのターンが終わるまでパワー+2000。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_kul0rdsG_2287cb5839bf51921c2b7ac85512a91a63035502.png",
     "rarity": "C",
@@ -5239,13 +5239,13 @@
   {
     "id": "BT03-048",
     "name": "軌道エレベーター",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "自分のトラッシュゾーンからコスト4から6のユニットカードを1枚選んで手札に加える。\n\n\n\nトリガー / \nこのカードをトラッシュする。相手の手札が3枚以上ある場合、相手は手札を1枚選んでトラッシュする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_sWgi9LNO_00098604b5455348c97242674314ed1a0ab072a5.png",
     "rarity": "R",
@@ -5254,13 +5254,13 @@
   {
     "id": "BT03-049",
     "name": "ボンディングペイン",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 3,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニットを1枚選ぶ。フィールドにある他の自分のユニット全てのパワーはこのターンが終わるまでそのユニットのパワー分上がる。そのユニットをトラッシュする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_eArsQy8u_fc1afba5a1e83ca5fa169f72966e9dfc7ede750f.png",
     "rarity": "C",
@@ -5269,13 +5269,13 @@
   {
     "id": "BT03-050",
     "name": "ガッデシアムベスト",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "相手の手札が3枚以下の場合、フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5286,13 +5286,13 @@
   {
     "id": "BT03-051",
     "name": "ガッデシアムアームガード",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 3,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある&nbsp; を持つ他の自分のユニットを1枚選ぶ。相手のターンが終わるまでそのユニットが持つ&nbsp; 効果を1つ選んで得る。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -5303,13 +5303,13 @@
   {
     "id": "BT03-052",
     "name": "マスト：ロマンチックメイド",
-    "type": "リーダー",
+    "type": "LEADER",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "基本面\n\n\n自分は&nbsp;&nbsp;のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n&nbsp; 自分のスキルゾーンからコスト3のスキルを1枚選んでトラッシュする。その後、フィールドにある&nbsp; を持つ自分のユニットを1枚選ぶ。そのユニットが持つ&nbsp; 効果を1つ選んで発動する。",
     "affiliation": "エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -5320,13 +5320,13 @@
   {
     "id": "BT03-052",
     "name": "マスト：ロマンチックメイド",
-    "type": "リーダー",
+    "type": "LEADER",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "基本面\n\n\n自分は&nbsp;&nbsp;のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n&nbsp; 自分のスキルゾーンからコスト3のスキルを1枚選んでトラッシュする。その後、フィールドにある&nbsp; を持つ自分のユニットを1枚選ぶ。そのユニットが持つ&nbsp; 効果を1つ選んで発動する。",
     "affiliation": "エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -5337,13 +5337,13 @@
   {
     "id": "BT03-053",
     "name": "ルドミラ：ウィンターオーナー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 1,
     "power": 2000,
     "hitCount": 1,
     "text": "1枚ドローする。その後、相手は1枚ドローする。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5354,13 +5354,13 @@
   {
     "id": "BT03-054",
     "name": "アリス：ワンダーランドバニー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 2,
     "power": 2500,
     "hitCount": 1,
     "text": "自分のデッキの上からカードを1枚トラッシュする。そのカードがスキルカードの場合、効果を発動できる。違う場合、1枚ドローし相手は1枚ドローする。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5371,13 +5371,13 @@
   {
     "id": "BT03-055",
     "name": "メアリー：ベイゴッデス",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 2,
     "power": 2500,
     "hitCount": 1,
     "text": "自分のデッキの上からカードを3枚公開し、その中のスキルカードを1枚選んで手札に加える。残りはトラッシュする。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5388,13 +5388,13 @@
   {
     "id": "BT03-056",
     "name": "ハラン‐バンケット・ウィッチ",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 3,
     "power": 0,
     "hitCount": 1,
     "text": "対向ユニットは相手のターンが終わるまで攻撃できない。\n\n この防御が終わるまでパワー+2000。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー、 ディフェンダー"
     ],
@@ -5405,13 +5405,13 @@
   {
     "id": "BT03-057",
     "name": "フォルクヴァン‐モイストラビット",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 2500,
     "hitCount": 0,
     "text": "相手は1枚ドローする。自分の手札からユニットカードを1枚選んでトラッシュする。相手はトラッシュしたカードと同じコストを持つカードを手札から1枚選んでトラッシュできる。トラッシュしなかった場合、相手にトラッシュしたユニットカードのヒット分のダメージを与える。\n\n\n\nトリガー / \nこのカードをトラッシュする。1枚ドローする。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -5422,13 +5422,13 @@
   {
     "id": "BT03-057",
     "name": "フォルクヴァン‐モイストラビット",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 2500,
     "hitCount": 0,
     "text": "相手は1枚ドローする。自分の手札からユニットカードを1枚選んでトラッシュする。相手はトラッシュしたカードと同じコストを持つカードを手札から1枚選んでトラッシュできる。トラッシュしなかった場合、相手にトラッシュしたユニットカードのヒット分のダメージを与える。\n\n\n\nトリガー / \nこのカードをトラッシュする。1枚ドローする。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -5439,13 +5439,13 @@
   {
     "id": "BT03-058",
     "name": "ペッパー‐オーシャンビタミン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 4,
     "power": 4000,
     "hitCount": 2,
     "text": "フィールドにある相手のユニットが攻撃するたびに、1枚ドローする。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "パッシブ"
     ],
@@ -5456,13 +5456,13 @@
   {
     "id": "BT03-059",
     "name": "アンカー：イノセントメイド",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 0,
     "hitCount": 2,
     "text": "自分の手札を2枚選んでトラッシュできる。その後、相手のターンが終わるまで相手は手札からコスト5以上のユニットを配置できない。\n\n この防御が終わるまでパワー+1000。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー、 ディフェンダー"
     ],
@@ -5473,13 +5473,13 @@
   {
     "id": "BT03-060",
     "name": "ヘルム‐アフターシャワー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 5,
     "power": 0,
     "hitCount": 2,
     "text": "このユニットはこのターンが終わるまで攻撃できない。相手の手札が5枚より多い場合、相手にその差分のダメージを与える。\n\n この防御が終わるまでパワー+1000。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー、 ディフェンダー"
     ],
@@ -5497,13 +5497,13 @@
   {
     "id": "BT03-060",
     "name": "ヘルム‐アフターシャワー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 5,
     "power": 0,
     "hitCount": 2,
     "text": "このユニットはこのターンが終わるまで攻撃できない。相手の手札が5枚より多い場合、相手にその差分のダメージを与える。\n\n この防御が終わるまでパワー+1000。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー、 ディフェンダー"
     ],
@@ -5514,13 +5514,13 @@
   {
     "id": "BT03-061",
     "name": "マスト：ロマンチックメイド",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 6,
     "power": 0,
     "hitCount": 2,
     "text": "防壁[2](隣のレーンの相手のユニットが攻撃する場合、自分の手札を2枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\n\n この防御が終わるまでパワー+4000。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "ディフェンダー、 ガーディアン",
       "防壁"
@@ -5532,13 +5532,13 @@
   {
     "id": "BT03-061",
     "name": "マスト：ロマンチックメイド",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 6,
     "power": 0,
     "hitCount": 2,
     "text": "防壁[2](隣のレーンの相手のユニットが攻撃する場合、自分の手札を2枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\n\n この防御が終わるまでパワー+4000。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "ディフェンダー、 ガーディアン"
     ],
@@ -5549,13 +5549,13 @@
   {
     "id": "BT03-062",
     "name": "メアリー‐メディカルラビット",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 7,
     "power": 0,
     "hitCount": 3,
     "text": "自分の手札を1枚選んでトラッシュできる。その後、自分のスキルゾーンからスキルを1枚選んで効果を発動する。\n\n この防御が終わるまでパワー+2000。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー、 ディフェンダー"
     ],
@@ -5566,13 +5566,13 @@
   {
     "id": "BT03-063",
     "name": "もう一度!",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 3,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある相手のユニットを1枚選ぶ。そのユニットは相手のターンが終わるまで攻撃できない。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_WiTcGLn5_b2f9970be32b4228546190f3d499e7582b4724c9.png",
     "rarity": "C",
@@ -5581,13 +5581,13 @@
   {
     "id": "BT03-064",
     "name": "ROMANTIC VALENTINE",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 3,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある&nbsp; を持つ自分のユニットを1枚選び、そのユニットのヒット分自分の手札を選んでトラッシュできる。その後、対向ユニットを持ち主の手札に戻す。\n\n\n\nトリガー / \nこのカードをトラッシュする。1枚ドローする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_Q7OqJSIA_83b02a50703cb0079d7f9f79360d32d5663e8cc3.png",
     "rarity": "C",
@@ -5596,13 +5596,13 @@
   {
     "id": "BT03-065",
     "name": "温かいお風呂",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 3,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある&nbsp;&nbsp;を持つ自分のユニットの枚数分ドローする。相手のターンが終わるまで相手は&nbsp;&nbsp;効果を発動できない。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_quYfKbVy_67bdcadb19894743d7f4bf0777eff5a82fbc953b.png",
     "rarity": "R",
@@ -5611,13 +5611,13 @@
   {
     "id": "BT03-066",
     "name": "BLUEWATER ISLAND",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 5,
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札が7枚以上あるなら、6枚になるように手札を選んでトラッシュする。その後、トラッシュしたカード1枚につき、相手に1ダメージを与える。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_QaMboveC_267bd1ef214f55af99046bf81f1c8d85307e9337.png",
     "rarity": "C",
@@ -5626,13 +5626,13 @@
   {
     "id": "BT03-067",
     "name": "ガッデシアムガントレット",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 2,
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札を1枚選んでトラッシュできる。その後、空いている自分のユニットゾーンにこのユニットカードを配置する。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5643,13 +5643,13 @@
   {
     "id": "BT03-068",
     "name": "ガッデシアムゴーグル",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 2,
     "power": 0,
     "hitCount": 0,
     "text": "パワー+3000。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_qkNOe6ML_4dcab4e59c1b885933527f31ddfd12b56d0605cb.png",
     "rarity": "C",
@@ -5658,13 +5658,13 @@
   {
     "id": "BT03-069",
     "name": "レヴィアタン",
-    "type": "リーダー",
+    "type": "LEADER",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "基本面\n\n\n自分は&nbsp;&nbsp;のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 自分のデッキの上からカードを3枚トラッシュする。この効果でアイテムカードが1枚以上トラッシュされた場合、1枚ドローする。",
     "affiliation": "ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -5675,13 +5675,13 @@
   {
     "id": "BT03-069",
     "name": "レヴィアタン",
-    "type": "リーダー",
+    "type": "LEADER",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "基本面\n\n\n自分は&nbsp;&nbsp;のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 自分のデッキの上からカードを3枚トラッシュする。この効果でアイテムカードが1枚以上トラッシュされた場合、1枚ドローする。",
     "affiliation": "ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -5692,13 +5692,13 @@
   {
     "id": "BT03-070",
     "name": "プリバティ：アンカインド・メイド",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 1,
     "power": 0,
     "hitCount": 1,
     "text": "アイテムを装備している場合、パワー+2000。",
     "affiliation": "エフェクト / エリシオン",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アームド"
     ],
@@ -5709,13 +5709,13 @@
   {
     "id": "BT03-071",
     "name": "ドレイク‐メイド・フォー・ヴィラン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 2,
     "power": 3000,
     "hitCount": 1,
     "text": "フィールドにアイテムを装備している自分のユニットがある場合、自分のデッキの上からカードを3枚公開し、その中のアイテムカードを1枚選んで手札に加える。残りはトラッシュする。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5726,13 +5726,13 @@
   {
     "id": "BT03-072",
     "name": "クラウン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 2000,
     "hitCount": 1,
     "text": "自分のトラッシュゾーンからコスト2のアイテムカードを1枚選んで手札に加える。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5743,13 +5743,13 @@
   {
     "id": "BT03-073",
     "name": "ソーダ：トゥインクルバニー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 3,
     "power": 4500,
     "hitCount": 0,
     "text": "装備しているアイテム1枚につき、自分のデッキの上からカードを3枚トラッシュする。このターンが終わるまでこの効果でトラッシュされたアイテムカード1枚につき、ヒット+1。\n\n\n\nトリガー / \nこのカードをトラッシュする。2枚ドローする。その後、自分の手札を2枚選んでトラッシュする。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アクティブ、 アームド"
     ],
@@ -5760,13 +5760,13 @@
   {
     "id": "BT03-074",
     "name": "トロニー‐スイートステップ",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 3,
     "power": 0,
     "hitCount": 1,
     "text": "装備しているアイテム1枚につき、パワー+1000。2枚以上装備している場合、更に「 フィールドにあるアイテムを装備していないユニットを1枚選んでトラッシュできる」を得る。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アームド"
     ],
@@ -5777,13 +5777,13 @@
   {
     "id": "BT03-075",
     "name": "シュエン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 3500,
     "hitCount": 2,
     "text": "自分のトラッシュゾーンからアイテムカードを3枚まで選んで好きな順番でデッキの下に置くことができる。置いたカードのコストの合計が対向ユニットのコスト以上なら対向ユニットをトラッシュする。",
     "affiliation": "エフェクト / ミシリス",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5794,13 +5794,13 @@
   {
     "id": "BT03-076",
     "name": "レオナ‐ズーキーパー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 4,
     "power": 5000,
     "hitCount": 2,
     "text": "自分のダメージゾーンから〈レオナ‐ズーキーパー〉以外のユニットカードを1枚選んで手札に加える。その後、このユニットカードをダメージゾーンに置く。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5818,13 +5818,13 @@
   {
     "id": "BT03-076",
     "name": "レオナ‐ズーキーパー",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 4,
     "power": 5000,
     "hitCount": 2,
     "text": "自分のダメージゾーンから〈レオナ‐ズーキーパー〉以外のユニットカードを1枚選んで手札に加える。その後、このユニットカードをダメージゾーンに置く。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エグジット"
     ],
@@ -5835,13 +5835,13 @@
   {
     "id": "BT03-077",
     "name": "レヴィアタン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 5500,
     "hitCount": 2,
     "text": "このユニットは自分の効果以外でアイテムを装備できず、カード名が同じアイテムを2枚以上装備できない。\n\n&nbsp;自分のトラッシュゾーンからアイテムカードを2枚まで選んでサイズを無視して装備できる。このユニットが装備しているアイテムはこのターンが終わるまでコストが0になる。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "パッシブ、 アクティブ"
     ],
@@ -5852,13 +5852,13 @@
   {
     "id": "BT03-077",
     "name": "レヴィアタン",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 5500,
     "hitCount": 2,
     "text": "このユニットは自分の効果以外でアイテムを装備できず、カード名が同じアイテムを2枚以上装備できない。\n\n&nbsp;自分のトラッシュゾーンからアイテムカードを2枚まで選んでサイズを無視して装備できる。このユニットが装備しているアイテムはこのターンが終わるまでコストが0になる。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "パッシブ、 アクティブ"
     ],
@@ -5869,13 +5869,13 @@
   {
     "id": "BT03-078",
     "name": "シュガー‐ワイルド・バックヤード",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 6,
     "power": 6000,
     "hitCount": 2,
     "text": "&nbsp;アイテムを装備しているなら戦闘/効果でトラッシュされる時、自分のトラッシュゾーンからアイテムカードを1枚選んでデッキの下に置くことができる。その後、このユニットと装備しているアイテム全てを持ち主の手札に戻す。",
     "affiliation": "エフェクト / テトラ",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アームド"
     ],
@@ -5886,13 +5886,13 @@
   {
     "id": "BT03-079",
     "name": "ベヒモス",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 6500,
     "hitCount": 3,
     "text": "&nbsp;自分のトラッシュゾーンと手札からアイテムカードを8枚選んで好きな順番でデッキの下に置くことができる。その後、コストの合計が8以下になるようにフィールドにある相手のユニットを好きな枚数選んでトラッシュする。この効果でトラッシュしたユニット1枚につき、1枚ドローする。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5903,13 +5903,13 @@
   {
     "id": "BT03-079",
     "name": "ベヒモス",
-    "type": "ユニット",
+    "type": "UNIT",
     "cost": 0,
     "power": 6500,
     "hitCount": 3,
     "text": "&nbsp;自分のトラッシュゾーンと手札からアイテムカードを8枚選んで好きな順番でデッキの下に置くことができる。その後、コストの合計が8以下になるようにフィールドにある相手のユニットを好きな枚数選んでトラッシュする。この効果でトラッシュしたユニット1枚につき、1枚ドローする。",
     "affiliation": "エフェクト / ピルグリム",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "エントリー"
     ],
@@ -5920,13 +5920,13 @@
   {
     "id": "BT03-080",
     "name": "死んだらダメ。",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 1,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニットを1枚選ぶ。そのユニットはこのターンが終わるまで「アイテムを1枚以上装備するたびに、1枚ドローする」を得る。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_UriB1C5l_26e929e92cdb78931a8917de997df7d417e7280d.png",
     "rarity": "R",
@@ -5935,13 +5935,13 @@
   {
     "id": "BT03-081",
     "name": "巨大なアーム",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 0,
     "power": 0,
     "hitCount": 0,
     "text": "自分のデッキの上からカードを5枚トラッシュする。自分のトラッシュゾーンからユニットカードを1枚選んで手札に加える。\n\n\n\nトリガー / \nこのカードをトラッシュする。自分のデッキからコスト1以下のアイテムカードを1枚手札に加える。デッキをシャッフルする。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_XzdnMNRH_6d7cdf548bcbbc4669f4f5bc1ac2a421b7b82a56.png",
     "rarity": "C",
@@ -5950,13 +5950,13 @@
   {
     "id": "BT03-082",
     "name": "早く来なさいよ!!!!!",
-    "type": "スキル",
+    "type": "SKILL",
     "cost": 2,
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるアイテムを装備している自分のユニットを1枚選ぶ。そのユニットが装備しているアイテムを1枚選らび、フィールドにある他の自分のユニット全てはこのターンが終わるまでそのアイテムの効果を得る。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_tYqndFJ7_b0c391ab284ed5fc30e989fee9e6e4cd66084625.png",
     "rarity": "C",
@@ -5965,13 +5965,13 @@
   {
     "id": "BT03-083",
     "name": "コードナンバー：IXゴーグル",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 2,
     "power": 0,
     "hitCount": 0,
     "text": "&nbsp;このユニットが戦闘/効果でトラッシュされる時、装備している〈コードナンバー：IXゴーグル〉を1枚選んでトラッシュできる。その後、このユニットと装備しているアイテム全てを持ち主の手札に戻す。",
     "affiliation": "ユニーク",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "パッシブ"
     ],
@@ -5982,13 +5982,13 @@
   {
     "id": "BT03-084",
     "name": "コードナンバー：Ⅸシューズ",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 2,
     "power": 0,
     "hitCount": 0,
     "text": "&nbsp;自分のデッキの上からカードを3枚トラッシュする。この効果でアイテムカードが1枚以上トラッシュされた場合、相手のターンが終わるまでパワー+3000。",
-    "affiliation": "-",
-    "attribute": "-",
+    "affiliation": "",
+    "attribute": "",
     "keywords": [
       "アクティブ"
     ],
@@ -5999,13 +5999,13 @@
   {
     "id": "BT03-085",
     "name": "コードナンバー：Ⅸジャケット",
-    "type": "アイテム",
+    "type": "ITEM",
     "cost": 3,
     "power": 0,
     "hitCount": 0,
     "text": "&nbsp;自分の手札を1枚選んでトラッシュできる。その後、相手はこのユニットのヒット分手札を選んでトラッシュできる。相手がトラッシュしなかった場合、対向ユニットをトラッシュする。",
     "affiliation": "ユニーク",
-    "attribute": "-",
+    "attribute": "",
     "keywords": [
       "アタッカー"
     ],
@@ -6335,7 +6335,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -6359,7 +6359,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンからコスト2以下のユニットカードを1枚選んで手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -6391,7 +6391,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニット全てはこのターンが終わるまでパワー+2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -6415,7 +6415,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-5000。\n\n\n[トリガー] / このカードをトラッシュする。フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-5000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "-"
@@ -6449,7 +6449,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\n\n[アタッカー]\nこの攻撃が終わるまでパワー+2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "アタッカー"
@@ -6475,7 +6475,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\n\n[アタッカー]\n略奪[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、1枚ドローする)。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "炎",
     "keywords": [
       "アタッカー",
@@ -6794,7 +6794,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニットを1枚選んでこのターンが終わるまでパワー+3000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -6818,7 +6818,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のリーダーレベル+1。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -6841,7 +6841,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のデッキの上からカードを3枚公開し、その中の1枚を選んで手札に加える。残りの2枚はデッキに戻し、シャッフルする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -6865,7 +6865,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のユニットと相手のユニットが両方あるレーンを一つ選び、そのレーンでパワーが一番低いユニットをトラッシュする。パワーが同じなら、全てトラッシュする。\n\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -6899,7 +6899,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\n\nパワー+2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -6923,7 +6923,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: コスト4以上]\n\nヒット+1。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "大地",
     "keywords": [
       "-"
@@ -7256,7 +7256,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札を1枚選んでトラッシュする。その後、相手は手札を1枚選んでトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -7290,7 +7290,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分の手札からユニットカードを1枚選んでトラッシュする。そのユニットカードのコストより低いコストを持つ、フィールドにあるユニットを1枚選んでトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -7314,7 +7314,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニットを1枚選んでトラッシュする。その後、2枚ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -7337,7 +7337,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニットを1枚選んでそのユニットと対向ユニットを全てトラッシュする。\n\n\n[トリガー] / \nこのカードをトラッシュする。自分のトラッシュゾーンから エグジット\n を持つユニットカードを1枚選んで手札に加える。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "-"
@@ -7361,7 +7361,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\n\nパワー+3000。\n\n[ディフェンダー]\n自壊(このユニットが相手の攻撃を防御したなら、その攻撃を終了させ、このユニットをトラッシュする)。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "ディフェンダー",
@@ -7393,7 +7393,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件なし]\n\nエグジット\n道連れ(このユニットを戦闘でトラッシュした相手のユニットのコストがこのカードのコスト以下の場合、そのユニットをトラッシュする)。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "嵐",
     "keywords": [
       "エグジット",
@@ -7666,7 +7666,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるガーディアンを持つ自分のユニットを1枚選び、相手のターンが終わるまでパワー+2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "GUARDIAN_1",
@@ -7691,7 +7691,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるガーディアンを持つ自分のユニットを1枚選び、このターンが終わるまでヒット+1。\n\n[トリガー] / \nこのカードをトラッシュする。1枚ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "GUARDIAN_1",
@@ -7724,7 +7724,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "2枚ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "-"
@@ -7747,7 +7747,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるガーディアンを持つ自分のユニットを1枚選ぶ。選んだユニットはこのターンが終わるまで[アタッカー] 突破(相手のユニットはこのユニットの攻撃を防御できない)を得る。\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにある一番低いコストを持つ相手のユニットを1枚選んで、そのユニットと装備しているアイテム全てを持ち主の手札に戻す。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "GUARDIAN_1",
@@ -7798,7 +7798,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: なし]\n[ディフェンダー] この防御が終わるまでパワー+2000。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "ディフェンダー",
@@ -7825,7 +7825,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: [ディフェンダー]を持つユニット]\n[アクティブ]：メイン 1枚ドローする。\n\n[トリガー] / \nこのカードをトラッシュする。1枚ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "波濤",
     "keywords": [
       "アクティブ",
@@ -8174,7 +8174,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "自分のトラッシュゾーンからアイテムカードを1枚選んで手札に加える。\n\n[トリガー] / \nこのカードをトラッシュする。自分のデッキからコスト1以下のアイテムカードを1枚選んで手札に加える。デッキをシャッフルする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -8206,7 +8206,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにある自分のユニットを1枚選び、そのユニットが装備しているコスト1以上のアイテムの枚数分ドローする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -8229,7 +8229,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "フィールドにあるアイテムを2枚以上装備している自分のユニットを1枚選んでトラッシュする。その後、フィールドにある相手のユニットを1枚選んでトラッシュする。\n\n[トリガー] / \nこのカードをトラッシュする。2枚ドローする。その後、自分の手札を2枚選んでトラッシュする。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -8277,7 +8277,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: なし]パワー+1500。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
@@ -8326,7 +8326,7 @@
     "power": 0,
     "hitCount": 0,
     "text": "[装備条件: なし]パワー+2500。",
-    "affiliation": "-",
+    "affiliation": "",
     "attribute": "稲妻",
     "keywords": [
       "-"
