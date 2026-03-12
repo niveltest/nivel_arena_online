@@ -4488,6 +4488,304 @@
     ]
   },
   {
+    "id": "BT03-001",
+    "name": "ラピ：レッドフード",
+    "type": "LEADER",
+    "cost": 0,
+    "power": 0,
+    "hitCount": 0,
+    "text": "基本面\n[誓約]\n自分は(炎)のカードのみをデッキに入れることができる。\n\n[覚醒]\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n[覚醒]面\n[起動]\n自分のスキルゾーンにスキルカードが1枚以上ある場合、フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-2000。",
+    "affiliation": "ピルグリム",
+    "attribute": "炎",
+    "keywords": [
+      "誓約",
+      "アクティブ"
+    ],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_JEhYiLIw_fcc3cbd5fa0ba4c71d3b005177a150acb8675992.png",
+    "rarity": "L",
+    "effects": [
+      {
+        "trigger": "ACTIVE",
+        "isAwakening": true,
+        "action": "DEBUFF_ENEMY",
+        "value": 2000,
+        "targetType": "SINGLE",
+        "condition": "SKILL_ZONE_GE_1"
+      }
+    ],
+    "awakeningLevel": 5
+  },
+  {
+    "id": "BT03-002",
+    "name": "バイパー：シャイン・オブ・ラブ",
+    "type": "UNIT",
+    "cost": 1,
+    "power": 1500,
+    "hitCount": 1,
+    "text": "[攻撃時]\n交戦している相手のユニットのパワーをこのターンが終わるまで-1500。",
+    "affiliation": "テトラ",
+    "attribute": "炎",
+    "keywords": [],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_9TvcYmQ7_847ad0b2534e9316feb3b93fbadebb7094c77730.png",
+    "rarity": "C",
+    "effects": [
+      {
+        "trigger": "ON_ATTACK",
+        "action": "DEBUFF_ENEMY",
+        "value": 1500,
+        "targetType": "OPPOSING"
+      }
+    ]
+  },
+  {
+    "id": "BT03-003",
+    "name": "紅蓮：黒影",
+    "type": "UNIT",
+    "cost": 2,
+    "power": 2000,
+    "hitCount": 1,
+    "text": "[攻撃時]\n交戦している相手のユニットのパワーをこのターンが終わるまで-2000。",
+    "affiliation": "ピルグリム",
+    "attribute": "炎",
+    "keywords": [],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_BuMp8Gb7_e0aef681aafaa3c1f68ed72b4871b01303f57f65.png",
+    "rarity": "R",
+    "effects": [
+      {
+        "trigger": "ON_ATTACK",
+        "action": "DEBUFF_ENEMY",
+        "value": 2000,
+        "targetType": "OPPOSING"
+      }
+    ]
+  },
+  {
+    "id": "BT03-004",
+    "name": "アニス：スパークリングサマー",
+    "type": "UNIT",
+    "cost": 2,
+    "power": 2500,
+    "hitCount": 1,
+    "text": "[登場時]\n[貫通]を持つ自分のユニットを1枚選ぶ。このターンが終わるまで、そのユニットは[貫通][+1]とパワー+1000を得る。",
+    "affiliation": "テトラ",
+    "attribute": "炎",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_OmP8hnD2_9cb15ef0d40ded4027886e4d38fd0ef9b28e35f8.png",
+    "rarity": "SR",
+    "effects": [
+      {
+        "trigger": "ON_PLAY",
+        "action": "BUFF_ALLY",
+        "value": 1000,
+        "targetType": "ALLY",
+        "condition": "HAS_PENETRATION"
+      },
+      {
+        "trigger": "ON_PLAY",
+        "action": "BUFF_HIT",
+        "value": 1,
+        "targetType": "ALLY",
+        "condition": "HAS_PENETRATION"
+      }
+    ]
+  },
+  {
+    "id": "BT03-005",
+    "name": "ラピ：ホワイトプロミス",
+    "type": "UNIT",
+    "cost": 3,
+    "power": 3500,
+    "hitCount": 1,
+    "text": "[攻撃時]\nこの攻撃中、このユニットのパワー+3000。",
+    "affiliation": "エリシオン",
+    "attribute": "炎",
+    "keywords": [],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_XUKvgil4_12a6f110024ff205d79460f6741c8329af706ca8.png",
+    "rarity": "R",
+    "effects": [
+      {
+        "trigger": "ON_ATTACK",
+        "action": "BUFF_ALLY",
+        "value": 3000,
+        "targetType": "SELF"
+      }
+    ]
+  },
+  {
+    "id": "BT03-006",
+    "name": "紅蓮：黒影-蓮花",
+    "type": "UNIT",
+    "cost": 3,
+    "power": 3500,
+    "hitCount": 1,
+    "text": "[登場時]\n自分のスキルゾーンにあるスキルカードを1枚選んでトラッシュしてもよい。そうしたなら、1枚ドローする。",
+    "affiliation": "ピルグリム",
+    "attribute": "炎",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_Kveht0Jf_63f9c156bd97dd7cf383b879ed2829c70b0f2908.png",
+    "rarity": "SR",
+    "effects": [
+      {
+        "trigger": "ON_PLAY",
+        "action": "DRAW",
+        "value": 1,
+        "condition": "TRASH_SKILL_FROM_ZONE"
+      }
+    ]
+  },
+  {
+    "id": "BT03-007",
+    "name": "ベスティー：アークメイジ",
+    "type": "UNIT",
+    "cost": 4,
+    "power": 4000,
+    "hitCount": 2,
+    "text": "[攻撃時]\n自分の手札が3枚以下の場合、自分のトラッシュゾーンからコスト3以下のスキルカードを1枚選んで手札に加え、この攻撃中、このユニットのパワー+2000。",
+    "affiliation": "エリシオン",
+    "attribute": "炎",
+    "keywords": [],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_0gpxIFwC_1d345ebd3be910083e84454aa11bf4aea5f19316.png",
+    "rarity": "R",
+    "effects": [
+      {
+        "trigger": "ON_ATTACK",
+        "action": "RECYCLE",
+        "value": 1,
+        "condition": "MY_HAND_LE_3_AND_COST_LE_3_SKILL",
+        "targetType": "DISCARD"
+      },
+      {
+        "trigger": "ON_ATTACK",
+        "action": "BUFF_ALLY",
+        "value": 2000,
+        "targetType": "SELF",
+        "condition": "MY_HAND_LE_3"
+      }
+    ]
+  },
+  {
+    "id": "BT03-008",
+    "name": "ノイズ：チェリーブロッサム",
+    "type": "UNIT",
+    "cost": 4,
+    "power": 5000,
+    "hitCount": 2,
+    "text": "[起動]\n自分のスキルゾーンにあるコスト2以下のスキルカードを1枚選んでトラッシュする。その後、このターンが終わるまでこのユニットは[貫通][1]を得る。",
+    "affiliation": "テトラ",
+    "attribute": "炎",
+    "keywords": [
+      "アクティブ"
+    ],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_Epdik6vM_5eae281dcf04c55126a64a14bbb06d0e9d05f5a7.png",
+    "rarity": "SR",
+    "effects": [
+      {
+        "trigger": "ACTIVE",
+        "action": "GRANT_ABILITY",
+        "grantedKeyword": "PENETRATION_1",
+        "condition": "TRASH_COST_2_SKILL_FROM_ZONE"
+      }
+    ]
+  },
+  {
+    "id": "BT03-009",
+    "name": "ブリティッシュ",
+    "type": "UNIT",
+    "cost": 5,
+    "power": 2500,
+    "hitCount": 2,
+    "text": "[攻撃時]\n自分の手札を任意の枚数選んでトラッシュしてもよい。この攻撃中、交戦している相手のユニットのパワーをトラッシュされたカード1枚につき-2500。\n\n[トリガー] / \nこのカードをトラッシュする。フィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-5000。",
+    "affiliation": "エリシオン",
+    "attribute": "炎",
+    "keywords": [],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_uj9wbRxG_72d32a1920fecbaa12c6eae145c1f7e7d526b7b8.png",
+    "rarity": "SR",
+    "effects": [
+      {
+        "trigger": "ON_ATTACK",
+        "action": "DEBUFF_ENEMY",
+        "value": 2500,
+        "targetType": "OPPOSING",
+        "condition": "DISCARD_ANY"
+      },
+      {
+        "trigger": "ON_DAMAGE_TRIGGER",
+        "action": "DEBUFF_ENEMY",
+        "value": 5000,
+        "targetType": "SINGLE",
+        "isSelfTrash": true
+      }
+    ]
+  },
+  {
+    "id": "BT03-010",
+    "name": "クラスト",
+    "type": "UNIT",
+    "cost": 6,
+    "power": 4500,
+    "hitCount": 2,
+    "text": "[登場時]\n交戦している相手のユニットのパワーをこのターンが終わるまで-4000。そのユニットをトラッシュしたなら、1枚ドローする。",
+    "affiliation": "エリシオン",
+    "attribute": "炎",
+    "keywords": [
+      "エントリー"
+    ],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_tpycl1MO_01f52ee32fbaf2750c6482daab65bee74fb3a1e2.png",
+    "rarity": "R",
+    "effects": [
+      {
+        "trigger": "ON_PLAY",
+        "action": "DEBUFF_ENEMY",
+        "value": 4000,
+        "targetType": "OPPOSING",
+        "drawOnKill": 1
+      }
+    ]
+  },
+  {
+    "id": "BT03-011",
+    "name": "ラピ：レッドフード",
+    "type": "UNIT",
+    "cost": 7,
+    "power": 5500,
+    "hitCount": 3,
+    "text": "[パッシブ]\n自分のトラッシュゾーンにスキルカードが3枚以上ある場合、このユニットのパワー+3000、[貫通][1]を得る。\n\n[登場時]\nフィールドにある相手のユニットを1枚選んでこのターンが終わるまでパワー-5000。",
+    "affiliation": "ピルグリム",
+    "attribute": "炎",
+    "keywords": [
+      "パッシブ",
+      "エントリー"
+    ],
+    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_jE7xd8Hn_528d4a0e12cac420fd3df2a62202c480d4c2df0e.png",
+    "rarity": "UR",
+    "effects": [
+      {
+        "trigger": "PASSIVE",
+        "action": "BUFF_ALLY",
+        "value": 3000,
+        "targetType": "SELF",
+        "condition": "TRASH_SKILL_GE_3"
+      },
+      {
+        "trigger": "PASSIVE",
+        "action": "GRANT_ABILITY",
+        "grantedKeyword": "PENETRATION_1",
+        "targetType": "SELF",
+        "condition": "TRASH_SKILL_GE_3"
+      },
+      {
+        "trigger": "ON_PLAY",
+        "action": "DEBUFF_ENEMY",
+        "value": 5000,
+        "targetType": "SINGLE"
+      }
+    ]
+  },
+  {
     "id": "BT03-012",
     "name": "一緒に花見でもどうか？",
     "type": "SKILL",
