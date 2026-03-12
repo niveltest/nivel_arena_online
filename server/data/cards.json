@@ -4608,23 +4608,6 @@
     "effects": []
   },
   {
-    "id": "BT03-018",
-    "name": "ナガ‐ラストガールフッド",
-    "type": "LEADER",
-    "cost": 0,
-    "power": 0,
-    "hitCount": 0,
-    "text": "基本面\n\n\n自分は  のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 自分の全てのユニットゾーンにユニットがある場合、自分のユニット全てのパワー+1000。",
-    "affiliation": "ミシリス",
-    "attribute": "",
-    "keywords": [
-      "戦線維持"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_gfbWZM9L_75643c719ad2490792168c2a6de55f60653d28c6.png",
-    "rarity": "SPL",
-    "effects": []
-  },
-  {
     "id": "BT03-019",
     "name": "ルピー：ウィンターショッパー",
     "type": "UNIT",
@@ -4656,23 +4639,6 @@
     ],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_Epdik6vM_5eae281dcf04c55126a64a14bbb06d0e9d05f5a7.png",
     "rarity": "SR",
-    "effects": []
-  },
-  {
-    "id": "BT03-020",
-    "name": "トリナ",
-    "type": "UNIT",
-    "cost": 0,
-    "power": 0,
-    "hitCount": 0,
-    "text": "自分のリーダーレベルが6以上で自分の全てのユニットゾーンにユニットがある場合、パワー+3000、ヒット+1。\n\n\n\nトリガー / \nこのカードをトラッシュする。フィールドにあるコスト3以下の相手のユニットを1枚選んでトラッシュする。",
-    "affiliation": "エフェクト / ミシリス",
-    "attribute": "",
-    "keywords": [
-      "レベルリンク、 戦線維持"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_J4aoesb2_a61e7481d83441473965d54db9bcd55e540a409b.png",
-    "rarity": "SPR",
     "effects": []
   },
   {
@@ -4801,23 +4767,6 @@
     ]
   },
   {
-    "id": "BT03-027",
-    "name": "シン‐バックストリートドリーム",
-    "type": "UNIT",
-    "cost": 6,
-    "power": 0,
-    "hitCount": 2,
-    "text": "このユニットのパワーが対向ユニットより3500以上高い場合、このターンが終わるまで  貫通[1](このユニットが攻撃した戦闘で相手のユニットをトラッシュしたなら、相手に1ダメージを与える)を得る。",
-    "affiliation": "エフェクト / ミシリス",
-    "attribute": "",
-    "keywords": [
-      "アクティブ"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_o7j9ukDQ_1abae9cfda20888f4ec3ab5bf8f66c26464ce5bc.png",
-    "rarity": "SPR",
-    "effects": []
-  },
-  {
     "id": "BT03-028",
     "name": "ナガ‐ラストガールフッド",
     "type": "UNIT",
@@ -4832,23 +4781,6 @@
     ],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_2QlV4hGk_bd3a57a78a1c78cf3cfc27fdebdfa91291a43213.png",
     "rarity": "UR",
-    "effects": []
-  },
-  {
-    "id": "BT03-028",
-    "name": "ナガ‐ラストガールフッド",
-    "type": "UNIT",
-    "cost": 0,
-    "power": 10000,
-    "hitCount": 3,
-    "text": "自分のリーダーレベルが10以上の場合、突破[コスト4以下](コスト4以下の相手のユニットはこのユニットの攻撃を防御できない)を得る。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
-    "affiliation": "エフェクト / ミシリス",
-    "attribute": "",
-    "keywords": [
-      "アタッカー、 レベルリンク"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_2K6LMFgc_f13ff898a55b42336d2fc85ad5e04665dd2bb1b5.png",
-    "rarity": "SPR",
     "effects": []
   },
   {
@@ -4961,23 +4893,6 @@
     "effects": []
   },
   {
-    "id": "BT03-035",
-    "name": "リトルマーメイド‐アビスフラワー",
-    "type": "LEADER",
-    "cost": 0,
-    "power": 0,
-    "hitCount": 0,
-    "text": "基本面\n\n\n自分は  のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが5以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 相手の手札が3枚以上ある場合、自分の手札を1枚選んでトラッシュできる。その後、相手は手札を1枚選んでトラッシュする。",
-    "affiliation": "ピルグリム",
-    "attribute": "",
-    "keywords": [
-      "アクティブ"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_SLmi6DoZ_d260b8326128487198de1179e7edbb9491c52dca.png",
-    "rarity": "SPL",
-    "effects": []
-  },
-  {
     "id": "BT03-036",
     "name": "ロザンナ：シックオーシャン",
     "type": "UNIT",
@@ -5054,23 +4969,6 @@
     ]
   },
   {
-    "id": "BT03-039",
-    "name": "シンデレラ‐ガラスのプリンセス",
-    "type": "UNIT",
-    "cost": 0,
-    "power": 3000,
-    "hitCount": 1,
-    "text": "自分のトラッシュゾーンからコスト4のユニットカードを1枚選んで手札に加える。",
-    "affiliation": "エフェクト / ピルグリム",
-    "attribute": "",
-    "keywords": [
-      "エグジット"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_dQcIZEuo_6dfc994a77c488082bbdc28ad75a4412eede5be5.png",
-    "rarity": "SPR",
-    "effects": []
-  },
-  {
     "id": "BT03-040",
     "name": "サクラ‐黒夜密行",
     "type": "UNIT",
@@ -5102,23 +5000,6 @@
     ],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_NeyUYI6Q_6f0382f1cf50f37c3f914bd08718e81febadd6a0.png",
     "rarity": "SR",
-    "effects": []
-  },
-  {
-    "id": "BT03-041",
-    "name": "ミハラ：ボンディングチェーン",
-    "type": "UNIT",
-    "cost": 4,
-    "power": 0,
-    "hitCount": 2,
-    "text": "犠牲[1](隣のレーンの相手のユニットが攻撃する場合、フィールドにある他の自分のユニットを1枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\n\n 相手のターンなら自分の手札から  を持つユニットカードか  を持つアイテムカードを1枚選んでトラッシュできる。その後、空いている自分のユニットゾーンにこのユニットカードを配置して自分のターンが終わるまでパワー+2500。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
-    "affiliation": "エフェクト / ミシリス",
-    "attribute": "",
-    "keywords": [
-      "エグジット、 ガーディアン"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_5zmEh8yU_32a1304e6d0213bc79c834ca08e89b68f583f348.png",
-    "rarity": "SPR",
     "effects": []
   },
   {
@@ -5170,23 +5051,6 @@
     ],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_ujVqMze8_76f2c330cfd9fb948e45fc322596a4037b356321.png",
     "rarity": "UR",
-    "effects": []
-  },
-  {
-    "id": "BT03-044",
-    "name": "リトルマーメイド‐アビスフラワー",
-    "type": "UNIT",
-    "cost": 6,
-    "power": 0,
-    "hitCount": 2,
-    "text": "相手の手札が1枚以下の場合、対向ユニットをトラッシュする。\n\n 相手の手札が2枚以下の場合、このターンが終わるまでパワー+3000。\n\n\n\nトリガー / \nこのカードをトラッシュする。自分のトラッシュゾーンから  を持つユニットカードを1枚選んで手札に加える。",
-    "affiliation": "エフェクト / ピルグリム",
-    "attribute": "",
-    "keywords": [
-      "エントリー、 アクティブ"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_4TECYVHn_395c81d3595f09f145d85e101ad879922e26dd4f.png",
-    "rarity": "SPR",
     "effects": []
   },
   {
@@ -5318,23 +5182,6 @@
     "effects": []
   },
   {
-    "id": "BT03-052",
-    "name": "マスト：ロマンチックメイド",
-    "type": "LEADER",
-    "cost": 0,
-    "power": 0,
-    "hitCount": 0,
-    "text": "基本面\n\n\n自分は&nbsp;&nbsp;のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n&nbsp; 自分のスキルゾーンからコスト3のスキルを1枚選んでトラッシュする。その後、フィールドにある&nbsp; を持つ自分のユニットを1枚選ぶ。そのユニットが持つ&nbsp; 効果を1つ選んで発動する。",
-    "affiliation": "エリシオン",
-    "attribute": "",
-    "keywords": [
-      "アクティブ"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_iIOGvjFN_b0d0e44534301137912bdbd9babd40fc114e723f.png",
-    "rarity": "SPL",
-    "effects": []
-  },
-  {
     "id": "BT03-053",
     "name": "ルドミラ：ウィンターオーナー",
     "type": "UNIT",
@@ -5420,23 +5267,6 @@
     "effects": []
   },
   {
-    "id": "BT03-057",
-    "name": "フォルクヴァン‐モイストラビット",
-    "type": "UNIT",
-    "cost": 0,
-    "power": 2500,
-    "hitCount": 0,
-    "text": "相手は1枚ドローする。自分の手札からユニットカードを1枚選んでトラッシュする。相手はトラッシュしたカードと同じコストを持つカードを手札から1枚選んでトラッシュできる。トラッシュしなかった場合、相手にトラッシュしたユニットカードのヒット分のダメージを与える。\n\n\n\nトリガー / \nこのカードをトラッシュする。1枚ドローする。",
-    "affiliation": "エフェクト / テトラ",
-    "attribute": "",
-    "keywords": [
-      "アクティブ"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_GrW67Isu_ae6d62628ba362c3795f8fb7fc1fbf8e056976e7.png",
-    "rarity": "SPR",
-    "effects": []
-  },
-  {
     "id": "BT03-058",
     "name": "ペッパー‐オーシャンビタミン",
     "type": "UNIT",
@@ -5495,23 +5325,6 @@
     ]
   },
   {
-    "id": "BT03-060",
-    "name": "ヘルム‐アフターシャワー",
-    "type": "UNIT",
-    "cost": 5,
-    "power": 0,
-    "hitCount": 2,
-    "text": "このユニットはこのターンが終わるまで攻撃できない。相手の手札が5枚より多い場合、相手にその差分のダメージを与える。\n\n この防御が終わるまでパワー+1000。",
-    "affiliation": "エフェクト / エリシオン",
-    "attribute": "",
-    "keywords": [
-      "エントリー、 ディフェンダー"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_XsjQpEGm_badd421cf64dcc3b12c189f2830c5df95165cfd1.png",
-    "rarity": "SPR",
-    "effects": []
-  },
-  {
     "id": "BT03-061",
     "name": "マスト：ロマンチックメイド",
     "type": "UNIT",
@@ -5527,23 +5340,6 @@
     ],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_sW92uqfd_8a69bbd6131346d98f9ab1318f767901b4c249dd.png",
     "rarity": "UR",
-    "effects": []
-  },
-  {
-    "id": "BT03-061",
-    "name": "マスト：ロマンチックメイド",
-    "type": "UNIT",
-    "cost": 6,
-    "power": 0,
-    "hitCount": 2,
-    "text": "防壁[2](隣のレーンの相手のユニットが攻撃する場合、自分の手札を2枚選んでトラッシュしたなら、このユニットでその攻撃を防御する)。\n\n この防御が終わるまでパワー+4000。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
-    "affiliation": "エフェクト / エリシオン",
-    "attribute": "",
-    "keywords": [
-      "ディフェンダー、 ガーディアン"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_IOrsEX5G_aec949ea9508c799cc010d2a833239c5d2bd5699.png",
-    "rarity": "SPR",
     "effects": []
   },
   {
@@ -5673,23 +5469,6 @@
     "effects": []
   },
   {
-    "id": "BT03-069",
-    "name": "レヴィアタン",
-    "type": "LEADER",
-    "cost": 0,
-    "power": 0,
-    "hitCount": 0,
-    "text": "基本面\n\n\n自分は&nbsp;&nbsp;のカードのみをデッキに入れることができる。\n\n\n\n自分のリーダーレベルが6以上の場合、このカードを裏返す。\n\n\n\n\n覚醒面\n\n 自分のデッキの上からカードを3枚トラッシュする。この効果でアイテムカードが1枚以上トラッシュされた場合、1枚ドローする。",
-    "affiliation": "ピルグリム",
-    "attribute": "",
-    "keywords": [
-      "アクティブ"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_Sj2pMYTJ_9933c395e0781cdafe617ebfc4edb9c251eacdef.png",
-    "rarity": "SPL",
-    "effects": []
-  },
-  {
     "id": "BT03-070",
     "name": "プリバティ：アンカインド・メイド",
     "type": "UNIT",
@@ -5816,23 +5595,6 @@
     ]
   },
   {
-    "id": "BT03-076",
-    "name": "レオナ‐ズーキーパー",
-    "type": "UNIT",
-    "cost": 4,
-    "power": 5000,
-    "hitCount": 2,
-    "text": "自分のダメージゾーンから〈レオナ‐ズーキーパー〉以外のユニットカードを1枚選んで手札に加える。その後、このユニットカードをダメージゾーンに置く。",
-    "affiliation": "エフェクト / テトラ",
-    "attribute": "",
-    "keywords": [
-      "エグジット"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_wAzsEKgk_d8364e35f83cfc7f80ca1719f60ee92026556656.png",
-    "rarity": "SPR",
-    "effects": []
-  },
-  {
     "id": "BT03-077",
     "name": "レヴィアタン",
     "type": "UNIT",
@@ -5847,23 +5609,6 @@
     ],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_4nHOXe3a_aa87e4a399582f0d5db58a90c61411d5b284ba17.png",
     "rarity": "UR",
-    "effects": []
-  },
-  {
-    "id": "BT03-077",
-    "name": "レヴィアタン",
-    "type": "UNIT",
-    "cost": 0,
-    "power": 5500,
-    "hitCount": 2,
-    "text": "このユニットは自分の効果以外でアイテムを装備できず、カード名が同じアイテムを2枚以上装備できない。\n\n&nbsp;自分のトラッシュゾーンからアイテムカードを2枚まで選んでサイズを無視して装備できる。このユニットが装備しているアイテムはこのターンが終わるまでコストが0になる。\n\n\n\nトリガー / \nこのカードを自分の手札に加える。",
-    "affiliation": "エフェクト / ピルグリム",
-    "attribute": "",
-    "keywords": [
-      "パッシブ、 アクティブ"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_MagkYE9W_84de7b951d4f036fea2e4d707a5e26087e6c82de.png",
-    "rarity": "SPR",
     "effects": []
   },
   {
@@ -5898,23 +5643,6 @@
     ],
     "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_GboCljnA_29d347ce6176fa9fe22e4831cb284644b76e7a4b.png",
     "rarity": "SR",
-    "effects": []
-  },
-  {
-    "id": "BT03-079",
-    "name": "ベヒモス",
-    "type": "UNIT",
-    "cost": 0,
-    "power": 6500,
-    "hitCount": 3,
-    "text": "&nbsp;自分のトラッシュゾーンと手札からアイテムカードを8枚選んで好きな順番でデッキの下に置くことができる。その後、コストの合計が8以下になるようにフィールドにある相手のユニットを好きな枚数選んでトラッシュする。この効果でトラッシュしたユニット1枚につき、1枚ドローする。",
-    "affiliation": "エフェクト / ピルグリム",
-    "attribute": "",
-    "keywords": [
-      "エントリー"
-    ],
-    "imageUrl": "https://nivelarena.jp/data/file/cardlists/cfbf01727a7e461ec5930f5d552f8bff_nb3ueZfY_ca6e63de06e52c788b4a221a1fa3f0c63325c7bd.png",
-    "rarity": "SPR",
     "effects": []
   },
   {
