@@ -33,16 +33,15 @@ export class SoundManager {
     static play(key: string) {
         if (typeof window === 'undefined') return;
 
-        // Special handling for legacy keys that might not match 1:1
-        // 'damage' is ambiguous in legacy (giving or taking?), assuming taking damage for now
-        // 'attack' might need 'attack_hit' too? 
-
         const mappedKey = this.KEY_MAP[key];
         if (mappedKey) {
-            console.log(`[SoundManager] play(${key}) -> mapped to ${mappedKey}`);
+            // Debug: Log stack trace for BGM calls to identify trigger source
             if (mappedKey.startsWith('bgm_')) {
+                console.log(`[SoundManager] play(${key}) -> mapped to ${mappedKey}`);
+                console.trace('[SoundManager] BGM call stack:');
                 audioManager.playBGM(mappedKey);
             } else {
+                console.log(`[SoundManager] play(${key}) -> mapped to ${mappedKey}`);
                 audioManager.playSE(mappedKey);
             }
         } else {

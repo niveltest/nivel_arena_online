@@ -44,7 +44,8 @@ export class Game {
             'ITEM_SHIELD': '装備ガード',
             'BREAKTHROUGH': '突破',
             'INFILTRATE': '潜入',
-            'GUARDIAN': '防壁',
+            'GUARDIAN': 'ガーディアン',
+            'BOUHEKI': '防壁',
             'SHIELD': 'シールド',
             'EXIT': 'エグジット',
             'RECYCLE': '帰還',
@@ -420,6 +421,9 @@ export class Game {
                 this.switchTurn();
                 break;
         }
+        this.checkLegendFlipping(this.turnPlayerId);
+        const opponentId = Object.keys(this.players).find(id => id !== this.turnPlayerId);
+        if (opponentId) this.checkLegendFlipping(opponentId);
         this.broadcastState();
         this.processEffectQueue();
     }
@@ -433,18 +437,20 @@ export class Game {
         this.addLog(`${player.username} Level Up -> ${player.state.leaderLevel}`);
         if (player.state.leaderLevel > oldLevel) {
             this.broadcastAction(this.turnPlayerId, 'LEVEL_UP', { newLevel: player.state.leaderLevel });
-            this.checkAwakening(this.turnPlayerId, oldLevel);
+            this.checkLeaderAwakening(this.turnPlayerId);
         }
+        this.checkLegendFlipping(this.turnPlayerId);
     }
 
-    private checkAwakening(playerId: string, oldLevel: number) {
+    private checkLeaderAwakening = (playerId: string) => {
         const player = this.players[playerId];
         if (!player) return;
 
         // ST01-001 hardcoded check or general awakeningLevel check
         const awakenLv = player.state.leader.id === 'ST01-001' ? 5 : (player.state.leader.awakeningLevel || 3);
 
-        if (oldLevel < awakenLv && player.state.leaderLevel >= awakenLv) {
+        if (!player.state.leader.isAwakened && player.state.leaderLevel >= awakenLv) {
+            player.state.leader.isAwakened = true;
             this.addLog(`${player.username} Leader Awakened!`);
             this.broadcastAction(playerId, 'AWAKEN', { leader: player.state.leader.name });
             if (player.state.leader.effects) {
@@ -455,6 +461,27 @@ export class Game {
                 });
             }
         }
+    }
+
+    private checkLegendFlipping = (playerId: string) => {
+        const player = this.players[playerId];
+        if (!player) return;
+
+        player.state.field.forEach((card, idx) => {
+            if (card && card.rarity === 'L' && !(card as any).isAwakened) {
+                const condition = card.effects?.find(e => e.trigger === 'FLIP_CONDITION');
+                if (condition && condition.condition === 'LEADER_LEVEL_GE') {
+                    const requiredLevel = condition.value || 5;
+                    if (player.state.leaderLevel >= requiredLevel) {
+                        // Flip the card
+                        (card as any).isAwakened = true;
+                        this.addLog(`${card.name} flipped to Awakened side!`);
+                        this.broadcastAction(playerId, 'CARD_FLIP', { slotIndex: idx, cardId: card.id });
+                        this.applyEffect(playerId, card, 'ON_AWAKEN', { slotIndex: idx });
+                    }
+                }
+            }
+        });
     }
 
     public handleDrawPhase() {
@@ -653,13 +680,20 @@ export class Game {
         }
 
 
-        // Duelist prevents adjacent Guardians.
+        // Duelist prevents adjacent Guardians and Bouheki.
         let guardianCandidates: number[] = [];
         if (!this.hasKeyword(attacker, 'DUELIST')) {
             const adjacentSlots = [attackerIndex - 1, attackerIndex + 1].filter(s => s >= 0 && s <= 2);
+            // GUARDIAN: 隣接関係なく（仕様によるが大きい場合は要調整）、通常は隣接として扱う。
+            // BOUHEKI(防壁): 隣接レーンの攻撃を肩代わり。レスト状態でないことが条件。
             guardianCandidates = adjacentSlots.filter(s => {
                 const u = opponent.state.field[s];
-                return u && this.hasKeyword(u, 'GUARDIAN');
+                if (!u) return false;
+                // ガーディアン判定
+                if (this.hasKeyword(u, 'GUARDIAN')) return true;
+                // 防壁判定（レストされていない＝attackedThisTurnがfalse、かつ防壁を持つ）
+                if (this.hasKeyword(u, 'BOUHEKI') && !u.attackedThisTurn) return true;
+                return false;
             });
         }
 
@@ -732,8 +766,15 @@ export class Game {
         } else {
             const defender = this.players[playerId];
             const unit = defender.state.field[interceptSlot];
-            if (unit && this.hasKeyword(unit, 'GUARDIAN')) {
+            if (unit && (this.hasKeyword(unit, 'GUARDIAN') || (this.hasKeyword(unit, 'BOUHEKI') && !unit.attackedThisTurn))) {
                 this.pendingAttack.targetIndex = interceptSlot;
+                
+                // 防壁の場合、自身をレスト(attackedThisTurn = true)にする
+                if (this.hasKeyword(unit, 'BOUHEKI') && !this.hasKeyword(unit, 'GUARDIAN')) {
+                    unit.attackedThisTurn = true;
+                    this.addLog(`${unit.name} activates [防壁]! Changed to Rest state.`);
+                }
+
                 this.finalizeAttackResolution();
             }
         }
@@ -949,6 +990,28 @@ export class Game {
                     this.addLog(`${card.name} moved from hand to damage zone.`);
                 }
             }
+        } else if (action === 'SWAP_WITH_DAMAGE_STEP_1') {
+            if (selectedIds.length > 0) {
+                const selectedId = selectedIds[0];
+                const dmgIdx = player.state.damageZone.findIndex(c => c.id === selectedId);
+                if (dmgIdx !== -1) {
+                    const [dmgCard] = player.state.damageZone.splice(dmgIdx, 1);
+                    player.drawCard(dmgCard);
+                    this.addLog(`${player.username} moved ${dmgCard.name} from damage zone to hand.`);
+                    
+                    // Move current card to damage zone
+                    const selfId = (this.selection.context as any)?.selfId;
+                    // Find self on field
+                    const fieldIdx = player.state.field.findIndex(u => u?.id === selfId);
+                    if (fieldIdx !== -1) {
+                        const [selfCard] = player.state.field.splice(fieldIdx, 1, null);
+                        if (selfCard) {
+                            player.state.damageZone.push(selfCard);
+                            this.addLog(`${selfCard.name} moved from field to damage zone.`);
+                        }
+                    }
+                }
+            }
         } else if (action === 'DEBUFF_ENEMY_SELECTION') {
             if (selectedIds.length > 0) {
                 const selectedId = selectedIds[0];
@@ -1028,6 +1091,111 @@ export class Game {
                 if (idx !== -1) player.drawCard(player.state.discard.splice(idx, 1)[0]);
             });
             this.addLog(`${player.username} recycled ${selectedIds.length} cards.`);
+        } else if (action === 'PAY_ACTIVE_COST') {
+            // Traverse selection for cost discard
+            if (selectedIds.length > 0) {
+                selectedIds.forEach(id => {
+                    const idx = player.state.hand.findIndex(c => c.id === id);
+                    if (idx !== -1) {
+                        const [card] = player.state.hand.splice(idx, 1);
+                        player.state.discard.push(card);
+                        this.addLog(`${player.username} discarded ${card.name} as cost.`);
+                    }
+                });
+                
+                // Once cost is paid, resolve the ability
+                const unitSlot = (this.selection.context as any)?.unitSlot;
+                if (typeof unitSlot === 'number') {
+                    this.resolveActiveAbility(playerId, unitSlot);
+                }
+            } else {
+                this.addLog(`${player.username} cancelled active ability cost payment.`);
+            }
+        } else if (action === 'PAY_BOUHEKI_COST') {
+            if (selectedIds.length > 0) {
+                selectedIds.forEach(id => {
+                    const idx = player.state.hand.findIndex(c => c.id === id);
+                    if (idx !== -1) {
+                        const [card] = player.state.hand.splice(idx, 1);
+                        player.state.discard.push(card);
+                    }
+                });
+                this.addLog(`${player.username} discarded ${selectedIds.length} cards for BOUHEKI.`);
+                const interceptSlot = (this.selection.context as any)?.interceptSlot;
+                if (typeof interceptSlot === 'number') {
+                    this.applyInterception(playerId, interceptSlot);
+                }
+            } else {
+                this.addLog(`${player.username} cancelled BOUHEKI interception.`);
+                this.phase = 'DEFENSE'; // Proceed without interception
+                this.broadcastState();
+            }
+        } else if (action === 'BEHEMOTH_STEP_1') {
+            if (selectedIds.length > 0) {
+                // Move selected items to deck bottom
+                let totalCost = 0;
+                selectedIds.forEach(id => {
+                    let card: Card | undefined;
+                    const handIdx = player.state.hand.findIndex(c => c.id === id);
+                    if (handIdx !== -1) {
+                        [card] = player.state.hand.splice(handIdx, 1);
+                    } else {
+                        const discIdx = player.state.discard.findIndex(c => c.id === id);
+                        if (discIdx !== -1) {
+                            [card] = player.state.discard.splice(discIdx, 1);
+                        }
+                    }
+                    if (card) {
+                        player.state.deck.unshift(card); // Unshift for bottom
+                        totalCost += (card.cost || 0);
+                    }
+                });
+                this.addLog(`${player.username} returned ${selectedIds.length} items to deck (Total Cost: ${totalCost}).`);
+                
+                // Next step: Select opponent units to kill (sum cost <= totalCost)
+                const opponentId = (this.selection.context as any)?.opponentId;
+                if (opponentId) {
+                    const opponent = this.players[opponentId];
+                    const targetIds = opponent.state.field.filter(u => u !== null).map(u => u!.id);
+                    if (targetIds.length > 0) {
+                        this.requestSelection(playerId, 'FIELD', targetIds, 3, 'BEHEMOTH_STEP_2', { opponentId, totalCostRemaining: totalCost, killedCount: 0 });
+                        return;
+                    }
+                }
+            }
+        } else if (action === 'BEHEMOTH_STEP_2') {
+            const opponentId = (this.selection.context as any)?.opponentId;
+            let totalCostRemaining = (this.selection.context as any)?.totalCostRemaining as number || 0;
+            let killedCount = (this.selection.context as any)?.killedCount as number || 0;
+            
+            if (opponentId && selectedIds.length > 0) {
+                const opponent = this.players[opponentId];
+                const selectedId = selectedIds[0];
+                const unit = opponent.state.field.find(u => u?.id === selectedId);
+                const unitCost = unit?.cost || 0;
+                
+                if (unitCost <= totalCostRemaining) {
+                    const idx = opponent.state.field.findIndex(u => u?.id === selectedId);
+                    if (idx !== -1) {
+                        this.destroyUnit(opponentId, idx);
+                        totalCostRemaining -= unitCost;
+                        killedCount++;
+                        this.addLog(`Behemoth destroyed ${unit?.name} (Remaining Cost Budget: ${totalCostRemaining}).`);
+                        
+                        // Can we kill more?
+                        const nextTargets = opponent.state.field.filter(u => u && u.cost <= totalCostRemaining).map(u => u!.id);
+                        if (nextTargets.length > 0 && totalCostRemaining > 0) {
+                            this.requestSelection(playerId, 'FIELD', nextTargets, 1, 'BEHEMOTH_STEP_2', { opponentId, totalCostRemaining, killedCount });
+                            return;
+                        }
+                    }
+                }
+            }
+            // Draw cards per killed count
+            for (let i = 0; i < killedCount; i++) {
+                player.drawCard(player.state.deck.pop()!);
+            }
+            if (killedCount > 0) this.addLog(`${player.username} drew ${killedCount} cards by Behemoth effect.`);
         } else if (this.selection.action === 'RESTRICT_ATTACK_SELECTION') {
             const opponentId = this.selection.context?.opponentId as string;
             const opponent = this.players[opponentId];
@@ -1059,6 +1227,51 @@ export class Game {
         const player = this.players[playerId];
         const unit = player.state.field[slotIndex];
         if (!unit || unit.activeUsedThisTurn) return;
+        
+        let hasActive = false;
+        let costRequirement = 0;
+        
+        if (unit.effects) {
+            unit.effects.forEach(e => {
+                if (e.trigger === 'ACTIVE') {
+                    hasActive = true;
+                    // Check for cost in condition e.g. "COST_HAND_1"
+                    if (e.condition && e.condition.startsWith('COST_HAND_')) {
+                        costRequirement = parseInt(e.condition.replace('COST_HAND_', ''), 10);
+                    }
+                }
+            });
+        }
+        
+        if (!hasActive) return;
+
+        // If a cost is required, we use the selection mechanic to ask the player to discard cards
+        if (costRequirement > 0) {
+            if (player.state.hand.length < costRequirement) {
+                this.addLog(`${player.username} does not have enough hand cards to pay for ${unit.name}'s Active Ability.`);
+                return; // Cannot pay cost
+            }
+            this.requestSelection(
+                playerId,
+                'HAND',
+                player.state.hand.map(c => c.id),
+                costRequirement,
+                'PAY_ACTIVE_COST',
+                { unitSlot: slotIndex, unitId: unit.id }, // Pass context to resolve later
+                unit
+            );
+            return; // Effect resolution pends on the selection response
+        }
+
+        // Direct activation
+        this.resolveActiveAbility(playerId, slotIndex);
+    }
+
+    public resolveActiveAbility(playerId: string, slotIndex: number) {
+        const player = this.players[playerId];
+        const unit = player.state.field[slotIndex];
+        if (!unit || unit.activeUsedThisTurn) return;
+        
         if (unit.effects) {
             unit.effects.forEach(e => {
                 if (e.trigger === 'ACTIVE') this.applyEffect(playerId, unit, 'ACTIVE', { slotIndex });
@@ -1152,7 +1365,7 @@ export class Game {
         this.broadcastState();
     }
 
-    private applyEffectImmediate(playerId: string, card: Card, trigger: string, context?: Record<string, unknown>, specificEffect?: CardEffect) {
+    private applyEffectImmediate = (playerId: string, card: Card, trigger: string, context?: Record<string, unknown>, specificEffect?: CardEffect) => {
         const player = this.players[playerId];
         if (!player) return;
 
@@ -1720,8 +1933,29 @@ export class Game {
                         this.addLog(`[Effect] ${player.username} Level Up: ${oldLevel} -> ${player.state.leaderLevel}`);
                         if (player.state.leaderLevel > oldLevel) {
                             this.broadcastAction(playerId, 'LEVEL_UP', { level: player.state.leaderLevel, newLevel: player.state.leaderLevel });
-                            this.checkAwakening(playerId, oldLevel);
+                            this.checkLeaderAwakening(playerId);
                         }
+                        this.checkLegendFlipping(playerId);
+                    }
+                    break;
+                }
+                case 'DAMAGE_BY_HAND_DIFF': {
+                    if (!opponentId || !opponent) return;
+                    const diff = opponent.state.hand.length - (effect.value || 0);
+                    if (diff > 0) {
+                        this.dealDamage(opponentId, diff);
+                        this.addLog(`${card.name} dealt ${diff} damage by hand count difference.`);
+                    }
+                    break;
+                }
+                case 'SWAP_WITH_DAMAGE': {
+                    const conditions = effect.condition?.split('_AND_') || [];
+                    let candidates = player.state.damageZone;
+                    if (conditions.includes('NOT_SELF')) {
+                        candidates = candidates.filter(c => c.name !== card.name);
+                    }
+                    if (candidates.length > 0) {
+                        this.requestSelection(playerId, 'DAMAGE_ZONE', candidates.map(c => c.id), 1, 'SWAP_WITH_DAMAGE_STEP_1', { selfId: card.id }, card);
                     }
                     break;
                 }
@@ -1730,6 +1964,18 @@ export class Game {
                     if (player.state.discard.length > 0) {
                         const candidates = player.state.discard;
                         this.requestSelection(playerId, 'DISCARD', candidates.map(c => c.id), count, 'RECYCLE_SELECTION', undefined, card);
+                    }
+                    break;
+                }
+                case 'RECYCLE_ITEMS_FOR_KILL': {
+                    // Behemoth (BT03-079) complex effect:
+                    // Trash/Hand items (up to 8) -> Deck bottom -> Cost-based Kill -> Draw per kill
+                    const handItems = player.state.hand.filter(c => c.type === 'ITEM').map(c => c.id);
+                    const discardItems = player.state.discard.filter(c => c.type === 'ITEM').map(c => c.id);
+                    const allItemIds = [...handItems, ...discardItems];
+                    
+                    if (allItemIds.length > 0) {
+                        this.requestSelection(playerId, 'HAND_AND_DISCARD', allItemIds, Math.min(8, allItemIds.length), 'BEHEMOTH_STEP_1', { opponentId }, card);
                     }
                     break;
                 }
