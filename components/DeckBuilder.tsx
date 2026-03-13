@@ -27,7 +27,7 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
     const [filterSet, setFilterSet] = useState<string>('ALL');
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [deckName, setDeckName] = useState<string>('My Deck');
-    const [sortMethod, setSortMethod] = useState<'COST' | 'POWER' | 'NAME'>('COST'); // Add Sort State
+    const [sortMethod, setSortMethod] = useState<'ID' | 'COST' | 'POWER' | 'NAME'>('ID'); // Add Sort State
 
     useEffect(() => {
         SoundManager.play('bgm_deck');
@@ -92,6 +92,7 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
 
         return true;
     }).sort((a, b) => {
+        if (sortMethod === 'ID') return a.id.localeCompare(b.id);
         if (sortMethod === 'COST') return (a.cost || 0) - (b.cost || 0);
         if (sortMethod === 'POWER') return (b.power || 0) - (a.power || 0);
         if (sortMethod === 'NAME') return a.name.localeCompare(b.name);
@@ -243,13 +244,13 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
 
                     {/* Sort Control */}
                     <div className="flex bg-slate-800 border border-white/20 rounded overflow-hidden">
-                        {(['COST', 'POWER', 'NAME'] as const).map(method => (
+                        {(['ID', 'COST', 'POWER', 'NAME'] as const).map(method => (
                             <button
                                 key={method}
                                 onClick={() => setSortMethod(method)}
                                 className={`px-2 py-1 text-xs font-bold ${sortMethod === method ? 'bg-blue-600 text-white' : 'text-gray-400 hover:bg-white/5'}`}
                             >
-                                {method === 'COST' ? 'Cost' : method === 'POWER' ? 'Pow' : 'Name'}
+                                {method === 'ID' ? 'ID' : method === 'COST' ? 'Cost' : method === 'POWER' ? 'Pow' : 'Name'}
                             </button>
                         ))}
                     </div>
@@ -326,7 +327,7 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
                 {/* Deck Content */}
                 <div className="flex-1 overflow-y-auto p-4 bg-white/5 rounded-lg border border-white/10">
                     <div className="grid grid-cols-5 gap-y-12 gap-x-2 content-start">
-                        {deck.sort((a, b) => (a.cost || 0) - (b.cost || 0)).map((card, i) => (
+                        {[...deck].sort((a, b) => a.id.localeCompare(b.id)).map((card, i) => (
                             <div key={i} className="scale-90 hover:scale-105 transition-transform cursor-pointer relative z-0 hover:z-10"
                                 onClick={() => handleDeckCardClick(i)}
                                 onContextMenu={(e) => { e.preventDefault(); setDetailCard(card); }}

@@ -12,6 +12,7 @@ export class Player {
     // Connection State
     public isCPU: boolean = false;
     public connected: boolean = true;
+    public summonRestriction?: { maxCost: number };
     public disconnectTimeout: NodeJS.Timeout | null = null;
 
     constructor(socket: Socket, username: string, deckData?: { deckIdList: string[], leaderId: string }) {

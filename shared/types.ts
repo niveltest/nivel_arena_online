@@ -1,13 +1,13 @@
 export type CardType = 'UNIT' | 'SKILL' | 'ITEM' | 'LEADER';
 
-export type EffectTrigger = 'ON_PLAY' | 'ON_ATTACK' | 'ON_DESTROY' | 'ON_DAMAGE_TRIGGER' | 'PASSIVE' | 'ON_AWAKEN' | 'ACTIVE' | 'ON_OTHER_UNIT_DESTROY' | 'ON_EXIT' | 'ON_ENTRY' | 'FLIP_CONDITION';
-export type EffectAction = 'DRAW' | 'DAMAGE_UNIT' | 'BUFF_ALLY' | 'DEAL_DAMAGE_PLAYER' | 'KILL_UNIT' | 'ADD_FROM_DISCARD' | 'SET_HIT' | 'LEVEL_UP' | 'SET_POWER' | 'DEBUFF_ENEMY' | 'STUN_UNIT' | 'HEAL_LEADER' | 'RESTRICT_ATTACK' | 'DISCARD' | 'RECYCLE' | 'SWAP_DAMAGE_HAND' | 'COST_BASED_KILL' | 'SALVAGE_EQUIPMENT' | 'POWER_COPY_FRIEND' | 'SEARCH_DECK' | 'BOUNCE_UNIT' | 'BUFF_HIT' | 'GRANT_ABILITY' | 'RESURRECT' | 'SPECIAL_VICTORY' | 'BUFF_SIZE' | 'DAMAGE_BY_HAND_DIFF' | 'RECYCLE_ITEMS_FOR_KILL' | 'SWAP_WITH_DAMAGE';
+export type EffectTrigger = 'ON_PLAY' | 'ON_ATTACK' | 'ON_DESTROY' | 'ON_DAMAGE_TRIGGER' | 'PASSIVE' | 'ON_AWAKEN' | 'ACTIVE' | 'ON_OTHER_UNIT_DESTROY' | 'ON_EXIT' | 'ON_ENTRY' | 'FLIP_CONDITION' | 'END_OF_ATTACK' | 'ON_PLAY_FROM_HAND';
+export type EffectAction = 'DRAW' | 'DAMAGE_UNIT' | 'BUFF_ALLY' | 'DEAL_DAMAGE_PLAYER' | 'KILL_UNIT' | 'ADD_FROM_DISCARD' | 'SET_HIT' | 'LEVEL_UP' | 'SET_POWER' | 'DEBUFF_ENEMY' | 'STUN_UNIT' | 'HEAL_LEADER' | 'RESTRICT_ATTACK' | 'DISCARD' | 'RECYCLE' | 'SWAP_DAMAGE_HAND' | 'COST_BASED_KILL' | 'SALVAGE_EQUIPMENT' | 'POWER_COPY_FRIEND' | 'SEARCH_DECK' | 'BOUNCE_UNIT' | 'BUFF_HIT' | 'GRANT_ABILITY' | 'RESURRECT' | 'SPECIAL_VICTORY' | 'BUFF_SIZE' | 'DAMAGE_BY_HAND_DIFF' | 'RECYCLE_ITEMS_FOR_KILL' | 'SWAP_WITH_DAMAGE' | 'MILL_DECK' | 'RECYCLE_TO_DECK' | 'SILENCE_KEYWORD' | 'CHANGE_BASE_POWER' | 'DEBUFF_HIT' | 'RECYCLE_TO_HAND' | 'RESTRICT_SUMMON' | 'GAIN_EFFECT_OF_ALLY' | 'RESOLVE_ALLY_ABILITY' | 'TRIGGER_IF_SKILL_ELSE_DRAW' | 'TRIGGER_COMPLEX_DAMAGE' | 'RESTRICT_ABILITY';
 
 export interface CardEffect {
     trigger: EffectTrigger;
     action: EffectAction;
     value?: number;
-    targetType?: 'SELF' | 'ALLY' | 'ENEMY' | 'ALL' | 'DISCARD' | 'ALL_ALLIES' | 'ALL_ENEMIES' | 'SINGLE' | 'OPPOSING' | 'DECK_TOP' | 'DAMAGE_ITEM' | 'HAND_UNIT' | 'DECK_ALL' | 'SELF_HAND' | 'OPPONENT_HAND';
+    targetType?: 'SELF' | 'ALLY' | 'ENEMY' | 'ALL' | 'DISCARD' | 'ALL_ALLIES' | 'ALL_ENEMIES' | 'SINGLE' | 'OPPOSING' | 'DECK_TOP' | 'DAMAGE_ITEM' | 'HAND_UNIT' | 'DECK_ALL' | 'SELF_HAND' | 'OPPONENT_HAND' | 'DECK_BOTTOM' | 'HAND_AND_DISCARD' | 'OPPONENT';
     condition?: string; // e.g. "SEARCH_TOP_3_LV3", "SEARCH_BASE", "COUNT_BASE", "FIELD_FULL", "LEVEL_UP"
     drawOnKill?: number;
     grantedKeyword?: string;
@@ -38,6 +38,8 @@ export interface Card {
     tempPowerBuff?: number; // Temporary power increase
     tempHitBuff?: number; // Temporary hit count increase
     tempKeywords?: string[]; // Keywords granted by effects for the turn
+    tempSizeBuff?: number; // Temporary size increase
+    isAwakened?: boolean; // For Leaders and Legend flipping
     cannotAttack?: boolean; // Temporary effect
     activeUsedThisTurn?: boolean; // Track if active ability was used this turn
     attackedThisTurn?: boolean; // Track if unit attacked this turn
