@@ -139,6 +139,111 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
         setDeck(newDeck);
     };
 
+    const handleAutoBuild = () => {
+        if (!leader) {
+            alert('自動構築を行うには、まずリーダーを選択してください');
+            return;
+        }
+
+        // Filter valid cards: Not leader, attribute matches leader
+        const validCards = allCards.filter(c => c.type !== 'LEADER' && isCardCompatible(leader, c));
+        if (validCards.length < 40) {
+            alert('プール内のカードが足りないため、自動構築できません（相性の合うカードが40種類/枚以上必要です）。');
+            return;
+        }
+
+        // Strategy: 
+        // 1. Triggers -> Try to get exactly 8, or as many as possible up to 8
+        // 2. Units -> Try to get ~20-25
+        // 3. Spells/Items -> Fill the rest
+        // We'll maintain a counting map to ensure max 3 copies per card.
+        // For simplicity, we can shuffle valid cards and pick greedily according to constraints constraints.
+
+        const newDeck: CardType[] = [];
+        const cardCounts = new Map<string, number>();
+        let triggerCount = 0;
+
+        const addCard = (card: CardType) => {
+            const currentCount = cardCounts.get(card.id) || 0;
+            if (currentCount < 3 && newDeck.length < 40) {
+                newDeck.push(card);
+                cardCounts.set(card.id, currentCount + 1);
+                if (card.effects?.some(e => e.trigger === 'ON_DAMAGE_TRIGGER')) {
+                    triggerCount++;
+                }
+                return true;
+            }
+            return false;
+        };
+
+        const isTrigger = (c: CardType) => c.effects?.some(e => e.trigger === 'ON_DAMAGE_TRIGGER') ?? false;
+
+        // Shuffle helper
+        const shuffle = (array: CardType[]) => {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        };
+
+        const validTriggers = shuffle(validCards.filter(isTrigger));
+        const validUnits = shuffle(validCards.filter(c => c.type === 'UNIT' && !isTrigger(c)));
+        const validOthers = shuffle(validCards.filter(c => (c.type === 'SKILL' || c.type === 'ITEM') && !isTrigger(c)));
+
+        // 1. Add Triggers (up to 8, trying 2 copies of each to have variety or 3 copies)
+        for (const trig of validTriggers) {
+            if (triggerCount >= 8) break;
+            // Add up to 3 copies, but don't exceed 8 total triggers
+            for (let i = 0; i < 3; i++) {
+                if (triggerCount >= 8) break;
+                addCard(trig);
+            }
+        }
+
+        // 2. Add Units (Target ~22 total units including triggers if any are units)
+        // Let's just try to add standard units until we reach around 22-25 units total.
+        for (const unit of validUnits) {
+            // Check current unit count in deck
+            const currentUnits = newDeck.filter(c => c.type === 'UNIT').length;
+            if (currentUnits >= 24) break; 
+            
+            // Add up to 3 copies
+            for (let i = 0; i < 3; i++) {
+                if (newDeck.filter(c => c.type === 'UNIT').length >= 24 || newDeck.length >= 40) break;
+                addCard(unit);
+            }
+        }
+
+        // 3. Fill the rest with Others then Units then Triggers until 40
+        const fillRest = (cards: CardType[]) => {
+            for (const c of cards) {
+                if (newDeck.length >= 40) return;
+                for (let i = 0; i < 3; i++) {
+                    if (newDeck.length >= 40) return;
+                    addCard(c);
+                }
+            }
+        };
+
+        fillRest(validOthers);
+        fillRest(validUnits); // In case others ran out
+        
+        // If still not 40, just try to hammer anything in (triggers might exceed 8 if forced, so avoid adding triggers here unless we failed to fill 40. But we checked pool size earlier, though 3-copy limit might make it tricky if there are exactly 40 unique cards. Assuming pool is large enough.)
+        if (newDeck.length < 40) {
+             fillRest(shuffle(validCards.filter(c => !isTrigger(c)))); 
+        }
+
+        if (newDeck.length < 40) {
+             alert(`カードプール不足のため、40枚のデッキを構築できませんでした。（${newDeck.length}/40枚）\nリーダーの属性に合ったカードをもっと集めてください。`);
+        }
+
+        setDeck(newDeck);
+        // Play success sound if any
+        SoundManager.play('se_success'); // Assumes we have some success sound or just a click
+    };
+
     const saveDeck = async () => {
         if (!leader) {
             alert('リーダーを選択してください');
@@ -298,12 +403,21 @@ const DeckBuilder: React.FC<DeckBuilderProps> = ({ onBack }) => {
                         onChange={e => setDeckName(e.target.value)}
                         placeholder="デッキ名を入力..."
                     />
-                    <button
-                        onClick={saveDeck}
-                        className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded font-bold shadow-lg transition-colors"
-                    >
-                        サーバー保存
-                    </button>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={handleAutoBuild}
+                            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded font-bold shadow-lg transition-colors text-sm"
+                            title="選択したリーダーに合わせてデッキを自動生成します"
+                        >
+                            自動構築
+                        </button>
+                        <button
+                            onClick={saveDeck}
+                            className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded font-bold shadow-lg transition-colors"
+                        >
+                            サーバー保存
+                        </button>
+                    </div>
                 </div>
 
                 {/* Leader Section */}
